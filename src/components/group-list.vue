@@ -18,7 +18,8 @@ import groupPreview from './group-preview.vue'
 export default {
 components:{
     groupPreview,
-}
+},
+
 }
 </script>
 
