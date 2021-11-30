@@ -3,8 +3,8 @@
 <div class="group-list-container">
     <div class="group-list">
         <!-- <h2>son: group-list</h2> -->
-        <!-- <p>{{board.groups[0]}}</p> -->
-        
+        <p>{{board.groups[0]}}</p>
+
         <group-preview 
         v-for="group in board.groups"
         :group="group"
