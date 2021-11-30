@@ -9,8 +9,8 @@ import ElementUi from 'element-ui'
 Vue.use(ElementUi)
 Vue.use(require('vue-moment'))
 
-// import VueDragscroll from 'vue-dragscroll'
-// Vue.use(VueDragscroll)
+import VueDragscroll from 'vue-dragscroll'
+Vue.use(VueDragscroll)
 Vue.config.productionTip = false
 
 new Vue({

@@ -1,8 +1,6 @@
 .group-preview{
     width: 272px;
-    border-radius: 3px;
-    height: 100%;
-    display: table-cell;
+    
     vertical-align: top;
     .group-preview-header{
         height: 45px;
@@ -14,4 +12,7 @@
     }
 
     
+    height: 100%;
+    display: table-cell;
+    vertical-align: top;
 }
