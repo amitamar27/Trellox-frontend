@@ -8,7 +8,11 @@
       >
 
       </card-preview>
-      <div class="card-add-edit"> + add card</div>
+      <div class="card-add-edit">
+        <textarea name="" id="" cols="10" rows="5" placeholder="Enter a title for this card..."></textarea>
+      <a> + Add List</a>
+
+      </div>
   </div>
 </template>
 
@@ -23,6 +27,11 @@ export default {
     },
 components: {
     cardPreview,
+},
+methods:{
+  setValue(){
+    console.log('letssss');
+  }
 }
 }
 </script>
