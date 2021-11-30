@@ -1,0 +1,9 @@
+.board-container {
+    margin-top: 45px;
+    height: calc(100% - 100px);
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }

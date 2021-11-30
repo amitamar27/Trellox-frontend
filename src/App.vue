@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="background-image: url(https://images.unsplash.com/photo-1520155346-36773ab29479?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyNDgxMTN8MHwxfHNlYXJjaHwzfHxtYWNrYm9va3xlbnwwfHx8fDE2MjcyMjkyNTk&ixlib=rb-1.2.1&q=85);
+  <div id="app" class="app" style="background-image: url(https://images.unsplash.com/photo-1520155346-36773ab29479?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyNDgxMTN8MHwxfHNlYXJjaHwzfHxtYWNrYm9va3xlbnwwfHx8fDE2MjcyMjkyNTk&ixlib=rb-1.2.1&q=85);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;">
@@ -27,28 +27,28 @@ export default {
 
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+// #app {
+//   font-family: Avenir, Helvetica, Arial, sans-serif;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+//   text-align: center;
 
-  // color: #2c3e50;
-  // width: 100%;
-  // height: 100vh;
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  // z-index: -1;
-  // background-size: cover;
+//   // color: #2c3e50;
+//   // width: 100%;
+//   // height: 100vh;
+//   // position: absolute;
+//   // top: 0;
+//   // left: 0;
+//   // z-index: -1;
+//   // background-size: cover;
 
-  position: absolute;
-    height: 100vh;
-    width: 100%;
-    z-index: 10;
-    overflow-y: hidden;
-    overflow-x: scroll;
-}
+//   position: absolute;
+//     height: 100vh;
+//     width: 100%;
+//     z-index: 10;
+//     // overflow-y: hidden;
+//     overflow-x: hidden;
+// }
 // .borad-nav-color {
 //     height: 40px;
 //     background-color: rgba(0,0,0,.32);
