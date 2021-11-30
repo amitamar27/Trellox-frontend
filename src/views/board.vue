@@ -50,4 +50,19 @@ components:{
   overflow: auto;
   height: 2em;
 }
+
+/* ::-webkit-scrollbar-thumb{
+  background: rgba(192,196,207,.7490196078431373);
+  border-radius: 5px;
+}
+::-webkit-scrollbar {
+    height: 15px;
+    width: 8.5px;
+} */
+/* {
+  display: block;
+  width: 1000px;
+  overflow: auto;
+  height: 2em;
+} */
 </style>
