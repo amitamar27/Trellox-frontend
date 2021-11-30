@@ -2,6 +2,9 @@
   
   <div class="board-container">
       <h1>grandfather: board</h1>
+      <div  v-if="board">{{board.group}}</div>
+      |
+      <div>{{x.length}}</div>
       <group-list v-if="board" :board="board"></group-list>
       <div class="scroller"></div>
   </div>
@@ -14,7 +17,7 @@ export default {
 
   data(){
     return {
-     
+     x: [1,2,34]
     }
   },
   created(){

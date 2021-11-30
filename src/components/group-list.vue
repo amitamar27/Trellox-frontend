@@ -16,6 +16,12 @@
 <script>
 import groupPreview from './group-preview.vue'
 export default {
+    // props: {
+    //     board: {
+    //         type: Array,
+
+    //     }
+    // }
 components:{
     groupPreview,
 }
