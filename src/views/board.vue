@@ -2,7 +2,7 @@
   
   <div class="board-container">
       <h1>grandfather: board</h1>
-      <group-list></group-list>
+      <group-list v-if="board" :board="board"></group-list>
       <div class="scroller"></div>
   </div>
 
@@ -17,6 +17,11 @@ export default {
   },
   created(){
     this.$store.dispatch({type: "loadBoard"})
+  },
+  computed: {
+    board(){
+      return this.$store.getters.board
+    }
   },
 
 components:{
