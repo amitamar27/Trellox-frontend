@@ -8,7 +8,7 @@
       >
 
       </card-preview>
-      <div class="card-add-edit"></div>
+      <div class="card-add-edit"> + add card</div>
   </div>
 </template>
 

@@ -1,4 +1,14 @@
 .group-preview{
     width: 272px;
+    border-radius: 3px;
+    .group-preview-header{
+        height: 45px;
+        display: flex;
+        align-items: center;
+        margin-inline-start: 7px;
+        cursor: pointer;
+        
+    }
+
     
 }

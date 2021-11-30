@@ -3,6 +3,7 @@
     // width: 100%;
     display: flex;
     flex-basis: auto;
+    margin: 7px 20px;
     >* {
         margin-right: 5px;
         background-color: #ebecf0;
@@ -13,6 +14,14 @@
         padding: 6px 8px 2px;
         margin: 6px 8px;
         border-radius: 3px;
+        cursor: pointer;
+        text-align: start;
+    }
+    .card-container >*:hover{
+        background-color: #091e42;
     }
     
+}
+.card-add-edit{
+    color: #5e6c84;
 }
