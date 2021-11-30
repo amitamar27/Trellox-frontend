@@ -6,7 +6,6 @@
 </template>
 
 
-<<<<<<< HEAD
 
 
 <script>
@@ -24,8 +23,6 @@ export default {
 
 
 
-=======
->>>>>>> 00bbfcc54ba066940062014c3417404db50cac8a
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
