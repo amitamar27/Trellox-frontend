@@ -6,6 +6,7 @@
         height: 45px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         margin-inline-start: 7px;
         cursor: pointer;
         
@@ -15,4 +16,29 @@
     height: 100%;
     display: table-cell;
     vertical-align: top;
+
+
+    .group-preview-btn{
+        display: flex;
+        border: none;
+        padding: 3px;
+        margin-right: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.1s;
+
+      
+
+        img{
+            width: 25px;
+            height: 25px;
+        }
+
+        
+    }
+
+    .group-preview-btn:hover{
+        background-color: lightgray;
+        transition: all 0.1s;
+    }
 }

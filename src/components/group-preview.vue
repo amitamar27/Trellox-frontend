@@ -1,16 +1,21 @@
 <template>
   <div class="group-preview">
-      <!-- <h3 >grandson: group-preview</h3> -->
+    <!-- <h3 >grandson: group-preview</h3> -->
 
-      <div class="group-preview-header">
-          {{group.title}}
-      </div>
-      
-      <card-list 
-      :tasks="group.tasks"
-      ></card-list>
+    <div class="group-preview-header">
+      {{ group.title }}
 
-      <!-- <div class="card-list">
+      <button class="group-preview-btn">
+        <img
+          :src="require('@/assets/dots-menu.svg')"
+          alt=""
+        />
+      </button>
+    </div>
+
+    <card-list :tasks="group.tasks"></card-list>
+
+    <!-- <div class="card-list">
           <div class="card-preview"></div>
       </div> -->
   </div>
@@ -19,18 +24,17 @@
 <script>
 import cardList from "./card-list.vue"
 export default {
-    props: {
-        group: {
-            type:Object,
-            required:true,
-        }
-    },
-components: {
+  props: {
+    group: {
+      type: Object,
+      required: true,
+    }
+  },
+  components: {
     cardList,
-}
+  }
 }
 </script>
 
 <style>
-
 </style>
