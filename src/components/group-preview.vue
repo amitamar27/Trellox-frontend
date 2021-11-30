@@ -4,11 +4,10 @@
 
       <div class="group-preview-header">
           {{group.title}}
+          {{group.id}}
       </div>
       
-      <card-list 
-      :tasks="group.tasks"
-      ></card-list>
+      <card-list  @addTask="addTask(group.id)" :tasks="group.tasks" ></card-list>
 
       <!-- <div class="card-list">
           <div class="card-preview"></div>
@@ -27,6 +26,13 @@ export default {
     },
 components: {
     cardList,
+},
+methods:{
+    addTask(idx){
+        console.log(idx);
+       
+        // this.$store.dispatch({type:'addTask', taskTitle})
+    }
 }
 }
 </script>

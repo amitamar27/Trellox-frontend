@@ -1,5 +1,11 @@
 .group-preview{
     width: 272px;
+    background-color: #ebecf0;
+    height: 100%;
+    display: table-cell;
+    vertical-align: top;
+    border-radius: 5px;
+    padding: 5px 7px;
     
     vertical-align: top;
     .group-preview-header{
@@ -12,7 +18,4 @@
     }
 
     
-    height: 100%;
-    display: table-cell;
-    vertical-align: top;
 }

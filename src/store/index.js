@@ -46,12 +46,12 @@ export default new Vuex.Store({
         console.log('could not add group to the board', err);
       }
     } ,
-    async addTask({commit}, payload){
+    async addTask({commit}, {taskTitle}){
       try{
-        var updatedGroup =boardService.getGroupById('g101'); // payload.groupId
-        var task = boardService.makeTask('title')
-        updatedGroup.tasks.push(task)
-        commit({type:'updateGroup', updatedGroup})
+        var updatedGroup =boardService.getGroupById(); // payload.groupId
+        // var task = boardService.makeTask('title')
+        // updatedGroup.tasks.push(task)
+        // commit({type:'updateGroup', updatedGroup})
 
       }catch(err){
         console.log('faild in add task', err);

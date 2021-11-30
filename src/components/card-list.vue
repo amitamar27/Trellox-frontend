@@ -8,11 +8,21 @@
       >
 
       </card-preview>
-      <div class="card-add-edit">
-        <textarea name="" id="" cols="10" rows="5" placeholder="Enter a title for this card..."></textarea>
-      <a> + Add List</a>
+      <div v-if="isAdding" class="card-add-edit" >
+        <textarea v-model="task.title" name="" id="" cols="10" rows="5" placeholder="Enter a title for this card..."></textarea>
+        <div class="card-actions">
+        <a @click="addTask"> + Add List</a>
+        <button>x</button>
 
-      </div>
+        </div>
+        </div>
+        <div @click="isAdding=true" v-else class="card-add-btn">
+        <a> + Add List</a>
+        </div>
+    
+      
+
+
   </div>
 </template>
 
@@ -22,17 +32,33 @@ export default {
      props: {
         tasks: {
             type:Array,
-            required:true,
+            required:false,
         }
+    },
+    data(){
+      return{
+        task:{
+          title:''
+        },
+        isAdding:false
+
+      }
     },
 components: {
     cardPreview,
 },
+
 methods:{
-  setValue(){
-    console.log('letssss');
+  addTask(){
+    this.isAdding =false;
+    const taskTitle =this.task.title
+    this.$emit('addTask', taskTitle)
+    this.task.title =''
+
+    
   }
 }
+
 }
 </script>
 
