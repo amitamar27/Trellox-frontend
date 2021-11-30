@@ -40,39 +40,11 @@ components:{
 .board-container{
     margin-top: 45px;
     height: calc(100% - 57px);
-    overflow-x: auto;
+    overflow-x:auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    /* cursor: move; */
+    
 }
-/* .scroller::-webkit-scrollbar-thumb{
-  background: rgba(192,196,207,.7490196078431373);
-  border-radius: 5px;
-}
-.scroller::-webkit-scrollbar {
-    height: 15px;
-    width: 8.5px;
-}
-.scroller{
-  display: block;
-  width: 1000px;
-  overflow: auto;
-  height: 2em;
-} */
 
-/* ::-webkit-scrollbar-thumb{
-  background: rgba(192,196,207,.7490196078431373);
-  border-radius: 5px;
-}
-::-webkit-scrollbar {
-    height: 15px;
-    width: 8.5px;
-} */
-/* {
-  display: block;
-  width: 1000px;
-  overflow: auto;
-  height: 2em;
-} */
 </style>
