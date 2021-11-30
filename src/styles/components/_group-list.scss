@@ -16,3 +16,8 @@
     }
     
 }
+@media (min-width: 960px){
+    .group-list-container {
+        height: calc(100vh - 100px);
+    }
+}

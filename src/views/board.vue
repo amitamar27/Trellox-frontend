@@ -36,7 +36,17 @@ components:{
 </script>
 
 <style>
-.scroller::-webkit-scrollbar-thumb{
+
+.board-container{
+    margin-top: 45px;
+    height: calc(100% - 57px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    cursor: move;
+}
+/* .scroller::-webkit-scrollbar-thumb{
   background: rgba(192,196,207,.7490196078431373);
   border-radius: 5px;
 }
@@ -49,7 +59,7 @@ components:{
   width: 1000px;
   overflow: auto;
   height: 2em;
-}
+} */
 
 /* ::-webkit-scrollbar-thumb{
   background: rgba(192,196,207,.7490196078431373);
