@@ -28,33 +28,33 @@
             border-radius: 4px;
             padding: 3px 6px;
             cursor: pointer;
+            @include hover-supported {
+                background-color: #6cadd3;
+                cursor: pointer;
+            }
         }
-
         .board-header-btn{
             color: white;
             align-items: center;
             padding: 4px;
             display: flex;
             cursor:pointer;
+
+            p{
+                font-weight: bold;
+            }
         }
         .board-header-btn p{
             margin: 0;
         }
-
-        @include hover-supported {
-            background-color: #006aa7;
-            cursor: pointer;
-        }
     }
-
     .logo{
         width: 90%;
+        color: white;
         display: flex;
         justify-content: center;
         align-items: center;
-
     }
-
     .nav-right{
         width: 100px;
         display: flex;
@@ -66,6 +66,10 @@
             border-radius: 4px;
             padding: 0px 5px 0px 5px;
             cursor: pointer;
+             @include hover-supported {
+                background-color: #6cadd3;
+                cursor: pointer;
+            }
         }
         img{
             filter: invert(100%) sepia(0) saturate(7479%) hue-rotate(
