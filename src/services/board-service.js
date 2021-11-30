@@ -1,10 +1,12 @@
 export const boardService={
 query,
+getGroupById,
+makeTask
 
 }
 
 
-const board = {
+const gBoard = {
     "_id": "b101",
     "title": "Robot dev proj",
     "createdAt": 1589983468418,
@@ -125,7 +127,21 @@ const board = {
 }
 
 function query(){
-    return board
+    return gBoard
+}
+getGroupById('g101')
+function getGroupById(groupId){
+    const board = gBoard
+    var currGroup =board.groups.find((group)=> group.id === groupId)
+    console.log(currGroup);
+    return currGroup
+
+}
+function makeTask(title){
+    return {
+        id:makeId(), 
+        title
+    }
 }
 
 
