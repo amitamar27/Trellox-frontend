@@ -1,7 +1,8 @@
 export const boardService={
 query,
 getGroupById,
-makeTask
+makeTask,
+getNewGroup
 
 }
 
@@ -140,6 +141,12 @@ function getGroupById(groupId){
 function makeTask(title){
     return {
         id:makeId(), 
+        title
+    }
+}
+function getNewGroup(title){
+    return {
+        id:makeId(),
         title
     }
 }

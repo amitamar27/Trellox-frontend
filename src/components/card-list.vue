@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class ="cards-container">
       <!-- <div>task : {{task}}</div> -->
       <card-preview 
         v-for="task in tasks"
