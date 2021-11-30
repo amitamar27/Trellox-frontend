@@ -44,7 +44,7 @@ components:{
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    cursor: move;
+    /* cursor: move; */
 }
 /* .scroller::-webkit-scrollbar-thumb{
   background: rgba(192,196,207,.7490196078431373);
