@@ -218,6 +218,8 @@ const gBoard =_createBoard("Robot dev proj","Abi Abambi","http://some-img", [
 function query(){
     return gBoard
 }
+
+
 function saveTask(boardId, groupId, task, activity) {
     // const board = getById(boardId)
     // TODO: find the task, and update
