@@ -13,7 +13,10 @@ import groupList from '../components/group-list.vue'
 export default {
 
   data(){
-
+    return {}
+  },
+  created(){
+    this.$store.dispatch({type: "loadBoard"})
   },
 
 components:{
@@ -30,5 +33,11 @@ components:{
 .scroller::-webkit-scrollbar {
     height: 15px;
     width: 8.5px;
+}
+.scroller{
+  display: block;
+  width: 1000px;
+  overflow: auto;
+  height: 2em;
 }
 </style>
