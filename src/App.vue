@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="app" style="background-image: url(https://images.unsplash.com/photo-1520155346-36773ab29479?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyNDgxMTN8MHwxfHNlYXJjaHwzfHxtYWNrYm9va3xlbnwwfHx8fDE2MjcyMjkyNTk&ixlib=rb-1.2.1&q=85);
+  <div id="app" class="app" style="background-image: url(https://res.cloudinary.com/taskit-sprint/image/upload/v1622319307/background%20for%20Taskit/background_6_lqcaex.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;">
