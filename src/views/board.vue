@@ -1,12 +1,11 @@
 <template>
-  <div class="board-container" v-dragscroll:nochilddrag.x="true"
-  v-dragscroll:nochilddrag.y="false">
+  <div class="board-container" >
     <!-- <h1>grandfather: board</h1> -->
     <!-- <div  v-if="board">{{board.groups}}</div> -->
 
     <!-- <div>{{x.length}}</div> -->
     <group-list v-if="board" :board="board"></group-list>
-    <div class="scroller"></div>
+    <!-- <div class="scroller"></div> -->
   </div>
 </template>
 
@@ -32,14 +31,7 @@ export default {
 </script>
 
 <style>
-.board-container {
-  margin-top: 45px;
-  height: calc(100% - 57px);
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-}
+
 /* .scroller::-webkit-scrollbar {
   height: 15px;
   width: 12px;
