@@ -5,6 +5,8 @@
 html {
     overflow-y: hidden;
     line-height: 1.6;
+    font-size: 14px;
+
 
     ::-webkit-scrollbar {
         height: 15px;
@@ -12,8 +14,8 @@ html {
     }
 
     ::-webkit-scrollbar-track {
-        // background-color: rgba(0, 0, 0, 0.15);
-        background: rgba(9,30,66,.08);
+        background-color: rgba(0,0,0,.15);
+        // background: rgba(9,30,66,.08);
         border-radius: 20px;
     }
 
@@ -23,7 +25,7 @@ html {
     }
 
     ::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.425);
+        background: hsla(0,0%,100%,.425);
         border-radius: 20px;
     }
 }

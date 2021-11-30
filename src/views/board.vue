@@ -1,78 +1,63 @@
 <template>
-  
-  <div class="board-container">
-      <!-- <h1>grandfather: board</h1> -->
-      <!-- <div  v-if="board">{{board.groups}}</div> -->
-      
-      <!-- <div>{{x.length}}</div> -->
-      <group-list v-if="board" :board="board"></group-list>
-      <div class="scroller"></div>
-  </div>
+  <div class="board-container" v-dragscroll:nochilddrag.x="true"
+  v-dragscroll:nochilddrag.y="false">
+    <!-- <h1>grandfather: board</h1> -->
+    <!-- <div  v-if="board">{{board.groups}}</div> -->
 
+    <!-- <div>{{x.length}}</div> -->
+    <group-list v-if="board" :board="board"></group-list>
+    <div class="scroller"></div>
+  </div>
 </template>
 
 <script>
-import groupList from '../components/group-list.vue'
+import groupList from "../components/group-list.vue";
 export default {
-
-  data(){
-    return {
-     
-    }
+  data() {
+    return {};
   },
-  created(){
-    this.$store.dispatch({type: "loadBoard"})
+  created() {
+    this.$store.dispatch({ type: "loadBoard" });
   },
   computed: {
-    board(){
-      return this.$store.getters.board
-    }
+    board() {
+      return this.$store.getters.board;
+    },
   },
 
-components:{
-  groupList,
- }
-}
+  components: {
+    groupList,
+  },
+};
 </script>
 
 <style>
+.board-container {
+  margin-top: 45px;
+  height: calc(100% - 57px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+/* .scroller::-webkit-scrollbar {
+  height: 15px;
+  width: 12px;
+}
 
-.board-container{
-    margin-top: 45px;
-    height: calc(100% - 57px);
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    /* cursor: move; */
+.scroller::-webkit-scrollbar-track {
+  
+  background: rgba(9, 30, 66, 0.08);
+  border-radius: 20px;
 }
-/* .scroller::-webkit-scrollbar-thumb{
-  background: rgba(192,196,207,.7490196078431373);
-  border-radius: 5px;
-}
-.scroller::-webkit-scrollbar {
-    height: 15px;
-    width: 8.5px;
-}
-.scroller{
-  display: block;
-  width: 1000px;
-  overflow: auto;
-  height: 2em;
-} */
 
-/* ::-webkit-scrollbar-thumb{
-  background: rgba(192,196,207,.7490196078431373);
-  border-radius: 5px;
+.scroller::-webkit-scrollbar-button {
+  height: 4px;
+  width: 4px;
 }
-::-webkit-scrollbar {
-    height: 15px;
-    width: 8.5px;
-} */
-/* {
-  display: block;
-  width: 1000px;
-  overflow: auto;
-  height: 2em;
+
+.scroller::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.425);
+  border-radius: 20px;
 } */
 </style>

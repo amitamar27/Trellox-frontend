@@ -46,7 +46,8 @@ export default {
     height: 100vh;
     width: 100%;
     z-index: 10;
-    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow-x: scroll;
 }
 // .borad-nav-color {
 //     height: 40px;
