@@ -59,8 +59,17 @@
         outline: none;
     }
 }
-@media (min-width: 960px){
-    .group-list-container {
-        height: calc(100vh - 100px);
-    }
+
+.group-list-container{
+    display: flex;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 38px 4px;
+    // height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: -1;
 }
