@@ -25,3 +25,8 @@
 .card-add-edit{
     color: #5e6c84;
 }
+@media (min-width: 960px){
+    .group-list-container {
+        height: calc(100vh - 100px);
+    }
+}
