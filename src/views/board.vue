@@ -13,7 +13,9 @@ import groupList from '../components/group-list.vue'
 export default {
 
   data(){
-    return {}
+    return {
+     
+    }
   },
   created(){
     this.$store.dispatch({type: "loadBoard"})
