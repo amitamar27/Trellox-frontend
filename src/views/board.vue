@@ -23,5 +23,12 @@ components:{
 </script>
 
 <style>
-
+.scroller::-webkit-scrollbar-thumb{
+  background: rgba(192,196,207,.7490196078431373);
+  border-radius: 5px;
+}
+.scroller::-webkit-scrollbar {
+    height: 15px;
+    width: 8.5px;
+}
 </style>
