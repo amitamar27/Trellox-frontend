@@ -16,7 +16,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setBoard(state, {board}){
-      console.log(board);
+      // console.log(board);
       state.board=board
     }
     
