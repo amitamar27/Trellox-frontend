@@ -36,10 +36,11 @@ export default new Vuex.Store({
       }
     },
 
-    async addGroup({commit}){
+    async addGroup({commit}, payload){
       try {
        var board = boardService.query()
-       board.groups.push({})
+       var group = boardService.getNewGroup(payload.title)
+       board.groups.push(group)
        commit({type:'setBoard', board})
       }catch(err){
         console.log('could not add group to the board', err);
