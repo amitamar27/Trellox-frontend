@@ -11,7 +11,7 @@
       <!-- router link to -> Board -->
       <router-link to="/board">
         <button class="board-header-btn">
-          <img :src="require('@/assets/boards.svg')" alt="" />
+          <img  :src="require('@/assets/boards.svg')" alt="" />
           <p>Boards</p>
         </button>
       </router-link>

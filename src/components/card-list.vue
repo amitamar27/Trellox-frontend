@@ -18,7 +18,7 @@
         </div>
         </div>
         <div @click="isAdding=true" v-else class="card-add-btn">
-        <a> + Add List</a>
+        <a> + Add a Card</a>
         </div>
   </div>
 </template>
@@ -51,6 +51,11 @@ components: {
 
 methods:{
   addTask(groupId){
+    if(!this.task.title) {
+      this.isAdding =false;
+      return
+    }
+    console.log('groupId:', groupId);
     this.isAdding =false;
     const taskTitle =this.task.title
     this.task.title =''

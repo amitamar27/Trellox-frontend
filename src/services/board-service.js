@@ -31,10 +31,12 @@ const gBoard = {
             "imgUrl": "https://www.google.com"
         }
     ],
+    // עמודות
     "groups": [
         {
             "id": "g101",
             "title": "Group 1",
+            // כרטיסים
             "tasks": [
                 {
                     "id": "c101",
@@ -109,6 +111,7 @@ const gBoard = {
             "style": {}
         }
     ],
+    // פעילויות בתוך כרטיס
     "activities": [
         {
             "id": "a101",
