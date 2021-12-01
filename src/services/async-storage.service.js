@@ -1,15 +1,11 @@
-import {asyncgStorageService} from './async-storage.service.js'
 
-export const boardService={
-query,
-getGroupById,
-makeTask,
-getNewGroup
-
+export const asyncgStorageService = {
+    query,
+    get,
+    post,
+    put,
+    remove,
 }
-const KEY ='board'
-
-
 const gBoard = {
     "_id": "b101",
     "title": "Robot dev proj",
@@ -133,72 +129,67 @@ const gBoard = {
     ],
 }
 
- async function query(){
-    var board = await asyncgStorageService.query(KEY)
-    return board   
-    
-}
- async function getGroupById(groupId){
-     return await asyncgStorageService.get(KEY , groupId)
-    // const board = gBoard
-    // var currGroup =board.groups.find((group)=> group.id === groupId)
-    // return currGroup
-
+function query(entityType, delay=0) {
+    var entities = JSON.parse(localStorage.getItem(entityType)) || gBoard
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+            resolve(entities)
+        }, delay)
+    })
 }
 
-function makeTask(title){
-    return {
-        id:makeId(), 
-        title
-    }
+function get(entityType, entityId) {
+    return query(entityType)
+        .then(entities => entities.groups.find(entity => entity.id === entityId))
+}
+function post(entityType, newEntity) {
+    newEntity._id = _makeId()
+    return query(entityType)
+        .then(entities => {
+            entities.push(newEntity)
+            _save(entityType, entities)
+            return newEntity
+        })
 }
 
-function getNewGroup(title){
-    return {
-        id:makeId(),
-        title,
-        tasks:[],
-        
-    }
+function put(entityType, updatedEntity) {
+    return query(entityType)
+        .then(entities => {
+            const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
+            entities.splice(idx, 1, updatedEntity)
+            _save(entityType, entities)
+            return updatedEntity
+        })
+}
+function putGroups(entityType, updatedEntity) {
+    return query(entityType)
+        .then(entities => {
+            entities.splice(groups, 1, updatedEntity)
+            _save(entityType, entities)
+            return updatedEntity
+        })
 }
 
-
-function saveTask(boardId, groupId, task, activity) {
-    // const board = getById(boardId)
-    // TODO: find the task, and update
-    // board.activities.unshift(activity)
-    // saveBoard(board)
-    return board
-}
-
-
-
-function _createBoard(title, fullname,imgUrl,style={},labels,members,groups){
-   return {
-        _id: makeId(),
-        title,
-        createdAt: Date.now(),
-        createdBy :{
-            _id:makeId(),
-            fullname,
-            imgUrl,
-        },
-        style,
-        labels,
-        members,
-        groups
-       
-    }
-
+function remove(entityType, entityId) {
+    return query(entityType)
+        .then(entities => {
+            const idx = entities.findIndex(entity => entity._id === entityId)
+            if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
+            entities.splice(idx, 1)
+            _save(entityType, entities)
+        })
 }
 
 
-// utils
-function makeId(length = 5) {
-    var txt = '';
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+function _save(entityType, entities) {
+    localStorage.setItem(entityType, JSON.stringify(entities))
+}
+
+function _makeId(length = 5) {
+    var text = ''
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     for (var i = 0; i < length; i++) {
-        txt += possible.charAt(Math.floor(Math.random() * possible.length));
+        text += possible.charAt(Math.floor(Math.random() * possible.length))
     }
-    return txt;
+    return text
 }

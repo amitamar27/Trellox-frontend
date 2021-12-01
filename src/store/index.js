@@ -29,27 +29,31 @@ export default new Vuex.Store({
   actions: {
    async loadBoard({commit}){
       try{
-        var board= boardService.query()
+        var board= await boardService.query()
+        console.log('boardd',board);
         commit({type:'setBoard',board})
       }catch(err){
         console.log('could not load board', err);
       }
     },
 
-    async addGroup({commit}, payload){
+    async addGroup({commit}, {groupTitle}){
+      console.log(groupTitle);
       try {
-       var board = boardService.query()
-       var group = boardService.getNewGroup(payload.title)
+       var board = await boardService.query()
+       var group = await boardService.getNewGroup(groupTitle)
        board.groups.push(group)
+       console.log(board.groups);
        commit({type:'setBoard', board})
+       
       }catch(err){
         console.log('could not add group to the board', err);
       }
     } ,
     async addTask({commit}, {task}){
       try{
-        var updatedGroup =boardService.getGroupById(task.groupId); 
-        var addedTask = boardService.makeTask(task.taskTitle)
+        var updatedGroup =await boardService.getGroupById(task.groupId); 
+        var addedTask = await boardService.makeTask(task.taskTitle)
         updatedGroup.tasks.push(addedTask)
         commit({type:'updateGroup', updatedGroup})
 
