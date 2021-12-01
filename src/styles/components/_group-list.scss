@@ -3,7 +3,7 @@
     // width: 100%;
     display: flex;
     gap: 7px;
-    // height: 100%;
+    height: 100%;
     width: 100vw;
     flex-basis: auto;
     margin: 7px 60px;
@@ -33,6 +33,7 @@
     flex-direction: column;
     text-align: start;
     margin-inline: 7px;
+    
    
     
     textarea{
@@ -87,7 +88,7 @@
     
 }
 .card-add-btn{
-    
+        margin-inline: 7px;
         padding: 4px 8px;
         cursor: pointer;
         border-radius: 4px;
