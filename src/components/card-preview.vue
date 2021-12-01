@@ -1,12 +1,16 @@
 <template>
-  <div class="card-container">
+      <draggable class="draggable-groups" group="task">
+      <div class="card-container">
       <div class="card-preview">
          Card : {{task.title}}
       </div>
   </div>
+      </draggable>
+  
 </template>
 
 <script>
+import draggable from "vuedraggable";
 export default {
 props: {
         task: {
@@ -14,6 +18,11 @@ props: {
             required:true,
         }
     },
+     components: {
+    draggable,
+  },
+   
+  
 }
 </script>
 

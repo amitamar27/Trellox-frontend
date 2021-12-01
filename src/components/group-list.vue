@@ -1,16 +1,9 @@
 <template>
 
 <div class="group-list-container">
-    <div class="group-list">
-        <!-- <h2>son: group-list</h2> -->
-        <!-- <p>{{board.groups[0]}}</p> -->
-
-        <group-preview 
-        v-for="group in board.groups"
-        :group="group"
-        :key="group.id"
-        ></group-preview>
-    </div>
+        <draggable  class="group-list"> 
+        <group-preview v-for="group in board.groups" :group="group" :key="group.id" ></group-preview>
+       </draggable>
 </div>
 
 
@@ -21,17 +14,19 @@
 
 <script>
 import groupPreview from './group-preview.vue'
+import boardService from '../store/index.js'
+import draggable from "vuedraggable";
+
 export default {
-    props: {
-        board: {
-            type: Object,
-            required: true,
-        }
-    },
 components:{
     groupPreview,
+    draggable
 },
-// v-for="group in board.groups"
+computed:{
+    board(){
+        return this.$store.getters.board
+    }
+}
 }
 </script>
 
