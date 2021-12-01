@@ -1,73 +1,118 @@
 <template>
+  <div v-if="board" class="group-list-container">
+     <!-- {{ board.groups}} -->
+    <draggable class="group-list">
+      <div
+        v-for="group in board.groups"
+        :group="group"
+        :key="group.id"
+        class="group-preview"
+      >
+        <div class="group-preview-header">
+          <p
+            class="group-title"
+            dir="auto"
+            maxlength="512"
+            style="overflow: hidden; overflow-wrap: break-word; height: 28px"
+          >
+            {{ group.title }}
+          </p>
+         <div class="group-preview-btn">
+                <span class="span-1 hide">
+                    <span class="span-2 icon-sm" ></span>
+                </span>
+                <div @click="openGroupMenu(group.id)" class="group-header-extras-menu span-1 icon-sm icon-overflow-menu-horizontal" ></div>
+            </div>
 
-<div class="group-list-container">
-        <draggable  class="group-list"> 
-        <div v-for="group in board.groups" :group="group" :key="group.id" class="group-preview">
-          <div class="group-preview-header">
-               {{ group.title }}
-           <button class="group-preview-btn">
-           <img :src="require('@/assets/dots-menu.svg')"/>
-           </button>
-          </div>
-        <card-list :tasks="group.tasks" :groupId="group.id" ></card-list>
-       </div>
-       <div class ="group-add-container">
-       <div class="group-add-btn"><p v-if="!isAddingTitle" @click="isAddingTitle=true"> +Add Group</p>
-           <form v-else class="add-group-form" @submit.prevent="addNewGroup">
-               <textarea v-model="newGroupTitle" name="" id="" cols="30" rows="1" placeholder="Enter list title"></textarea>
-               <div class="form-actions">
-               <a class="add-group-add" @click="addNewGroup">Add Group</a>
-               <button class="add-group-close" @click="isAddingTitle=!isAddingTitle"> x</button>
-               </div>
-           </form>
-
-       </div>
-       
-       </div>
-       </draggable>
-</div>
-
+      
+        </div>
+        <card-list :tasks="group.tasks" :groupId="group.id"></card-list>
+      </div>
+      <group-menu @mousedown.stop=""
+        v-if="isMenuOpened && group"
+        @closeMenu="closeGroupMenu"
+        :group="group"
+        :title="'List actions'"
+        ></group-menu>
+      <div class="group-add-container">
+        <div class="group-add-btn">
+          <p v-if="!isAddingTitle" @click="isAddingTitle = true">+Add Group</p>
+          <form v-else class="add-group-form" @submit.prevent="addNewGroup">
+            <textarea
+              v-model="newGroupTitle"
+              name=""
+              id=""
+              cols="30"
+              rows="1"
+              placeholder="Enter list title"
+            ></textarea>
+            <div class="form-actions">
+              <a class="add-group-add" @click="addNewGroup">Add Group</a>
+              <button
+                class="add-group-close"
+                @click="isAddingTitle = !isAddingTitle"
+              >
+                x
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </draggable>
+  </div>
 </template>
 
 <script>
-import groupPreview from './group-preview.vue'
-import boardService from '../store/index.js'
+import groupPreview from "./group-preview.vue";
+import {boardService} from "../store/index.js";
 import draggable from "vuedraggable";
-import cardList from "./card-list.vue"
-
-
+import cardList from "./card-list.vue";
+import groupMenu from './menus-cmps/group-menu.vue'
 export default {
-components:{
+  components: {
     groupPreview,
     draggable,
-    cardList
-},
-data(){
+    cardList,
+    groupMenu,
+  },
+  data() {
     return {
-        isAddingTitle:false,
-        newGroupTitle:''
+      isAddingTitle: false,
+      newGroupTitle: "",
+      isMenuOpened: false,
+      group: null,
+    };
+  },
+  computed: {
+    board() {
+      return this.$store.getters.board;
+    },
+  },
+  methods: {
+    addNewGroup() {
+      if (this.newGroupTitle === "") return;
+      this.isAddingTitle = false;
+      var groupTitle = this.newGroupTitle;
+      this.$store.dispatch({ type: "addGroup", groupTitle });
+      this.newGroupTitle = "";
+    },
+    async openGroupMenu(groupId) {
+      this.isMenuOpened = true
+      const group = await this.$store.dispatch({type: 'getGroupById', groupId});
+      this.group = group
+      console.log('group',group);
+      console.log('open');
+    },
+    closeGroupMenu() {
+      this.isMenuOpened = false
+      console.log('close');
     }
-},
-computed:{
-    board(){
-        return this.$store.getters.board
-    }
-},
-methods:{
-    addNewGroup(){
-        if(this.newGroupTitle==='') return
-        this.isAddingTitle=false
-        var groupTitle = this.newGroupTitle
-        this.$store.dispatch({type:'addGroup', groupTitle})
-        this.newGroupTitle=''
-
-    }
-}
-}
+  },
+};
 </script>
 
 <style>
 .group-list-container {
-    overflow-x: auto;
+  overflow-x: auto;
 }
 </style>

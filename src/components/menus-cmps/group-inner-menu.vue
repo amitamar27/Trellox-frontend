@@ -4,7 +4,7 @@
 			<h5 @click="addCard">Add card...</h5>
 			<h5>Sort by</h5>
 			<h5 @click="removeGroup">Delete this list</h5>
-            <p>{{groupId}}</p>
+            <!-- <p>{{groupId}}</p> -->
 		</div>
 	</section>
 </template>
@@ -16,7 +16,10 @@
 export default {
     name:'group-inner-menu',
     props:{
-        groupId:String
+        groupId: {
+            type:String,
+            required: true,
+        }
     },
     methods:{
         addCard(){

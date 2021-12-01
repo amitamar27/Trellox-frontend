@@ -23,6 +23,9 @@ export default new Vuex.Store({
       var index = state.board.groups.findIndex((group) => group.id === updatedGroup.id);
       state.board.groups.splice(index,1,updatedGroup)
       console.log(state.board);
+    },
+    getGroupById(state, {group}){
+
     }
     
   },
@@ -61,6 +64,16 @@ export default new Vuex.Store({
         console.log('faild in add task', err);
 
       }
+    },
+    async getGroupById({commit}, {groupId}){
+      try {
+        const group = await boardService.getGroupById(groupId); 
+        return group;
+        // commit({type: 'getGroupById',group})
+      } catch(err){
+        console.log('faild get group', err);
+      }
+
     }
     
   

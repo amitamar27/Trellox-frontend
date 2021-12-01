@@ -1,5 +1,5 @@
 <template>
-  <section v-if="isAlive" class="group-menu" @click.stop="">
+  <section v-if="isAlive" class="group-menu" @click.stop="" >
     <header class="title">
       <button class="close-btn-menu" @click="closeMenu">
         <img :src="require('@/assets/cancel-icon.png')" />
@@ -28,12 +28,17 @@ export default {
       type: Boolean,
       default: true
     },
-    group: Object
+    group:{
+      type: Object,
+    } 
   },
   data() {
     return {
       isAlive: false
     }
+  },
+  created(){
+    console.log(this.group);
   },
   methods: {
     closeMenu() {

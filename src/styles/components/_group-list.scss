@@ -13,15 +13,20 @@
         background-color: #ebecf0;
     }
     .card-container >*{
+        font-family: "Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
         background-color: white;
         box-shadow: 0 1px 0 #091e4240;
-        padding: 6px 8px 2px;
+        padding: 6px 8px 2px 2px;
         margin: 10px 8px;
+        padding: 5px 5px;
         border-radius: 3px;
         cursor: pointer;
         text-align: start;
         color: #172b4d;
-
+        box-shadow: 0 1px 0 #091e4240;
+        text-decoration: solid;
+       
+        
     }
     .card-container >*:hover{
         background-color: rgb(231, 233, 233);
