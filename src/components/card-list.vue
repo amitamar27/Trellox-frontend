@@ -18,7 +18,7 @@
         </div>
         </div>
         <div @click="isAdding=true" v-else class="card-add-btn">
-        <a> + Add List</a>
+        <a> + Add a Card</a>
         </div>
   </div>
 </template>

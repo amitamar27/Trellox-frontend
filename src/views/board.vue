@@ -2,7 +2,6 @@
   <div class="board-container" >
     <!-- <h1>grandfather: board</h1> -->
     <!-- <div  v-if="board">{{board.groups}}</div> -->
-
     <!-- <div>{{x.length}}</div> -->
     <group-list v-if="board" :board="board"></group-list>
     <!-- <div class="scroller"></div> -->
