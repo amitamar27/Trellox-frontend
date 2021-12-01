@@ -15,7 +15,7 @@ export default {
     return {};
   },
   created() {
-    this.$store.dispatch({ type: "loadBoard" });
+    this.$store.dispatch({ type:"loadBoard" });
   },
   computed: {
     board() {
