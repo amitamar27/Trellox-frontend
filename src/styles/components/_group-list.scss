@@ -33,6 +33,7 @@
     flex-direction: column;
     text-align: start;
     margin-inline: 7px;
+    
    
     
     textarea{
@@ -87,7 +88,7 @@
     
 }
 .card-add-btn{
-    
+        margin-inline: 7px;
         padding: 4px 8px;
         cursor: pointer;
         border-radius: 4px;

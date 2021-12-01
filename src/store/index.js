@@ -16,13 +16,13 @@ export default new Vuex.Store({
   },
   mutations: {
     setBoard(state, {board}){
-      // console.log(board);
+      console.log('board',board);
       state.board=board
     },
     updateGroup(state, {updatedGroup}){
-      console.log(updatedGroup);
-      var index =state.board.groups.findIndex((group) => group.id === updatedGroup.id);
-      board.groups.splice(index,1,updatedGroup)
+      var index = state.board.groups.findIndex((group) => group.id === updatedGroup.id);
+      state.board.groups.splice(index,1,updatedGroup)
+      console.log(state.board);
     }
     
   },
@@ -46,12 +46,12 @@ export default new Vuex.Store({
         console.log('could not add group to the board', err);
       }
     } ,
-    async addTask({commit}, {taskTitle}){
+    async addTask({commit}, {task}){
       try{
-        var updatedGroup =boardService.getGroupById(); // payload.groupId
-        // var task = boardService.makeTask('title')
-        // updatedGroup.tasks.push(task)
-        // commit({type:'updateGroup', updatedGroup})
+        var updatedGroup =boardService.getGroupById(task.groupId); 
+        var addedTask = boardService.makeTask(task.taskTitle)
+        updatedGroup.tasks.push(addedTask)
+        commit({type:'updateGroup', updatedGroup})
 
       }catch(err){
         console.log('faild in add task', err);

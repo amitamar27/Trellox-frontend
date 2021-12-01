@@ -13,7 +13,7 @@
       </button>
     </div>
 
-    <card-list :tasks="group.tasks"></card-list>
+    <card-list :tasks="group.tasks" :groupId="group.id" ></card-list>
 
     <!-- <div class="card-list">
           <div class="card-preview"></div>
@@ -33,13 +33,7 @@ export default {
   components: {
     cardList,
 },
-methods:{
-    addTask(idx){
-        console.log(idx);
-       
-        // this.$store.dispatch({type:'addTask', taskTitle})
-    }
-}
+
 }
 </script>
 

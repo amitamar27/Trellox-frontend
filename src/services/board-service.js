@@ -137,7 +137,6 @@ getGroupById('g101')
 function getGroupById(groupId){
     const board = gBoard
     var currGroup =board.groups.find((group)=> group.id === groupId)
-    console.log(currGroup);
     return currGroup
 
 }
