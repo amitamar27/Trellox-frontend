@@ -27,10 +27,6 @@
        </draggable>
 </div>
 
-
-
-
-  
 </template>
 
 <script>
