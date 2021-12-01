@@ -1,4 +1,36 @@
 @font-face {
     font-family: trello;
-    src: url(~@/assets/fonts/trellicons.ttf);
+    src: url(~@/assets/fonts/trellicons/trellicons.ttf);
+    // src: url("~@/assets/fonts/trellicons/trellicons.ttf") format("ttf");
+    // src: url('../../assets/fonts/trellicons.ttf') format('ttf')
+    // src:local('trellicons.ttf')
+    // ../../assets/fonts/trellicons.ttf
+    // src: url(../../assets/fonts/trellicons.ttf);
+    // src: url('~@/assets/fonts/trellicons.ttf');
+}
+
+// @font-face {
+//     font-family: trellicons;
+//     src: url(https://a.trellocdn.com/prgb/dist/fonts/trellicons.ebcb1833f2dbc6fb44a0.woff) format("woff")
+  
+// }
+
+// @font-face {
+//     font-family: Trellicons Regular;
+//     // font-family: trellicons;
+//     src: url("~@/assets/fonts/trellicons/trellicons-regular.woff") format("woff"),
+//         url("~@/assets/fonts/trellicons/trellicons-regular.ttf") format("truetype"),
+//         url("~@/assets/fonts/trellicons/trellicons-regular.svg#trelliconsregular") format("svg");
+//     // src:url()
+//     font-weight: 400;
+//     font-style: normal
+// }
+
+
+@font-face {
+    font-family: trellicons;
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://a.trellocdn.com/prgb/dist/fonts/trellicons.08dce13e9cd8db302c23.eot);
+    src: url(https://a.trellocdn.com/prgb/dist/fonts/trellicons.08dce13e9cd8db302c23.eot#iefix) format("embedded-opentype"), url(https://a.trellocdn.com/prgb/dist/fonts/trellicons.4525327b3f0a2d81edda.ttf) format("truetype"), url(https://a.trellocdn.com/prgb/dist/fonts/trellicons.ebcb1833f2dbc6fb44a0.woff) format("woff")
 }
