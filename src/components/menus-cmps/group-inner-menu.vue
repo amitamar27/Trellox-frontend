@@ -4,7 +4,7 @@
 			<h5 @click="addCard">Add card...</h5>
 			<h5>Sort by</h5>
 			<h5 @click="removeGroup">Delete this list</h5>
-            <p>{{groupId}}</p>
+            <!-- <p>{{groupId}}</p> -->
 		</div>
 	</section>
 </template>

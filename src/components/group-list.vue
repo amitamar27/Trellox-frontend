@@ -1,5 +1,6 @@
 <template>
-  <div class="group-list-container">
+  <div v-if="board" class="group-list-container">
+     <!-- {{ board.groups}} -->
     <draggable class="group-list">
       <div
         v-for="group in board.groups"
@@ -17,14 +18,22 @@
             {{ group.title }}
           </p>
          <div class="group-preview-btn">
-        <span class="span-1 hide">
-          <span class="span-2 icon-sm" > </span>
-        </span>
-        <a class="group-header-extras-menu span-1 icon-sm icon-overflow-menu-horizontal" href=""></a>
-      </div>
+                <span class="span-1 hide">
+                    <span class="span-2 icon-sm" ></span>
+                </span>
+                <div @click="openGroupMenu(group.id)" class="group-header-extras-menu span-1 icon-sm icon-overflow-menu-horizontal" ></div>
+            </div>
+
+      
         </div>
         <card-list :tasks="group.tasks" :groupId="group.id"></card-list>
       </div>
+      <group-menu @mousedown.stop=""
+        v-if="isMenuOpened && group"
+        @closeMenu="closeGroupMenu"
+        :group="group"
+        :title="'List actions'"
+        ></group-menu>
       <div class="group-add-container">
         <div class="group-add-btn">
           <p v-if="!isAddingTitle" @click="isAddingTitle = true">+Add Group</p>
@@ -55,20 +64,23 @@
 
 <script>
 import groupPreview from "./group-preview.vue";
-import boardService from "../store/index.js";
+import {boardService} from "../store/index.js";
 import draggable from "vuedraggable";
 import cardList from "./card-list.vue";
-
+import groupMenu from './menus-cmps/group-menu.vue'
 export default {
   components: {
     groupPreview,
     draggable,
     cardList,
+    groupMenu,
   },
   data() {
     return {
       isAddingTitle: false,
       newGroupTitle: "",
+      isMenuOpened: false,
+      group: null,
     };
   },
   computed: {
@@ -84,6 +96,17 @@ export default {
       this.$store.dispatch({ type: "addGroup", groupTitle });
       this.newGroupTitle = "";
     },
+    async openGroupMenu(groupId) {
+      this.isMenuOpened = true
+      const group = await this.$store.dispatch({type: 'getGroupById', groupId});
+      this.group = group
+      console.log('group',group);
+      console.log('open');
+    },
+    closeGroupMenu() {
+      this.isMenuOpened = false
+      console.log('close');
+    }
   },
 };
 </script>
