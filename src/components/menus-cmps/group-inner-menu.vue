@@ -16,7 +16,10 @@
 export default {
     name:'group-inner-menu',
     props:{
-        groupId:String
+        groupId: {
+            type:String,
+            required: true,
+        }
     },
     methods:{
         addCard(){
