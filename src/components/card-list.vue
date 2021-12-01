@@ -6,7 +6,6 @@
         :task="task"
         :key="task.id"
       >
-
       </card-preview>
 
       <div v-if="isAdding" class="card-add-edit"  >
