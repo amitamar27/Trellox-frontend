@@ -2,7 +2,9 @@
   <div class ="cards-container">
       <!-- <div>task : {{task}}</div> -->
         <draggable @end="pickTask" class="draggable-groups" v-model="tasksToEdit" group="tasks" >
-         <card-preview v-for="task in tasks" :task="task" :key="task.id"></card-preview>
+         <card-preview v-for="task in tasks" :task="task" :key="task.id" :groupId="groupId" 
+         @click="openCardDetails(groupId,task.id)"
+         ></card-preview>
         </draggable>
 
         <div v-if="isAdding" class="card-add-edit"  >
@@ -64,6 +66,17 @@ methods:{
   },
   pickTask(){
     console.log(this.tasksToEdit);
+  },
+  openCardDetails(groupId,taskId){
+    console.log('groupId',groupId);
+    console.log('taskId',taskId);
+			// const { boardId } = this.$route.params
+      // console.log();
+			// this.$store.commit({ type: "openBlack" })
+			this.$router
+				.push("/details/" + groupId + "/" + taskId)
+				.catch((err) => { console.log('error');})
+		
   }
 }
 

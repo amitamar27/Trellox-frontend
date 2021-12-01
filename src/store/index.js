@@ -5,16 +5,30 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    board:null
+    board:null,
+    isDarkScreen: false,
 
   },
   getters:{
     board(state){
       return state.board
+    },
+    isDark(state){
+      console.log('in getters');
+      return state.isDarkScreen
     }
 
   },
   mutations: {
+    setDarkScreen(state){
+      console.log('screen dark true');
+      console.log('state.isDarkScreen',state.isDarkScreen);
+      state.isDarkScreen = true;
+      console.log('state.isDarkScreen',state.isDarkScreen);
+    },
+    closeDarkScreen(state){
+      state.isDarkScreen = false;
+    },
     setBoard(state, {board}){
       console.log('board',board);
       state.board=board
@@ -30,6 +44,7 @@ export default new Vuex.Store({
     
   },
   actions: {
+   
    async loadBoard({commit}){
       try{
         var board= await boardService.query()

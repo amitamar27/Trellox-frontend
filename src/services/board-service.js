@@ -4,7 +4,8 @@ export const boardService={
 query,
 getGroupById,
 makeTask,
-getNewGroup
+getNewGroup,
+getBoardId
 
 }
 const KEY ='board'
@@ -136,7 +137,10 @@ const gBoard = {
  async function query(){
     var board = await asyncgStorageService.query(KEY)
     return board   
-    
+}
+async function getBoardId(){
+    var board = await asyncgStorageService.query(KEY)
+    return board._id   
 }
  async function getGroupById(groupId){
      return await asyncgStorageService.get(KEY , groupId)
