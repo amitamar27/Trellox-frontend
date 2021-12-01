@@ -11,13 +11,13 @@
       <div v-if="isAdding" class="card-add-edit" >
         <textarea v-model="task.title" name="" id="" cols="10" rows="5" placeholder="Enter a title for this card..."></textarea>
         <div class="card-actions">
-        <a @click="addTask"> + Add List</a>
+        <a @click="addTask"> + Add card</a>
         <button>x</button>
 
         </div>
         </div>
         <div @click="isAdding=true" v-else class="card-add-btn">
-        <a> + Add List</a>
+        <a> + Add a Card</a>
         </div>
     
       
