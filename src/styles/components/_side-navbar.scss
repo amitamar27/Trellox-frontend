@@ -1,0 +1,102 @@
+.board-container{
+    display: flex;   
+}
+
+.side-nav{
+    position: absolute;
+    width: 100px;
+    height: 100%;
+    min-height: 100%;
+    cursor: pointer;
+    background: linear-gradient(180deg, rgba(14, 13, 13, 0.3) 0%, rgba(155, 143, 143, 0.849) 100%);
+    border-radius: 3px;
+    transition: 0.6s ease;
+
+   .nav-header{
+       margin-top: 20px;
+       padding: 15px;
+   }
+    a{
+        padding: 5px;
+        
+    }
+    
+    .el-icon-d-arrow-right{
+        color:grey;
+        font-size: 20px;
+    }
+    &:hover{
+        background:linear-gradient(180deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
+        background-color: white;
+    }
+    
+}
+
+.show{
+    width: 260px;
+    background-color: white;
+    transition: 0.6s ease;
+}
+
+// .side-nav{
+//     position: absolute;
+//     padding:10px 10px 0px 15px;  
+//     //   width:260px;
+//     height: 100%;
+//     min-height: 100%;
+//     background-color:white;
+//     border-radius: 3px;
+//     z-index: 999;
+//     transform: translate3d(0%, 0, 0);
+//     transition: transform 100ms ease-in;
+//     // display: none;
+//      >*{
+//         display: none;
+//     }
+//     .nav-header{
+//         display: flex;
+//         flex-direction: row;
+//         justify-content: space-between;
+//         align-items: center;
+//         .close-nav-btn{
+//             width: 32px;
+//             height: 32px;
+//             border: none;
+//             cursor: pointer;
+//             background-color: #f1f2f5;
+//             i{
+//                 font-size: 20px;
+//             }
+//             &:hover{
+//                 background-color:#eaebec;
+//             }
+
+//         }
+//     }
+// }
+// .navigation {
+//     padding-top:12px ;
+//     >*{
+//         cursor: pointer;
+//         display: flex;
+//         flex-direction: row;
+//         align-items: center;
+//         padding-left: 16px;
+//         text-decoration: none;
+//         height: 32px;
+//     }
+//     p{
+//         margin: 0 0 0 12px;
+//             color: #172b4d;
+//             font-size: 18px;
+//             font-weight: normal;
+//             line-height: 20px;
+//             overflow: hidden;
+//             text-overflow: ellipsis;
+//             white-space: nowrap;
+//             font-family:trellicons ;
+//     }
+//     a:hover{
+//         background-color: #f1f2f5;
+//     }
+// }
