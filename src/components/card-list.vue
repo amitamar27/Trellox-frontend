@@ -51,6 +51,10 @@ components: {
 
 methods:{
   addTask(groupId){
+    if(!this.task.title) {
+      this.isAdding =false;
+      return
+    }
     console.log('groupId:', groupId);
     this.isAdding =false;
     const taskTitle =this.task.title
