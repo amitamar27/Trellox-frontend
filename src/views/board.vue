@@ -1,18 +1,6 @@
 <template>
   <div class="board-container" >
-    <div class="side-nav" :class="{'show':showNavBar}">
-      <div class="nav-header">
-      <a @click="showNavBar=!showNavBar"><i class="el-icon-d-arrow-right"></i></a>
-      <!-- <button class="close-nav-btn" @click="closeNav">
-      <i class="el-icon-d-arrow-left"></i>
-      </button> -->
-      </div> 
-      <hr/>
-      <!-- <div class="navigation">
-        <a> <p> <i class="el-icon-s-home"></i> Home</p> </a>
-        <a> <p>  <i class="el-icon-edit-outline"></i> Board</p> </a>
-      </div> -->
-    </div>
+  
     <!-- <h1>grandfather: board</h1> -->
     <!-- <div  v-if="board">{{board.groups}}</div> -->
     <!-- <div>{{x.length}}</div> -->
@@ -25,11 +13,7 @@
 <script>
 import groupList from "../components/group-list.vue";
 export default {
-  data() {
-    return {
-      showNavBar:false
-    };
-  },
+  
   created() {
     this.$store.dispatch({ type:"loadBoard" });
   },
@@ -38,14 +22,10 @@ export default {
       return this.$store.getters.board;
     },
   },
-  methods:{
-    closeNav(){
-      console.log('he');
-    }
-  },
 
   components: {
     groupList,
+    
   },
 };
 </script>

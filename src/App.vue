@@ -3,7 +3,9 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;">
+    
     <app-header/>
+    <side-nav></side-nav>
     <router-view/>
   </div>
 </template>
@@ -13,10 +15,12 @@
 
 <script>
 import  appHeader  from './components/app-header.vue'
+import  sideNav  from './components/side-navbar.vue'
 
 export default {
   components:{
-    appHeader
+    appHeader,
+    sideNav
   }
     
 }
