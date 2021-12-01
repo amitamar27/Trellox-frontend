@@ -9,6 +9,12 @@
       </router-link>
 
       <!-- router link to -> Board -->
+      <!-- <div @click="board">
+         <button class="board-header-btn">
+          <img  :src="require('@/assets/boards.svg')" alt="" />
+          <p>Boards</p>
+        </button>
+      </div> -->
       <router-link to="/board">
         <button class="board-header-btn">
           <img  :src="require('@/assets/boards.svg')" alt="" />
@@ -31,3 +37,20 @@
 
   </header>
 </template>
+<script>
+import {boardService} from '../services/board-service.js'
+
+export default {
+
+  methods:{
+   async board(){
+     const id = await boardService.getBoardId()
+     this.$router.push(`board/${id}`);
+    }
+  },
+  components: {
+    boardService,
+  }
+
+}
+</script>

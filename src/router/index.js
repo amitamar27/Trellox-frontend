@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import board from '../views/board.vue'
+import taskEdit from '../views/task-edit.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,7 +14,14 @@ const routes = [
   {
     path:'/board',
     name:'Board',
-    component:board
+    component:board,
+    children: [
+      {
+          path: 'taskEdit/:groupId/:taskId',
+          name: 'taskEdit',
+          component: taskEdit
+      }
+  ]
   },
   {
     path: '/about',
