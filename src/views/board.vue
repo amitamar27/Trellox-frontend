@@ -1,7 +1,9 @@
 <template>
   <div class="board-container" >
-  
+    <!-- <router-view></router-view> -->
     <group-list v-if="board" ></group-list>
+    
+    <router-view></router-view>
     <!-- <task-edit></task-edit> -->
     <!-- <div class="scroller"></div> -->
   </div>
