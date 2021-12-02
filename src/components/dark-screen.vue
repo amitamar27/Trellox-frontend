@@ -1,6 +1,8 @@
 <template>
-  <div class="dark-screen" v-if="isDark" @click="closeDarkScreen">
-      <h1>dark</h1>
+  <div class="dark-screen-5" v-if="isDark" @click="closeDarkScreen">
+      <slot></slot>
+      <!-- <h1>dark</h1> -->
+      <!-- <router-view></router-view> -->
   </div>
 </template>
 
@@ -11,9 +13,9 @@ computed:{
         return this.$store.getters.isDark
     },
 },
-// created(){
-//     console.log('1');
-// },
+created(){
+    console.log('1');
+},
 methods: {
     closeDarkScreen(){
         this.$store.commit({ type: 'closeDarkScreen' })
