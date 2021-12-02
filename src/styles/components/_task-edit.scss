@@ -34,9 +34,34 @@
         overflow-x: hidden;
         gap: 10px;
         z-index: 100;
+        .task-edit-container{
+            padding: 5px 10px;
 
-        .task-edit-header{
-            min-height: 125px;
+        
+        .task-edit-header {
+            // min-height: 125px;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            .task-section {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                margin-bottom: 10px;
+                .main-title {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                }
+                .icon-card {
+                    
+                }
+
+                .icon-card:before {
+                    content: "\e912";
+                }
+            }
         }
+    }
     }
 }
