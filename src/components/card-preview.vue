@@ -2,7 +2,7 @@
   <div class="card-main">
     <div @click="cardClick(groupId, task.id)" class="card-container">
       <div class="card-preview">Card : {{ task.title }}</div>
-      <!-- <button @click="AddDetails(task.id,groupId)">{{task.id}} {{ groupId}}</button> -->
+      <button @click="AddDetails(task.id,groupId)">{{task.id}} {{ groupId}}</button>
     </div>
     <!-- <task-edit v-if="isClick"></task-edit> -->
   </div>

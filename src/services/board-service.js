@@ -7,7 +7,8 @@ makeTask,
 getNewGroup,
 getBoardId,
 saveBoard,
-getBoardByTaskId
+getBoardByTaskId,
+getTaskById
 
 
 }
@@ -160,7 +161,10 @@ async function getBoardId(){
 async function saveBoard(board){
     return await asyncgStorageService._save(KEY,board)
 }
+async function getTaskById(groupId, cardId){
+    return await asyncgStorageService.getTask(KEY,groupId, cardId )
 
+}
 function makeTask(title){
     return {
         id:makeId(), 
