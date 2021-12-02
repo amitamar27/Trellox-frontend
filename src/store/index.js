@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     board:null,
     isDarkScreen: false,
-    isAddingCardTitle:false
+    isAddingCardTitle:false,
+    currTask: null,
 
   },
   getters:{
@@ -23,7 +24,11 @@ export default new Vuex.Store({
     },
     isAddingCardTitle(state){
       return state.isAddingCardTitle
-    }
+    },
+    currTask(state) {
+      if (!state.currTask) return null
+      return JSON.parse(JSON.stringify(state.currTask))
+  },
     
 
   },
@@ -50,7 +55,15 @@ export default new Vuex.Store({
     },
     toggleIsAdding(state){
      state.isAddingCardTitle =!state.isAddingCardTitle
-    }
+    },
+    getTaskById(state, { groupId, taskId }) {
+      console.log('groupId, taskId',groupId, taskId);
+      const group = state.board.groups.find(group => group.id === groupId)
+      console.log('group',group);
+      const task = group.tasks.find(task => task.id === taskId)
+      console.log('task',task);
+      state.currTask = task
+  },
     
   },
   actions: {
