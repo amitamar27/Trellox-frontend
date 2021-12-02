@@ -1,9 +1,7 @@
 <template>
   <div v-if="board" class="group-list-container">
-
       <div class="group-list">
-
-      <div  v-for="group in board.groups"  :key="group.id" class="group-preview" >
+      <div  v-for="group in board.groups" :groupId ="group.id" :key="group.id" class="group-preview" >
         <div class="group-preview-header">
           <p
             class="group-title"
@@ -22,6 +20,16 @@
         <!-- <draggable> -->
         <card-list @pickTask="pickTask" :tasks="group.tasks" :groups="board.groups" :groupId="group.id" @addTask="addTask">
         </card-list>
+         <div v-if="isAdding && group.id===currGroupId" class="card-add-edit"  >
+        <textarea  v-model="task.title" name="" id="" cols="10" rows="5" placeholder="Enter a title for this card..."></textarea>
+        <div class="card-actions">
+        <a @click="addTask(group.id)"> + Add List</a>
+        <button @click="isAdding=false" >x</button>
+        </div>
+        </div>
+        <div @click="opemModal(group.id)" v-else class="card-add-btn">
+        <a> + Add a Card</a>
+        </div>
           
         
 
@@ -31,7 +39,7 @@
     </div>
       <div class="group-add-container">
         <div class="group-add-btn" >
-          <p v-if="!isAddingTitle" @click="isAddingTitle = true">+Add Group</p>
+          <p v-if="!isAddingTitle"  @click="isAddingTitle = true">+Add Group</p>
           <form v-else class="add-group-form" @submit.prevent="addNewGroup">
             <textarea v-model="newGroupTitle" name="" id="" cols="30" rows="1" placeholder="Enter list title"></textarea>
             <div class="form-actions" >
@@ -70,7 +78,12 @@ export default {
       isAddingTitle: false,
       newGroupTitle: "",
       isMenuOpened: false,
-      group: null,      
+      group: null,   
+      isAdding:false,
+      currGroupId:null,
+      task:{
+        title:''
+      }   
     };
   },
   computed: {
@@ -102,11 +115,7 @@ export default {
       this.isMenuOpened = false
       console.log('close');
     },
-    async addTask(task){
-        console.log(task);
-         await this.$store.dispatch({type:'addTask',task})
-         this.$store.dispatch({type:'saveBoard', board:this.board})
-    },
+    
     changeGroup(ev){
       console.log(ev);
       const fromIndex =ev.oldIndex
@@ -120,9 +129,28 @@ export default {
       console.log('gothere');
       this.$emit('pickTask')
     },
-    end(){
-      console.log('hey');
+    opemModal(groupId){
+      console.log('hello');
+      this.isAdding=true;
+      this.currGroupId =groupId
+      console.log();
+
+    },
+   async addTask(groupId){
+    if(!this.task.title)  return
+     this.isAdding =false;
+     const task ={title:this.task.title, groupId}
+      this.task.title ='';
+    try{
+      await this.$store.dispatch({type:'addTask',task});
+       this.$store.dispatch({type:'saveBoard', board:this.board})    // this.$store.dispatch({type:'addTask',task:{groupId,taskTitle}})
+
+    }catch(err){
+      console.log(err);
     }
+
+    
+  },
   },
 };
 </script>

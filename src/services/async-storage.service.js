@@ -7,7 +7,8 @@ export const asyncgStorageService = {
     remove,
     _save,
     getBoard,
-    removeBoard
+    removeTaskByCardId
+    
 }
 const gBoard = {
     "_id": "b101",
@@ -180,6 +181,23 @@ function remove(entityType, entityId) {
             if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
             entities.splice(idx, 1)
             _save(entityType, entities)
+        })
+}
+
+// this function need to be checked!!!
+function removeTaskByCardId(entityType, entityId) {
+    return query(entityType)
+        .then(entities => {
+            const idx = entities.groups.map((group)=> {group.findIndex((task) =>task.id === entityId)
+                if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
+                const groupIdx =  entities.groups.findIndex((group)=>{ group.tasks.id ===entityId})
+                if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
+                entities.groups[groupIdx].splice(idx,1,0)
+                _save(entityType, entities)
+
+            })
+            
+            
         })
 }
 

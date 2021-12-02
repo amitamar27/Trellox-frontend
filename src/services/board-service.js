@@ -7,6 +7,7 @@ makeTask,
 getNewGroup,
 getBoardId,
 saveBoard,
+getBoardByTaskId
 
 
 }
@@ -39,12 +40,11 @@ const gBoard = {
             "imgUrl": "https://www.google.com"
         }
     ],
-    // עמודות
+    
     "groups": [
         {
             "id": "g101",
             "title": "Group 1",
-            // כרטיסים
             "tasks": [
                 {
                     "id": "c101",
@@ -52,7 +52,11 @@ const gBoard = {
                 },
                 {
                     "id": "c102",
-                    "title": "Add Samples"
+                    "title": "Add Samples",
+                    labels:{
+                        bcg:'blue',
+                        title:'gilad'
+                    }
                 }
             ],
             "style": {}
@@ -171,6 +175,9 @@ function getNewGroup(title){
         tasks:[],
         
     }
+}
+async function getBoardByTaskId(taskId){
+    return await asyncgStorageService.removeTaskByCardId(taskId)
 }
 
 
