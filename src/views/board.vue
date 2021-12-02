@@ -1,7 +1,7 @@
 <template>
   <div class="board-container" >
   
-    <group-list v-if="board" :board="board"></group-list>
+    <group-list v-if="board" ></group-list>
 
     <!-- <div class="scroller"></div> -->
   </div>
