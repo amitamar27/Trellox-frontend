@@ -1,7 +1,6 @@
 <template>
   <div v-if="board" class="group-list-container">
-     <!-- {{ board.groups}} -->
-    <draggable class="group-list">
+    <draggable class="group-list" @end="changeGroup">
       <div v-for="group in board.groups"  :key="group.id" class="group-preview" >
         <div class="group-preview-header">
           <p
@@ -19,7 +18,7 @@
             </div>
         </div>
         <!-- <draggable> -->
-        <card-list :tasks="group.tasks" :groups="board.groups" :groupId="group.id" @addTask="addTask"></card-list>
+        <card-list @pickTask="pickTask" :tasks="group.tasks" :groups="board.groups" :groupId="group.id" @addTask="addTask"></card-list>
 
         <!-- </draggable> -->
       </div>
@@ -53,6 +52,12 @@ export default {
     cardList,
     groupMenu,
   },
+  props:{
+    board:{
+      type:Object
+    }
+
+  },
   data() {
     return {
       isAddingTitle: false,
@@ -62,14 +67,14 @@ export default {
     };
   },
   computed: {
-    board() {
-      return this.$store.getters.board;
-    },
-    groups(){
-     return this.$store.getters.groups;
+    // board() {
+    //   return this.$store.getters.board;
+    // },
+    // groups(){
+    //  return this.$store.getters.groups;
 
 
-    }
+    // }
   },
   methods: {
     addNewGroup() {
@@ -96,12 +101,17 @@ export default {
          this.$store.dispatch({type:'saveBoard', board:this.board})
     },
     changeGroup(ev){
+      console.log(ev);
       const fromIndex =ev.oldIndex
       const toIndex =ev.newIndex
       if(fromIndex===toIndex)return
       const board=this.board
       const payload ={board,fromIndex,toIndex}
       this.$store.dispatch({type:'changeGroupPos',payload})
+    },
+    pickTask(){
+      console.log('gothere');
+      this.$emit('pickTask')
     }
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div class ="cards-container">
       <!-- <div>task : {{task}}</div> -->
-        <draggable @add="pickTask" @remove="removeTask" class="draggable-groups" group="tasks"  >
+        <draggable @end="pickTask"  class="draggable-groups" group="tasks"  >
          <card-preview v-for="task in tasks" :task="task" :key="task.id" :groupId="groupId" 
          @click="openCardDetails(groupId,task.id)"></card-preview>
         </draggable>
@@ -77,13 +77,10 @@ methods:{
     
   },
   pickTask(ev){
-    console.log('hey');
+    this.$emit('pickTask')
     console.log(ev);
   },
-  removeTask(ev){
-    console.log('remove');
-    console.log(ev);
-  },
+  
   openCardDetails(groupId,taskId){
 			// const { boardId } = this.$route.params
       // console.log();
