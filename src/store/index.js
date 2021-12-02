@@ -42,6 +42,9 @@ export default new Vuex.Store({
     },
     getGroupById(state, {group}){
 
+    },
+    removeGroup(state , {groupId}){
+      console.log('in mutating');
     }
     
   },
@@ -114,9 +117,16 @@ export default new Vuex.Store({
       }catch(err){
 
       }
-     
-     
-
+    },
+    async removeGroup({commit}, {groupId}){
+        console.log(groupId);
+        try{
+          var board = await boardService.removeGroup(groupId)
+          console.log(board);
+            commit({ type: 'setBoard', board })
+        }catch(err){
+          console.log('coldent remove group',err);
+        }
     }
     
   

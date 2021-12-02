@@ -176,10 +176,11 @@ function putGroups(entityType, updatedEntity) {
 function remove(entityType, entityId) {
     return query(entityType)
         .then(entities => {
-            const idx = entities.findIndex(entity => entity._id === entityId)
+            const idx = entities.groups.findIndex(entity => entity.id === entityId)
             if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
-            entities.splice(idx, 1)
+            entities.groups.splice(idx, 1)
             _save(entityType, entities)
+            return entities
         })
 }
 

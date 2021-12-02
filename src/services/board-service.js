@@ -7,6 +7,7 @@ makeTask,
 getNewGroup,
 getBoardId,
 saveBoard,
+removeGroup
 
 
 }
@@ -181,6 +182,8 @@ function saveTask(boardId, groupId, task, activity) {
     // saveBoard(board)
     return board
 }
+
+
 
 
 
@@ -385,6 +388,11 @@ async function getBoardById(boardId){
 }
 async function removeBoard(baordId){
     return await asyncgStorageService.removeBoard(KEYS, baordId)
+}
+
+
+async function removeGroup(groupId){
+   return await asyncgStorageService.remove(KEY,groupId)
 }
 
 
