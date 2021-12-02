@@ -5,7 +5,9 @@ export const asyncgStorageService = {
     post,
     put,
     remove,
-    _save
+    _save,
+    getBoard,
+    removeBoard
 }
 const gBoard = {
     "_id": "b101",
@@ -193,4 +195,17 @@ function _makeId(length = 5) {
         text += possible.charAt(Math.floor(Math.random() * possible.length))
     }
     return text
+}
+function getBoard(entityType, entityId) {
+    return query(entityType)
+        .then(entities => entities.find(entity => entity._id === entityId))
+}
+function removeBoard(entityType, entityId) {
+    return query(entityType)
+        .then(entities => {
+            const idx = entities.findIndex(entity => entity._id === entityId)
+            if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
+            entities.splice(idx, 1)
+            _save(entityType, entities)
+        })
 }

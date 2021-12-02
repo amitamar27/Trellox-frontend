@@ -1,5 +1,5 @@
 import {asyncgStorageService} from './async-storage.service.js'
-
+import { storageService } from './storage-service.js'
 export const boardService={
 query,
 getGroupById,
@@ -11,7 +11,7 @@ saveBoard,
 
 }
 const KEY ='board'
-const KEYS ='board'
+const KEYS ='boards'
 
 
 const gBoard = {
@@ -184,28 +184,210 @@ function saveTask(boardId, groupId, task, activity) {
 
 
 
-function _createBoard(title, fullname,imgUrl,style={},labels,members,groups){
+function updateBoard(board){
+    
+}
+// in case we have couple of boards
+const gBoards= _creareBoards()
+
+function _creareBoards(){
+    var boards = storageService.load(KEYS)
+    if(!boards || !boards.length){
+        boards=[_createBoard('board1',[
+        {
+            "id": "g101",
+            "title": "Group 1",
+            // כרטיסים
+            "tasks": [
+                {
+                    "id": "c101",
+                    "title": "Replace logo"
+                },
+                {
+                    "id": "c102",
+                    "title": "Add Samples"
+                }
+            ],
+            "style": {}
+        },
+        {
+            "id": "g102",
+            "title": "Group 2",
+            "tasks": [
+                {
+                    "id": "c103",
+                    "title": "Do that"
+                },
+                {
+                    "id": "c104",
+                    "title": "Help me",
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": "ZdPnm",
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": 1590999817436.0,
+                            "byMember": {
+                                "_id": "u101",
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": "YEhmF",
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": "212jX",
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    "members": [
+                        {
+                            "_id": "u101",
+                            "username": "Tal",
+                            "fullname": "Tal Tarablus",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        }
+                    ],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": 1590999730348,
+                    "dueDate": 16156215211,
+                    "byMember": {
+                        "_id": "u101",
+                        "username": "Tal",
+                        "fullname": "Tal Tarablus",
+                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                    },
+                    "style": {
+                        "bgColor": "#26de81"
+                    }
+                }
+            ],
+            "style": {}
+        }
+    ]), _createBoard('board2', [
+        {
+            "id": "g101",
+            "title": "Group 1",
+            // כרטיסים
+            "tasks": [
+                {
+                    "id": "c101",
+                    "title": "Replace logo"
+                },
+                {
+                    "id": "c102",
+                    "title": "Add Samples"
+                }
+            ],
+            "style": {}
+        },
+        {
+            "id": "g102",
+            "title": "Group 2",
+            "tasks": [
+                {
+                    "id": "c103",
+                    "title": "Do that"
+                },
+                {
+                    "id": "c104",
+                    "title": "Help me",
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": "ZdPnm",
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": 1590999817436.0,
+                            "byMember": {
+                                "_id": "u101",
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": "YEhmF",
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": "212jX",
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    "members": [
+                        {
+                            "_id": "u101",
+                            "username": "Tal",
+                            "fullname": "Tal Tarablus",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        }
+                    ],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": 1590999730348,
+                    "dueDate": 16156215211,
+                    "byMember": {
+                        "_id": "u101",
+                        "username": "Tal",
+                        "fullname": "Tal Tarablus",
+                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                    },
+                    "style": {
+                        "bgColor": "#26de81"
+                    }
+                }
+            ],
+            "style": {}
+        }
+    ])]
+    storageService.store(KEYS, boards)
+    }
+    return boards
+    
+}
+function _createBoard(title,groups){
    return {
         _id: makeId(),
         title,
         createdAt: Date.now(),
         createdBy :{
             _id:makeId(),
-            fullname,
-            imgUrl,
+            fullname:'gilad',
+            imgUrl:'',
         },
-        style,
-        labels,
-        members,
+        style:{},
+        labels:[],
+        members:[{
+            _id:makeId(),
+            fullname:'gilad',
+            imgUrl:''
+        }],
         groups
        
     }
 
 }
-function updateBoard(board){
-
+async function queryBoards(){
+    return await asyncgStorageService.query(KEYS)
 }
-// in case we have couple of boards
+async function getBoardById(boardId){
+    return await asyncgStorageService.getBoard(KEYS,boardId)
+}
+async function removeBoard(baordId){
+    return await asyncgStorageService.removeBoard(KEYS, baordId)
+}
+
+
 
 // utils
 function makeId(length = 5) {

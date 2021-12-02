@@ -1,9 +1,7 @@
 <template>
   <div class="board-container" >
-    <!-- <router-view></router-view> -->
-    <group-list v-if="board" ></group-list>
-    
-    <router-view></router-view>
+  
+    <group-list @pickTask="pickTask" :board="board" v-if="board" ></group-list>
     <!-- <task-edit></task-edit> -->
     <!-- <div class="scroller"></div> -->
   </div>
@@ -15,12 +13,17 @@ import taskEdit from './task-edit.vue'
 export default {
   
   created() {
-    this.$store.dispatch({ type: "loadBoard" });
+    this.$store.dispatch({ type:"loadBoard" });
   },
   computed: {
     board() {
-      return this.$store.getters;
+      return this.$store.getters.board;
     },
+  },
+  methods:{
+    pickTask(){
+      console.log(this.board);
+    }
   },
 
   components: {

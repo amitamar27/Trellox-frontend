@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    
+    
   </div>
 </template>
 
@@ -8,6 +10,13 @@
 
 export default {
   name: 'Home',
-  
+  created() {
+    this.$store.dispatch({ type:"loadBoard" });
+  },
+  computed: {
+    board() {
+      return this.$store.getters.board;
+    },
+  },
 }
 </script>

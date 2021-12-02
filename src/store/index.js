@@ -49,7 +49,6 @@ export default new Vuex.Store({
    async loadBoard({commit}){
       try{
         var board= await boardService.query()
-        console.log('boardd',board);
         commit({type:'setBoard',board})
       }catch(err){
         console.log('could not load board', err);
