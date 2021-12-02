@@ -6,7 +6,7 @@
     height: 100%;
     // width: 100vw;
     flex-basis: auto;
-    margin: 7px 60px;
+    margin: 0px 5px;
     
     >* {
         margin-right: 5px;
@@ -38,8 +38,6 @@
     flex-direction: column;
     text-align: start;
     margin-inline: 7px;
-    
-   
     
     textarea{
         border-radius: 6px;
@@ -108,7 +106,7 @@
 }
 .group-list-container{
     // z-index: 10;
-    margin-left: 50px;
+    margin-left: 65px;
     margin-top: 45px;
     display: flex;
     // width: -webkit-fit-content;
