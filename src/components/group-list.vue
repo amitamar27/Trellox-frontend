@@ -1,7 +1,7 @@
 <template>
   <div v-if="board" class="group-list-container">
      <!-- {{ board.groups}} -->
-    <draggable class="group-list">
+    <draggable class="group-list" @end="changeGroup">
       <div v-for="group in board.groups" :group="group" :key="group.id" class="group-preview" >
         <div class="group-preview-header">
           <p
@@ -20,13 +20,13 @@
             </div>
         </div>
         <!-- <draggable> -->
-        <card-list :tasks="group.tasks" :groups="board.groups" :groupId="group.id"></card-list>
+        <card-list :tasks="group.tasks" :groups="board.groups" :groupId="group.id" @addTask="addTask"></card-list>
 
         <!-- </draggable> -->
       </div>
       <group-menu @mousedown.stop="" v-if="isMenuOpened && group" @closeMenu="closeGroupMenu" :group="group" :title="'List actions'"></group-menu>
     </draggable>
-      <div class="group-add-container group-preview">
+      <div class="group-add-container">
         <div class="group-add-btn" >
           <p v-if="!isAddingTitle" @click="isAddingTitle = true">+Add Group</p>
           <form v-else class="add-group-form" @submit.prevent="addNewGroup">
@@ -66,6 +66,11 @@ export default {
     board() {
       return this.$store.getters.board;
     },
+    groups(){
+     return this.$store.getters.groups;
+
+
+    }
   },
   methods: {
     addNewGroup() {
@@ -85,6 +90,19 @@ export default {
     closeGroupMenu() {
       this.isMenuOpened = false
       console.log('close');
+    },
+    async addTask(task){
+        console.log(task);
+         await this.$store.dispatch({type:'addTask',task})
+         this.$store.dispatch({type:'saveBoard', board:this.board})
+    },
+    changeGroup(ev){
+      const fromIndex =ev.oldIndex
+      const toIndex =ev.newIndex
+      if(fromIndex===toIndex)return
+      const board=this.board
+      const payload ={board,fromIndex,toIndex}
+      this.$store.dispatch({type:'changeGroupPos',payload})
     }
   },
 };

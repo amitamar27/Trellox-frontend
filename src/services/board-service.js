@@ -5,10 +5,13 @@ query,
 getGroupById,
 makeTask,
 getNewGroup,
-getBoardId
+getBoardId,
+saveBoard,
+
 
 }
 const KEY ='board'
+const KEYS ='board'
 
 
 const gBoard = {
@@ -149,6 +152,9 @@ async function getBoardId(){
     // return currGroup
 
 }
+async function saveBoard(board){
+    return await asyncgStorageService._save(KEY,board)
+}
 
 function makeTask(title){
     return {
@@ -165,6 +171,7 @@ function getNewGroup(title){
         
     }
 }
+
 
 
 function saveTask(boardId, groupId, task, activity) {
@@ -195,7 +202,10 @@ function _createBoard(title, fullname,imgUrl,style={},labels,members,groups){
     }
 
 }
+function updateBoard(board){
 
+}
+// in case we have couple of boards
 
 // utils
 function makeId(length = 5) {

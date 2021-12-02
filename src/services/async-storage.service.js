@@ -5,6 +5,7 @@ export const asyncgStorageService = {
     post,
     put,
     remove,
+    _save
 }
 const gBoard = {
     "_id": "b101",

@@ -14,7 +14,7 @@
     }
     .card-container >*{
         font-family: "Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
-        background-color: white;
+        background-color: $addcard;
         box-shadow: 0 1px 0 #091e4240;
         padding: 6px 8px 2px 2px;
         margin: 10px 8px;
@@ -189,6 +189,7 @@
 
 }
 .group-add-container{
+    border-radius: 3px;
     height: 100%;
     background-color: #ebecf0;
     &:hover{

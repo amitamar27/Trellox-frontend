@@ -1,7 +1,7 @@
 <template>
   <div class ="cards-container">
       <!-- <div>task : {{task}}</div> -->
-        <draggable @end="pickTask" class="draggable-groups" group="tasks" >
+        <draggable @add="pickTask" @remove="removeTask" class="draggable-groups" group="tasks"  >
          <card-preview v-for="task in tasks" :task="task" :key="task.id" :groupId="groupId" 
          @click="openCardDetails(groupId,task.id)"></card-preview>
         </draggable>
@@ -52,18 +52,27 @@ components: {
     cardPreview,
     draggable
 },
-created(){
-console.log(this.groups);
-},
+// computed:{
+//     groupsToDrag: {
+//         get() {
+//             return this.$store.getters.groups
+//         },
+//         set(value) {
+//           console.log('value',value);
+//         }
+    
+// }
+
+// },
+
 methods:{
   addTask(groupId){
     if(!this.task.title)  return
-    
-    console.log('groupId:', groupId);
-    this.isAdding =false;
-    const taskTitle =this.task.title
+     this.isAdding =false;
+    const task ={title:this.task.title, groupId}
     this.task.title =''
-    this.$store.dispatch({type:'addTask',task:{groupId,taskTitle}})
+    this.$emit('addTask', task)
+    // this.$store.dispatch({type:'addTask',task:{groupId,taskTitle}})
 
     
   },
@@ -71,9 +80,11 @@ methods:{
     console.log('hey');
     console.log(ev);
   },
+  removeTask(ev){
+    console.log('remove');
+    console.log(ev);
+  },
   openCardDetails(groupId,taskId){
-    console.log('groupId',groupId);
-    console.log('taskId',taskId);
 			// const { boardId } = this.$route.params
       // console.log();
 			// this.$store.commit({ type: "openBlack" })
@@ -81,7 +92,8 @@ methods:{
 				.push("/details/" + groupId + "/" + taskId)
 				.catch((err) => { console.log('error');})
 		
-  }
+  },
+ 
 }
 
 }

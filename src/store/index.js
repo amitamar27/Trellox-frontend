@@ -13,6 +13,9 @@ export default new Vuex.Store({
     board(state){
       return state.board
     },
+    groups(state){
+      return state.board.groups
+    },
     isDark(state){
       console.log('in getters');
       return state.isDarkScreen
@@ -36,7 +39,6 @@ export default new Vuex.Store({
     updateGroup(state, {updatedGroup}){
       var index = state.board.groups.findIndex((group) => group.id === updatedGroup.id);
       state.board.groups.splice(index,1,updatedGroup)
-      console.log(state.board);
     },
     getGroupById(state, {group}){
 
@@ -44,7 +46,6 @@ export default new Vuex.Store({
     
   },
   actions: {
-   
    async loadBoard({commit}){
       try{
         var board= await boardService.query()
@@ -61,9 +62,10 @@ export default new Vuex.Store({
        var board = await boardService.query()
        var group = await boardService.getNewGroup(groupTitle)
        board.groups.push(group)
-       console.log(board.groups);
-       commit({type:'setBoard', board})
-       
+       commit({type:'setBoard',board})
+       boardService.saveBoard(board)
+
+    
       }catch(err){
         console.log('could not add group to the board', err);
       }
@@ -71,9 +73,10 @@ export default new Vuex.Store({
     async addTask({commit}, {task}){
       try{
         var updatedGroup =await boardService.getGroupById(task.groupId); 
-        var addedTask = await boardService.makeTask(task.taskTitle)
+        var addedTask = await boardService.makeTask(task.title)
         updatedGroup.tasks.push(addedTask)
-        commit({type:'updateGroup', updatedGroup})
+       await commit({type:'updateGroup', updatedGroup})
+       return updatedGroup
 
       }catch(err){
         console.log('faild in add task', err);
@@ -88,6 +91,32 @@ export default new Vuex.Store({
       } catch(err){
         console.log('faild get group', err);
       }
+
+    },
+    async saveBoard({commit}, {board}){
+      try{
+        await boardService.saveBoard(board)
+
+      }catch(err){
+        console.log('coldent save board',err);
+      }
+    },
+    async changeGroupPos({commit}, {payload}){
+      try{
+        const {board, fromIndex, toIndex}= payload
+        var groupToUpdate = board.groups[fromIndex]
+        board.groups.splice(fromIndex,1)
+        board.groups.splice(toIndex,0,groupToUpdate)
+        boardService.saveBoard(board)
+       
+
+        // var board = boardService.changeGroupPos(payload)
+
+      }catch(err){
+
+      }
+     
+     
 
     }
     

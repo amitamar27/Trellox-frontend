@@ -6,7 +6,7 @@
     background-position: center center;">
     <dark-screen />
     <app-header/>
-    <side-nav></side-nav>
+    <!-- <side-nav></side-nav> -->
     <router-view/>
   </div>
 </template>
@@ -24,7 +24,8 @@ export default {
     appHeader,
     sideNav,
     darkScreen
-  }
+  },
+  
     
 }
 </script>
