@@ -1,6 +1,6 @@
 <template>
-  <main class="card-edit-window" ref="task" @click.stop="closeDarkScreen">
-    <div class="card-edit">
+  <main class="card-edit-window" ref="task" @click="closeDarkScreen">
+    <div class="card-edit" @click.stop="">
       <header></header>
       <h1>hey</h1>
     </div>

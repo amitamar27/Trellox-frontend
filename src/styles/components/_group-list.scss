@@ -11,26 +11,128 @@
     >* {
         margin-right: 5px;
         background-color: #ebecf0;
+        // ecedf0
     }
+    .card-main >*:hover{
+        background-color: #0079bf;
+    }
+    .cards-container {
+        /* display: flex; */
+        /* position: relative; */
+        /* min-height: 30px; */
+        /* min-width: 30px; */
+        overflow-y: auto!important;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        margin: 0 3px;
+        // .draggable-groups >*:hover{
+        //     background-color: #0079bf;
+        // }
+        .draggable-groups {
+            height: 100%;
+           
+            /* position: relative; */
+            /* min-height: 30px; */
+            /* min-width: 30px; */
+            /* margin: 0 5px 5px; */
+            
+            position: relative;
+            min-height: 30px;
+            min-width: 30px;
+          
+           
+           
+            
+            .card-main{
+                margin: 0 5px 5px;
+                /* margin: 0 5px 5px; */
+                overflow: hidden;
+                display: block;
+                // :hover{
+                //     background-color: rgb(231, 233, 233);
+                // }
+                /* display: block; */
+                // .card-main>*:hover{
+                //     background-color: rgb(231, 233, 233);
+                // }
+                .card-main:hover{
+                    background-color: #0079bf;
+                }
+                
+                .card-container {
+                    position: relative;
+                    flex-direction: column;
+                    background-color: #fff;
+                    // &:hover{
+                    //     background-color: #0079bf;
+                    // }
+                   
+                    // box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
+                    border-radius: 3px;
+                    max-width: 100%;
+                    box-sizing: border-box;
+                    min-height: 34px;
+                    // padding: 4px 4px;
+                    // margin: 0 0 2px;
+                    font-size: 14px;
+                    cursor: pointer;
+                    // .card-container:hover{
+                    //     background-color: rgb(231, 233, 233);
+                    // }
+                }
+                // .cards-container:hover{
+                //     background-color: rgb(231, 233, 233);
+                // }
+
+            }
+        }
+    }
+    
     .card-container >*{
         font-family: "Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
-        background-color: $addcard;
-        box-shadow: 0 1px 0 #091e4240;
-        padding: 6px 8px 2px 2px;
-        margin: 10px 8px;
-        padding: 5px 5px;
-        border-radius: 3px;
+        // background-color: $addcard;
+        // box-shadow: 0 1px 0 #091e4240;
+        // padding: 6px 8px 2px 2px;
+        // margin: 10px 8px;
+        // padding: 5px 5px;
+        min-height: 34px;
+        // border-radius: 3px;
         cursor: pointer;
-        text-align: start;
+        // text-align: start;
         color: #172b4d;
-        box-shadow: 0 1px 0 #091e4240;
-        text-decoration: solid;
-       
+        // box-shadow: 0 1px 0 #091e4240;
+        // text-decoration: solid;
+        padding-left: 5px;
+        overflow-wrap: break-word;
+        // margin: 2px 0 4px 5px;
+        display: flex;
+        // align-items: baseline;
+        width: 100%;
+        // justify-content: space-around;
+        position: relative;
+        align-content: center;
+        flex-wrap: wrap;
+
+    //     position: relative;
+    // flex-direction: column;
+    // background-color: #fff;
+    // box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
+    // border-radius: 3px;
+    // max-width: 100%;
+    // box-sizing: border-box;
+    // min-height: 34px;
+    // padding: 4px 4px;
+    // margin: 0 0 2px;
+    // font-size: 14px;
+    // cursor: pointer;
+
+        
         
     }
-    .card-container >*:hover{
+    .card-container>*:hover{
         background-color: rgb(231, 233, 233);
     }
+    
     
 }
 .card-add-edit{
