@@ -1,9 +1,10 @@
 <template>
   <div class ="cards-container">
       <!-- <div>task : {{task}}</div> -->
+      <div class="draggable-groups">
          <card-preview v-for="task in tasks" :task="task" :key="task.id" :groupId="groupId" 
          @click="openCardDetails(groupId,task.id)"></card-preview>
-
+      </div>
         <div v-if="isAdding" class="card-add-edit"  >
         <textarea  v-model="task.title" name="" id="" cols="10" rows="5" placeholder="Enter a title for this card..."></textarea>
         <div class="card-actions">

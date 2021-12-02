@@ -9,6 +9,9 @@ html {
     padding: 0;
     height: 100vh;
     -webkit-text-size-adjust: 100%;
+    --animate-duration: 1s;
+    --animate-delay: 1s;
+    --animate-repeat: 1;
 
     ::-webkit-scrollbar {
         height: 15px;
