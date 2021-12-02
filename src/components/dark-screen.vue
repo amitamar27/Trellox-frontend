@@ -1,5 +1,5 @@
 <template>
-  <div class="dark-screen-5" v-if="isDark" @click="closeDarkScreen">
+  <div class="dark-screen" v-if="isDark" @click.stop="closeDarkScreen">
       <slot></slot>
       <!-- <h1>dark</h1> -->
       <!-- <router-view></router-view> -->
@@ -18,6 +18,7 @@ created(){
 },
 methods: {
     closeDarkScreen(){
+        console.log('clic');
         this.$store.commit({ type: 'closeDarkScreen' })
         this.$router.push('/board')
     }
