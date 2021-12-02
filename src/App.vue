@@ -4,7 +4,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;">
-    <dark-screen />
+    <!-- <dark-screen /> -->
     <app-header/>
     <!-- <side-nav></side-nav> -->
     <router-view/>
