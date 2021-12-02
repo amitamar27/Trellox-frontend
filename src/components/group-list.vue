@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style>
-.group-list-container {
+/* .group-list-container {
   overflow-x: auto;
-}
+} */
 </style>
