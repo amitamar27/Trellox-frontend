@@ -1,7 +1,7 @@
 <template>
   <div class ="cards-container">
       <!-- <div>task : {{task}}</div> -->
-        <draggable @end="pickTask" class="draggable-groups" group="tasks" v-model="groupsToEdit">
+        <draggable @end="pickTask" class="draggable-groups" group="tasks" >
          <card-preview v-for="task in tasks" :task="task" :key="task.id" :groupId="groupId" 
          @click="openCardDetails(groupId,task.id)"></card-preview>
         </draggable>
