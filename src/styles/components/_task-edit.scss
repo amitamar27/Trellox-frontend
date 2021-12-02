@@ -12,9 +12,26 @@
     left: 0;
     overflow-y: auto;
     .card-edit {
+        // display: flex;
+        // height: 500px;
+        // width: 500px;
+        // background-color: #fff;
+
         display: flex;
-        height: 500px;
-        width: 500px;
-        background-color: #fff;
+    flex-direction: column;
+    position: absolute;
+    background-color: #f4f5f7;
+    border-radius: 3px;
+    margin-top: 48px;
+    width: 96vw;
+    max-width: 768px;
+    min-height: 50vh;
+    top: -1%;
+    left: 50%;
+    transform: translate(-50%);
+    overflow-y: hidden;
+    overflow-x: hidden;
+    gap: 10px;
+    z-index: 100;
     }
 }

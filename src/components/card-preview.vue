@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="card-main">
     <div @click="cardClick(groupId, task.id)" class="card-container">
       <div class="card-preview">Card : {{ task.title }}</div>
     </div>

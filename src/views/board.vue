@@ -3,6 +3,7 @@
   
     <group-list @pickTask="pickTask" :board="board" v-if="board" ></group-list>
     <!-- <task-edit></task-edit> -->
+    <router-view />
     <!-- <div class="scroller"></div> -->
   </div>
 </template>

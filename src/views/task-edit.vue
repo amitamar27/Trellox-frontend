@@ -1,6 +1,6 @@
 <template>
-  <main class="card-edit-window" ref="task">
-    <div class="card-edit">
+  <main class="card-edit-window" ref="task" @click="closeDarkScreen">
+    <div class="card-edit" @click.stop="">
       <header></header>
       <h1>hey</h1>
     </div>
@@ -14,6 +14,15 @@ export default {
   created() {
     console.log("created!");
   },
+  methods: {
+    // @click.stop="closeDarkScreen"
+    closeDarkScreen(){
+        console.log('clic');
+        this.$store.commit({ type: 'closeDarkScreen' })
+        this.$router.push('/board')
+    }
+}
+
 };
 </script>
 
