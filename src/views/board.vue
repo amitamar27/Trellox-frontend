@@ -2,13 +2,14 @@
   <div class="board-container" >
   
     <group-list v-if="board" ></group-list>
-
+    <!-- <task-edit></task-edit> -->
     <!-- <div class="scroller"></div> -->
   </div>
 </template>
 
 <script>
 import groupList from "../components/group-list.vue";
+import taskEdit from './task-edit.vue'
 export default {
   
   created() {
@@ -22,7 +23,7 @@ export default {
 
   components: {
     groupList,
-    
+    taskEdit
   },
 };
 </script>
