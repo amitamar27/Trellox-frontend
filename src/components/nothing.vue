@@ -1,8 +1,10 @@
 <template>
   <div class ="cards-container">
       <!-- <div>task : {{task}}</div> -->
+        <draggable @end="pickTask"  class="draggable-groups" group="tasks"  >
          <card-preview v-for="task in tasks" :task="task" :key="task.id" :groupId="groupId" 
          @click="openCardDetails(groupId,task.id)"></card-preview>
+        </draggable>
 
         <div v-if="isAdding" class="card-add-edit"  >
         <textarea  v-model="task.title" name="" id="" cols="10" rows="5" placeholder="Enter a title for this card..."></textarea>
@@ -19,6 +21,7 @@
 
 <script>
 import cardPreview from './card-preview.vue'
+import draggable from "vuedraggable";
 
 export default {
      props: {
@@ -48,6 +51,7 @@ export default {
     },
 components: {
     cardPreview,
+    draggable
 },
 computed:{
   // isAdding(){
@@ -67,6 +71,11 @@ methods:{
 
     
   },
+  pickTask(ev){
+    // this.$emit('pickTask')
+    // console.log(ev);
+  },
+  
   openCardDetails(groupId,taskId){
 			// const { boardId } = this.$route.params
       // console.log();
@@ -78,8 +87,17 @@ methods:{
   },
   setIsAdding(){
     this.$store.commit('toggleIsAdding')
-  }
- 
+  },
+  //container
+  changeGroup(ev){
+      console.log(ev);
+      const fromIndex =ev.oldIndex
+      const toIndex =ev.newIndex
+      if(fromIndex===toIndex)return
+      const board=this.board
+      const payload ={board,fromIndex,toIndex}
+      this.$store.dispatch({type:'changeGroupPos',payload})
+    },
 }
 
 }

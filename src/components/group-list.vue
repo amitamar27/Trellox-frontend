@@ -1,7 +1,9 @@
 <template>
   <div v-if="board" class="group-list-container">
-    <draggable class="group-list" @end="changeGroup">
-      <div v-for="group in board.groups"  :key="group.id" class="group-preview" >
+
+      <div class="group-list">
+
+      <div  v-for="group in board.groups"  :key="group.id" class="group-preview" >
         <div class="group-preview-header">
           <p
             class="group-title"
@@ -18,12 +20,15 @@
             </div>
         </div>
         <!-- <draggable> -->
-        <card-list @pickTask="pickTask" :tasks="group.tasks" :groups="board.groups" :groupId="group.id" @addTask="addTask"></card-list>
+        <card-list @pickTask="pickTask" :tasks="group.tasks" :groups="board.groups" :groupId="group.id" @addTask="addTask">
+        </card-list>
+          
+        
 
         <!-- </draggable> -->
       </div>
       <group-menu @mousedown.stop="" v-if="isMenuOpened && group" @closeMenu="closeGroupMenu" :group="group" :title="'List actions'"></group-menu>
-    </draggable>
+    </div>
       <div class="group-add-container">
         <div class="group-add-btn" >
           <p v-if="!isAddingTitle" @click="isAddingTitle = true">+Add Group</p>
@@ -42,15 +47,17 @@
 <script>
 import groupPreview from "./group-preview.vue";
 import {boardService} from "../store/index.js";
-import draggable from "vuedraggable";
 import cardList from "./card-list.vue";
 import groupMenu from './menus-cmps/group-menu.vue'
+import { Container, Draggable } from "vue-smooth-dnd";
+
 export default {
   components: {
     groupPreview,
-    draggable,
     cardList,
     groupMenu,
+    Container, 
+    Draggable
   },
   props:{
     board:{
@@ -63,7 +70,7 @@ export default {
       isAddingTitle: false,
       newGroupTitle: "",
       isMenuOpened: false,
-      group: null,
+      group: null,      
     };
   },
   computed: {
@@ -112,6 +119,9 @@ export default {
     pickTask(){
       console.log('gothere');
       this.$emit('pickTask')
+    },
+    end(){
+      console.log('hey');
     }
   },
 };

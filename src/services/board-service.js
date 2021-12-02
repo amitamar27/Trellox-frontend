@@ -11,6 +11,7 @@ saveBoard,
 
 }
 const KEY ='board'
+// for future
 const KEYS ='boards'
 
 

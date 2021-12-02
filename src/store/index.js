@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     board:null,
     isDarkScreen: false,
+    isAddingCardTitle:false
 
   },
   getters:{
@@ -19,7 +20,11 @@ export default new Vuex.Store({
     isDark(state){
       console.log('in getters');
       return state.isDarkScreen
+    },
+    isAddingCardTitle(state){
+      return state.isAddingCardTitle
     }
+    
 
   },
   mutations: {
@@ -42,6 +47,9 @@ export default new Vuex.Store({
     },
     getGroupById(state, {group}){
 
+    },
+    toggleIsAdding(state){
+     state.isAddingCardTitle =!state.isAddingCardTitle
     }
     
   },
