@@ -1,8 +1,8 @@
 <template>
   <div v-if="board" class="group-list-container">
      <!-- {{ board.groups}} -->
-    <draggable class="group-list" @end="changeGroup">
-      <div v-for="group in board.groups" :group="group" :key="group.id" class="group-preview" >
+    <draggable class="group-list">
+      <div v-for="group in board.groups"  :key="group.id" class="group-preview" >
         <div class="group-preview-header">
           <p
             class="group-title"
