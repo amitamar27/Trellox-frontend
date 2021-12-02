@@ -2,12 +2,7 @@
   <div v-if="board" class="group-list-container">
      <!-- {{ board.groups}} -->
     <draggable class="group-list">
-      <div
-        v-for="group in board.groups"
-        :group="group"
-        :key="group.id"
-        class="group-preview"
-      >
+      <div v-for="group in board.groups" :group="group" :key="group.id" class="group-preview" >
         <div class="group-preview-header">
           <p
             class="group-title"
@@ -23,42 +18,26 @@
                 </span>
                 <div @click="openGroupMenu(group.id)" class="group-header-extras-menu span-1 icon-sm icon-overflow-menu-horizontal" ></div>
             </div>
-
-      
         </div>
-        <card-list :tasks="group.tasks" :groupId="group.id"></card-list>
+        <!-- <draggable> -->
+        <card-list :tasks="group.tasks" :groups="board.groups" :groupId="group.id"></card-list>
+
+        <!-- </draggable> -->
       </div>
-      <group-menu @mousedown.stop=""
-        v-if="isMenuOpened && group"
-        @closeMenu="closeGroupMenu"
-        :group="group"
-        :title="'List actions'"
-        ></group-menu>
-      <div class="group-add-container">
-        <div class="group-add-btn">
+      <group-menu @mousedown.stop="" v-if="isMenuOpened && group" @closeMenu="closeGroupMenu" :group="group" :title="'List actions'"></group-menu>
+    </draggable>
+      <div class="group-add-container group-preview">
+        <div class="group-add-btn" >
           <p v-if="!isAddingTitle" @click="isAddingTitle = true">+Add Group</p>
           <form v-else class="add-group-form" @submit.prevent="addNewGroup">
-            <textarea
-              v-model="newGroupTitle"
-              name=""
-              id=""
-              cols="30"
-              rows="1"
-              placeholder="Enter list title"
-            ></textarea>
-            <div class="form-actions">
+            <textarea v-model="newGroupTitle" name="" id="" cols="30" rows="1" placeholder="Enter list title"></textarea>
+            <div class="form-actions" >
               <a class="add-group-add" @click="addNewGroup">Add Group</a>
-              <button
-                class="add-group-close"
-                @click="isAddingTitle = !isAddingTitle"
-              >
-                x
-              </button>
+              <button class="add-group-close" @click="isAddingTitle = !isAddingTitle">x</button>
             </div>
           </form>
         </div>
       </div>
-    </draggable>
   </div>
 </template>
 

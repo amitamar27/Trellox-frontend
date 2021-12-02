@@ -1,10 +1,9 @@
 <template>
   <div class ="cards-container">
       <!-- <div>task : {{task}}</div> -->
-        <draggable @end="pickTask" class="draggable-groups" v-model="tasksToEdit" group="tasks" >
+        <draggable @end="pickTask" class="draggable-groups" group="tasks" v-model="groupsToEdit">
          <card-preview v-for="task in tasks" :task="task" :key="task.id" :groupId="groupId" 
-         @click="openCardDetails(groupId,task.id)"
-         ></card-preview>
+         @click="openCardDetails(groupId,task.id)"></card-preview>
         </draggable>
 
         <div v-if="isAdding" class="card-add-edit"  >
@@ -12,7 +11,6 @@
         <div class="card-actions">
         <a @click="addTask(groupId)"> + Add List</a>
         <button @click="isAdding=false" >x</button>
-
         </div>
         </div>
         <div @click="isAdding=true" v-else class="card-add-btn">
@@ -34,6 +32,10 @@ export default {
         groupId:{
           type:String,
           required:true
+        },
+        groups:{
+          // type:String,
+          // required:true
         }
     },
     data(){
@@ -42,7 +44,7 @@ export default {
           title:''
         },
         isAdding:false,
-        tasksToEdit:this.tasks
+        groupsToEdit:this.groups
 
       }
     },
@@ -50,12 +52,13 @@ components: {
     cardPreview,
     draggable
 },
+created(){
+console.log(this.groups);
+},
 methods:{
   addTask(groupId){
-    if(!this.task.title) {
-      this.isAdding =false;
-      return
-    }
+    if(!this.task.title)  return
+    
     console.log('groupId:', groupId);
     this.isAdding =false;
     const taskTitle =this.task.title
@@ -64,8 +67,9 @@ methods:{
 
     
   },
-  pickTask(){
-    console.log(this.tasksToEdit);
+  pickTask(ev){
+    console.log('hey');
+    console.log(ev);
   },
   openCardDetails(groupId,taskId){
     console.log('groupId',groupId);
