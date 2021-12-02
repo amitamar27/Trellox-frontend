@@ -8,8 +8,7 @@
             class="group-title"
             dir="auto"
             maxlength="512"
-            style="overflow: hidden; overflow-wrap: break-word; height: 28px"
-          >
+            style="overflow: hidden; overflow-wrap: break-word; height: 28px">
             {{ group.title }}
           </p>
          <div class="group-preview-btn">
