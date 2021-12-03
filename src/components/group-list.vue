@@ -6,6 +6,7 @@
         :groupId="group.id"
         :key="group.id"
         class="group-preview"
+
       >
         <div class="group-preview-header">
           <p
@@ -27,9 +28,10 @@
                 span-1
                 icon-sm icon-overflow-menu-horizontal
               "
+              
             ></div>
-          </div>
 
+          </div>
         </div>
         <!-- <draggable> -->
         <card-list
@@ -69,6 +71,7 @@
         :group="group"
         :title="'List actions'"
       ></group-menu>
+
     </div>
     <div class="group-add-container">
       <div class="group-add-btn">
@@ -151,11 +154,11 @@ export default {
       this.newGroupTitle = "";
     },
     async openGroupMenu(groupId) {
-      console.log('groppppp', groupId);
-      const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
+      console.log('groppppp',groupId);
       this.isMenuOpened = !this.isMenuOpened
+      const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
       this.group = group
-      console.log(group);
+     console.log(group);
     },
     closeGroupMenu() {
       this.isMenuOpened = false
@@ -179,7 +182,7 @@ export default {
       console.log('hello');
       this.isAdding = true;
       this.currGroupId = groupId
-
+      
       console.log();
 
     },
