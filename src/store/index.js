@@ -93,10 +93,10 @@ export default new Vuex.Store({
     async addGroup(context, { groupTitle }) {
       try {
         var board = context.state.board;
-        var group = await boardService.getNewGroup(groupTitle);
-        board.groups.push(group);
-        commit({ type: "setBoard", board });
-        boardService.saveBoard(board);
+        var newGroup = await boardService.getNewGroup(groupTitle);
+        var newBoard =await boardService.addNewGroup(board,newGroup);
+        console.log(context);
+        // context.commit({ type:"setBoard", newBoard });
       } catch (err) {
         console.log("could not add group to the board", err);
       }

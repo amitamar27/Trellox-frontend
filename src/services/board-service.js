@@ -11,7 +11,8 @@ removeGroup,
 getBoardByTaskId,
 getTaskById,
 queryBoards,
-getBoardById
+getBoardById,
+addNewGroup
 
 
 }
@@ -166,7 +167,7 @@ async function getBoardId(){
 
 }
 async function saveBoard(board){
-    return await asyncgStorageService._save(KEY,board)
+    return await asyncgStorageService._save(KEYS,board)
 }
 async function getTaskById(groupId, cardId){
     return await asyncgStorageService.getTask(KEY,groupId, cardId )
@@ -179,16 +180,20 @@ function makeTask(title){
     }
 }
 
-function getNewGroup(title){
+function getNewGroup(title,tasks=[]){
     return {
         id:makeId(),
         title,
-        tasks:[],
+        tasks,
         
     }
 }
 async function getBoardByTaskId(taskId){
     return await asyncgStorageService.removeTaskByCardId(taskId)
+}
+async function addNewGroup(board,newGroup){
+    return await asyncgStorageService.postGroup(KEYS,board,newGroup)
+    
 }
 
 
@@ -404,7 +409,7 @@ function _createBoard(title,groups){
             fullname:'gilad',
             imgUrl:''
         }],
-        groups:[]
+        groups,
        
     }
 

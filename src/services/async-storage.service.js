@@ -2,7 +2,7 @@
 export const asyncgStorageService = {
     query,
     postTask,
-    post,
+    postGroup,
     put,
     remove,
     _save,
@@ -146,9 +146,9 @@ function query(entityType, delay=0) {
 function postTask(key, taskDetails,currBoard) {
     return query(key)
         .then(boards => {
-            var boardIdx =boards.findIndex((board)=> board._id === currBoard._id)
+            const boardIdx =boards.findIndex((board)=> board._id === currBoard._id)
             if (boardIdx < 0) throw new Error(`Unknown Entity ${boardIdx}`)
-           var groupIdx= boards[boardIdx].groups.findIndex((group)=> group.id===taskDetails.groupId)
+            const groupIdx= boards[boardIdx].groups.findIndex((group)=> group.id===taskDetails.groupId)
            if (groupIdx < 0) throw new Error(`Unknown Entity ${groupIdx}`)
            boards[boardIdx].groups[groupIdx].tasks.push(taskDetails.task)
            _save(key,boards)
@@ -156,14 +156,23 @@ function postTask(key, taskDetails,currBoard) {
         
 )
 }
-function post(entityType, newEntity) {
-    newEntity._id = _makeId()
+function postGroup(entityType, currBoard,groupToAdd) {
     return query(entityType)
-        .then(entities => {
-            entities.push(newEntity)
-            _save(entityType, entities)
-            return newEntity
-        })
+    .then(boards=>{
+        const boardIdx =boards.findIndex((board)=> board._id === currBoard._id)
+        if (boardIdx < 0) throw new Error(`Unknown Entity ${boardIdx}`)
+       boards[boardIdx].groups.push(groupToAdd)
+       _save(entityType,boards)
+       return boards[boardIdx]
+
+
+    }
+        )
+        // .then(boards => {
+        //     boards.push(newEntity)
+        //     _save(entityType, entities)
+        //     return newEntity
+        // })
 }
 
 function put(entityType, updatedEntity) {
