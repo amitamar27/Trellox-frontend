@@ -1,7 +1,12 @@
 <template>
   <div v-if="board" class="group-list-container">
-      <div class="group-list">
-      <div  v-for="group in board.groups" :groupId ="group.id" :key="group.id" class="group-preview" >
+    <div class="group-list">
+      <div
+        v-for="group in board.groups"
+        :groupId="group.id"
+        :key="group.id"
+        class="group-preview"
+      >
         <div class="group-preview-header">
           <p
             class="group-title"
@@ -24,45 +29,77 @@
               "
             ></div>
           </div>
+
         </div>
         <!-- <draggable> -->
-        <card-list @pickTask="pickTask" :tasks="group.tasks" :groups="board.groups" :groupId="group.id" @addTask="addTask">
+        <card-list
+          @pickTask="pickTask"
+          :tasks="group.tasks"
+          :groups="board.groups"
+          :groupId="group.id"
+          @addTask="addTask"
+        >
         </card-list>
-         <div v-if="isAdding && group.id===currGroupId" class="card-add-edit"  >
-        <textarea  v-model="task.title" name="" id="" cols="10" rows="5" placeholder="Enter a title for this card..."></textarea>
-        <div class="card-actions">
-        <a @click="addTask(group.id)"> + Add List</a>
-        <button @click="isAdding=false" >x</button>
-        </div>
+        <div v-if="isAdding && group.id === currGroupId" class="card-add-edit">
+          <textarea
+            v-model="task.title"
+            name=""
+            id=""
+            cols="10"
+            rows="5"
+            placeholder="Enter a title for this card..."
+          ></textarea>
+          <div class="card-actions">
+            <a @click="addTask(group.id)"> + Add List</a>
+            <button @click="isAdding = false">x</button>
+          </div>
         </div>
         <div @click="opemModal(group.id)" v-else class="card-add-btn">
-        <a> + Add a Card</a>
+          <a> + Add a Card</a>
         </div>
-          
-        
 
         <!-- </draggable> -->
       </div>
-      <group-menu @mousedown.stop="" v-if="isMenuOpened && group" @closeMenu="closeGroupMenu" :group="group" :title="'List actions'"></group-menu>
+
+      <group-menu
+        @addCard="onAddCard"
+        @mousedown.stop=""
+        v-if="isMenuOpened && group"
+        @closeMenu="closeGroupMenu"
+        :group="group"
+        :title="'List actions'"
+      ></group-menu>
     </div>
-      <div class="group-add-container">
-        <div class="group-add-btn" >
-          <p v-if="!isAddingTitle"  @click="isAddingTitle = true">+Add Group</p>
-          <form v-else class="add-group-form" @submit.prevent="addNewGroup">
-            <textarea v-model="newGroupTitle" name="" id="" cols="30" rows="1" placeholder="Enter list title"></textarea>
-            <div class="form-actions" >
-              <a class="add-group-add" @click="addNewGroup">Add Group</a>
-              <button class="add-group-close" @click="isAddingTitle = !isAddingTitle">x</button>
-            </div>
-          </form>
-        </div>
+    <div class="group-add-container">
+      <div class="group-add-btn">
+        <p v-if="!isAddingTitle" @click="isAddingTitle = true">+Add Group</p>
+        <form v-else class="add-group-form" @submit.prevent="addNewGroup">
+          <textarea
+            v-model="newGroupTitle"
+            name=""
+            id=""
+            cols="30"
+            rows="1"
+            placeholder="Enter list title"
+          ></textarea>
+          <div class="form-actions">
+            <a class="add-group-add" @click="addNewGroup">Add Group</a>
+            <button
+              class="add-group-close"
+              @click="isAddingTitle = !isAddingTitle"
+            >
+              x
+            </button>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 import groupPreview from "./group-preview.vue";
-import {boardService} from "../store/index.js";
+import { boardService } from "../store/index.js";
 import cardList from "./card-list.vue";
 import groupMenu from './menus-cmps/group-menu.vue'
 import { Container, Draggable } from "vue-smooth-dnd";
@@ -72,13 +109,13 @@ export default {
     groupPreview,
     cardList,
     groupMenu,
-    Container, 
+    Container,
     Draggable
   },
   props: {
     board: {
       type: Object,
-      required:true,
+      required: true,
     }
 
   },
@@ -87,12 +124,12 @@ export default {
       isAddingTitle: false,
       newGroupTitle: "",
       isMenuOpened: false,
-      group: null,   
-      isAdding:false,
-      currGroupId:null,
-      task:{
-        title:''
-      }   
+      group: null,
+      isAdding: false,
+      currGroupId: null,
+      task: {
+        title: ''
+      }
     };
   },
   computed: {
@@ -114,18 +151,18 @@ export default {
       this.newGroupTitle = "";
     },
     async openGroupMenu(groupId) {
-      this.isMenuOpened = true
+      console.log('groppppp', groupId);
       const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
+      this.isMenuOpened = !this.isMenuOpened
       this.group = group
-      console.log('group', group);
-      console.log('open');
+      console.log(group);
     },
     closeGroupMenu() {
       this.isMenuOpened = false
       console.log('close');
     },
-    
-    changeGroup(ev){
+
+    changeGroup(ev) {
       console.log(ev);
       const fromIndex = ev.oldIndex
       const toIndex = ev.newIndex
@@ -138,28 +175,35 @@ export default {
       console.log('gothere');
       this.$emit('pickTask')
     },
-    opemModal(groupId){
+    opemModal(groupId) {
       console.log('hello');
-      this.isAdding=true;
-      this.currGroupId =groupId
+      this.isAdding = true;
+      this.currGroupId = groupId
+
       console.log();
 
     },
-   async addTask(groupId){
-    if(!this.task.title)  return
-     this.isAdding =false;
-     const task ={title:this.task.title, groupId}
-      this.task.title ='';
-    try{
-      await this.$store.dispatch({type:'addTask',task});
-       this.$store.dispatch({type:'saveBoard', board:this.board})    // this.$store.dispatch({type:'addTask',task:{groupId,taskTitle}})
+    async addTask(groupId) {
+      if (!this.task.title) return
+      this.isAdding = false;
+      const task = { title: this.task.title, groupId }
+      this.task.title = '';
+      try {
+        await this.$store.dispatch({ type: 'addTask', task });
+        this.$store.dispatch({ type: 'saveBoard', board: this.board })    // this.$store.dispatch({type:'addTask',task:{groupId,taskTitle}})
 
-    }catch(err){
-      console.log(err);
-    }
+      } catch (err) {
+        console.log(err);
+      }
 
-    
-  },
+
+    },
+    onAddCard(groupId) {
+      this.isAdding = true
+      this.currGroupId = groupId
+      this.isMenuOpened = false
+    },
+
   },
 };
 </script>
