@@ -26,6 +26,7 @@ export default {
         labels(){
         
             const labels = this.$store.getters.labels;
+            console.log('labels',labels);
             const newLabels = []
             labels.forEach((label)=> {
                 if(this.labelIds.includes(label.id)) newLabels.push(label)

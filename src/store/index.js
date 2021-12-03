@@ -26,6 +26,7 @@ export default new Vuex.Store({
       return state.isAddingCardTitle;
     },
     currTask(state) {
+      console.log('state.currTask',state.currTask);
       if (!state.currTask) return null
       return JSON.parse(JSON.stringify(state.currTask))
     },
@@ -34,7 +35,8 @@ export default new Vuex.Store({
     },
 
     labels(state) {
-      return JSON.parse(JSON.stringify(state.board.labels));
+      console.log('state.board.labels',state.board);
+      return JSON.parse(JSON.stringify(state.board.labels))
     },
   },
 
