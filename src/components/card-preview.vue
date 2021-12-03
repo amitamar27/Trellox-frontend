@@ -23,17 +23,16 @@ export default {
     data(){
       return{
        
-        
-
       }
     },
   methods: {
     cardClick(groupId, taskId) {
       console.log("card is clicked");
+      const { boardId } = this.$route.params
+      console.log('boardId',boardId);
       this.$store.commit({ type: "setDarkScreen" });
-      this.$router
-        .push("/board/taskEdit/" + groupId + "/" + taskId)
-        .catch((err) => {
+      this.$router.push(boardId+"/taskEdit/" + groupId + "/" + taskId)
+      .catch((err) => {
           console.dir("error");
         });
     },

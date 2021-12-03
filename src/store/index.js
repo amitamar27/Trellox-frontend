@@ -26,12 +26,13 @@ export default new Vuex.Store({
       return state.isAddingCardTitle;
     },
     currTask(state) {
-      if (!state.currTask) return null;
-      return JSON.parse(JSON.stringify(state.currTask));
+      if (!state.currTask) return null
+      return JSON.parse(JSON.stringify(state.currTask))
     },
     boards(state) {
-      return state.boards;
+      return state.boards
     },
+
     labels(state) {
       return JSON.parse(JSON.stringify(state.board.labels));
     },
@@ -182,4 +183,5 @@ export default new Vuex.Store({
   modules: {
     taskDetails,
   },
-});
+
+})
