@@ -1,0 +1,72 @@
+.boards-page-container{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    
+}
+.boards{
+    width:100%;
+    height:60%;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    >*{
+        flex-grow: 1;
+    }
+}
+.boards-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.boards-list{
+    width: 200px;
+    height: 95px;
+    background-color: rgb(55, 154, 187);
+    margin: 0 20px 20px 0;
+    transform: translate(0);
+    border-radius: 3px;
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+    background-image: url(https://res.cloudinary.com/giladtoy/image/upload/v1638531156/rc9kslncvagzrkz2p2ru.jpg);
+    object-fit: contain;
+    &:hover{
+        background-color: rgb(50, 135, 163);
+    }
+
+    p{
+        font-weight: 700;
+        margin-top: 10px;
+        margin-left: 10px;
+        color: white;
+        font-size: 16px;
+        letter-spacing: 1.1px;
+    }
+}
+.board-boards{
+    margin: 40px 16px 0;
+    max-width: 825px;
+    min-width: 288px;
+    width: 100%;
+    padding-block-start: 20px
+}
+.boards-list-header{
+    display: flex;
+    margin: 0 0 0 10px;
+    padding: 0 0 20px;
+    position: relative;
+
+    .el-icon-user:before {
+        content: "\e6e3";
+        font-size: 25px;
+        width: 32px;
+        height: 32px;
+        margin-inline-end: 10px;
+        font-weight: 1000;
+    }
+}
+.nav-side{
+    margin: 40px 16px 0;
+    padding:20px;
+}

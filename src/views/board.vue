@@ -1,6 +1,6 @@
 <template>
   <div class="board-container" >
-  
+    {{board}}
     <group-list @pickTask="pickTask" :board="board" v-if="board" ></group-list>
     <!-- <router-view /> -->
     <!-- <task-edit></task-edit> -->
@@ -13,10 +13,16 @@
 import groupList from "../components/group-list.vue";
 import taskEdit from './task-edit.vue'
 export default {
-  
-  created() {
-    this.$store.dispatch({ type:"loadBoard" });
-  },
+   watch: {
+        '$route.params.boardId': {
+            handler() {
+              console.log('iam here');
+               const { boardId } = this.$route.params;
+               this.$store.dispatch({type:'getBoardById', boardId})
+            },
+            immediate: true
+        }
+    },
   computed: {
     board() {
       return this.$store.getters.board;

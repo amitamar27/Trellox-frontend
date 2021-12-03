@@ -8,6 +8,7 @@
 @import 'basics/helpers';
 @import 'basics/base';
 @import 'basics/layout';
+@import 'basics/variables';
 
 // COMPONENTS
 @import 'cmps/app-header.scss';
@@ -17,10 +18,11 @@
 @import 'cmps/group-menu.scss';
 @import 'cmps/group-inner-menu.scss';
 @import 'components/side-navbar.scss';
-
+@import 'components/text-set';
 @import 'components/task-edit.scss';
 @import 'components/dark-screen.scss';
 //VIEWS
-@import 'views/board';
+@import 'views/board.scss';
+@import 'views/boards.scss';
 //MIXINS
 

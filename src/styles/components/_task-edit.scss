@@ -29,7 +29,7 @@
         min-height: 50vh;
         top: -1%;
         left: 50%;
-        transform: translate(-50%);
+        transform: translate(-50%,50%);
         overflow-y: hidden;
         overflow-x: hidden;
         gap: 10px;
@@ -64,4 +64,22 @@
         }
     }
     }
+}
+.controls-btns {
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+    margin-bottom: 22px;
+    margin-left: 38px;
+
+    // .save-btn {
+    //     background-color: #0079bf;
+    //     border: none;
+    //     box-shadow: none;
+    //     color: #fff;
+    //     height: 30px;
+    // }
+    // .cancel-btn {
+    //     @include xBtn;
+    // }
 }
