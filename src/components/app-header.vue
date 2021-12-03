@@ -15,7 +15,7 @@
           <p>Boards</p>
         </button>
       </div> -->
-      <router-link to="/board">
+      <router-link to="/boards">
         <button class="board-header-btn">
           <img  :src="require('@/assets/boards.svg')" alt="" />
           <p>Boards</p>

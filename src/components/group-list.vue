@@ -158,7 +158,7 @@ export default {
       this.isMenuOpened = !this.isMenuOpened
       const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
       this.group = group
-     console.log(group);
+      console.log(group);
     },
     closeGroupMenu() {
       this.isMenuOpened = false
@@ -183,7 +183,7 @@ export default {
       this.isAdding = true;
       this.currGroupId = groupId
       
-      console.log();
+     
 
     },
     async addTask(groupId) {

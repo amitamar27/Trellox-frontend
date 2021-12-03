@@ -1,6 +1,6 @@
 <template>
   <div class="board-container" >
-    {{board}}
+    <!-- {{board}} -->
     <group-list @pickTask="pickTask" :board="board" v-if="board" ></group-list>
     <!-- <router-view /> -->
     <!-- <task-edit></task-edit> -->

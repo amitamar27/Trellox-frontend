@@ -10,7 +10,6 @@ export default new Vuex.Store({
     boards:null,
     currTask:null,
     currCardToEdit:null
-
   },
   getters:{
     board(state){
@@ -50,17 +49,18 @@ export default new Vuex.Store({
     closeDarkScreen(state){
       state.isDarkScreen = false;
     },
-    setBoard(state, {board}){
-      console.log('board',board);
-      state.board=board
+    setBoard(state, { board}) {
+      console.log('board', board);
+      state.board = board
     },
-    updateGroup(state, {updatedGroup}){
+    updateGroup(state, { updatedGroup}) {
       var index = state.board.groups.findIndex((group) => group.id === updatedGroup.id);
       state.board.groups.splice(index,1,updatedGroup)
     },
-    getGroupById(state, {group}){
+    getGroupById(state, { group}) {
 
     },
+  
     getTaskById(state, { groupId, taskId }) {
       console.log('groupId, taskId',groupId, taskId);
       const group = state.board.groups.find(group => group.id === groupId)
@@ -88,7 +88,6 @@ export default new Vuex.Store({
         console.log('could not load board', err);
       }
     },
-
     async addGroup(context, {groupTitle}){
       try {
        var board = context.state.board
@@ -99,10 +98,10 @@ export default new Vuex.Store({
       }catch(err){
         console.log('could not add group to the board', err);
       }
-    } ,
-    async addTask({commit}, {task}){
-      try{
-        var updatedGroup =await boardService.getGroupById(task.groupId); 
+    },
+    async addTask({commit}, { task}) {
+      try {
+        var updatedGroup = await boardService.getGroupById(task.groupId);
         var addedTask = await boardService.makeTask(task.title)
         updatedGroup.tasks.push(addedTask)
        await commit({type:'updateGroup', updatedGroup})
@@ -123,47 +122,44 @@ export default new Vuex.Store({
       }
 
     },
-    async saveBoard({commit}, {board}){
-      try{
+    async saveBoard({commit}, {board}) {
+      try {
         await boardService.saveBoard(board)
 
       }catch(err){
         console.log('coldent save board',err);
       }
     },
-    async changeGroupPos({commit}, {payload}){
-      try{
-        const {board, fromIndex, toIndex}= payload
+    async changeGroupPos({ commit}, {  payload}) {
+      try {
+        const {  board,  fromIndex, toIndex} = payload
         var groupToUpdate = board.groups[fromIndex]
         board.groups.splice(fromIndex,1)
         board.groups.splice(toIndex,0,groupToUpdate)
         boardService.saveBoard(board)
         // var board = boardService.changeGroupPos(payload)
-      }catch(err){
+      } catch (err) {
         console.log(err);
       }
     },
-    // async addDetails({commit}, {details}){
-    //   const {groupId, cardId, cardDetails} = details
-    //   try{
-    //     var card = await boardService.getTaskById(groupId,cardId)
-    //     commit({type:'setCardToEdit', card})
-    //     if(cardDetails.labels){
-    //       console.log('labels',cardDetails.labels);
-    //       card.labels.push(cardDetails.labels)
-    //     }
-    //     if(cardDetails.members){
-    //       console.log('members',cardDetails.members);
-    //       card.members.push(cardDetails.members)
-    //     }
 
-    //   }catch(err){
-    //     console.log(err);
-    //   }
+    async removeGroup({commit}, { groupId}) {
+      try {
+        var board = await boardService.removeGroup(groupId)
+        console.log(board);
+        commit({ type: 'setBoard', board})
+      } catch (err) {
+        console.log('coldent remove group', err);
+      }
+    },
 
-    // },
+  //need to aproval
+  async removeTask({ commit}, { task}) {
+    try {
+      var board = await boardService.getBoardByTaskId(task.id)
+    } catch (err) {}
 
-    //need to aproval
+  },
    async removeTask({commit}, {task}){
      try{
        var board = await boardService.getBoardByTaskId(task.id)
@@ -188,4 +184,6 @@ export default new Vuex.Store({
   modules: {
     taskDetails,
   }
+
+
 })
