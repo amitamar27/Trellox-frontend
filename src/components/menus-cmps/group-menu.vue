@@ -7,8 +7,9 @@
       <p>
         {{ title }}
       </p>
+     
     </header>
-    <group-Inner-Menu :groupId="group.id" />
+    <group-Inner-Menu @addCard="onAddCard" :group="group" />
     <!-- <slot></slot> -->
   </section>
 </template>
@@ -45,6 +46,9 @@ export default {
       console.log('close');
       this.isAlive = false
       this.$emit('closeMenu')
+    },
+    onAddCard(groupId){
+      this.$emit('addCard',groupId)
     }
   },
   mounted() {

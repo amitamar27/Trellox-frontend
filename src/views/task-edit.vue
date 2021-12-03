@@ -13,6 +13,11 @@
           </div>
         </section>
       </header>
+
+        <aside>
+            <task-aside :task="task" :key="6"></task-aside>
+        </aside>
+        
       <section class="main-content">
         <div>
           <section class="task-details">
@@ -39,6 +44,8 @@
             <header></header>
             <task-activity :task="task" :key="5"></task-activity>
           </section>
+
+         
         </div>
       </section>
       </main>

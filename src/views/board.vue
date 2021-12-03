@@ -2,6 +2,7 @@
   <div class="board-container" >
     <!-- {{board}} -->
     <group-list @pickTask="pickTask" :board="board" v-if="board" ></group-list>
+    <!-- <router-view /> -->
     <!-- <task-edit></task-edit> -->
     <router-view />
     <!-- <div class="scroller"></div> -->
