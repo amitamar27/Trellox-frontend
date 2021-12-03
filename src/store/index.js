@@ -12,7 +12,6 @@ export default new Vuex.Store({
     boards:null,
     currTask:null,
     currCardToEdit:null
-
   },
   getters: {
     board(state) {
