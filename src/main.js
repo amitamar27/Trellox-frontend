@@ -12,7 +12,7 @@ import 'animate.css'
 import VueDragscroll from 'vue-dragscroll'
 Vue.use(VueDragscroll)
 Vue.config.productionTip = false
-
+// import '@fortawesome/fontawesome-free/css/all.css'
 new Vue({
   router,
   store,
