@@ -22,7 +22,7 @@
         <div>
           <section class="task-details">
             <task-members v-if="task.members" :members="task.members" :key="task.id"></task-members>
-            <labels :labelIds="task.labelIds" :key="1"></labels>
+            <labels v-if="task.labelIds" :labelIds="task.labelIds" :key="1"></labels>
           </section>
 
           <section class="task-description">
