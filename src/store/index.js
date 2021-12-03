@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import {boardService} from '../services/board-service'
 Vue.use(Vuex)
-
+import taskDetails from './task-details.store'
 export default new Vuex.Store({
   state: {
     board:null,
@@ -28,7 +28,10 @@ export default new Vuex.Store({
     currTask(state) {
       if (!state.currTask) return null
       return JSON.parse(JSON.stringify(state.currTask))
-  },
+    },
+    labels(state) {
+      return JSON.parse(JSON.stringify(state.board.labels))
+    },
     
 
   },
@@ -143,5 +146,6 @@ export default new Vuex.Store({
   
   },
   modules: {
+    taskDetails,
   }
 })

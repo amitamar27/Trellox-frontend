@@ -82,6 +82,9 @@ body {
     text-decoration: none;
     vertical-align: bottom;
 }
+.icon-close:before {
+    content: "\e91c";
+}
 h1,
 h2,
 h3,
