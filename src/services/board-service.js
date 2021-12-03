@@ -8,7 +8,9 @@ getNewGroup,
 getBoardId,
 saveBoard,
 getBoardByTaskId,
-getTaskById
+getTaskById,
+queryBoards,
+getBoardById
 
 
 }
@@ -145,6 +147,10 @@ const gBoard = {
 
  async function query(){
     var board = await asyncgStorageService.query(KEY)
+    if(!board || !board.length){
+        board = gBoard
+    }
+
     return board   
 }
 async function getBoardId(){
@@ -199,6 +205,7 @@ function saveTask(boardId, groupId, task, activity) {
 function updateBoard(board){
     
 }
+queryBoards()
 // in case we have couple of boards
 const gBoards= _creareBoards()
 
@@ -285,32 +292,32 @@ function _creareBoards(){
         }
     ]), _createBoard('board2', [
         {
-            "id": "g101",
-            "title": "Group 1",
+            "id": "g103",
+            "title": "Group 3",
             // כרטיסים
             "tasks": [
                 {
-                    "id": "c101",
-                    "title": "Replace logo"
+                    "id": "c104",
+                    "title": "drag and drop"
                 },
                 {
-                    "id": "c102",
-                    "title": "Add Samples"
+                    "id": "c105",
+                    "title": "add home page"
                 }
             ],
             "style": {}
         },
         {
-            "id": "g102",
-            "title": "Group 2",
+            "id": "g104",
+            "title": "Group 4",
             "tasks": [
                 {
-                    "id": "c103",
-                    "title": "Do that"
+                    "id": "c107",
+                    "title": "eat lunch"
                 },
                 {
-                    "id": "c104",
-                    "title": "Help me",
+                    "id": "c108",
+                    "title": "get the dog out",
                     "description": "description",
                     "comments": [
                         {
@@ -384,13 +391,18 @@ function _createBoard(title,groups){
             fullname:'gilad',
             imgUrl:''
         }],
-        groups
+        groups:[]
        
     }
 
 }
 async function queryBoards(){
-    return await asyncgStorageService.query(KEYS)
+    var boards =await asyncgStorageService.query(KEYS)
+    if(!boards ||!boards.length){
+        boards = _creareBoards()
+    }
+    return boards
+    
 }
 async function getBoardById(boardId){
     return await asyncgStorageService.getBoard(KEYS,boardId)

@@ -10,13 +10,12 @@
 
 export default {
   name: 'Home',
-  created() {
-    this.$store.dispatch({ type:"loadBoard" });
+   created() {
+    // this.$store.dispatch({ type:"loadBoard" });
+    var boards = this.$store.dispatch({type:'loadBoards'})
   },
   computed: {
-    board() {
-      return this.$store.getters.board;
-    },
+   
   },
 }
 </script>

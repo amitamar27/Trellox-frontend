@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import board from '../views/board.vue'
 import taskEdit from '../views/task-edit.vue'
+import boards from '../views/boards.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -12,7 +13,7 @@ const routes = [
     component: Home
   },
   {
-    path:'/board',
+    path:'/board/:boardId',
     name:'Board',
     component:board,
     children: [
@@ -30,6 +31,12 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path:'/boards',
+    component:boards
+    
+    
   }
 ]
 
