@@ -7,8 +7,9 @@ export default new Vuex.Store({
   state: {
     board:null,
     isDarkScreen: false,
-    isAddingCardTitle:false,
-    currTask: null,
+    boards:null,
+    currTask:null,
+    currCardToEdit:null
 
   },
   getters:{
@@ -28,7 +29,11 @@ export default new Vuex.Store({
     currTask(state) {
       if (!state.currTask) return null
       return JSON.parse(JSON.stringify(state.currTask))
-    },
+  },
+  boards(state){
+    return state.boards
+  },
+    
     labels(state) {
       return JSON.parse(JSON.stringify(state.board.labels))
     },
@@ -56,17 +61,23 @@ export default new Vuex.Store({
     getGroupById(state, {group}){
 
     },
-    toggleIsAdding(state){
-     state.isAddingCardTitle =!state.isAddingCardTitle
-    },
-    getTaskById(state, { groupId, taskId }) {
-      console.log('groupId, taskId',groupId, taskId);
-      const group = state.board.groups.find(group => group.id === groupId)
-      console.log('group',group);
-      const task = group.tasks.find(task => task.id === taskId)
-      console.log('task',task);
-      state.currTask = task
+  
+  //   getTaskById(state, { groupId, taskId }) {
+  //     console.log('groupId, taskId',groupId, taskId);
+  //     const group = state.board.groups.find(group => group.id === groupId)
+  //     console.log('group',group);
+  //     const task = group.tasks.find(task => task.id === taskId)
+  //     console.log('task',task);
+  //     state.currTask = task
+  // },
+  setBoards(state, {boards}){
+   state.boards=boards 
+
   },
+  setCardToEdit(state,{card}){
+    state.currCardToEdit = card
+
+  }
     
   },
   actions: {
@@ -79,16 +90,13 @@ export default new Vuex.Store({
       }
     },
 
-    async addGroup({commit}, {groupTitle}){
-      console.log(groupTitle);
+    async addGroup(context, {groupTitle}){
       try {
-       var board = await boardService.query()
+       var board = context.state.board
        var group = await boardService.getNewGroup(groupTitle)
        board.groups.push(group)
        commit({type:'setBoard',board})
-       boardService.saveBoard(board)
-
-    
+      //  boardService.saveBoard(board)
       }catch(err){
         console.log('could not add group to the board', err);
       }
@@ -136,24 +144,25 @@ export default new Vuex.Store({
         console.log(err);
       }
     },
-    async addDetails({commit}, {details}){
-      const {groupId, cardId, cardDetails} = details
-      try{
-        // var card = await boardService.getTaskById(groupId,cardId)
-        if(cardDetails.labels){
-          console.log('labels',cardDetails.labels);
-          card.labels.push(cardDetails.labels)
-        }
-        if(cardDetails.members){
-          console.log('members',cardDetails.members);
-          card.members.push(cardDetails.members)
-        }
+    // async addDetails({commit}, {details}){
+    //   const {groupId, cardId, cardDetails} = details
+    //   try{
+    //     var card = await boardService.getTaskById(groupId,cardId)
+    //     commit({type:'setCardToEdit', card})
+    //     if(cardDetails.labels){
+    //       console.log('labels',cardDetails.labels);
+    //       card.labels.push(cardDetails.labels)
+    //     }
+    //     if(cardDetails.members){
+    //       console.log('members',cardDetails.members);
+    //       card.members.push(cardDetails.members)
+    //     }
 
-      }catch(err){
-        console.log(err);
-      }
+    //   }catch(err){
+    //     console.log(err);
+    //   }
 
-    },
+    // },
 
     //need to aproval
    async removeTask({commit}, {task}){
@@ -162,6 +171,16 @@ export default new Vuex.Store({
      }catch(err){
      }
 
+   },
+   async loadBoards({commit}){
+     var boards = await boardService.queryBoards()
+     console.log('gggg',boards);
+     commit({type:'setBoards',boards})
+   },
+   async getBoardById({commit}, {boardId}){
+     var board = await boardService.getBoardById(boardId)
+     commit({type:'setBoard', board})
+     
    }
 
   
