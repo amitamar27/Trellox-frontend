@@ -65,3 +65,44 @@
         }
     }
   }
+
+  @mixin primaryBtn {
+    background-color: $boxShadowMain;
+    font-weight: 600;
+
+    text-align: center;
+    border-radius: 3px;
+    color: white;
+    padding: 9px 12px;
+    margin-top: 0;
+    font-size: 14px;
+
+    transition: all 5ms;
+
+    @include hover-supported {
+        background-color: #006aa7;
+        cursor: pointer;
+    }
+}
+
+@mixin xBtn() {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    height: 15px;
+    margin-left: 5px;
+
+    > img {
+        display: inline-block;
+        height: 100%;
+        align-items: center;
+        padding: unset;
+        filter: invert(48%) sepia(19%) saturate(417%) hue-rotate(180deg) brightness(92%) contrast(88%);
+    }
+    @include hover-supported {
+        img {
+            cursor: pointer;
+            filter: invert(13%) sepia(97%) saturate(527%) hue-rotate(180deg) brightness(91%) contrast(94%);
+        }
+    }
+}

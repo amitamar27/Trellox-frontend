@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import {boardService} from '../services/board-service'
 Vue.use(Vuex)
-
+import taskDetails from './task-details.store'
 export default new Vuex.Store({
   state: {
     board:null,
@@ -32,7 +32,11 @@ export default new Vuex.Store({
   },
   boards(state){
     return state.boards
-  }
+  },
+    
+    labels(state) {
+      return JSON.parse(JSON.stringify(state.board.labels))
+    },
     
 
   },
@@ -140,25 +144,25 @@ export default new Vuex.Store({
         console.log(err);
       }
     },
-    async addDetails({commit}, {details}){
-      const {groupId, cardId, cardDetails} = details
-      try{
-        var card = await boardService.getTaskById(groupId,cardId)
-        commit({type:'setCardToEdit', card})
-        if(cardDetails.labels){
-          console.log('labels',cardDetails.labels);
-          card.labels.push(cardDetails.labels)
-        }
-        if(cardDetails.members){
-          console.log('members',cardDetails.members);
-          card.members.push(cardDetails.members)
-        }
+    // async addDetails({commit}, {details}){
+    //   const {groupId, cardId, cardDetails} = details
+    //   try{
+    //     var card = await boardService.getTaskById(groupId,cardId)
+    //     commit({type:'setCardToEdit', card})
+    //     if(cardDetails.labels){
+    //       console.log('labels',cardDetails.labels);
+    //       card.labels.push(cardDetails.labels)
+    //     }
+    //     if(cardDetails.members){
+    //       console.log('members',cardDetails.members);
+    //       card.members.push(cardDetails.members)
+    //     }
 
-      }catch(err){
-        console.log(err);
-      }
+    //   }catch(err){
+    //     console.log(err);
+    //   }
 
-    },
+    // },
 
     //need to aproval
    async removeTask({commit}, {task}){
@@ -183,5 +187,6 @@ export default new Vuex.Store({
   
   },
   modules: {
+    taskDetails,
   }
 })

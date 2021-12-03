@@ -22,21 +22,7 @@ export default {
   },
     data(){
       return{
-        details:{
-          labels:{
-            title:'i am label',
-            bcg:'blue'
-          },
-          members:{
-            fullName:'gilad'
-          },
-          checkbox:{
-            title:'',
-            items:[
-              'FIRTS ITEM', 'second item'
-            ]
-          }
-        }
+       
         
 
       }
@@ -51,10 +37,7 @@ export default {
           console.dir("error");
         });
     },
-    AddDetails(cardId, groupId){
-      var cardDetails =this.details
-      this.$store.dispatch({type:'addDetails', details:{cardId,groupId,cardDetails} })
-    }
+  
   },
   components: {
     taskEdit,
