@@ -19,7 +19,11 @@ created(){
 methods: {
     closeDarkScreen(){
         console.log('clic');
+        const { boardId } = this.$route.params
+        alert(boardId)
+        console.log('boardId',boardId);
         this.$store.commit({ type: 'closeDarkScreen' })
+        
         this.$router.push('/board')
     }
 }
