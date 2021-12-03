@@ -61,15 +61,14 @@ export default new Vuex.Store({
     getGroupById(state, {group}){
 
     },
-  
-  //   getTaskById(state, { groupId, taskId }) {
-  //     console.log('groupId, taskId',groupId, taskId);
-  //     const group = state.board.groups.find(group => group.id === groupId)
-  //     console.log('group',group);
-  //     const task = group.tasks.find(task => task.id === taskId)
-  //     console.log('task',task);
-  //     state.currTask = task
-  // },
+    getTaskById(state, { groupId, taskId }) {
+      console.log('groupId, taskId',groupId, taskId);
+      const group = state.board.groups.find(group => group.id === groupId)
+      console.log('group',group);
+      const task = group.tasks.find(task => task.id === taskId)
+      console.log('task',task);
+      state.currTask = task
+  },
   setBoards(state, {boards}){
    state.boards=boards 
 
