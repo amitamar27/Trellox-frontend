@@ -9,10 +9,9 @@ export default new Vuex.Store({
   state: {
     board: null,
     isDarkScreen: false,
-    boards: null,
-    currTask: null,
-    currCardToEdit: null
-
+    boards:null,
+    currTask:null,
+    currCardToEdit:null
   },
   getters: {
     board(state) {
