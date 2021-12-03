@@ -94,11 +94,11 @@ export default new Vuex.Store({
 
     async addGroup(context, { groupTitle }) {
       try {
-        var board = context.state.board;
+        const boards =await boardService.queryBoards()
+        var currboard = context.state.board;
         var newGroup = await boardService.getNewGroup(groupTitle);
-        var newBoard =await boardService.addNewGroup(board,newGroup);
-        console.log(context);
-        // context.commit({ type:"setBoard", newBoard });
+        var board =await boardService.addNewGroup(currboard,newGroup,boards);
+        context.commit({type:'setBoard', board})
       } catch (err) {
         console.log("could not add group to the board", err);
       }
@@ -111,12 +111,9 @@ export default new Vuex.Store({
           task:addedTask,
           groupId:task.groupId
         }
-        var currBoard =context.state.board
-        
-        var updatedGroup = await boardService.getGroupById(taskDetails,currBoard);
-        // updatedGroup.tasks.push(addedTask);
-        // await context.commit({ type: "updateGroup", updatedGroup });
-        // return updatedGroup;
+        var currBoard=context.state.board
+        var board = await boardService.addTask(taskDetails,currBoard);
+         context.commit({ type: "setBoard", board });
       } catch (err) {
         console.log("faild in add task", err);
       }
@@ -174,7 +171,6 @@ export default new Vuex.Store({
     },
     async loadBoards({ commit }) {
       var boards = await boardService.queryBoards();
-      console.log("gggg", boards);
       commit({ type: "setBoards", boards });
     },
     async getBoardById({ commit }, { boardId }) {

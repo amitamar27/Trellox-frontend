@@ -190,8 +190,6 @@ export default {
       this.task.title = '';
       try {
         await this.$store.dispatch({ type: 'addTask', task });
-        this.$store.dispatch({ type: 'saveBoard', board: this.board })    // this.$store.dispatch({type:'addTask',task:{groupId,taskTitle}})
-
       } catch (err) {
         console.log(err);
       }

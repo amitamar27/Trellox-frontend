@@ -2,10 +2,9 @@ import {asyncgStorageService} from './async-storage.service.js'
 import { storageService } from './storage-service.js'
 export const boardService={
 query,
-getGroupById,
+addTask,
 makeTask,
 getNewGroup,
-getBoardId,
 saveBoard,
 removeGroup,
 getBoardByTaskId,
@@ -155,22 +154,17 @@ const gBoard = {
 
     return board   
 }
-async function getBoardId(){
-    var board = await asyncgStorageService.query(KEY)
-    return board._id   
-}
- async function getGroupById(taskDetails, board){
-     var Idx= await asyncgStorageService.postTask(KEYS ,taskDetails,board)
-    // const board = gBoard
-    // var currGroup =board.groups.find((group)=> group.id === groupId)
-    // return currGroup
+
+ async function addTask(taskDetails, board){
+     return await asyncgStorageService.postTask(KEYS ,taskDetails,board)
+    
 
 }
 async function saveBoard(board){
     return await asyncgStorageService._save(KEYS,board)
 }
 async function getTaskById(groupId, cardId){
-    return await asyncgStorageService.getTask(KEY,groupId, cardId )
+    return await asyncgStorageService.getTask(KEYS,groupId, cardId )
 
 }
 function makeTask(title){
@@ -191,8 +185,8 @@ function getNewGroup(title,tasks=[]){
 async function getBoardByTaskId(taskId){
     return await asyncgStorageService.removeTaskByCardId(taskId)
 }
-async function addNewGroup(board,newGroup){
-    return await asyncgStorageService.postGroup(KEYS,board,newGroup)
+async function addNewGroup(board,newGroup,boards){
+    return await asyncgStorageService.postGroup(KEYS,board,newGroup,boards)
     
 }
 
