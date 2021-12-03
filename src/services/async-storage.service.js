@@ -1,7 +1,7 @@
 
 export const asyncgStorageService = {
     query,
-    get,
+    postTask,
     post,
     put,
     remove,
@@ -143,9 +143,18 @@ function query(entityType, delay=0) {
     })
 }
 
-function get(entityType, entityId) {
-    return query(entityType)
-        .then(entities => entities.groups.find(entity => entity.id === entityId))
+function postTask(key, taskDetails,currBoard) {
+    return query(key)
+        .then(boards => {
+            var boardIdx =boards.findIndex((board)=> board._id === currBoard._id)
+            if (boardIdx < 0) throw new Error(`Unknown Entity ${boardIdx}`)
+           var groupIdx= boards[boardIdx].groups.findIndex((group)=> group.id===taskDetails.groupId)
+           if (groupIdx < 0) throw new Error(`Unknown Entity ${groupIdx}`)
+           boards[boardIdx].groups[groupIdx].tasks.push(taskDetails.task)
+           _save(key,boards)
+        }
+        
+)
 }
 function post(entityType, newEntity) {
     newEntity._id = _makeId()
