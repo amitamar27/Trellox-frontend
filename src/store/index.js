@@ -131,18 +131,40 @@ export default new Vuex.Store({
         board.groups.splice(fromIndex,1)
         board.groups.splice(toIndex,0,groupToUpdate)
         boardService.saveBoard(board)
-       
-
         // var board = boardService.changeGroupPos(payload)
+      }catch(err){
+        console.log(err);
+      }
+    },
+    async addDetails({commit}, {details}){
+      const {groupId, cardId, cardDetails} = details
+      try{
+        // var card = await boardService.getTaskById(groupId,cardId)
+        if(cardDetails.labels){
+          console.log('labels',cardDetails.labels);
+          card.labels.push(cardDetails.labels)
+        }
+        if(cardDetails.members){
+          console.log('members',cardDetails.members);
+          card.members.push(cardDetails.members)
+        }
 
       }catch(err){
-
+        console.log(err);
       }
-     
-     
 
-    }
-    
+    },
+
+    //need to aproval
+   async removeTask({commit}, {task}){
+     try{
+       var board = await boardService.getBoardByTaskId(task.id)
+     }catch(err){
+     }
+
+   }
+
+  
   
   },
   modules: {
