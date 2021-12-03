@@ -158,8 +158,8 @@ async function getBoardId(){
     var board = await asyncgStorageService.query(KEY)
     return board._id   
 }
- async function getGroupById(groupId){
-     return await asyncgStorageService.get(KEY , groupId)
+ async function getGroupById(taskDetails, board){
+     var Idx= await asyncgStorageService.postTask(KEYS ,taskDetails,board)
     // const board = gBoard
     // var currGroup =board.groups.find((group)=> group.id === groupId)
     // return currGroup
@@ -388,7 +388,17 @@ function _createBoard(title,groups){
             imgUrl:'',
         },
         style:{},
-        labels:[],
+        labels:[{
+            "id": "l101",
+            "title": "Done",
+            "color": "#61bd4f"
+        },
+        {
+            "id": "l102",
+            "title": "ready",
+            "color": "yellow"
+        }
+    ],
         members:[{
             _id:makeId(),
             fullname:'gilad',
