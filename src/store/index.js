@@ -77,6 +77,15 @@ export default new Vuex.Store({
     setCardToEdit(state, { card }) {
       state.currCardToEdit = card;
     },
+    saveTask(state, { groupId, taskToSave }) {
+      console.log(' groupId, taskToSave', groupId, taskToSave);
+      const group = state.board.groups.find(group => group.id === groupId)
+      console.log('group',group);
+      const taskIdx = group.tasks.findIndex(task => task.id === taskToSave.id)
+      console.log('taskIdx',taskIdx);
+      if (taskIdx < 0) return
+      group.tasks.splice(taskIdx, 1, taskToSave)
+  },
   },
 
   actions: {
@@ -186,7 +195,12 @@ export default new Vuex.Store({
       }catch(err){
         console.log('faild to add new board', err);
       }
-    }
+    },
+
+    saveTask({ commit }, payload) {
+      console.log('payload',payload);
+      commit({ type: 'saveTask' ,groupId: payload.groupId , taskToSave: payload.taskToSave})
+    },
   },
   modules: {
     taskDetails,
