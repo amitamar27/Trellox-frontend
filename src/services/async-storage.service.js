@@ -136,6 +136,7 @@ const gBoard = {
 
 function query(entityType, delay=0) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
+    console.log('entit',entities);
     return new Promise((resolve)=>{
         setTimeout(()=>{
             resolve(entities)
@@ -150,30 +151,26 @@ function postTask(key, taskDetails,currBoard) {
             if (boardIdx < 0) throw new Error(`Unknown Entity ${boardIdx}`)
             const groupIdx= boards[boardIdx].groups.findIndex((group)=> group.id===taskDetails.groupId)
            if (groupIdx < 0) throw new Error(`Unknown Entity ${groupIdx}`)
-           boards[boardIdx].groups[groupIdx].tasks.push(taskDetails.task)
+           var index =boards[boardIdx].groups[groupIdx].tasks.push(taskDetails.task)
            _save(key,boards)
+           return boards[boardIdx]
         }
+        )
         
-)
 }
-function postGroup(entityType, currBoard,groupToAdd) {
+function postGroup(entityType, currBoard,groupToAdd,allBoards) {
     return query(entityType)
     .then(boards=>{
         const boardIdx =boards.findIndex((board)=> board._id === currBoard._id)
         if (boardIdx < 0) throw new Error(`Unknown Entity ${boardIdx}`)
-       boards[boardIdx].groups.push(groupToAdd)
+      var board =boards[boardIdx].groups.push(groupToAdd)
+      console.log('hey',boards);
        _save(entityType,boards)
        return boards[boardIdx]
-
-
     }
-        )
-        // .then(boards => {
-        //     boards.push(newEntity)
-        //     _save(entityType, entities)
-        //     return newEntity
-        // })
-}
+       
+       
+    )}
 
 function put(entityType, updatedEntity) {
     return query(entityType)
@@ -236,6 +233,8 @@ function removeTaskByCardId(entityType, entityId) {
 
 
 function _save(entityType, entities) {
+    console.log('entit',entityType);
+    console.log('entit',entities);
     localStorage.setItem(entityType, JSON.stringify(entities))
 }
 
