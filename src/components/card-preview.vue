@@ -6,6 +6,7 @@
     </div>
     <!-- <task-edit v-if="isClick"></task-edit> -->
   </div>
+  
 </template>
 <script>
 import taskEdit from "../views/task-edit.vue";
@@ -27,9 +28,9 @@ export default {
     },
   methods: {
     cardClick(groupId, taskId) {
-      console.log("card is clicked");
+      // console.log("card is clicked");
       const { boardId } = this.$route.params
-      console.log('boardId',boardId);
+      // console.log('boardId',boardId);
       this.$store.commit({ type: "setDarkScreen" });
       this.$router.push(boardId+"/taskEdit/" + groupId + "/" + taskId)
       .catch((err) => {

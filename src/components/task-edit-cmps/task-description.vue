@@ -49,12 +49,12 @@ export default {
           this.task.description = this.description
 			
       },
-   setType(){
+    setType(){
        this.isType = true
-   },
-   offType(){
+    },
+    offType(){
        this.isType = false
-   }
+    }
   }
 };
 </script>

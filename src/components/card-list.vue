@@ -1,9 +1,12 @@
 <template>
   <div class ="cards-container">
       <!-- <div>task : {{task}}</div> -->
-      <div class="draggable-groups">
-         <card-preview v-for="task in tasks" :task="task" :key="task.id" :groupId="groupId" 
+      <div class="draggable-groups" >
+            <draggable data-dragscroll  :list="group.tasks" @end="dragEnd" group="tasks"   >
+         <card-preview :group="group" v-for="task in tasks" :task="task" :key="task.id" :groupId="groupId" 
          @click="openCardDetails(groupId,task.id)"></card-preview>
+    </draggable>
+
       </div>
        
   </div>
@@ -11,6 +14,7 @@
 
 <script>
 import cardPreview from './card-preview.vue'
+import draggable from "vuedraggable";
 
 export default {
      props: {
@@ -25,13 +29,19 @@ export default {
         groups:{
           // type:String,
           // required:true
+        },
+        group:{
+          type:Object
         }
     },
+   
     data(){
       return{}
     },
 components: {
     cardPreview,
+          draggable
+
 },
 computed:{
 },
@@ -46,6 +56,9 @@ methods:{
 				.catch((err) => { console.log('error');})
 		
   },
+  dragEnd(){
+    this.$emit('dragEnd')
+  }
   
  
 }

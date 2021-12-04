@@ -14,15 +14,17 @@
         </section>
       </header>
 
-        <aside>
-            <task-aside :task="task" :key="6"></task-aside>
-        </aside>
+       
 
       <section class="main-content">
-        <div>
+
+      
+
+
+        <div class="main-content-details" >
           <section class="task-details">
             <task-members v-if="task.members" :members="task.members" :key="task.id"></task-members>
-            <labels :labelIds="task.labelIds" :key="1"></labels>
+            <labels v-if="task.labelIds" :labelIds="task.labelIds" :key="1"></labels>
           </section>
 
           <section class="task-description">
@@ -47,6 +49,12 @@
 
          
         </div>
+
+
+           <aside class="task-side-bar">
+            <task-aside :task="task" :key="6"></task-aside>
+          </aside>
+          
       </section>
       </main>
       
@@ -128,4 +136,32 @@ export default {
     font-weight: 600;
     margin-bottom: 7px;
 }
+
+.main-content{
+      display: flex;
+    width: 100%;
+    flex-grow: 1;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.main-content-details{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.task-side-bar{
+  position: relative;
+    width: 159px;
+}
+
+.task-attachments {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
 </style>

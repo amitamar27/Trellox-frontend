@@ -1,14 +1,14 @@
 <template>
   <main v-if="labels && labelIds" class="task-members">
       <h3 class="task-details-h">LABELS</h3>
-      
+      <div class="task-label-container flex">
       <section
         v-for="label in labels" :key="label.id"
          class="task-label"
          :style="'background-color:' + label.color">
          {{label.title}}
       </section>
-      
+      </div>
   </main>
 </template>
 
@@ -26,6 +26,7 @@ export default {
         labels(){
         
             const labels = this.$store.getters.labels;
+            console.log('labels',labels);
             const newLabels = []
             labels.forEach((label)=> {
                 if(this.labelIds.includes(label.id)) newLabels.push(label)

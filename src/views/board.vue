@@ -1,7 +1,7 @@
-<template>
-  <div class="board-container" >
+<template >
+  <div v-if="board" :style="getStyle" class="board-container" >
     <!-- {{board}} -->
-    <group-list @pickTask="pickTask" :board="board" v-if="board" ></group-list>
+    <group-list  @dragEnd="dragEnd" @pickTask="pickTask" :board="board" v-if="board" ></group-list>
     <!-- <router-view /> -->
     <!-- <task-edit></task-edit> -->
     <router-view />
@@ -16,9 +16,8 @@ export default {
    watch: {
         '$route.params.boardId': {
             handler() {
-              console.log('iam here');
                const { boardId } = this.$route.params;
-               this.$store.dispatch({type:'getBoardById', boardId})
+                 
             },
             immediate: true
         }
@@ -27,11 +26,27 @@ export default {
     board() {
       return this.$store.getters.board;
     },
+    getStyle(){
+      if (this.board.style.backgroundSrc) {
+        const url =this.board.style.backgroundSrc
+       return {'background-image':`url(${url})`}
+      }
+      else{
+        const backgroundColor =this.board.style.backgroundColor
+        return {backgroundColor:`${backgroundColor}`}
+      }
+    }
   },
   methods:{
     pickTask(){
       console.log(this.board);
-    }
+    },
+    dragEnd(){
+      const board =this.board
+      this.$store.dispatch({type:'setBoard', board})
+    },
+    
+    
   },
 
   components: {

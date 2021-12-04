@@ -106,3 +106,38 @@
         }
     }
 }
+
+@mixin mainTextarea {
+  width: 100%;
+
+  textarea {
+      @content;
+      display: flex;
+      border: none;
+      border-radius: 3px;
+      padding: 8px 12px;
+      text-decoration: none;
+      color: $textClr;
+      overflow: hidden;
+      resize: none;
+
+      &::placeholder {
+          color: $textClr;
+          font-size: 14px;
+      }
+
+      &:focus {
+          background-color: #fff;
+          outline: none;
+          box-shadow: inset 0 0 0 2px $boxShadowMain;
+
+          &::placeholder {
+              color: $secondaryTitle;
+              font-weight: 600;
+          }
+          @include hover-supported {
+              background-color: #fff;
+          }
+      }
+  }
+}

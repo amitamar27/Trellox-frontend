@@ -2,16 +2,17 @@ import {asyncgStorageService} from './async-storage.service.js'
 import { storageService } from './storage-service.js'
 export const boardService={
 query,
-getGroupById,
+addTask,
 makeTask,
 getNewGroup,
-getBoardId,
 saveBoard,
 removeGroup,
 getBoardByTaskId,
 getTaskById,
 queryBoards,
-getBoardById
+getBoardById,
+addNewGroup,
+addNewBoard
 
 
 }
@@ -124,7 +125,9 @@ const gBoard = {
                     }
                 }
             ],
-            "style": {}
+            "style": {
+
+            }
         }
     ],
     // פעילויות בתוך כרטיס
@@ -154,22 +157,17 @@ const gBoard = {
 
     return board   
 }
-async function getBoardId(){
-    var board = await asyncgStorageService.query(KEY)
-    return board._id   
-}
- async function getGroupById(groupId){
-     return await asyncgStorageService.get(KEY , groupId)
-    // const board = gBoard
-    // var currGroup =board.groups.find((group)=> group.id === groupId)
-    // return currGroup
+
+ async function addTask(taskDetails, board){
+     return await asyncgStorageService.postTask(KEYS ,taskDetails,board)
+    
 
 }
 async function saveBoard(board){
-    return await asyncgStorageService._save(KEY,board)
+    return await asyncgStorageService.getAndSaveBoard(KEYS,board)
 }
 async function getTaskById(groupId, cardId){
-    return await asyncgStorageService.getTask(KEY,groupId, cardId )
+    return await asyncgStorageService.getTask(KEYS,groupId, cardId )
 
 }
 function makeTask(title){
@@ -179,16 +177,20 @@ function makeTask(title){
     }
 }
 
-function getNewGroup(title){
+function getNewGroup(title,tasks=[]){
     return {
         id:makeId(),
         title,
-        tasks:[],
+        tasks,
         
     }
 }
 async function getBoardByTaskId(taskId){
     return await asyncgStorageService.removeTaskByCardId(taskId)
+}
+async function addNewGroup(board,newGroup){
+    return await asyncgStorageService.postGroup(KEYS,board,newGroup)
+    
 }
 
 
@@ -293,7 +295,11 @@ function _creareBoards(){
             ],
             "style": {}
         }
-    ]), _createBoard('board2', [
+    ],
+     {backgroundSrc:"https://res.cloudinary.com/giladtoy/image/upload/v1638531202/u27ypkc1wfre9x9vgmrb.jpg"}
+    
+    ),
+     _createBoard('board2', [
         {
             "id": "g103",
             "title": "Group 3",
@@ -369,15 +375,17 @@ function _creareBoards(){
                     }
                 }
             ],
-            "style": {}
+            
         }
-    ])]
+    ],
+{backgroundSrc:"https://res.cloudinary.com/giladtoy/image/upload/v1638531189/t7mu6ik3iaglggchsd73.jpg"}
+    )]
     storageService.store(KEYS, boards)
     }
     return boards
     
 }
-function _createBoard(title,groups){
+function _createBoard(title,groups=[],style={}){
    return {
         _id: makeId(),
         title,
@@ -388,13 +396,24 @@ function _createBoard(title,groups){
             imgUrl:'',
         },
         style:{},
-        labels:[],
+        labels:[{
+            "id": "l101",
+            "title": "Done",
+            "color": "#61bd4f"
+        },
+        {
+            "id": "l102",
+            "title": "ready",
+            "color": "yellow"
+        }
+    ],
         members:[{
             _id:makeId(),
             fullname:'gilad',
             imgUrl:''
         }],
-        groups:[]
+        groups,
+        style
        
     }
 
@@ -409,6 +428,7 @@ async function queryBoards(){
 }
 async function getBoardById(boardId){
     return await asyncgStorageService.getBoard(KEYS,boardId)
+    
 }
 async function removeBoard(baordId){
     return await asyncgStorageService.removeBoard(KEYS, baordId)
@@ -417,6 +437,18 @@ async function removeBoard(baordId){
 
 async function removeGroup(groupId){
    return await asyncgStorageService.remove(KEY,groupId)
+}
+async function addNewBoard(boardDetails){
+  console.log('board sservice with', boardDetails);
+   const board = _createBoard(boardDetails.title,[],boardDetails.background)
+   try{
+       await asyncgStorageService.postBoard(KEYS, board)
+       return board
+
+   }catch(err){
+       console.log(err);
+   }
+
 }
 
 
