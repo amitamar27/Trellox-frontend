@@ -242,7 +242,7 @@ function removeTaskByCardId(entityType, details) {
                 console.log('got your taskid',taskIdx);
                 boards[boardIdx].groups[groupIdx].tasks.splice(taskIdx,1)
                 _save(entityType,boards)
-                return board
+                return boards[boardIdx]
                 
             
             
