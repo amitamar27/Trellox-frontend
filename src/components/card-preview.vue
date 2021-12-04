@@ -6,6 +6,7 @@
     </div>
     <!-- <task-edit v-if="isClick"></task-edit> -->
   </div>
+  
 </template>
 <script>
 import taskEdit from "../views/task-edit.vue";

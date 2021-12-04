@@ -1,6 +1,8 @@
 <template>
   <div v-if="board" class="group-list-container">
-    <div class="group-list">
+
+    <div class="group-list" >
+    <draggable data-dragscroll class="group-list"  groups="groups" :list="board.groups" @end="dragEnd">
       <div
         v-for="group in board.groups"
         :groupId="group.id"
@@ -31,10 +33,11 @@
           </div>
 
         </div>
-        <!-- <draggable> -->
         <card-list
+          @dragEnd="dragEnd"
           @pickTask="pickTask"
           :tasks="group.tasks"
+          :group="group"
           :groups="board.groups"
           :groupId="group.id"
           @addTask="addTask"
@@ -58,8 +61,8 @@
           <a> + Add a Card</a>
         </div>
 
-        <!-- </draggable> -->
       </div>
+    </draggable>
 
       <group-menu
         @addCard="onAddCard"
@@ -99,7 +102,7 @@
 
 <script>
 import groupPreview from "./group-preview.vue";
-import { boardService } from "../store/index.js";
+import draggable from "vuedraggable";
 import cardList from "./card-list.vue";
 import groupMenu from './menus-cmps/group-menu.vue'
 import { Container, Draggable } from "vue-smooth-dnd";
@@ -110,7 +113,7 @@ export default {
     cardList,
     groupMenu,
     Container,
-    Draggable
+    draggable
   },
   props: {
     board: {
@@ -160,6 +163,11 @@ export default {
     closeGroupMenu() {
       this.isMenuOpened = false
       console.log('close');
+    },
+    dragEnd(){
+      this.$emit('dragEnd')
+      console.log('dragEnd');
+
     },
 
     changeGroup(ev) {

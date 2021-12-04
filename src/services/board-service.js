@@ -11,7 +11,8 @@ getBoardByTaskId,
 getTaskById,
 queryBoards,
 getBoardById,
-addNewGroup
+addNewGroup,
+addNewBoard
 
 
 }
@@ -124,7 +125,9 @@ const gBoard = {
                     }
                 }
             ],
-            "style": {}
+            "style": {
+
+            }
         }
     ],
     // פעילויות בתוך כרטיס
@@ -161,7 +164,7 @@ const gBoard = {
 
 }
 async function saveBoard(board){
-    return await asyncgStorageService._save(KEYS,board)
+    return await asyncgStorageService.getAndSaveBoard(KEYS,board)
 }
 async function getTaskById(groupId, cardId){
     return await asyncgStorageService.getTask(KEYS,groupId, cardId )
@@ -185,8 +188,8 @@ function getNewGroup(title,tasks=[]){
 async function getBoardByTaskId(taskId){
     return await asyncgStorageService.removeTaskByCardId(taskId)
 }
-async function addNewGroup(board,newGroup,boards){
-    return await asyncgStorageService.postGroup(KEYS,board,newGroup,boards)
+async function addNewGroup(board,newGroup){
+    return await asyncgStorageService.postGroup(KEYS,board,newGroup)
     
 }
 
@@ -292,7 +295,11 @@ function _creareBoards(){
             ],
             "style": {}
         }
-    ]), _createBoard('board2', [
+    ],
+     {backgroundSrc:"https://res.cloudinary.com/giladtoy/image/upload/v1638531202/u27ypkc1wfre9x9vgmrb.jpg"}
+    
+    ),
+     _createBoard('board2', [
         {
             "id": "g103",
             "title": "Group 3",
@@ -368,15 +375,17 @@ function _creareBoards(){
                     }
                 }
             ],
-            "style": {}
+            
         }
-    ])]
+    ],
+{backgroundSrc:"https://res.cloudinary.com/giladtoy/image/upload/v1638531189/t7mu6ik3iaglggchsd73.jpg"}
+    )]
     storageService.store(KEYS, boards)
     }
     return boards
     
 }
-function _createBoard(title,groups){
+function _createBoard(title,groups=[],style={}){
    return {
         _id: makeId(),
         title,
@@ -404,6 +413,7 @@ function _createBoard(title,groups){
             imgUrl:''
         }],
         groups,
+        style
        
     }
 
@@ -418,6 +428,7 @@ async function queryBoards(){
 }
 async function getBoardById(boardId){
     return await asyncgStorageService.getBoard(KEYS,boardId)
+    
 }
 async function removeBoard(baordId){
     return await asyncgStorageService.removeBoard(KEYS, baordId)
@@ -426,6 +437,18 @@ async function removeBoard(baordId){
 
 async function removeGroup(groupId){
    return await asyncgStorageService.remove(KEY,groupId)
+}
+async function addNewBoard(boardDetails){
+  console.log('board sservice with', boardDetails);
+   const board = _createBoard(boardDetails.title,[],boardDetails.background)
+   try{
+       await asyncgStorageService.postBoard(KEYS, board)
+       return board
+
+   }catch(err){
+       console.log(err);
+   }
+
 }
 
 

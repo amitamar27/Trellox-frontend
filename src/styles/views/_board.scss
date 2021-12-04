@@ -1,8 +1,10 @@
 .board-container {
-    height: calc(100% - 57px);
+    height: calc(100% );
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
+    background-size: cover;
+    background-repeat: no-repeat;
   }

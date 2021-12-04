@@ -91,6 +91,14 @@ export default new Vuex.Store({
         console.log("could not load board", err);
       }
     },
+    async setBoard({commit},{board}){
+      var board = await boardService.saveBoard(board)
+      try{
+
+      }catch(err){
+        console.log('problem with save board', err);
+      }
+    },
 
     async addGroup(context, { groupTitle }) {
       try {
@@ -128,26 +136,14 @@ export default new Vuex.Store({
         console.log("faild get group", err);
       }
     },
-
-    async saveBoard({ commit }, { board }) {
-      try {
-        await boardService.saveBoard(board);
-      } catch (err) {
-        console.log("coldent save board", err);
-      }
-    },
-    async changeGroupPos({ commit }, { payload }) {
-      try {
-        const { board, fromIndex, toIndex } = payload;
-        var groupToUpdate = board.groups[fromIndex];
-        board.groups.splice(fromIndex, 1);
-        board.groups.splice(toIndex, 0, groupToUpdate);
-        boardService.saveBoard(board);
-        // var board = boardService.changeGroupPos(payload)
-      } catch (err) {
-        console.log(err);
-      }
-    },
+// no need
+    // async saveBoard({ commit }, { board }) {
+    //   try {
+    //     await boardService.saveBoard(board);
+    //   } catch (err) {
+    //     console.log("coldent save board", err);
+    //   }
+    // },
     async removeGroup({commit}, {groupId}) {
       try {
         var board = await boardService.removeGroup(groupId);
@@ -164,19 +160,33 @@ export default new Vuex.Store({
         var board = await boardService.getBoardByTaskId(task.id);
       } catch (err) {}
     },
-    async removeTask({ commit }, { task }) {
-      try {
-        var board = await boardService.getBoardByTaskId(task.id);
-      } catch (err) {}
-    },
+    
     async loadBoards({ commit }) {
       var boards = await boardService.queryBoards();
       commit({ type: "setBoards", boards });
     },
-    async getBoardById({ commit }, { boardId }) {
-      var board = await boardService.getBoardById(boardId);
-      commit({ type: "setBoard", board });
+    async getBoardById({ commit }, { boardId }) {  
+      try{
+        var board = await boardService.getBoardById(boardId);
+        commit({ type: "setBoard", board });
+
+      }catch(err){
+        console.log(err);
+      }
+      
+
+        
     },
+    async createNewBoard({commit}, {boardDetails}){
+      try{
+        var board = await boardService.addNewBoard(boardDetails)
+        commit({ type: "setBoard", board });
+
+
+      }catch(err){
+        console.log('faild to add new board', err);
+      }
+    }
   },
   modules: {
     taskDetails,
