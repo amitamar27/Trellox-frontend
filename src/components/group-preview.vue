@@ -63,11 +63,11 @@ export default {
   methods: {
     openGroupMenu() {
       this.menuOpened = true
-      console.log('open');
+      // console.log('open');
     },
     closeGroupMenu() {
       this.menuOpened = false
-      console.log('close');
+      // console.log('close');
     }
   },
   components: {

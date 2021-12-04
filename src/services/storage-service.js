@@ -4,6 +4,7 @@ export const storageService = {
 
 }
 function load(key) {
+    console.log('key',key);
     var val = localStorage.getItem(key)
     return (val)? JSON.parse(val) : null;
 }

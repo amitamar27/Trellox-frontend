@@ -151,15 +151,15 @@ export default {
       this.newGroupTitle = "";
     },
     async openGroupMenu(groupId) {
-      console.log('groppppp', groupId);
+      // console.log('groppppp', groupId);
       const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
       this.isMenuOpened = !this.isMenuOpened
       this.group = group
-      console.log(group);
+      // console.log(group);
     },
     closeGroupMenu() {
       this.isMenuOpened = false
-      console.log('close');
+      // console.log('close');
     },
 
     changeGroup(ev) {
