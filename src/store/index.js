@@ -200,6 +200,7 @@ export default new Vuex.Store({
     saveTask({ commit }, payload) {
       console.log('payload',payload);
       commit({ type: 'saveTask' ,groupId: payload.groupId , taskToSave: payload.taskToSave})
+      boardService.getTaskById(payload.groupId,payload.taskToSave.id)
     },
   },
   modules: {
