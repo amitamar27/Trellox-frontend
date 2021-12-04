@@ -17,7 +17,7 @@
         <aside>
             <task-aside :task="task" :key="6"></task-aside>
         </aside>
-        
+
       <section class="main-content">
         <div>
           <section class="task-details">
@@ -91,9 +91,11 @@ export default {
   methods: {
     // @click.stop="closeDarkScreen"
     closeDarkScreen() {
+      const { boardId } = this.$route.params
+      console.log('boardId',boardId);
       console.log("clic");
       this.$store.commit({ type: "closeDarkScreen" });
-      this.$router.push("/board");
+      this.$router.push("/board/" + boardId);
     },
   },
   components: {
