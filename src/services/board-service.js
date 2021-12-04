@@ -185,8 +185,8 @@ function getNewGroup(title,tasks=[]){
         
     }
 }
-async function getBoardByTaskId(taskId){
-    return await asyncgStorageService.removeTaskByCardId(taskId)
+async function getBoardByTaskId(taskDetails){
+    return await asyncgStorageService.removeTaskByCardId(KEYS,taskDetails)
 }
 async function addNewGroup(board,newGroup){
     return await asyncgStorageService.postGroup(KEYS,board,newGroup)

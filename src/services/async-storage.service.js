@@ -138,7 +138,6 @@ const gBoard = {
 
 function query(entityType, delay=0) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
-    console.log('entit',entities);
     return new Promise((resolve)=>{
         setTimeout(()=>{
             resolve(entities)
@@ -230,20 +229,33 @@ function getTask(entityType, groupId, cardId){
 }
 
 // this function need to be checked!!!
-function removeTaskByCardId(entityType, entityId) {
+function removeTaskByCardId(entityType, details) {
+    const {taskId,groupId,boardId} =details
     return query(entityType)
-        // .then(entities => {
-            // const idx = entities.groups.map((group)=> {group.findIndex((task) =>task.id === entityId)
-            //     if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
-            //     const groupIdx =  entities.groups.findIndex((group)=>{ group.tasks.id ===entityId})
-            //     if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
-            //     entities.groups[groupIdx].splice(idx,1,0)
-            //     _save(entityType, entities)
+        .then(boards => {
+            const boardIdx = boards.findIndex(board=> board._id === boardId )
+             if (boardIdx < 0) throw new Error(`Unknown Entity ${boardIdx}`)
+                const groupIdx =  boards[boardIdx].groups.findIndex(group=> group.id ===groupId)
+                console.log('gropp',groupIdx);
+                if (groupIdx < 0) throw new Error(`Unknown Entity ${groupIdx}`)
+                const taskIdx= boards[boardIdx].groups[groupIdx].tasks.findIndex(task=>task.id===taskId)
+                console.log('got your taskid',taskIdx);
+                boards[boardIdx].groups[groupIdx].tasks.splice(taskIdx,1)
+                _save(entityType,boards)
+                return board
+                
+            
+            
+            
+            
+            
 
-        //     })
+
+          
             
             
-        // })
+            
+        })
 }
 function postBoard(key,board){
     return query(key)
