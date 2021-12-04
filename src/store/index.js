@@ -5,7 +5,7 @@ Vue.use(Vuex);
 import taskDetails from "./task-details.store";
 export default new Vuex.Store({
   state: {
-    board: null,
+    board:null,
     isDarkScreen: false,
     boards: null,
     currTask: null,
@@ -29,11 +29,11 @@ export default new Vuex.Store({
       console.log('state.currTask',state.currTask);
       if (!state.currTask) return null
       return JSON.parse(JSON.stringify(state.currTask))
-    },
-    boards(state) {
-      return state.boards
-    },
-
+  },
+  boards(state){
+    return state.boards
+  },
+    
     labels(state) {
       console.log('state.board.labels',state.board);
       return JSON.parse(JSON.stringify(state.board.labels))
@@ -202,6 +202,7 @@ export default new Vuex.Store({
     saveTask({ commit }, payload) {
       console.log('payload',payload);
       commit({ type: 'saveTask' ,groupId: payload.groupId , taskToSave: payload.taskToSave})
+      boardService.getTaskById(payload.groupId,payload.taskToSave.id)
     },
   },
   modules: {
