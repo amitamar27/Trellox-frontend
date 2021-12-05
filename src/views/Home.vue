@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <router-link class="router" to="/boards"> 
+    <button class="home-btn" > Lets start our project</button>
+    </router-link>
     
     
   </div>

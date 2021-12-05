@@ -2,7 +2,6 @@
   <div v-if="boards" class="boards-page-container">
       <div class="boards">
           <div class="nav-side">
-              <h1>side nav</h1>
          </div>
           <div class="board-boards">
               <div class="boards-list-header">
