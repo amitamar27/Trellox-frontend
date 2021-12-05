@@ -166,11 +166,7 @@ export default {
       const groupDetails = { board, groupId }
       const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
       this.isMenuOpened = !this.isMenuOpened
-<<<<<<< HEAD
-      console.log('groupFromCompo', group);
-=======
       // const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
->>>>>>> f8fdff9b2918e10c371105f020a6a684cbd91efa
       this.group = group
       // console.log(group);
     },

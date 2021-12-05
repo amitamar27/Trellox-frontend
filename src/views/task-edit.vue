@@ -23,9 +23,7 @@
       <section class="main-content">
          
         <div class="main-content-details" >
-          <section>
-           
-          </section>
+          
           <section class="task-details">
             <task-members v-if="task.members" :members="task.members" :key="task.id"></task-members>
             <labels v-if="task.labelIds" :labelIds="task.labelIds" :key="1"></labels>
@@ -33,7 +31,7 @@
 
           <section class="task-description">
             <header></header>
-            <task-description :task="task" :key="2"></task-description>
+            <task-description :task="task" :key="2" @saveTask="saveTask"></task-description>
           </section>
 
           <section class="check-list" v-if="task.checklists">

@@ -1,5 +1,5 @@
 <template>
-  <main class="set-text">
+  <main class="set-text" v-if="task">
     <!-- <textarea 
       :autosize="{ minRows: 1, maxRows: 20 }"
       name="" id="" cols="30" rows="10"
@@ -33,7 +33,10 @@
 // :autosize="{ minRows: 1, maxRows: 20 }"
 export default {
   props: {
-    task: Object,
+    task: {
+      type: Object,
+      required: true,
+    }
   },
   data(){
       return {
@@ -41,13 +44,16 @@ export default {
           isType: false,
       }
   },
+  created(){
+    this.description = this.task.description
+  },
   computed:{
      
   },
   methods: {
       saveData(){
           this.task.description = this.description
-			
+          this.$emit('saveTask',this.task)
       },
     setType(){
        this.isType = true
