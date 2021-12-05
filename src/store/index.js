@@ -153,14 +153,14 @@ export default new Vuex.Store({
       try {
         // commit({type: 'getGroupById',groupId})
 
-        const group = await boardService.getGroupById(groupId);
+        const group = await boardService.getGroupById(groupDetails);
         return group;
       } catch (err) {
         console.log("faild get group", err);
       }
     },
 
-    async removeGroup({commit}, {groupId}) {
+    async removeGroup({commit}, {groupDetails}) {
       try {
         var board = await boardService.removeGroup(groupDetails);
         console.log(board);

@@ -65,7 +65,7 @@
             </div>
           </div>
           <div @click="opemModal(group.id)" v-else class="card-add-btn">
-            <a> + Add a Card</a>
+            <a> + Add a card</a>
           </div>
         </div>
       </draggable>
@@ -83,7 +83,7 @@
     </div>
     <div class="group-add-container">
       <div class="group-add-btn">
-        <p v-if="!isAddingTitle" @click="isAddingTitle = true">+Add Group</p>
+        <p v-if="!isAddingTitle" @click="isAddingTitle = true">+Add another list</p>
         <form v-else class="add-group-form" @submit.prevent="addNewGroup">
           <textarea
             v-model="newGroupTitle"
@@ -164,8 +164,8 @@ export default {
     async openGroupMenu(groupId) {
       const board = this.$store.getters.board
       const groupDetails = { board, groupId }
-      const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
       this.isMenuOpened = !this.isMenuOpened
+      const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
       this.group = group
       // console.log(group);
     },

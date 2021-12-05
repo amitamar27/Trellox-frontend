@@ -26,7 +26,7 @@
         overflow-y: auto!important;
         overflow-x: hidden;
         scroll-behavior: smooth;
-        margin: 0 3px;
+        padding: 0px 4px ;
         // .draggable-groups >*:hover{
         //     background-color: #0079bf;
         // }
@@ -50,7 +50,7 @@
                 opacity: 0.7;
               }
             .card-main{
-                margin: 0 5px 5px;
+                margin: 0 5px 8px;
                 /* margin: 0 5px 5px; */
                 // overflow: hidden;
                 display: block;
@@ -93,6 +93,7 @@
         // padding: 6px 8px 2px 2px;
         // margin: 10px 8px;
         // padding: 5px 5px;
+        text-align: left;
         min-height: 34px;
         // border-radius: 3px;
         cursor: pointer;
@@ -100,7 +101,7 @@
         color: #172b4d;
         // box-shadow: 0 1px 0 #091e4240;
         // text-decoration: solid;
-        padding-left: 5px;
+        padding-left: 9px;
         overflow-wrap: break-word;
         // margin: 2px 0 4px 5px;
         display: flex;
@@ -191,12 +192,13 @@
     
 }
 .card-add-btn{
-        margin-inline: 7px;
+        margin-inline: 15px;
+        color:#6b778c;
         padding: 4px 8px;
         cursor: pointer;
         border-radius: 4px;
         margin-block: 7px;
-        background-color: rgb(211, 214, 214);;
+        text-align: left;
         
     
     &:hover{
