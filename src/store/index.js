@@ -159,14 +159,7 @@ export default new Vuex.Store({
         console.log("faild get group", err);
       }
     },
-// no need
-    // async saveBoard({ commit }, { board }) {
-    //   try {
-    //     await boardService.saveBoard(board);
-    //   } catch (err) {
-    //     console.log("coldent save board", err);
-    //   }
-    // },
+
     async removeGroup({commit}, {groupId}) {
       try {
         var board = await boardService.removeGroup(groupId);
@@ -178,9 +171,18 @@ export default new Vuex.Store({
     },
 
     //need to aproval
-    async removeTask({commit},{task}) {
+    async removeTask(context,payload) {
       try {
-        var board = await boardService.getBoardByTaskId(task.id);
+        const {taskId, groupId}= payload
+        var boardId = context.state.board._id
+        var details ={
+          taskId,
+          groupId,
+          boardId
+        }
+        var board = await boardService.getBoardByTaskId(details);
+        context.commit({type:'setBoard', board})
+        
       } catch (err) {}
     },
     
