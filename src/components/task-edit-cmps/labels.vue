@@ -5,10 +5,14 @@
       <section
         v-for="label in labels" :key="label.id"
          class="task-label"
-         :style="'background-color:' + label.color">
+         :style="'background-color:' + label.color"
+         
+         >
+         
          {{label.title}}
       </section>
       </div>
+    
   </main>
 </template>
 
@@ -21,17 +25,17 @@ export default {
             required: true,
         }
     },
+ 
+    
     computed:{
     
         labels(){
-        
             const labels = this.$store.getters.labels;
             console.log('labels',labels);
             const newLabels = []
             labels.forEach((label)=> {
                 if(this.labelIds.includes(label.id)) newLabels.push(label)
             })
-         
             console.log('newLabels',newLabels);
             return newLabels
         },
@@ -50,5 +54,8 @@ export default {
     margin: 0 4px 4px 0;
     color: #fff;
     white-space: nowrap;
+    cursor: pointer;
+    cursor: pointer;
 }
+
 </style>

@@ -3,25 +3,29 @@
     <div v-if="task" class="card-edit " @click.stop="">
       <header v-if="task.bgColor"></header>
       <main class="task-edit-container">
-        <header class="task-edit-header">
-        <section class="task-section">
-          <span class="icon-card icon-lg">
+
+
+          <!-- <header class="task-edit-header">
+              <section class="task-section">
+                  <span class="icon-card icon-lg">
            
-          </span>
-          <div class="main-title">
-            <h1>This is Header</h1>
-          </div>
-        </section>
-      </header>
+                  </span>
+                  
+                <textarea >
+
+                  </textarea> 
+       
+              </section>
+          </header> -->
 
        
-
+      <task-title :task="task" @saveTask="saveTask"></task-title>
       <section class="main-content">
-
-      
-
-
+         
         <div class="main-content-details" >
+          <section>
+           
+          </section>
           <section class="task-details">
             <task-members v-if="task.members" :members="task.members" :key="task.id"></task-members>
             <labels v-if="task.labelIds" :labelIds="task.labelIds" :key="1"></labels>
@@ -32,19 +36,19 @@
             <task-description :task="task" :key="2"></task-description>
           </section>
 
-          <section class="check-list">
+          <section class="check-list" v-if="task.checklists">
             <header></header>
-            <check-list :task="task" :key="3"></check-list>
+            <check-list :task="task" :key="3" @saveTask="saveTask" ></check-list>
           </section>
 
-          <section class="task-attachments">
-            <header></header>
-            <task-attachment :task="task" :key="4"></task-attachment>
+          <section class="task-attachments" v-if="task.attachments">
+          
+            <task-attachment :task="task" :key="4" ></task-attachment>
           </section>
           
-          <section class="task-activities">
+          <section class="task-activities" v-if="task.activities">
             <header></header>
-            <task-activity :task="task" :key="5"></task-activity>
+            <task-activity :task="task" :key="5" @saveTask="saveTask" ></task-activity>
           </section>
 
          
@@ -73,6 +77,7 @@ import taskActivity from '../components/task-edit-cmps/task-activity.vue'
 import taskAside from '../components/task-edit-cmps/task-aside.vue'
 import taskAttachment from '../components/task-edit-cmps/task-attachment.vue'
 import checkList from '../components/task-edit-cmps/check-list.vue'
+import taskTitle from '../components/task-edit-cmps/task-title.vue'
 export default {
   name: "task-edit",
   props: {},
@@ -92,9 +97,16 @@ export default {
       this.$store.commit({ type: "getTaskById", taskId, groupId });
       const task = this.$store.getters.currTask
       console.log('task',task);
-      // this.task = task
       return task;
     },
+    isCheckLists(){
+      // console.log('this.task',this.task);
+      // const { groupId } = this.$route.params;
+      // this.$store.commit({ type: "getGroupById", groupId });
+      // const group = this.$store.getters.currGroup
+      return this.task().checkList
+       
+    }
   },
   methods: {
     // @click.stop="closeDarkScreen"
@@ -105,6 +117,15 @@ export default {
       this.$store.commit({ type: "closeDarkScreen" });
       this.$router.push("/board/" + boardId);
     },
+    saveTask(task){
+      // alert('saving..')
+      console.log('rass',task);
+      if(!task) return
+      console.log('boardId task',task);
+      const { groupId } = this.$route.params
+      console.log('groupId',groupId);
+      if(groupId) this.$store.dispatch({type: 'saveTask' , groupId,taskToSave:task})
+    }
   },
   components: {
     labels,
@@ -113,10 +134,13 @@ export default {
     taskAttachment,
     taskActivity,
     taskAside,
-    checkList
+    checkList,
+    taskTitle
 
   }
 };
+
+
 </script>
 
 <style>

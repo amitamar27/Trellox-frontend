@@ -1,0 +1,178 @@
+.task-activities {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    // background-color: #fff;
+    header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        gap: 15px;
+
+        h3 {
+            margin-bottom: 3px;
+            font-size: 16px;
+        }
+    }
+
+    .add-comment {
+        display: flex;
+        width: 100%;
+
+        > main {
+            width: 100%;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 2px -1px #091e4240, 0 0 0 1px $secondaryBtnsGray;
+            background-color: #fff;
+            .textarea {
+                width: 100%;
+                height: 34px;
+                display: flex;
+                align-items: center;
+                position: relative;
+
+                textarea {
+                    position: absolute;
+                    top: 5px;
+                    border: none;
+                    border-radius: 3px;
+                    min-height: 18px !important;
+                    height: 19px !important;
+                    width: 90%;
+                    padding: 2px 12px;
+                    text-decoration: none;
+                    color: $textClr;
+                    overflow: hidden;
+                    resize: none;
+                    font-family: Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+                    &::placeholder {
+                        color: $textClr;
+                        font-size: 14px;
+                    }
+
+                    &:focus {
+                        background-color: #fff;
+                        outline-style: none;
+                    }
+                }
+
+               
+            }
+            .controllers {
+                display: flex;
+                justify-content: space-between;
+
+                .attachment-btn {
+                    width: 30px;
+                    height: 30px;
+                    position: relative;
+                    top: 18px;
+                    right: 5px;
+
+                    // >img {
+                    //     height: 100%;
+                    //     width: 100%;
+                    //     top: 16px;
+                    //     margin-left: 3px;
+                    //     filter: invert(13%) sepia(97%) saturate(527%) hue-rotate(180deg) brightness(91%) contrast(94%);
+                    // }
+                }
+
+                .save-btn {
+                    @include primaryBtn;
+                    width: fit-content;
+                    margin-top: 10px;
+                    margin-left: 12px;
+                    margin-bottom: 6px;
+                }
+            }
+        }
+    }
+
+    .comment {
+        display: flex;
+        margin-bottom: 10px;
+        .comment-container {
+            display: flex;
+            flex-direction: column;
+
+            p {
+                margin-bottom: 5px;
+                text-align: justify;
+            }
+            .comment-box {
+                display: flex;
+                align-items: center;
+                box-sizing: border-box;
+                background-color: #ffffff;
+                min-height: 32px;
+                padding: 2px 15px;
+                border-radius: 3px;
+                box-shadow: 0 1px 2px -1px #091e4240, 0 0 0 1px $secondaryBtnsGray;
+                width: 100%;
+            }
+
+            span {
+                align-self: center;
+                font-size: 14px;
+                &.user-fullname {
+                    font-family: "segoe-ui-bold";
+                    // font-family: Segoe UI;
+                    // font-weight: 700;
+                }
+              
+            }
+            .small-span{
+                font-size: 12px;
+            }
+        }
+    }
+
+    > .activities {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 10px;
+        font-size: 14px;
+
+        span {
+            align-self: center;
+            font-size: 14px;
+            &.user-fullname {
+                font-family: "segoe-ui-bold";
+            }
+        }
+        .small-span{
+            font-size: 12px;
+        }
+    }
+
+    button {
+        align-self: end;
+    }
+
+    main {
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        padding: 2px;
+        border-radius: 3px;
+        box-shadow: 0 1px 0 #091e4240;
+
+        &.border {
+            box-shadow: inset 0 0 0 2px $boxShadowMain;
+        }
+        @include hover-supported {
+            cursor: pointer;
+        }
+    }
+    .user-avatar {
+        margin-right: 8px;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
+        align-self: start;
+    }
+}

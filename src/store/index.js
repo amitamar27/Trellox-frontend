@@ -10,6 +10,7 @@ export default new Vuex.Store({
     boards: null,
     currTask: null,
     currCardToEdit: null,
+    currGroup: null,
   },
   getters: {
     board(state) {
@@ -29,15 +30,18 @@ export default new Vuex.Store({
       console.log('state.currTask',state.currTask);
       if (!state.currTask) return null
       return JSON.parse(JSON.stringify(state.currTask))
-  },
-  boards(state){
+    },
+    boards(state){
     return state.boards
-  },
+    },
     
     labels(state) {
       console.log('state.board.labels',state.board);
       return JSON.parse(JSON.stringify(state.board.labels))
     },
+    currGroup(state){
+      return state.currGroup
+    }
   },
 
   mutations: {
@@ -62,7 +66,15 @@ export default new Vuex.Store({
       state.board.groups.splice(index, 1, updatedGroup);
     },
 
-    getGroupById(state, { group }) {},
+    getGroupById(state, { groupId }) {
+      // alert('here')
+      console.log('groupId',groupId);
+      console.log('state.currGroup',state.currGroup);
+      state.currGroup = state.board.groups.find((group) => group.id === groupId);
+      console.log('state.currGroup',state.currGroup);
+      // state.currGroup = group
+      
+    },
     getTaskById(state, { groupId, taskId }) {
       console.log("groupId, taskId", groupId, taskId);
       const group = state.board.groups.find((group) => group.id === groupId);
@@ -85,7 +97,8 @@ export default new Vuex.Store({
       console.log('taskIdx',taskIdx);
       if (taskIdx < 0) return
       group.tasks.splice(taskIdx, 1, taskToSave)
-  },
+      
+    },
   },
 
   actions: {
@@ -138,14 +151,20 @@ export default new Vuex.Store({
 
     async getGroupById({ commit }, { groupDetails }) {
       try {
+<<<<<<< HEAD
         const group = await boardService.getGroupById(groupDetails);
         console.log('greatGroup',group);
+=======
+        // commit({type: 'getGroupById',groupId})
+
+        const group = await boardService.getGroupById(groupId);
+>>>>>>> f8fdff9b2918e10c371105f020a6a684cbd91efa
         return group;
-        // commit({type: 'getGroupById',group})
       } catch (err) {
         console.log("faild get group", err);
       }
     },
+<<<<<<< HEAD
 // no need
     // async saveBoard({ commit }, { board }) {
     //   try {
@@ -156,6 +175,10 @@ export default new Vuex.Store({
     // },
     async removeGroup({commit}, {groupDetails}) {
       console.log('fromStore',groupDetails);
+=======
+
+    async removeGroup({commit}, {groupId}) {
+>>>>>>> f8fdff9b2918e10c371105f020a6a684cbd91efa
       try {
         var board = await boardService.removeGroup(groupDetails);
         console.log(board);
@@ -167,9 +190,18 @@ export default new Vuex.Store({
     },
 
     //need to aproval
-    async removeTask({commit},{task}) {
+    async removeTask(context,payload) {
       try {
-        var board = await boardService.getBoardByTaskId(task.id);
+        const {taskId, groupId}= payload
+        var boardId = context.state.board._id
+        var details ={
+          taskId,
+          groupId,
+          boardId
+        }
+        var board = await boardService.getBoardByTaskId(details);
+        context.commit({type:'setBoard', board})
+        
       } catch (err) {}
     },
     
@@ -200,10 +232,11 @@ export default new Vuex.Store({
       }
     },
 
-    saveTask({ commit }, payload) {
-      console.log('payload',payload);
-      commit({ type: 'saveTask' ,groupId: payload.groupId , taskToSave: payload.taskToSave})
-      boardService.getTaskById(payload.groupId,payload.taskToSave.id)
+   async saveTask({ commit }, {groupId,taskToSave}) {
+      commit({ type: 'saveTask' ,groupId,taskToSave})
+      const board = this.getters.board
+      console.log('board',board);
+      await boardService.saveBoard(board)
     },
   },
   modules: {

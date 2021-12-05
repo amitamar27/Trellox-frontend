@@ -1,0 +1,92 @@
+.task-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+
+    section {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 10px;
+        .icon-card{
+            display: flex;
+            align-items: center;
+        }
+        .icon-card:before {
+            content: "\e912";
+        }
+        .task-main-title {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            > .textarea {
+                line-height: 0;
+                height: 41px;
+                width: 100%;
+                // margin-bottom: 5px;
+
+                > textarea {
+                    font-size: 20px;
+                    font-weight: 600;
+                    border: none;
+                    overflow: hidden;
+                    overflow-wrap: break-word;
+                    color: $textClr;
+                    width: 100%;
+                    height: 32px;
+                    background-color: transparent;
+                    border-radius: 3px;
+                    padding: 5px 10px;
+                    margin: 0 5px;
+                    resize: none;
+
+                    &:focus {
+                        background-color: #fff;
+                        outline: none;
+                        box-shadow: inset 0 0 0 2px $boxShadowMain;
+                        height: 31px;
+                    }
+                }
+            }
+            > span {
+                font-size: 14px;
+                position: relative;
+                margin-left: 17px;
+                top: -10px;
+            }
+        }
+    }
+
+    > .cancel-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: start;
+        position: absolute;
+        top: -3px;
+        right: -12px;
+        height: 32px;
+        width: 32px;
+
+        img {
+            display: inline-block;
+            color: $btnsGray;
+            height: 40%;
+            align-items: center;
+            padding: unset;
+            filter: invert(48%) sepia(19%) saturate(417%) hue-rotate(180deg) brightness(92%) contrast(88%);
+        }
+
+        @include hover-supported {
+            img {
+                cursor: pointer;
+                color: $textClr;
+                filter: invert(13%) sepia(97%) saturate(527%) hue-rotate(180deg) brightness(91%) contrast(94%);
+            }
+            background-color: $secondaryBtnsGray;
+            border-radius: 50%;
+        }
+    }
+}

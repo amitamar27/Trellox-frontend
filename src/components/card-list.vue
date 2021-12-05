@@ -2,7 +2,7 @@
   <div class ="cards-container">
       <!-- <div>task : {{task}}</div> -->
       <div class="draggable-groups" >
-         <draggable class="draggable-groups" data-dragscroll  :list="group.tasks" @end="dragEnd" group="tasks"   >
+         <draggable :emptyInsertThreshold="100" class="draggable-groups" data-dragscroll  :list="group.tasks" @end="dragEnd" group="tasks"   >
             <transition-group  type="transition" name="flip">
          <card-preview :group="group" v-for="task in tasks" :task="task" :key="task.id" :groupId="groupId" 
          @click="openCardDetails(groupId,task.id)"></card-preview>
