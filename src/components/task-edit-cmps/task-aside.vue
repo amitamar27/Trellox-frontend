@@ -23,7 +23,7 @@
 </template>
 
 <script>
-// import { component } from 'vue/types/umd'
+import { component } from 'vue/types/umd'
 import menuLabels from '../task-edit-menu-cmps/menu-labels.vue'
 export default {
     props:{
@@ -63,6 +63,7 @@ computed:{
 },
 components:{
     menuLabels,
+    
 }
 }
 </script>
