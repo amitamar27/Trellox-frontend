@@ -5,11 +5,12 @@
     </aside>
 
    
-        <a class="button-link" v-for="(option,idx) in options" :key="idx">
+        <a class="button-link" v-for="(option,idx) in options" :key="idx" @click="showMenu(idx)">
             <span :class="setClass(idx)">
             </span>
             <span>{{option.title}}</span>
         </a>
+        
     
 </main>    
 </template>
@@ -26,6 +27,7 @@ data(){
 				{ icon: '', title: 'Attachment', },
 				{ icon: '', title: 'Cover', },
 			],
+            menuIdx: null,
     }
 },
 methods:{

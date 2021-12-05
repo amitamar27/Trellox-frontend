@@ -11,7 +11,7 @@
     placeholder="Add a more detailed description…"
     @change="saveData"
     @focus="setType"
-	@blur="offType"
+	  @blur="offType"
     v-model="description"
     
     ></el-input>
@@ -64,6 +64,7 @@ export default {
     max-width: 100%;
     padding-left: 38px;
     box-sizing: border-box;
+    font-family: Segoe UI;
 }
 
 .save-btn{

@@ -160,7 +160,7 @@ export default {
       // console.log('groppppp', groupId);
       const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
       this.isMenuOpened = !this.isMenuOpened
-      const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
+      // const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
       this.group = group
       // console.log(group);
     },

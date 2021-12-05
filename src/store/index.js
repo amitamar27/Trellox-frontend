@@ -10,6 +10,7 @@ export default new Vuex.Store({
     boards: null,
     currTask: null,
     currCardToEdit: null,
+    currGroup: null,
   },
   getters: {
     board(state) {
@@ -29,15 +30,18 @@ export default new Vuex.Store({
       console.log('state.currTask',state.currTask);
       if (!state.currTask) return null
       return JSON.parse(JSON.stringify(state.currTask))
-  },
-  boards(state){
+    },
+    boards(state){
     return state.boards
-  },
+    },
     
     labels(state) {
       console.log('state.board.labels',state.board);
       return JSON.parse(JSON.stringify(state.board.labels))
     },
+    currGroup(state){
+      return state.currGroup
+    }
   },
 
   mutations: {
@@ -62,7 +66,15 @@ export default new Vuex.Store({
       state.board.groups.splice(index, 1, updatedGroup);
     },
 
-    getGroupById(state, { group }) {},
+    getGroupById(state, { groupId }) {
+      // alert('here')
+      console.log('groupId',groupId);
+      console.log('state.currGroup',state.currGroup);
+      state.currGroup = state.board.groups.find((group) => group.id === groupId);
+      console.log('state.currGroup',state.currGroup);
+      // state.currGroup = group
+      
+    },
     getTaskById(state, { groupId, taskId }) {
       console.log("groupId, taskId", groupId, taskId);
       const group = state.board.groups.find((group) => group.id === groupId);
@@ -85,7 +97,8 @@ export default new Vuex.Store({
       console.log('taskIdx',taskIdx);
       if (taskIdx < 0) return
       group.tasks.splice(taskIdx, 1, taskToSave)
-  },
+      
+    },
   },
 
   actions: {
@@ -138,9 +151,10 @@ export default new Vuex.Store({
 
     async getGroupById({ commit }, { groupId }) {
       try {
+        // commit({type: 'getGroupById',groupId})
+
         const group = await boardService.getGroupById(groupId);
         return group;
-        // commit({type: 'getGroupById',group})
       } catch (err) {
         console.log("faild get group", err);
       }
@@ -197,10 +211,11 @@ export default new Vuex.Store({
       }
     },
 
-    saveTask({ commit }, payload) {
-      console.log('payload',payload);
-      commit({ type: 'saveTask' ,groupId: payload.groupId , taskToSave: payload.taskToSave})
-      boardService.getTaskById(payload.groupId,payload.taskToSave.id)
+   async saveTask({ commit }, {groupId,taskToSave}) {
+      commit({ type: 'saveTask' ,groupId,taskToSave})
+      const board = this.getters.board
+      console.log('board',board);
+      await boardService.saveBoard(board)
     },
   },
   modules: {

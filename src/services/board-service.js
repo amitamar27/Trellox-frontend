@@ -290,7 +290,17 @@ function _creareBoards(){
                     },
                     "style": {
                         "bgColor": "#26de81"
-                    }
+                    },
+                    "activities": [{
+                        "txt": "Changed Color",
+                        "createdAt": 1625816076030,
+                        "byMember": {
+                            "_id": "u101",
+                            "username": "Koren",
+                            "fullname": "Koren Levi",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                    },]
                 }
             ],
             "style": {}
@@ -372,7 +382,17 @@ function _creareBoards(){
                     },
                     "style": {
                         "bgColor": "#26de81"
-                    }
+                    },
+                    "activities": [{
+                        "txt": "Changed Color",
+                        "createdAt": 1625816076030,
+                        "byMember": {
+                            "_id": "u101",
+                            "username": "Koren",
+                            "fullname": "Koren Levi",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                    },]
                 }
             ],
             
@@ -403,8 +423,8 @@ function _createBoard(title,groups=[],style={}){
         },
         {
             "id": "l102",
-            "title": "ready",
-            "color": "yellow"
+            "title": "Ready",
+            "color": "#e7be33"
         }
     ],
         members:[{
@@ -418,6 +438,7 @@ function _createBoard(title,groups=[],style={}){
     }
 
 }
+
 async function queryBoards(){
     var boards =await asyncgStorageService.query(KEYS)
     if(!boards ||!boards.length){

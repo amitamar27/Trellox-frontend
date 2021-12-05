@@ -42,12 +42,13 @@ export default {
 		}
 	},
 	methods: {
-		saveTask() {
-			const { groupId } = this.$route.params
-            console.log('groupIdgroupId',groupId);
-            var taskk = this.taskToSave
-            console.log('taskktaskk',taskk);
-			this.$store.dispatch({ type: 'saveTask', groupId, taskToSave: taskk })
+		saveNewTask() {
+			// const { groupId } = this.$route.params
+            // console.log('groupIdgroupId',groupId);
+            // var taskk = this.taskToSave
+            console.log('taskktaskk',this.taskToSave);
+			this.$emit('saveTask',this.taskToSave)
+			// this.$store.dispatch({ type: 'saveTask', groupId, taskToSave: taskk })
 		},
 		saveChecklist(checklist) {
 			const idx = this.taskToSave.checklists.findIndex(l => l.id === checklist.id)
@@ -55,13 +56,15 @@ export default {
 			if (idx < 0) return
 			this.taskToSave.checklists.splice(idx, 1, checklist)
 
-			this.saveTask()
+			this.saveNewTask()
 		},
 		removeChecklist(idx) {
 			if (idx < 0) return
 			this.taskToSave.checklists.splice(idx, 1)
 
-			this.saveTask()
+			this.saveNewTask()
+			//   console.log('taskktaskk',this.taskToSave);
+			// this.$emit('saveTask',this.taskToSave)
 		}
 	},
 	components: {
