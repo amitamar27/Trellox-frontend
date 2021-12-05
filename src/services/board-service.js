@@ -12,7 +12,8 @@ getTaskById,
 queryBoards,
 getBoardById,
 addNewGroup,
-addNewBoard
+addNewBoard,
+getGroupById
 
 
 }
@@ -188,6 +189,14 @@ function getNewGroup(title,tasks=[]){
 async function getBoardByTaskId(taskId){
     return await asyncgStorageService.removeTaskByCardId(taskId)
 }
+
+
+async function getGroupById(groupDetails){
+    return await asyncgStorageService.getGroupById(KEYS,groupDetails)
+}
+
+
+
 async function addNewGroup(board,newGroup){
     return await asyncgStorageService.postGroup(KEYS,board,newGroup)
     
@@ -435,9 +444,11 @@ async function removeBoard(baordId){
 }
 
 
-async function removeGroup(groupId){
-   return await asyncgStorageService.remove(KEY,groupId)
+async function removeGroup(groupDetails){
+   return await asyncgStorageService.removeGroup(KEYS,groupDetails)
 }
+
+
 async function addNewBoard(boardDetails){
   console.log('board sservice with', boardDetails);
    const board = _createBoard(boardDetails.title,[],boardDetails.background)

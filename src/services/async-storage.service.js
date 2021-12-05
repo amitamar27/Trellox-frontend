@@ -10,7 +10,9 @@ export const asyncgStorageService = {
     removeTaskByCardId,
     getTask,
     getAndSaveBoard,
-    postBoard
+    postBoard,
+    getGroupById,
+    removeGroup
     
 }
 const gBoard = {
@@ -209,10 +211,24 @@ function remove(entityType, entityId) {
     return query(entityType)
         .then(entities => {
             const idx = entities.groups.findIndex(entity => entity.id === entityId)
+            console.log(idx);
             if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
             entities.groups.splice(idx, 1)
             _save(entityType, entities)
             return entities
+        })
+}
+
+
+function removeGroup(entityType , groupDetails){
+    console.log('inAsync',groupDetails);
+    return query(entityType)    
+        .then(entities=>{
+            const BoardIdx =  entities.findIndex(board=>board._id ===groupDetails.board._id)
+            var groupIdx = entities[BoardIdx].groups.findIndex(group=>group.id === groupDetails.groupId)
+            entities[BoardIdx].groups.splice(groupIdx,1)
+            _save(entityType,entities)
+            return entities[BoardIdx]
         })
 }
 
@@ -284,4 +300,24 @@ function removeBoard(entityType, entityId) {
             entities.splice(idx, 1)
             _save(entityType, entities)
         })
+}
+
+
+
+function getGroupById(entityType , groupDetails){
+   
+    return query(entityType).then(boards => {
+        const idx = boards.findIndex(board=>board._id ===groupDetails.board._id)
+        var group =boards[idx].groups.find(group=>group.id === groupDetails.groupId)
+        return group
+
+    })
+       
+            
+      
+           
+            
+    
+        
+    
 }

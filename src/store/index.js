@@ -136,9 +136,10 @@ export default new Vuex.Store({
       }
     },
 
-    async getGroupById({ commit }, { groupId }) {
+    async getGroupById({ commit }, { groupDetails }) {
       try {
-        const group = await boardService.getGroupById(groupId);
+        const group = await boardService.getGroupById(groupDetails);
+        console.log('greatGroup',group);
         return group;
         // commit({type: 'getGroupById',group})
       } catch (err) {
@@ -153,11 +154,13 @@ export default new Vuex.Store({
     //     console.log("coldent save board", err);
     //   }
     // },
-    async removeGroup({commit}, {groupId}) {
+    async removeGroup({commit}, {groupDetails}) {
+      console.log('fromStore',groupDetails);
       try {
-        var board = await boardService.removeGroup(groupId);
+        var board = await boardService.removeGroup(groupDetails);
         console.log(board);
-        commit({ type: "setBoard", board });
+        commit({ type: 'setBoard', board });
+        return board
       } catch (err) {
         console.log("coldent remove group", err);
       }

@@ -1,70 +1,74 @@
 <template>
   <div v-if="board" class="group-list-container">
-
-    <div class="group-list" >
-    <draggable data-dragscroll class="group-list"  groups="groups" :list="board.groups" @end="dragEnd">
-      <div
-        v-for="group in board.groups"
-        :groupId="group.id"
-        :key="group.id"
-        class="group-preview"
-
+    <div class="group-list">
+      <draggable
+        data-dragscroll
+        class="group-list"
+        groups="groups"
+        :list="board.groups"
+        @end="dragEnd"
       >
-        <div class="group-preview-header">
-          <p
-            class="group-title"
-            dir="auto"
-            maxlength="512"
-            style="overflow: hidden; overflow-wrap: break-word; height: 28px"
-          >
-            {{ group.title }}
-          </p>
-          <div class="group-preview-btn">
-            <span class="span-1 hide">
-              <span class="span-2 icon-sm"></span>
-            </span>
-            <div
-              @click="openGroupMenu(group.id)"
-              class="
-                group-header-extras-menu
-                span-1
-                icon-sm icon-overflow-menu-horizontal
-              "
-              
-            ></div>
-
-          </div>
-        </div>
-        <card-list
-          @dragEnd="dragEnd"
-          @pickTask="pickTask"
-          :tasks="group.tasks"
-          :group="group"
-          :groups="board.groups"
+        <div
+          v-for="group in board.groups"
           :groupId="group.id"
-          @addTask="addTask"
+          :key="group.id"
+          class="group-preview"
         >
-        </card-list>
-        <div v-if="isAdding && group.id === currGroupId" class="card-add-edit">
-          <textarea
-            v-model="task.title"
-            name=""
-            id=""
-            cols="10"
-            rows="5"
-            placeholder="Enter a title for this card..."
-          ></textarea>
-          <div class="card-actions">
-            <a @click="addTask(group.id)"> + Add List</a>
-            <button @click="isAdding = false">x</button>
+          <div class="group-preview-header">
+            <p
+              class="group-title"
+              dir="auto"
+              maxlength="512"
+              style="overflow: hidden; overflow-wrap: break-word; height: 28px"
+            >
+              {{ group.title }}
+            </p>
+            <div class="group-preview-btn">
+              <span class="span-1 hide">
+                <span class="span-2 icon-sm"></span>
+              </span>
+              <div
+                @click="openGroupMenu(group.id)"
+                class="
+                  group-header-extras-menu
+                  span-1
+                  icon-sm icon-overflow-menu-horizontal
+                "
+              ></div>
+            </div>
+          </div>
+          <card-list
+            @dragEnd="dragEnd"
+            @pickTask="pickTask"
+            :tasks="group.tasks"
+            :group="group"
+            :groups="board.groups"
+            :groupId="group.id"
+            @addTask="addTask"
+          >
+          </card-list>
+          <div
+            v-if="isAdding && group.id === currGroupId"
+            class="card-add-edit"
+          >
+            <textarea
+              v-model="task.title"
+              name=""
+              id=""
+              cols="10"
+              rows="5"
+              placeholder="Enter a title for this card..."
+            ></textarea>
+            <div class="card-actions">
+              <a @click="addTask(group.id)"> + Add List</a>
+              <button @click="isAdding = false">x</button>
+            </div>
+          </div>
+          <div @click="opemModal(group.id)" v-else class="card-add-btn">
+            <a> + Add a Card</a>
           </div>
         </div>
-        <div @click="opemModal(group.id)" v-else class="card-add-btn">
-          <a> + Add a Card</a>
-        </div>
-
-      </div>
-    </draggable>
+      </draggable>
 
       <group-menu
         @addCard="onAddCard"
@@ -74,6 +78,7 @@
         :group="group"
         :title="'List actions'"
       ></group-menu>
+
 
     </div>
     <div class="group-add-container">
@@ -157,18 +162,20 @@ export default {
       this.newGroupTitle = "";
     },
     async openGroupMenu(groupId) {
-      // console.log('groppppp', groupId);
-      const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
+      const board = this.$store.getters.board
+      const groupDetails = { board, groupId }
+      const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
       this.isMenuOpened = !this.isMenuOpened
-      const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
+      console.log('groupFromCompo', group);
       this.group = group
       // console.log(group);
     },
     closeGroupMenu() {
+      console.log('close group menu')
       this.isMenuOpened = false
       // console.log('close');
     },
-    dragEnd(){
+    dragEnd() {
       this.$emit('dragEnd')
       console.log('dragEnd');
 
@@ -191,8 +198,8 @@ export default {
       console.log('hello');
       this.isAdding = true;
       this.currGroupId = groupId
-      
-     
+
+
 
     },
     async addTask(groupId) {

@@ -3,8 +3,8 @@
     <div>
       <h5 @click="addCard(group.id)">Add card...</h5>
       <h5>Sort by</h5>
-      <h5 @click="removeGroup">Delete this list</h5>
-      <p>{{group.id}}</p>
+      <h5 @click.prevent="removeGroup(group.id)">Delete this list</h5>
+     
     </div>
   </section>
 </template>
@@ -28,10 +28,12 @@ export default {
       this.$emit('addCard',groupId)
       console.log('need add card');
     },
-    removeGroup() {
-
-        console.log('need remove');
-        this.$store.dispatch({ type: 'removeGroup', groupId: this.group.id })
+    async removeGroup(groupId) {
+        const board = this.$store.getters.board
+        const groupDetails = {board,groupId}
+       await this.$store.dispatch({ type: 'removeGroup', groupDetails })
+       this.$emit('closeMenu');
+       
     }
   }
 
