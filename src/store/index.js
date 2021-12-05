@@ -151,20 +151,13 @@ export default new Vuex.Store({
 
     async getGroupById({ commit }, { groupDetails }) {
       try {
-<<<<<<< HEAD
         const group = await boardService.getGroupById(groupDetails);
         console.log('greatGroup',group);
-=======
-        // commit({type: 'getGroupById',groupId})
-
-        const group = await boardService.getGroupById(groupId);
->>>>>>> f8fdff9b2918e10c371105f020a6a684cbd91efa
         return group;
       } catch (err) {
         console.log("faild get group", err);
       }
     },
-<<<<<<< HEAD
 // no need
     // async saveBoard({ commit }, { board }) {
     //   try {
@@ -175,10 +168,6 @@ export default new Vuex.Store({
     // },
     async removeGroup({commit}, {groupDetails}) {
       console.log('fromStore',groupDetails);
-=======
-
-    async removeGroup({commit}, {groupId}) {
->>>>>>> f8fdff9b2918e10c371105f020a6a684cbd91efa
       try {
         var board = await boardService.removeGroup(groupDetails);
         console.log(board);
