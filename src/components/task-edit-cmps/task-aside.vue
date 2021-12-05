@@ -29,11 +29,10 @@
           /> -->
            <component
             @click="showMenu(idx)"
-            class="popup dynamic-component"
+            class="popup is-show dynamic-component"
             :is="currComponent"
             :task="this.task"
             @close="closeMenu"
-            @updateCard="saveCard"
           />
          
 
@@ -99,7 +98,45 @@ components:{
 </script>
 
 <style>
+/* 
+
+.popup{
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    right: -9999px;
+    top: -9999px;
+    -webkit-transform: translateZ(0);
+    width: 304px;
+    z-index: 70;
+    left: 305px;
+    top: 486px;
+} */
+.popup{
+        position: absolute;
+        /* position: relative; */
+    right: -10px;
+    /* z-index: 50; */
+    background-color: #fff;
+    border-radius: 3px;
+    width: 304px;
+    min-height: 50px;
+    overflow-x: hidden;
+    z-index: 1;
+    top: 20px;
+    box-shadow: 0 0 2px 1px #e1e2e8;
+    overflow-y: hidden;
 
 
-
+        /* right: -9999px; */
+}
+.is-show{
+    display: block;
+}
+.dynamic-component{
+    margin: 10px;
+}
 </style>

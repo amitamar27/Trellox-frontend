@@ -184,10 +184,7 @@ export default {
     flex-direction: column;
 }
 
-.task-side-bar{
-  position: relative;
-    width: 159px;
-}
+
 
 .task-attachments {
     display: flex;
