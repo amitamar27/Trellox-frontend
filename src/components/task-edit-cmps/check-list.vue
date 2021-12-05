@@ -11,10 +11,16 @@
 			>
            
 				<header class="checkList-header">
-						<h3>{{ checklist.title }}</h3>					
+					<div class="checklist-icons">
+					<span class="icon-lg icon card icon-Checklist">
+						</span>	
+						<h3>{{ checklist.title }}</h3>	
+						</div>
+					<div>			
 					<button @click="removeChecklist(idx)">
 						Delete
 					</button>
+					</div>
 				</header>
 
 				<todos-preview
@@ -91,5 +97,8 @@ button{
     border: none;
     cursor: pointer;
     transition: all .2s;
+}
+.checklist-icons{
+	display: flex;
 }
 </style>
