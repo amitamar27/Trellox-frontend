@@ -151,6 +151,10 @@ export default new Vuex.Store({
 
     async getGroupById({ commit }, { groupDetails }) {
       try {
+        // commit({type: 'getGroupById',groupId})
+
+        const group = await boardService.getGroupById(groupId);
+        return group;
       } catch (err) {
         console.log("faild get group", err);
       }

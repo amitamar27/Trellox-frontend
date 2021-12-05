@@ -1,0 +1,33 @@
+.home{
+    display: flex;
+    justify-content: center;
+    .router{
+        text-decoration: none;
+    }
+}
+.home-btn{
+    background-color: rgb(35, 101, 187);
+    box-shadow: 0 10px 30px -10px #0af;
+    color: #fff;
+    line-height: 50px;
+    height: 70px;
+    padding: 0 35px;
+    font-size: 25px;
+    border-radius: 36px;
+    -webkit-appearance: none;
+    font-family: "Avenir","Avenir Next","Segoe UI",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    border: none;
+    resize: none;
+    cursor: pointer;
+    text-align: center;
+    margin: 55px 0;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    &:hover{
+        background-color: rgb(25, 86, 167);
+    }
+}
