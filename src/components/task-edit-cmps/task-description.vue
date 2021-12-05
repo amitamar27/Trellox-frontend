@@ -1,9 +1,11 @@
 <template>
   <main class="set-text" v-if="task">
-    <!-- <textarea 
-      :autosize="{ minRows: 1, maxRows: 20 }"
-      name="" id="" cols="30" rows="10"
-       placeholder="Add a more detailed description…"></textarea> -->
+    <header class="task-description-header">
+      <span class="icon-description icon-lg"></span>
+      <h3>Description</h3>
+      
+    </header>
+ 
        
     <el-input
     type="textarea"
@@ -65,7 +67,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" >
 .set-text>.textarea {
     max-width: 100%;
     padding-left: 38px;
@@ -82,5 +84,17 @@ export default {
     outline: 0;
 
 }
+.set-text{
+>.task-description-header{
+  display: flex;
+}
+.icon-lg{
+      padding-right: 5px;
+}
+.icon-lg::before{
+      content: "\e922";
+}
+}
 
 </style>
+

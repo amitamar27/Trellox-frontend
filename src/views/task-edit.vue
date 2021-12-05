@@ -1,7 +1,9 @@
 <template>
   <main class="card-edit-window" ref="task" @click="closeDarkScreen">
     <div v-if="task" class="card-edit " @click.stop="">
-      <header v-if="task.bgColor"></header>
+      <header v-if="task.cover" @click="closeDarkScreen" :style="taskBgColor" class="task-edit-bg-title">
+        <a class="icon-md "></a>
+      </header>
       <main class="task-edit-container">
 
 
@@ -17,8 +19,10 @@
        
               </section>
           </header> -->
+         
+        <!-- <header  v-if="task.cover"> 
 
-       
+          </header> -->
       <task-title :task="task" @saveTask="saveTask"></task-title>
       <section class="main-content">
          
@@ -79,13 +83,14 @@ import taskTitle from '../components/task-edit-cmps/task-title.vue'
 export default {
   name: "task-edit",
   props: {},
-  // data(){
-  //   return {
-  //     task: null,
-  //   }
-  // },
+  data(){
+    return {
+      currTask: null,
+    }
+  },
   created() {
-    console.log("created!",this.task);
+    console.log("created!",this.currTask);
+  
   },
   computed: {
     task() {
@@ -94,8 +99,14 @@ export default {
       console.log(groupId, taskId);
       this.$store.commit({ type: "getTaskById", taskId, groupId });
       const task = this.$store.getters.currTask
+      this.currTask = task
       console.log('task',task);
       return task;
+    },
+    taskBgColor(){
+      if(this.currTask.cover.bgColor){
+        return `background-color:${this.currTask.cover.bgColor}`
+      }
     },
     isCheckLists(){
       // console.log('this.task',this.task);
@@ -185,5 +196,29 @@ export default {
     width: 100%;
     margin-bottom: 30px;
 }
+.task-edit-bg-title{
+  height: 150px;
+  width: 100%;
+}
+/* .icon-md{
+  background-color: #00000014;
+  cursor: pointer;
+  border-radius: 50%;
+    color: #42526e;
+    height: 32px;
+    margin: 4px;
+    overflow: hidden;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: background-color 85ms,color 85ms;
+    width: 32px;
+    z-index: 2;
+    font-size: 20px;
+
+    line-height: 32px;
+} */
+
 
 </style>

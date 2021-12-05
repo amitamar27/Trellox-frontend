@@ -123,6 +123,10 @@ const gBoard = {
                     },
                     "style": {
                         "bgColor": "#26de81"
+                    },
+                    "cover": {
+                        "isFull": false,
+                        "bgColor": "#26de81"
                     }
                 }
             ],
@@ -321,6 +325,10 @@ function _creareBoards(){
                         "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                     },
                     "style": {
+                        "bgColor": "#26de81"
+                    },
+                    "cover": {
+                        "isFull": false,
                         "bgColor": "#26de81"
                     },
                     "activities": [{

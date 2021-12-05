@@ -79,26 +79,31 @@ export default {
 }
 </script>
 
-<style>
-.checkList-header{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-}
-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    background-color: rgba(9,30,66,.0392156862745098);
-    color: #172a4d;
-    border-radius: 3px;
-    padding: 9px 15px;
-    border: none;
-    cursor: pointer;
-    transition: all .2s;
-}
-.checklist-icons{
-	display: flex;
-}
+<style lang="scss" >
+// .checkList-header{
+//     display: flex;
+//     justify-content: space-between;
+//     padding: 10px;
+// }
+// button{
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     box-sizing: border-box;
+//     background-color: rgba(9,30,66,.0392156862745098);
+//     color: #172a4d;
+//     border-radius: 3px;
+//     padding: 9px 15px;
+//     border: none;
+//     cursor: pointer;
+//     transition: all .2s;
+	
+// 	//  @include hover-supported {
+//     //         background-color: $secondaryBtnsGray;
+//     //     }
+// }
+// .checklist-icons{
+// 	display: flex;
+// }
 </style>
+
