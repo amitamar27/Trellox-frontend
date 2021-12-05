@@ -336,6 +336,14 @@ function _creareBoards(){
                 }
             ],
             "style": {}
+        },
+        {
+            "id": "g115",
+            "title": "Done",
+            "tasks": [
+               
+            ],
+            "style": {}
         }
     ],
      {backgroundSrc:"https://res.cloudinary.com/giladtoy/image/upload/v1638531202/u27ypkc1wfre9x9vgmrb.jpg"}
