@@ -17,13 +17,34 @@
         >
         <menu-labels v-if="menuIdx === 0" @closeMenu="closeMenu" :task="task"></menu-labels>
         </transition>
-        
+        <!-- <component
+            v-clickoutside="closeEditPopup"
+            class="popup dynamic-component"
+            v-if="isPopupShow"
+            :is="currAction.type"
+            :card="card"
+            :action="currAction"
+            @close="closeEditPopup"
+            @updateCard="saveCard"
+          /> -->
+           <component
+            @click="showMenu(idx)"
+            class="popup dynamic-component"
+            :is="currComponent"
+            :task="this.task"
+            @close="closeMenu"
+            @updateCard="saveCard"
+          />
+         
+
+         
+
     
 </main>    
 </template>
 
 <script>
-import { component } from 'vue/types/umd'
+// import { component } from 'vue/types/umd'
 import menuLabels from '../task-edit-menu-cmps/menu-labels.vue'
 export default {
     props:{
@@ -36,7 +57,7 @@ data(){
     return {
         options: [
 				{ icon: '', title: 'Members', },
-				{ icon: '', title: 'Labels', },
+				{ icon: '', title: 'Labels',component: 'menu-labels' },
 				{ icon: '', title: 'Checklist', },
 				{ icon: '', title: 'Dates', },
 				{ icon: '', title: 'Attachment', },
@@ -44,6 +65,7 @@ data(){
 			],
             menuIdx: null,
             isMenuOpen: false,
+            currComponent: '',
     }
 },
 methods:{
@@ -55,6 +77,14 @@ methods:{
     openMenu(idx) {
 		this.open = idx
 	},
+    showMenu(idx){
+        this.isMenuOpen = true;
+        this.menuIdx = idx;
+        this.currComponent = this.options[idx].component
+    },
+    closeMenu(){
+        this.isMenuOpen = false;
+    },
 },
 computed:{
     // task(){
