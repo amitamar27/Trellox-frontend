@@ -1,78 +1,304 @@
+// .task-side-bar {
+//     position: relative;
+//     width: 159px;
+
+//     article {
+//         // list-style: none;
+//         margin: 0;
+//         padding: 0;
+//     }
+
+//     .edit-labels {
+//         margin-bottom: 8px;
+//         display: flex;
+//         flex-direction: column;
+//         // margin: 0;
+//         // padding: 0;
+
+//         >div {
+//             // padding-right: 36px;
+//             // position: relative;
+
+
+//             position: relative;
+//             flex-grow: 1;
+//             border-radius: 3px;
+//             min-height: 20px;
+//             padding: 6px 12px;
+//             width: 173px;
+//             color: #fff;
+//             font-weight: 700;
+//             transition: padding 85ms, margin 85ms, box-shadow 85ms;
+//             cursor: pointer;
+
+//             >a {
+//                 .icon-edit::before {
+//                     content: "\e928";
+//                 }
+//             }
+
+//             >span {
+//                 -webkit-font-smoothing: antialiased;
+//                 -moz-osx-font-smoothing: grayscale;
+//                 background-color: #b3bac5;
+//                 border-radius: 4px;
+//                 color: #fff;
+//                 display: block;
+//                 margin-right: 4px;
+//                 max-width: 100%;
+//                 overflow: hidden;
+//                 padding: 4px 6px;
+//                 position: relative;
+//                 text-overflow: ellipsis;
+//                 white-space: nowrap;
+
+//                 @include hover-supported {
+//                     box-shadow: inset 8px 0 #3434345c;
+//                     padding-left: 15px;
+//                 }
+//             }
+
+//             >.mod-selectable {
+//                 border-radius: 3px;
+//                 cursor: pointer;
+//                 font-weight: 700;
+//                 // margin: 0 0 4px;
+//                 min-height: 20px;
+//                 padding: 6px 12px;
+//                 position: relative;
+//                 transition: padding 85ms, margin 85ms, box-shadow 85ms;
+
+//                 display: flex;
+//                 gap: 4px;
+//                 flex-direction: column;
+//                 width: 100%;
+//             }
+//         }
+//     }
+// }
+
 .task-side-bar {
-    position: relative;
-    width: 159px;
+    // position: absolute;
+    // right: -10px;
+    // z-index: 50;
+    margin: 10px;
+    width: 30%;
+    header {
+        
+        text-transform: capitalize;
+        text-align: center;
+        min-height: 40px;
+        padding: 0 32px;
+        margin: 0 12px;
+        font-size: 16px;
+        line-height: 40px;
+        border-bottom: 1px solid rgba(9, 30, 66, .13);
+        color: #172a4d;
+        position: relative;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        z-index: 30;
 
-    article {
-        // list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .edit-labels {
-        margin-bottom: 8px;
-        display: flex;
-        flex-direction: column;
-        // margin: 0;
-        // padding: 0;
-
-        >div {
-            // padding-right: 36px;
-            // position: relative;
-
-
-            position: relative;
-            flex-grow: 1;
-            border-radius: 3px;
-            min-height: 20px;
-            padding: 6px 12px;
-            width: 173px;
-            color: #fff;
-            font-weight: 700;
-            transition: padding 85ms, margin 85ms, box-shadow 85ms;
+        p {
+            margin: 0;
+            color: #6b778c;;
+        }
+        a{
+            color: #6b778c;
+            padding: 10px 12px 10px 8px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 2;
+            font-size: 18px;
+            margin-top: 3px;
             cursor: pointer;
+            @include hover-supported {
+                color: #252e3d;
+                
 
-            >a {
-                .icon-edit::before {
-                    content: "\e928";
-                }
-            }
-
-            >span {
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                background-color: #b3bac5;
-                border-radius: 4px;
-                color: #fff;
-                display: block;
-                margin-right: 4px;
-                max-width: 100%;
-                overflow: hidden;
-                padding: 4px 6px;
-                position: relative;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-
-                @include hover-supported {
-                    box-shadow: inset 8px 0 #3434345c;
-                    padding-left: 15px;
-                }
-            }
-
-            >.mod-selectable {
-                border-radius: 3px;
-                cursor: pointer;
-                font-weight: 700;
-                // margin: 0 0 4px;
-                min-height: 20px;
-                padding: 6px 12px;
-                position: relative;
-                transition: padding 85ms, margin 85ms, box-shadow 85ms;
-
-                display: flex;
-                gap: 4px;
-                flex-direction: column;
-                width: 100%;
             }
         }
+        // a::before {
+        //     content: "\e90a";
+        // }
     }
+
+    .labels-menu {
+        margin: 10px;
+
+        >.input {
+            display: flex;
+            gap: 4px;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .h-title {
+            border: none;
+            text-align: left;
+            padding: 3px 0;
+            margin: 0;
+            font-size: 12px;
+            color: #5e6c84;
+
+            text-transform: capitalize;
+            // text-align: center;
+            min-height: 40px;
+            // padding: 0 32px;
+            // margin: 0 12px;
+            // font-size: 16px;
+            line-height: 40px;
+
+            position: relative;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            z-index: 30;
+        }
+
+        >section {
+            display: flex;
+            gap: 4px;
+            flex-direction: column;
+            width: 100%;
+
+            >div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                >.edit-labels {
+                    position: relative;
+                    flex-grow: 1;
+                    border-radius: 3px;
+                    min-height: 20px;
+                    padding: 6px 12px;
+                    width: 173px;
+                    color: #fff;
+                    font-weight: 700;
+                    transition: padding 85ms, margin 85ms, box-shadow 85ms;
+                    cursor: pointer;
+
+                    @include hover-supported {
+                        box-shadow: inset 8px 0 #3434345c;
+                        padding-left: 15px;
+                    }
+
+                    // >.mod-selectable {
+                    //     border-radius: 3px;
+                    //     cursor: pointer;
+                    //     font-weight: 700;
+                    //     // margin: 0 0 4px;
+                    //     min-height: 20px;
+                    //     padding: 6px 12px;
+                    //     position: relative;
+                    //     transition: padding 85ms, margin 85ms, box-shadow 85ms;
+
+                    //     display: flex;
+                    //     gap: 4px;
+                    //     flex-direction: column;
+                    //     width: 100%;
+                    // }
+                }
+            }
+        }
+
+        a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 3px;
+            width: 32px;
+            height: 32px;
+            // padding: 5px;
+            margin: 0 0 0 5px;
+            z-index: 30;
+            cursor: pointer;
+
+            @include hover-supported {
+                background-color: $secondaryBtnsGray;
+            }
+
+        }
+
+        .task-label-edit::before {
+            content: "\e928";
+        }
+
+        // .el-input{
+        //     box-shadow: inset 0 0 0 2px #dfe1e6;
+        //     background-color: #fafbfc;
+        //     border-radius: 3px;
+        //     border: none;
+        //     outline: none;
+        //     width: 258px;
+        //     padding: 8px 12px;
+        //     margin: 4px 0 4px;
+        // }
+    }
+
+    .edit-label {
+        .icon-sm {
+            font-size: 16px;
+            height: 20px;
+            line-height: 20px;
+            width: 20px;
+
+        }
+
+        a::before {
+            content: "\e90a";
+        }
+
+        .icon-back {
+            @include xBtn;
+            display: flex;
+            justify-content: center;
+            align-self: center;
+            height: 18px;
+            margin-left: 5px;
+            position: absolute;
+            top: 11.5px;
+            left: 10px;
+            cursor: pointer;
+            z-index: 50;
+
+            @include hover-supported {
+                color: #252e3d;
+                
+
+            }
+
+
+        }
+
+        .h-title {
+            color: #5e6c84;
+            display: flex;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16px;
+            margin-bottom: 12px;
+            margin-top: 12px;
+            margin-left: 15px;
+        }
+        input{
+            box-shadow: inset 0 0 0 2px #dfe1e6;
+            background-color: #fafbfc;
+            border-radius: 3px;
+            // border: none;
+            outline: none;
+            width: 210px;
+            padding: 8px 12px;
+            margin: 4px 0 4px;
+        }
+        .el-input{
+            display: flex;
+            margin-left: 13.4px;
+        }
+
+    }
+
 }

@@ -97,8 +97,10 @@ export default new Vuex.Store({
       console.log('taskIdx',taskIdx);
       if (taskIdx < 0) return
       group.tasks.splice(taskIdx, 1, taskToSave)
-      
     },
+    updateLabels(state, {labels}){
+      state.board.labels = labels;
+    }
   },
 
   actions: {
@@ -220,6 +222,16 @@ export default new Vuex.Store({
       console.log('board',board);
       await boardService.saveBoard(board)
     },
+    async updateBoard({commit},{labels}){
+      try {
+        commit({type: 'updateLabels',labels})
+        const board = this.getters.board
+        await boardService.saveBoard(board)
+      } catch(err){
+        console.log('faild to add new board', err);
+      }
+      
+    }
   },
   modules: {
     taskDetails,
