@@ -10,7 +10,7 @@
 				@click="editTodo(idx)"
 				:style="isEditingStyle(idx)"
 			>
-				<!-- Show -->
+				
 				<template v-if="editingTodoIdx !== idx">
 					<input
 						class="checkbox"
@@ -24,7 +24,6 @@
 					}}</span>
 				</template>
 
-				<!-- Editing todo -->
 				<template v-else>
 					<el-input
 						type="textarea"
@@ -47,7 +46,7 @@
 					</span>
 				</template>
 			</article>
-		<!-- </transition-group> -->
+	
 
 		<!-- Addign todos -->
 		<button v-if="!isAddingTodo" @click="openAddTodo" class="add-todo-btn">Add an item</button>
@@ -125,11 +124,13 @@ export default {
 			this.saveChanges()
 		},
 		updateTodo() {
+			console.log('editing');
 			if (!this.editingTodo?.title) this.closeAddTodo()
 			const idx = this.checklist.todos.findIndex(t => t.id === this.editingTodo.id)
 			if (idx < 0) return
 
 			this.checklist.todos.splice(idx, 1, this.editingTodo)
+			console.log('this.checklist.todos',this.checklist.todos);
 			this.editingTodo = null
 			this.closeEditTodo()
 			this.saveChanges()

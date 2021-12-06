@@ -1,6 +1,7 @@
 <template>
   <section class="task-activities">
       <header class="task-header">
+		  
           <h3>Activity</h3>
       </header>
       <div class="add-comment">

@@ -11,6 +11,7 @@
     top: 0;
     left: 0;
     overflow-y: auto;
+   
 
     .card-edit {
         // display: flex;
@@ -34,34 +35,63 @@
         overflow-x: hidden;
         gap: 10px;
         z-index: 100;
+        >header{
+            .icon-md{
+                background-color: #00000014;
+                cursor: pointer;
+                border-radius: 50%;
+                  color: #42526e;
+                  height: 32px;
+                  margin: 4px;
+                  overflow: hidden;
+                  padding: 4px;
+                  position: absolute;
+                  right: 0;
+                  top: 0;
+                  transition: background-color 85ms,color 85ms;
+                  width: 32px;
+                  z-index: 2;
+                  font-size: 20px;
+              
+                  line-height: 32px;
+                  &:hover,
+                  &:focus {
+                    // background-color: rgba(255, 255, 255, 0);
+                    background-color: rgba(14, 16, 16, 0.15);
+                }
+                &.icon-md::before{
+                    content: "\e91c";
+                }
+            }
+        }
         .task-edit-container{
             padding: 5px 10px;
 
         
-        .task-edit-header {
-            // min-height: 125px;
-            display: flex;
-            align-items: center;
-            width: 100%;
-            .task-section {
-                display: flex;
-                align-items: center;
-                width: 100%;
-                margin-bottom: 10px;
-                .main-title {
-                    display: flex;
-                    flex-direction: column;
-                    width: 100%;
-                }
-                // .icon-card {
+        // .task-edit-header {
+        //     // min-height: 125px;
+        //     display: flex;
+        //     align-items: center;
+        //     width: 100%;
+        //     .task-section {
+        //         display: flex;
+        //         align-items: center;
+        //         width: 100%;
+        //         margin-bottom: 10px;
+        //         .main-title {
+        //             display: flex;
+        //             flex-direction: column;
+        //             width: 100%;
+        //         }
+        //         // .icon-card {
                     
-                // }
+        //         // }
 
-                .icon-card:before {
-                    content: "\e912";
-                }
-            }
-        }
+        //         .icon-card:before {
+        //             content: "\e912";
+        //         }
+        //     }
+        // }
     }
     }
 }
