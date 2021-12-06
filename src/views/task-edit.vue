@@ -26,7 +26,10 @@
         <!-- <header  v-if="task.cover"> 
 
           </header> -->
-        <task-title :task="task" @saveTask="saveTask"></task-title>
+        <task-title :task="task" @saveTask="saveTask">
+          
+        </task-title>
+        <a class="icon-md close-btn" v-if="!task.cover" @click="closeDarkScreen"></a>
         <section class="main-content">
           <div class="main-content-details">
             <section class="task-details">
@@ -77,6 +80,7 @@
           <aside class="task-side-bar">
             <task-aside :task="task" :key="6"
             @addLabel="addLabel"
+            @saveTask="saveTask"
             ></task-aside>
           </aside>
         </section>
@@ -165,8 +169,10 @@ export default {
       console.log('labels tp',labels);
     },
     addLabel(labelId){
-      // console.log(task);
+      console.log(this.currTask);
       console.log('labelId',labelId);
+      const { groupId } = this.$route.params;
+      this.$store.dispatch({ type: "saveTask", groupId, taskToSave: this.currTask });
     }
   },
   components: {

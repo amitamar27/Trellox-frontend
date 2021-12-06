@@ -18,7 +18,9 @@
             :style="`background-color: ${color}`"
             @click="addLabel(idx)"
           >
-            <p v-if="labelsId(idx)">{{labels[idx].title}}</p>
+            <!-- <p v-if="labelsId(idx)">{{labels[idx].title}}</p> -->
+            <p >{{defaulsLabels[idx].title}}</p>
+            
           <span v-if="labelsId(idx)" class="icon-check icon-sm"></span>
           </div>
           <a class="task-label-edit icon-sm icon-edit" @click="goInMenu(idx)"></a>
@@ -81,11 +83,13 @@ export default {
       isInEdit: false,
       isFiltering: false,
       filter: '',
+      defaulsLabels: []
     };
   },
   created() {
     // this.labels = this.$emit("labels");
     // console.log("this.labels", this.labels);
+    this.defaulsLabels = this.$store.getters.labels;
     this.currLabels();
   },
   computed: {
@@ -96,6 +100,7 @@ export default {
   methods: {
     currLabels() {
       const labels = this.$store.getters.labels;
+      this.labels = []
       console.log("labels", labels);
       const newLabels = [];
       labels.forEach((label) => {
@@ -107,8 +112,12 @@ export default {
     },
     labelsId(idx){
    
-        if(!this.labels[idx]) return
-        if(this.colors[idx] === this.labels[idx].color) return true
+        // if(!this.labels[idx]) return
+        // if(this.colors[idx] === this.labels[idx].color) return true
+        // if(this.labels.includes(this.defaulsLabels[idx])){
+
+        // }
+        return this.labels.includes(this.defaulsLabels[idx])
     },
     setLabel(idx){
         this.currLabel = labels[idx]
@@ -128,22 +137,36 @@ export default {
         this.$emit('closeMenu')
     },
     addLabel(idx){
-        if(this.labels.find((label) => label.color === this.colors[idx])
-        
-        ) return
-          const labelId = {
-            id: 'l10'+(idx+1)
-        }
-        const id = 'l10'+(idx+1)
-        this.task.labelIds.push(id)
-        // const label = {
+    
+        // console.log(newIdx)
 
+        //   const labelId = {
+        //     id: 'l10'+(idx+1)
+        //     }
+        const id = 'l10'+(idx+1)
+        console.log('id',id);
+        const newIdx = this.labels.findIndex((label) => label.color === this.colors[idx])
+        console.log('newIdx',newIdx);
+        if(newIdx > -1) {
+            this.labels.splice(newIdx,1)
+            const idx = this.task.labelIds.findIndex((lId) => lId===id)
+            this.task.labelIds.splice(idx,1);
+            return
+        }
+        // const label = {
+        //     id: id,
+        //     color: this.colors[idx],
+        //     title:''
         // }
+        // console.log('this.defaulsLabels[idx]',this.defaulsLabels[idx]);
+        // this.labels.push(this.defaulsLabels[idx]);
+        // console.log(' this.labels', this.labels);
+         this.task.labelIds.push(id)
         this.currLabels()
         console.log('this.labels',this.labels);
-        console.log('labelId',labelId);
+        console.log('labelId',id);
 
-        this.$emit('addLabel',labelId)
+        this.$emit('addLabel',id)
         
     }
   },

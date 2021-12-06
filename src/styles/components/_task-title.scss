@@ -20,7 +20,7 @@
         .task-main-title {
             display: flex;
             flex-direction: column;
-            width: 100%;
+            width: 70%;
             > .textarea {
                 line-height: 0;
                 height: 41px;
@@ -70,21 +70,9 @@
         height: 32px;
         width: 32px;
 
-        img {
-            display: inline-block;
-            color: $btnsGray;
-            height: 40%;
-            align-items: center;
-            padding: unset;
-            filter: invert(48%) sepia(19%) saturate(417%) hue-rotate(180deg) brightness(92%) contrast(88%);
-        }
-
+   
         @include hover-supported {
-            img {
-                cursor: pointer;
-                color: $textClr;
-                filter: invert(13%) sepia(97%) saturate(527%) hue-rotate(180deg) brightness(91%) contrast(94%);
-            }
+           
             background-color: $secondaryBtnsGray;
             border-radius: 50%;
         }

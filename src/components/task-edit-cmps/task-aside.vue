@@ -92,7 +92,7 @@ export default {
     },
     addLabel(labelId){
         console.log('labelId',labelId);
-        this.$emit('addLabel',labelId)
+        this.$emit('addLabel')
     }
     // labels(){
     //     const lab =  this.$emit('labels');
