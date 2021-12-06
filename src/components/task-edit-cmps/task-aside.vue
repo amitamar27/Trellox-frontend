@@ -35,6 +35,7 @@
       class="popup is-show dynamic-component"
       :is="currComponent"
       :task="this.task"
+      @addLabel="addLabel"
       @closeMenu="closeMenu"
       
     />
@@ -88,6 +89,10 @@ export default {
     },
     saveLabels(){
         this.$emit('saveLabels',this.labels)
+    },
+    addLabel(labelId){
+        console.log('labelId',labelId);
+        this.$emit('addLabel',labelId)
     }
     // labels(){
     //     const lab =  this.$emit('labels');

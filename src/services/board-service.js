@@ -563,6 +563,26 @@ function _createBoard(title,groups=[],style={}){
             "id": "l102",
             "title": "Ready",
             "color": "#f2d600"
+        },
+        {
+            "id": "l103",
+            "title": "Ready",
+            "color": "#ff9f1a"
+        },
+        {
+            "id": "l104",
+            "title": "Ready",
+            "color": "#eb5a46"
+        },
+        {
+            "id": "l105",
+            "title": "Ready",
+            "color": "#c377e0"
+        },
+        {
+            "id": "l106",
+            "title": "Ready",
+            "color": "#0079bf"
         }
     ],
         members:[{

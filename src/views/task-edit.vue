@@ -75,7 +75,9 @@
           </div>
 
           <aside class="task-side-bar">
-            <task-aside :task="task" :key="6"></task-aside>
+            <task-aside :task="task" :key="6"
+            @addLabel="addLabel"
+            ></task-aside>
           </aside>
         </section>
       </main>
@@ -161,6 +163,10 @@ export default {
     },
     saveLabels({labels}){
       console.log('labels tp',labels);
+    },
+    addLabel(labelId){
+      // console.log(task);
+      console.log('labelId',labelId);
     }
   },
   components: {

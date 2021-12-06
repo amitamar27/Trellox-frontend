@@ -7,7 +7,7 @@
 
     <main v-if="!isInEdit" class="labels-menu">
       <!-- <section class="labels-input"> -->
-      <el-input class="input" @change="showFilterd" v-model="filter"></el-input>
+      <el-input class="input"  v-model="filter"></el-input>
       <h5 class="h-title">LABELS</h5>
       <!-- </section> -->
 
@@ -16,12 +16,10 @@
           <div
             class="edit-labels mod-selectable task-labels"
             :style="`background-color: ${color}`"
+            @click="addLabel(idx)"
           >
             <p v-if="labelsId(idx)">{{labels[idx].title}}</p>
-            <!-- <span
-            class="task-labels mod-selectable "
-            :style="`background-color: ${color}`"
-          ></span> -->
+          <span v-if="labelsId(idx)" class="icon-check icon-sm"></span>
           </div>
           <a class="task-label-edit icon-sm icon-edit" @click="goInMenu(idx)"></a>
         </div>
@@ -30,6 +28,7 @@
       <section v-else>
           <div v-for="(color, idx) in colors" :key="idx" >
           <div
+          
             v-if="color"
             class="edit-labels mod-selectable task-labels"
             :style="`background-color: ${color}`"
@@ -51,7 +50,6 @@
 				type="text"
 				placeholder="Set label..."
 				v-model="currLabel.title"
-				@change="saveLabel"
 				@keydown.enter="saveLabel"
 			/>
 		</section>
@@ -105,7 +103,7 @@ export default {
       });
       //   this.labels= newLabels
       console.log("this.labels", this.labels);
-      //   return newLabels;
+     
     },
     labelsId(idx){
    
@@ -120,6 +118,7 @@ export default {
         this.isInEdit = true;
     },
     saveLabel(){
+        console.log('labels 1 ');
         this.$emit('saveLabels',this.labels)
     },
     goBack(){
@@ -128,6 +127,25 @@ export default {
     closeMenu(){
         this.$emit('closeMenu')
     },
+    addLabel(idx){
+        if(this.labels.find((label) => label.color === this.colors[idx])
+        
+        ) return
+          const labelId = {
+            id: 'l10'+(idx+1)
+        }
+        const id = 'l10'+(idx+1)
+        this.task.labelIds.push(id)
+        // const label = {
+
+        // }
+        this.currLabels()
+        console.log('this.labels',this.labels);
+        console.log('labelId',labelId);
+
+        this.$emit('addLabel',labelId)
+        
+    }
   },
   
 };
