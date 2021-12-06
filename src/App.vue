@@ -26,6 +26,7 @@ export default {
   },
   computed:{
     background() {
+		console.log('this.$route.name',this.$route.name);
 			if (this.$route.name === 'Home') {
 				return {
 					backgroundImage: `url('https://res.cloudinary.com/taskit-sprint/image/upload/v1622319307/background%20for%20Taskit/background_6_lqcaex.jpg')`,
@@ -34,12 +35,19 @@ export default {
 					backgroundPosition: 'center'
 				}
 			}
-      
+			if(this.$route.name === 'taskEdit'){
+				return {
+					backgroundImage: 'url(https://res.cloudinary.com/giladtoy/image/upload/v1638531202/u27ypkc1wfre9x9vgmrb.jpg)',
+					backgroundRepeat: 'no-repeat',
+          			backgroundSize: 'cover',
+					backgroundPosition: 'center'
+				}
+			}
 			if (this.$route.name === 'Board') {
 				return {
 					backgroundImage: 'url(https://res.cloudinary.com/giladtoy/image/upload/v1638531202/u27ypkc1wfre9x9vgmrb.jpg)',
 					backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
+          			backgroundSize: 'cover',
 					backgroundPosition: 'center'
 				}
 			}
