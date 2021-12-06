@@ -1,5 +1,4 @@
-
-.group-list  {
+.group-list {
     // width: 100%;
     display: flex;
     gap: 7px;
@@ -7,77 +6,57 @@
     // width: 100vw;
     flex-basis: auto;
     margin: 0px 5px;
-    
-       .group-preview{
-           cursor: grabbing;
+
+    .group-preview {
+        cursor: default;
         margin-right: 5px;
         background-color: #ebecf0;
         --animate-duration: 1s;
         --animate-delay: 1s;
         --animate-repeat: 1;
-        // ecedf0
     }
-   
+
     .cards-container {
-        /* display: flex; */
-        /* position: relative; */
-        /* min-height: 30px; */
-        /* min-width: 30px; */
-        overflow-y: auto!important;
+
+        overflow-y: auto !important;
         overflow-x: hidden;
         scroll-behavior: smooth;
-        padding: 0px 4px ;
-        // .draggable-groups >*:hover{
-        //     background-color: #0079bf;
-        // }
+        padding: 0px 4px;
         .draggable-groups {
             height: 100%;
-           
-            /* position: relative; */
-            /* min-height: 30px; */
-            /* min-width: 30px; */
-            /* margin: 0 5px 5px; */
-            
             position: relative;
             min-height: 30px;
             min-width: 30px;
-          
-           
-           
-            .flip-move{
-                transition: transform 0.6s ;
-                box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.14);
+
+
+
+            .flip-move {
+                transition: transform 0.6s;
+                box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.14);
                 opacity: 0.7;
-              }
-            .card-main{
+            }
+
+            .card-main {
                 margin: 0 5px 8px;
-                /* margin: 0 5px 5px; */
-                // overflow: hidden;
                 display: block;
-             
-               
-                
+
+
+
                 .card-container {
                     position: relative;
                     flex-direction: column;
                     background-color: #fff;
-                    // &:hover{
-                    //     background-color: #0079bf;
-                    // }
-                   
-                    // box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
                     border-radius: 3px;
                     max-width: 100%;
                     box-sizing: border-box;
                     min-height: 34px;
-                    // padding: 4px 4px;
-                    // margin: 0 0 2px;
                     font-size: 14px;
                     cursor: pointer;
                     // .card-container:hover{
                     //     background-color: rgb(231, 233, 233);
                     // }
                 }
+
                 // .cards-container:hover{
                 //     background-color: rgb(231, 233, 233);
                 // }
@@ -85,9 +64,9 @@
             }
         }
     }
-    
-    .card-container >*{
-        font-family: Segoe UI,"Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+
+    .card-container>* {
+        font-family: Segoe UI, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
         // background-color: $addcard;
         // box-shadow: 0 1px 0 #091e4240;
         // padding: 6px 8px 2px 2px;
@@ -112,103 +91,142 @@
         align-content: center;
         flex-wrap: wrap;
 
-    //     position: relative;
-    // flex-direction: column;
-    background-color: #fff;
-    box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
-    border-radius: 5px;
-    // max-width: 100%;
-    // box-sizing: border-box;
-    // min-height: 34px;
-    // padding: 4px 4px;
-    // margin: 2px 4px 2px;
-    // font-size: 14px;
-    // cursor: pointer;
+        //     position: relative;
+        // flex-direction: column;
+        background-color: #fff;
+        box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
+        border-radius: 3px;
+        // max-width: 100%;
+        // box-sizing: border-box;
+        // min-height: 34px;
+        // padding: 4px 4px;
+        // margin: 2px 4px 2px;
+        // font-size: 14px;
+        // cursor: pointer;
 
-        
-        
+
+
     }
-    .card-container>*:hover{
+
+    .card-container>*:hover {
         background-color: rgb(231, 233, 233);
     }
-    
-    
+
+
 }
-.card-add-edit{
+
+.card-add-edit {
     display: flex;
     flex-direction: column;
     text-align: start;
     margin-inline: 7px;
-    
-    textarea{
-        border-radius: 6px;
+
+    textarea {
+        border-radius: 3px;
         border: none;
         padding: 10px;
         box-shadow: 0 1px 0 #091e4240;
         resize: none;
-        
-        
+
+
 
     }
+
     ::placeholder {
-        color:#5e6c84;
+        color: #5e6c84;
     }
-    input:focus, textarea:focus, select:focus{
+
+    input:focus,
+    textarea:focus,
+    select:focus {
         outline: none;
     }
 }
-.card-actions{
+
+.card-actions {
     display: flex;
     align-items: center;
     margin-block: 7px;
     margin-inline-start: 1px;
-    
-    a{
-        padding: 4px 8px;
+
+    a {
+        padding: 6px 11px;
         cursor: pointer;
         border-radius: 4px;
         margin-block: 7px;
         background-color: #0079bf;
-        color:white;
-        margin-inline-end:8px;
-        padding: 10px;
-        
+        color: white;
+        margin-inline-end: 8px;
     }
-    a:hover{
+
+    a:hover {
         background-color: #0469a3
     }
-    button{
-            padding: 4px 8px;
-            border:none;
-            color: #091e4240 ;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-inline-end:8px;
-            font-size: 40px;
-            margin-bottom: 5px;
-            
-        
-    }
-    
-}
-.card-add-btn{
-        margin-inline: 15px;
-        color:#6b778c;
+
+    button {
         padding: 4px 8px;
+        border: none;
+        color: #091e4240;
         cursor: pointer;
         border-radius: 4px;
-        margin-block: 7px;
-        text-align: left;
-        
-    
-    &:hover{
-        background-color: rgb(201, 207, 207);
-        color: #5e6c84;
+        margin-inline-end: 8px;
+        font-size: 40px;
+        background-color: inherit;
+    }
+
+    img {
+        width: 13px;
+        filter: invert(48%) sepia(19%) saturate(417%) hue-rotate(180deg) brightness(92%) contrast(88%);
+    }
+
+    img:hover {
+        filter: invert(48%) sepia(19%) saturate(417%) hue-rotate(180deg) brightness(12%) contrast(88%);
+    }
+
+  
+
+}
+
+.card-add-btn {
+    margin-inline: 10px;
+    color: #6b778c;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    text-align: left;
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        justify-content: left;
+        box-sizing: border-box;
+        color: #6b778c;
+        border-radius: 3px;
+        width: 100%;
+        background-color: unset;
+        border: unset;
+        cursor: pointer;
+        transition: all .2s;
+
+        img {
+            filter: invert(48%) sepia(19%) saturate(417%) hue-rotate(180deg) brightness(92%) contrast(88%);
+            height: 16px;
+            margin-right: 3px;
+            padding: 5px;
+        }
+    }
+
+
+    &:hover {
+        background-color: rgba(9, 30, 66, .08);
+        color: #172a4d;
     }
 }
-.group-list-container{
+
+.group-list-container {
     // z-index: 10;
-    margin-left: 65px;
     margin-top: 45px;
     display: flex;
     // width: -webkit-fit-content;
@@ -223,79 +241,115 @@
     // -ms-user-select: none;
     user-select: none;
 }
-.group-add-btn{
+
+.group-add-btn {
     height: auto;
     width: 272px;
     border-radius: 3px;
     color: #172b4d;
-    margin: 0px 8px 0px 4px;
     text-align: start;
-    
-    p{
+
+    p {
+        display: flex;
+        margin-inline: 2px;
         cursor: pointer;
         margin-left: 8px;
-        padding: 5px;
-           
+        padding: 10px;
+        gap: 5px;
+
+        img {
+            width: 17px;
+            filter: brightness(0) invert(1);
+        }
 
     }
-   
+
 }
 
-.add-group-form{
+.add-group-form {
     display: flex;
     flex-direction: column;
     text-align: start;
-    padding: 5px 7px;
-    margin-top: 5px;
-    textarea{
-    border-radius: 6px;
-    border: none;
-    padding: 10px;
-    box-shadow: 0 1px 0 #091e4240;
-    resize: none;
-    &:focus{
-        outline-color: #0079bf;
-    }
+    padding: 5px 5px;
+    background-color: #ebecf0;
+    border-radius: 3px;
+
+    textarea {
+        border-radius: 3px;
+        border: none;
+        padding: 10px;
+        box-shadow: 0 1px 0 #091e4240;
+        resize: none;
+
+        &:focus {
+            outline-color: #0079bf;
+        }
     }
 
-    .form-actions{
+    .form-actions {
         display: flex;
-        align-items: center;   
-        margin-top: 2px;     
-        a{
+        align-items: center;
+        margin-top: 6px;
+
+        a {
             padding: 4px 8px;
             cursor: pointer;
             border-radius: 4px;
-            margin-block: 7px;
             background-color: #0079bf;
-            color:white;
-            margin-inline-end:8px;
-            padding: 4px 12px;
-
-            
+            color: white;
+            margin-inline-end: 8px;
+            // padding: 7px 12px;
         }
-        button{
-            border:none;
+
+
+
+        button {
+            border: none;
             margin-left: 4px;
-            color: #091e4240 ;
+            color: #091e4240;
             cursor: pointer;
             border-radius: 4px;
-            margin-inline-end:8px;
+            margin-inline-end: 8px;
             font-size: 35px;
             background-color: transparent;
             cursor: pointer;
-            
-        
+            padding: 0;
+
+
+        }
+
+        img {
+            width: 15px;
+            filter: invert(48%) sepia(19%) saturate(417%) hue-rotate(180deg) brightness(92%) contrast(88%);
+
+        }
     }
+
+    .form-actions a:hover {
+        background-color: #026aa7;
+        border: none;
+        box-shadow: none;
+        color: #fff;
+    }
+
+    .form-actions img:hover {
+        filter: invert(48%) sepia(19%) saturate(417%) hue-rotate(180deg) brightness(12%) contrast(88%);
     }
 
 }
-.group-add-container{
+
+.group-add-container {
     border-radius: 3px;
     height: 100%;
-    background-color: #ebecf0;
-    &:hover{
-        background-color:#d8d8d8af ;
+    background-color: hsla(0,0%,100%,.24);
+
+    p {
+        color: #ffff;
+    }
+
+
+    &:hover {
+        background-color: hsla(0, 0%, 100%, .32);
     }
 
 }

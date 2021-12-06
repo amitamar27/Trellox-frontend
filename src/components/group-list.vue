@@ -23,6 +23,17 @@
             >
               {{ group.title }}
             </p>
+
+            <!-- <input
+              ref="titleInput"
+              type="text"
+              placeholder="title"
+              v-model="group.title"
+              @change="addGroup"
+              @keydown.enter="addGroup"
+              @mousedown.stop=""
+            /> -->
+
             <div class="group-preview-btn">
               <span class="span-1 hide">
                 <span class="span-2 icon-sm"></span>
@@ -60,12 +71,14 @@
               placeholder="Enter a title for this card..."
             ></textarea>
             <div class="card-actions">
-              <a @click="addTask(group.id)"> + Add List</a>
-              <button @click="isAdding = false">x</button>
+              <a @click="addTask(group.id)">Add card</a>
+              <button @click="isAdding = false"><img :src="require('@/assets/cancel-icon.png')" /></button>
             </div>
           </div>
           <div @click="opemModal(group.id)" v-else class="card-add-btn">
-            <a> + Add a card</a>
+            <button>
+              <img :src="require('@/assets/add.svg')" />Add a card
+            </button>
           </div>
         </div>
       </draggable>
@@ -78,14 +91,16 @@
         :group="group"
         :title="'List actions'"
       ></group-menu>
-
-
     </div>
     <div class="group-add-container">
       <div class="group-add-btn">
-        <p v-if="!isAddingTitle" @click="isAddingTitle = true">+Add another list</p>
+        <p v-if="!isAddingTitle" @click="isAddingTitle = true">
+          <img :src="require('@/assets/add.svg')" />
+          Add another list
+        </p>
         <form v-else class="add-group-form" @submit.prevent="addNewGroup">
           <textarea
+            ref="textarea"
             v-model="newGroupTitle"
             name=""
             id=""
@@ -94,12 +109,12 @@
             placeholder="Enter list title"
           ></textarea>
           <div class="form-actions">
-            <a class="add-group-add" @click="addNewGroup">Add Group</a>
+            <a class="add-group-add" @click="addNewGroup">Add list</a>
             <button
               class="add-group-close"
               @click="isAddingTitle = !isAddingTitle"
             >
-              x
+              <img :src="require('@/assets/cancel-icon.png')" />
             </button>
           </div>
         </form>
@@ -160,6 +175,7 @@ export default {
       var groupTitle = this.newGroupTitle;
       this.$store.dispatch({ type: "addGroup", groupTitle });
       this.newGroupTitle = "";
+
     },
     async openGroupMenu(groupId) {
       const board = this.$store.getters.board
@@ -167,6 +183,7 @@ export default {
       this.isMenuOpened = !this.isMenuOpened
       const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
       this.group = group
+
       // console.log(group);
     },
     closeGroupMenu() {
@@ -219,8 +236,10 @@ export default {
       this.currGroupId = groupId
       this.isMenuOpened = false
     },
+   
 
   },
+ 
 };
 </script>
 

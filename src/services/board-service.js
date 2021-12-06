@@ -245,7 +245,7 @@ function _creareBoards(){
                     "title": "Project `Teamwork Dream Work` Launch Timeline"
                 }
             ],
-            "style": {}
+            "style": {bgUrl: null, bgColor: null}
         },
         {
             "id": "g102",
