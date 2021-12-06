@@ -4,7 +4,7 @@
     <!-- <dark-screen /> -->
     <!-- <side-nav></side-nav> -->
     <app-header
-    :style="appHeaderStyle"
+    
     />
     <router-view/>
   </div>
@@ -83,7 +83,7 @@ export default {
 
     
   }
-  
+//   :style="appHeaderStyle"
     
 }
 </script>

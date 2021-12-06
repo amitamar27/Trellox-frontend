@@ -1,7 +1,7 @@
 <template>
   <main>
     <aside>
-      <h3 class="head-lines">Add to card</h3>
+      <h3 class="head-lines" @click="f">Add to card</h3>
     </aside>
 
     <a
@@ -38,25 +38,32 @@
       @addLabel="addLabel"
       @closeMenu="closeMenu"
       
+       
     />
   </main>
 </template>
 
 <script>
+// :members="members"
 // import { component } from 'vue/types/umd'
 import menuLabels from "../task-edit-menu-cmps/menu-labels.vue";
+import menuMembers from '../task-edit-menu-cmps/menu-members.vue'
 export default {
   props: {
     task: {
       type: Object,
       required: true,
     },
+    board:{
+        // type: Object,
+        required: true,
+    }
    
   },
   data() {
     return {
       options: [
-        { icon: "", title: "Members" },
+        { icon: "", title: "Members", component: "menu-members" },
         { icon: "", title: "Labels", component: "menu-labels" },
         { icon: "", title: "Checklist" },
         { icon: "", title: "Dates" },
@@ -76,6 +83,7 @@ export default {
       // return
     },
     openMenu(idx) {
+        
       this.menuIdx = idx;
     },
     showMenu(idx) {
@@ -84,6 +92,7 @@ export default {
       this.currComponent = this.options[idx].component;
     },
     closeMenu() {
+        // console.log(this.board);
       this.isMenuOpen = false;
        this.currComponent = null
     },
@@ -93,16 +102,25 @@ export default {
     addLabel(labelId){
         console.log('labelId',labelId);
         this.$emit('addLabel')
-    }
+    },
+    currentProperties(){
+        if(this.currComponent === 'currComponent') console.log(board);
+        return board
+    },
     // labels(){
     //     const lab =  this.$emit('labels');
     //     console.log('lab',lab);
     // }
+    f(){
+alert('f')
+        console.log('board',this.board);
+    }
 
   },
   computed: {},
   components: {
     menuLabels,
+    menuMembers
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template >
-  <div v-if="board" :style="getStyle" class="board-container" >
+  <div v-if="board"  class="board-container" >
     <!-- {{board}} -->
     <group-list  @dragEnd="dragEnd" @pickTask="pickTask" :board="board" v-if="board" ></group-list>
     <!-- <router-view /> -->
@@ -24,6 +24,7 @@ export default {
     },
   computed: {
     board() {
+      // :style="getStyle"
       return this.$store.getters.board;
     },
     getStyle(){

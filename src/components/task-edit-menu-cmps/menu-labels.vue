@@ -54,6 +54,7 @@
 				v-model="currLabel.title"
 				@keydown.enter="saveLabel"
 			/>
+            <button class="save-btn" @mousedown="saveLabel">Save</button>
 		</section>
   </section>
 </template>
@@ -91,10 +92,14 @@ export default {
     // console.log("this.labels", this.labels);
     this.defaulsLabels = this.$store.getters.labels;
     this.currLabels();
+    
   },
   computed: {
       isFilter(){
 
+      },
+      color(){
+          board.labels.filter(label => label.color === color)
       },
   },
   methods: {
@@ -111,12 +116,6 @@ export default {
      
     },
     labelsId(idx){
-   
-        // if(!this.labels[idx]) return
-        // if(this.colors[idx] === this.labels[idx].color) return true
-        // if(this.labels.includes(this.defaulsLabels[idx])){
-
-        // }
         return this.labels.includes(this.defaulsLabels[idx])
     },
     setLabel(idx){
@@ -138,11 +137,7 @@ export default {
     },
     addLabel(idx){
     
-        // console.log(newIdx)
-
-        //   const labelId = {
-        //     id: 'l10'+(idx+1)
-        //     }
+       
         const id = 'l10'+(idx+1)
         console.log('id',id);
         const newIdx = this.labels.findIndex((label) => label.color === this.colors[idx])
@@ -153,14 +148,6 @@ export default {
             this.task.labelIds.splice(idx,1);
             return
         }
-        // const label = {
-        //     id: id,
-        //     color: this.colors[idx],
-        //     title:''
-        // }
-        // console.log('this.defaulsLabels[idx]',this.defaulsLabels[idx]);
-        // this.labels.push(this.defaulsLabels[idx]);
-        // console.log(' this.labels', this.labels);
          this.task.labelIds.push(id)
         this.currLabels()
         console.log('this.labels',this.labels);
@@ -168,7 +155,10 @@ export default {
 
         this.$emit('addLabel',id)
         
-    }
+    },
+    // saveLabel(){
+        
+    // }
   },
   
 };
