@@ -55,6 +55,22 @@
                     // .card-container:hover{
                     //     background-color: rgb(231, 233, 233);
                     // }
+                    .labels{
+                        display: flex;
+                        padding-top: 5px;
+                        .task-label{
+                            height: 13px;
+                            line-height: 7px;
+                            width: 34px;
+                            max-width: 184px;
+                            padding: 0 8px;
+                        }
+                   
+                    }
+
+             
+
+                  
                 }
 
                 // .cards-container:hover{
@@ -354,3 +370,5 @@
     }
 
 }
+
+

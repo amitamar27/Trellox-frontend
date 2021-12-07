@@ -15,6 +15,14 @@
           class="group-preview"
         >
           <div class="group-preview-header">
+            <!-- <input
+                class="input-title"
+                type="text"
+                v-model="newTitle"
+                @blur="editTitle"
+                @keyup.enter="$event.target.blur()"
+                
+            /> -->
             <p
               class="group-title"
               dir="auto"
@@ -24,22 +32,12 @@
               {{ group.title }}
             </p>
 
-            <!-- <input
-              ref="titleInput"
-              type="text"
-              placeholder="title"
-              v-model="group.title"
-              @change="addGroup"
-              @keydown.enter="addGroup"
-              @mousedown.stop=""
-            /> -->
-
             <div class="group-preview-btn">
               <span class="span-1 hide">
                 <span class="span-2 icon-sm"></span>
               </span>
               <div
-                @click="openGroupMenu(group.id)"
+                @click.prevent.stop="openGroupMenu(group.id)"
                 class="
                   group-header-extras-menu
                   span-1
@@ -47,17 +45,32 @@
                 "
               ></div>
             </div>
+
+            <group-menu
+              @addCard="onAddCard"
+              @mousedown.stop=""
+              v-if="isMenuOpened && group"
+              @closeMenu="closeGroupMenu"
+              :group="group"
+              :title="'List actions'"
+            ></group-menu>
           </div>
-          <card-list
+
+        
+           <card-list
             @dragEnd="dragEnd"
             @pickTask="pickTask"
             :tasks="group.tasks"
             :group="group"
             :groups="board.groups"
             :groupId="group.id"
+            :boardLabels="board.labels"
             @addTask="addTask"
           >
           </card-list>
+
+     
+         
           <div
             v-if="isAdding && group.id === currGroupId"
             class="card-add-edit"
@@ -72,7 +85,9 @@
             ></textarea>
             <div class="card-actions">
               <a @click="addTask(group.id)">Add card</a>
-              <button @click="isAdding = false"><img :src="require('@/assets/cancel-icon.png')" /></button>
+              <button @click="isAdding = false">
+                <img :src="require('@/assets/cancel-icon.png')" />
+              </button>
             </div>
           </div>
           <div @click="opemModal(group.id)" v-else class="card-add-btn">
@@ -83,14 +98,14 @@
         </div>
       </draggable>
 
-      <group-menu
+      <!-- <group-menu
         @addCard="onAddCard"
         @mousedown.stop=""
         v-if="isMenuOpened && group"
         @closeMenu="closeGroupMenu"
         :group="group"
         :title="'List actions'"
-      ></group-menu>
+      ></group-menu> -->
     </div>
     <div class="group-add-container">
       <div class="group-add-btn">
@@ -128,6 +143,7 @@ import groupPreview from "./group-preview.vue";
 import draggable from "vuedraggable";
 import cardList from "./card-list.vue";
 import groupMenu from './menus-cmps/group-menu.vue'
+import taskEdit from "../views/task-edit.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
 
 export default {
@@ -136,18 +152,24 @@ export default {
     cardList,
     groupMenu,
     Container,
+    taskEdit,
     draggable
   },
   props: {
     board: {
       type: Object,
       required: true,
-    }
+    },
+    // boardLabels: {
+    //   type: Array,
+    // },
 
   },
   data() {
     return {
       isAddingTitle: false,
+      boardId : '',
+      newTitle: "",
       newGroupTitle: "",
       isMenuOpened: false,
       group: null,
@@ -178,11 +200,14 @@ export default {
 
     },
     async openGroupMenu(groupId) {
+
       const board = this.$store.getters.board
       const groupDetails = { board, groupId }
       this.isMenuOpened = !this.isMenuOpened
       const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
       this.group = group
+
+
 
       // console.log(group);
     },
@@ -236,10 +261,12 @@ export default {
       this.currGroupId = groupId
       this.isMenuOpened = false
     },
-   
-
-  },
+    editTitle() {
+      if (!this.newTitle) return;
+    },
  
+  },
+
 };
 </script>
 

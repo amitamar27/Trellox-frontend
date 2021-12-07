@@ -10,7 +10,7 @@
      
     </header>
     <group-Inner-Menu @addCard="onAddCard" :group="group" @closeMenu="closeMenu" />
-    <!-- <slot></slot> -->
+    <slot></slot>
   </section>
 </template>
 
