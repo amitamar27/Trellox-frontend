@@ -152,6 +152,7 @@ function getAndSaveBoard(key,currBoard){
     .then((boards)=>{
         const idx =boards.findIndex((board)=> board._id === currBoard._id)
         if (idx < 0) throw new Error(`Unknown Entity ${idx}`)
+        console.log('currBoard',currBoard);
         boards.splice(idx,1,currBoard)
         _save(key,boards)
         return boards[idx]

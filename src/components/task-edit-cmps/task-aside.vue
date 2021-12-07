@@ -1,7 +1,7 @@
 <template>
   <main>
     <aside>
-      <h3 class="head-lines" @click="f">Add to card</h3>
+      <h3 class="head-lines">Add to card</h3>
     </aside>
 
     <a
@@ -54,10 +54,10 @@ export default {
       type: Object,
       required: true,
     },
-    board:{
-        // type: Object,
-        required: true,
-    }
+    // board:{
+    //     // type: Object,
+    //     required: true,
+    // }
    
   },
   data() {
@@ -103,18 +103,15 @@ export default {
         console.log('labelId',labelId);
         this.$emit('addLabel')
     },
-    currentProperties(){
-        if(this.currComponent === 'currComponent') console.log(board);
-        return board
-    },
+    // currentProperties(){
+    //     if(this.currComponent === 'currComponent') console.log(board);
+    //     return board
+    // },
     // labels(){
     //     const lab =  this.$emit('labels');
     //     console.log('lab',lab);
     // }
-    f(){
-alert('f')
-        console.log('board',this.board);
-    }
+
 
   },
   computed: {},

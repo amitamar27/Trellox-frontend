@@ -81,7 +81,7 @@
             <task-aside :task="task" :key="6"
             @addLabel="addLabel"
             @saveTask="saveTask"
-            :board="board"
+            
             ></task-aside>
           </aside>
         </section>
@@ -91,6 +91,7 @@
 </template>
 
 <script>
+// :board="board"
 // background-color: #f4f5f7;
 // animate__animated animate__backInDown
 import labels from "../components/task-edit-cmps/labels.vue";
@@ -108,12 +109,12 @@ export default {
   data() {
     return {
       currTask: null,
-      board:null,
+      // board:null,
     };
   },
   created() {
     console.log("created!", this.currTask);
-    console.log('this.$store.getters.board',this.$store.getters.board);
+    // console.log('this.$store.getters.board',this.$store.getters.board);
   },
   computed: {
     task() {
@@ -175,6 +176,7 @@ export default {
       console.log(this.currTask);
       console.log('labelId',labelId);
       const { groupId } = this.$route.params;
+      // alert('calling saveTask')
       this.$store.dispatch({ type: "saveTask", groupId, taskToSave: this.currTask });
     },
     members(){
