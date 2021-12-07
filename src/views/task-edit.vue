@@ -26,7 +26,10 @@
         <!-- <header  v-if="task.cover"> 
 
           </header> -->
-        <task-title :task="task" @saveTask="saveTask"></task-title>
+        <task-title :task="task" @saveTask="saveTask">
+          
+        </task-title>
+        <a class="icon-md close-btn" v-if="!task.cover" @click="closeDarkScreen"></a>
         <section class="main-content">
           <div class="main-content-details">
             <section class="task-details">
@@ -77,6 +80,8 @@
           <aside class="task-side-bar">
             <task-aside :task="task" :key="6"
             @addLabel="addLabel"
+            @saveTask="saveTask"
+            :board="board"
             ></task-aside>
           </aside>
         </section>
@@ -103,10 +108,12 @@ export default {
   data() {
     return {
       currTask: null,
+      board:null,
     };
   },
   created() {
     console.log("created!", this.currTask);
+    console.log('this.$store.getters.board',this.$store.getters.board);
   },
   computed: {
     task() {
@@ -165,8 +172,21 @@ export default {
       console.log('labels tp',labels);
     },
     addLabel(labelId){
-      // console.log(task);
+      console.log(this.currTask);
       console.log('labelId',labelId);
+      const { groupId } = this.$route.params;
+      this.$store.dispatch({ type: "saveTask", groupId, taskToSave: this.currTask });
+    },
+    members(){
+      const memberss = this.$store.getters.members
+      console.log('memberss',memberss);
+      return this.$store.getters.members
+    },
+    board(){
+      // return
+      this.board = this.$store.getters.board
+      console.log('this.$store.getters.board',board);
+      return this.board
     }
   },
   components: {

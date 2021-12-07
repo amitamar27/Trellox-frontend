@@ -14,6 +14,7 @@ export default new Vuex.Store({
   },
   getters: {
     board(state) {
+      console.log('state.board',state.board);
       return state.board;
     },
     groups(state) {
@@ -41,7 +42,10 @@ export default new Vuex.Store({
     },
     currGroup(state){
       return state.currGroup
-    }
+    },
+    members(state) {
+      return JSON.parse(JSON.stringify(state.board.members))
+  }
   },
 
   mutations: {

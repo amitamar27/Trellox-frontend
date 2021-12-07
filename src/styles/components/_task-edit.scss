@@ -66,7 +66,32 @@
         }
         .task-edit-container{
             padding: 5px 10px;
-
+            .close-btn{
+                background-color: #00000014;
+                cursor: pointer;
+                border-radius: 50%;
+                color: #42526e;
+                height: 32px;
+                margin: 4px;
+                overflow: hidden;
+                padding: 4px;
+                position: absolute;
+                right: 0;
+                top: 0;
+                transition: background-color 85ms, color 85ms;
+                width: 32px;
+                z-index: 2;
+                font-size: 20px;
+                line-height: 32px;
+                      &:hover,
+                  &:focus {
+                    // background-color: rgba(255, 255, 255, 0);
+                    background-color: rgba(14, 16, 16, 0.15);
+                  }
+            }
+            .close-btn::before{
+                content: "\e91c";
+            }
         
         // .task-edit-header {
         //     // min-height: 125px;

@@ -24,6 +24,7 @@ export default {
     },
   computed: {
     board() {
+      // :style="getStyle"
       return this.$store.getters.board;
     },
     getStyle(){
