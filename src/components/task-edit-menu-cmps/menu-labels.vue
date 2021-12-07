@@ -144,7 +144,7 @@ export default {
         this.labels.splice(newIdx, 1);
         const idx = this.task.labelIds.findIndex((lId) => lId === id);
         this.task.labelIds.splice(idx, 1);
-        // this.$emit('addLabel',id)
+        this.$emit('addLabel',id)
         return;
       }
       this.task.labelIds.push(id);

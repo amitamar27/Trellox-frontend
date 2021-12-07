@@ -94,9 +94,11 @@ export default new Vuex.Store({
       state.currCardToEdit = card;
     },
     saveTask(state, { groupId, taskToSave }) {
+      // alert('saveTask mut')
       console.log(' groupId, taskToSave', groupId, taskToSave);
       const group = state.board.groups.find(group => group.id === groupId)
       console.log('group',group);
+      console.log('state.board',state.board,state.boards);
       const taskIdx = group.tasks.findIndex(task => task.id === taskToSave.id)
       console.log('taskIdx',taskIdx);
       if (taskIdx < 0) return
@@ -221,6 +223,7 @@ export default new Vuex.Store({
     },
 
    async saveTask({ commit }, {groupId,taskToSave}) {
+    //  alert('saveTask action')
       commit({ type: 'saveTask' ,groupId,taskToSave})
       const board = this.getters.board
       console.log('board',board);

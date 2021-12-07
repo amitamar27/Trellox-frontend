@@ -2,10 +2,10 @@
   <div class="card-main">
     <div @click="cardClick(groupId, task.id)" class="card-container">
       <div class="card-preview">
-      <div v-if="taskLabels.length" class="labels">
+      <div v-if="task.labelIds.length" class="labels">
         <div
           class="task-label"
-          v-for="label in taskLabels"
+          v-for="label in getLabels"
           :key="label.id"
           :style="{ backgroundColor: label.color }"
         
@@ -46,6 +46,23 @@ export default {
 
     }
   },
+  computed:{
+ getLabels() {
+      // console.log('gettttttt',this.task);
+      const labels = []
+      if(!this.task.labelIds) return
+      // console.log('this.task.labelIds',this.task.labelIds);
+      this.boardLabels.forEach((label) => {
+        // console.log('label',label);
+        if (this.task.labelIds.includes(label.id)) labels.push(label);
+      });
+      // console.log('bbbbbb', this.taskLabels);
+      // if(this.taskLabels) return true;
+      // return false
+      return labels
+    },
+    
+  },
   methods: {
     cardClick(groupId, taskId) {
 
@@ -58,20 +75,7 @@ export default {
           console.dir("error");
         });
     },
-    getLabels() {
-      console.log('gettttttt',this.task);
-      if(!this.task.labelIds) return
-      console.log('this.task.labelIds',this.task.labelIds);
-      this.boardLabels.forEach((label) => {
-        console.log('label',label);
-        if (this.task.labelIds.includes(label.id)) this.taskLabels.push(label);
-      });
-      console.log('bbbbbb', this.taskLabels);
-      // if(this.taskLabels) return true;
-      // return false
-
-    },
-    
+   
     // toggleSize() {
     //             this.changeLabelSize = !this.changeLabelSize;
     //             console.log('this.changeLabelSize', this.changeLabelSize);
@@ -82,7 +86,7 @@ export default {
     this.boardId = boardId
     console.log('labels task',this.taskLabels);
     console.log('labels', this.task.labelIds);
-    this.getLabels();
+    // this.getLabels();
 
   },
 
