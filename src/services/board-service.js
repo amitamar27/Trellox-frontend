@@ -231,26 +231,147 @@ function _creareBoards(){
     var boards = storageService.load(KEYS)
     if(!boards || !boards.length){
         boards=[_createBoard('Project Managment',[
-        {
-            "id": "g101",
-            "title": "project Resources",
-            // כרטיסים
-            "tasks": [
-                {
-                    "id": "c101",
-                    "title": "Replace logo"
-                },
-                {
-                    "id": "c102",
-                    "title": "Add Samples"
-                },
-                {
-                    "id": "c103",
-                    "title": "Project `Teamwork Dream Work` Launch Timeline"
-                }
-            ],
-            "style": {bgUrl: null, bgColor: null}
-        },
+            {
+                "id": "g101",
+                "title": "Question for next meeting",
+                "tasks": [
+                    {
+                        "id": "c104",
+                        "title": "Who's the best person to fix my HTML snag?",
+                        "description": "",
+                        "comments": [
+                            {
+                                "id": "ZdPnm",
+                                "txt": "also @yaronb please CR this",
+                                "createdAt": 1590999817436.0,
+                                "byMember": {
+                                    "_id": "u101",
+                                    "fullname": "Tal Tarablus",
+                                    "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                                }
+                            }
+                        ],
+                        "checklists": [
+                            {
+                                "id": "gghty",
+                                "title": "Checklist",
+                                "todos": [
+                                    {
+                                        "id": "2gg5e",
+                                        "title": "dont forget to to talk with me",
+                                        "isDone": false
+                                    },
+                                    {
+                                        "id": "4ff43",
+                                        "title": "clean the house",
+                                        "isDone": true
+                                    }
+                                ]
+                            }
+                        ],
+                        "members": [
+                            {
+                                "_id": "u101",
+                                "username": "Tal",
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        ],
+                        "labelIds": ["l101", "l102"],
+                        "createdAt": 1590999730348,
+                        "dueDate": 16156215211,
+                        "byMember": {
+                            "_id": "u101",
+                            "username": "Tal",
+                            "fullname": "Tal Tarablus",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        "style": {
+                            "bgColor": "#26de81"
+                        },
+                        "cover": {
+                            "isFull": false,
+                            "bgColor": "#26de81"
+                        },
+                        "activities": [{
+                            "txt": "Changed Color",
+                            "createdAt": 1625816076030,
+                            "byMember": {
+                                "_id": "u101",
+                                "username": "Koren",
+                                "fullname": "Koren Levi",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            },
+                        },],
+                        
+                    },
+                    {
+                        "id": "c105",
+                        "title": "How can I get access to the super secret document?",
+                        "description": "description",
+                        "comments": [
+                            {
+                                "id": "ZdPnm",
+                                "txt": "also @yaronb please CR this",
+                                "createdAt": 1590999817436.0,
+                                "byMember": {
+                                    "_id": "u101",
+                                    "fullname": "Tal Tarablus",
+                                    "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                                }
+                            }
+                        ],
+                        "checklists": [
+                            {
+                                "id": "YEhmF",
+                                "title": "Checklist",
+                                "todos": [
+                                    {
+                                        "id": "212jX",
+                                        "title": "To Do 1",
+                                        "isDone": false
+                                    }
+                                ]
+                            }
+                        ],
+                        "members": [
+                            {
+                                "_id": "u101",
+                                "username": "Tal",
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        ],
+                        "labelIds": ["l101", "l102"],
+                        "createdAt": 1590999730348,
+                        "dueDate": 16156215211,
+                        "byMember": {
+                            "_id": "u101",
+                            "username": "Tal",
+                            "fullname": "Tal Tarablus",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        "style": {
+                            "bgColor": "#26de81"
+                        },
+                        "cover": {
+                            "isFull": false,
+                            "bgColor": "#26de81"
+                        },
+                        "activities": [{
+                            "txt": "Changed Color",
+                            "createdAt": 1625816076030,
+                            "byMember": {
+                                "_id": "u101",
+                                "username": "Koren",
+                                "fullname": "Koren Levi",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            },
+                        },]
+                    }
+                ],
+                "style": {}
+            },
         {
             "id": "g102",
             "title": "Question for next meeting",
@@ -392,14 +513,7 @@ function _creareBoards(){
             ],
             "style": {}
         },
-        {
-            "id": "g115",
-            "title": "Done",
-            "tasks": [
-               
-            ],
-            "style": {}
-        }
+       
     ],
      {backgroundSrc:"https://res.cloudinary.com/giladtoy/image/upload/v1638531202/u27ypkc1wfre9x9vgmrb.jpg"}
     
@@ -634,7 +748,7 @@ function _createBoard(title,groups=[],style={}){
     ],
         members:[{
             _id:makeId(),
-            fullname:'gilad',
+            fullname:'koren',
             imgUrl:''
         }],
         groups,
