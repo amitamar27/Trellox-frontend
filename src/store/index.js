@@ -224,7 +224,9 @@ export default new Vuex.Store({
 
    async saveTask({ commit }, {groupId,taskToSave}) {
     //  alert('saveTask action')
+    console.log('taskToSave',taskToSave);
       commit({ type: 'saveTask' ,groupId,taskToSave})
+      console.log('taskToSave',taskToSave);
       const board = this.getters.board
       console.log('board',board);
       await boardService.saveBoard(board)

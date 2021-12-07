@@ -11,7 +11,7 @@
     top: 0;
     left: 0;
     overflow-y: auto;
-   
+
 
     .card-edit {
         // display: flex;
@@ -35,38 +35,80 @@
         overflow-x: hidden;
         gap: 10px;
         z-index: 100;
-        >header{
-            .icon-md{
+
+        >header {
+
+
+
+            .icon-md {
                 background-color: #00000014;
                 cursor: pointer;
                 border-radius: 50%;
-                  color: #42526e;
-                  height: 32px;
-                  margin: 4px;
-                  overflow: hidden;
-                  padding: 4px;
-                  position: absolute;
-                  right: 0;
-                  top: 0;
-                  transition: background-color 85ms,color 85ms;
-                  width: 32px;
-                  z-index: 2;
-                  font-size: 20px;
-              
-                  line-height: 32px;
-                  &:hover,
-                  &:focus {
+                color: #42526e;
+                height: 32px;
+                margin: 4px;
+                overflow: hidden;
+                padding: 4px;
+                position: absolute;
+                right: 0;
+                top: 0;
+                transition: background-color 85ms, color 85ms;
+                width: 32px;
+                z-index: 2;
+                font-size: 20px;
+
+                line-height: 32px;
+
+                &:hover,
+                &:focus {
                     // background-color: rgba(255, 255, 255, 0);
                     background-color: rgba(14, 16, 16, 0.15);
                 }
-                &.icon-md::before{
+
+                &.icon-md::before {
                     content: "\e91c";
                 }
             }
+
+
+            .task-edit-bg-btn {
+                align-items: center;
+                bottom: 0;
+                box-sizing: border-box;
+                display: flex;
+                justify-content: flex-end;
+                padding: 8px;
+                position: absolute;
+                width: 100%;
+
+
+                .cover-btn {
+                    background-color: #00000014;
+                    border-radius: 3px;
+                    color: #172b4d;
+                    padding: 6px 12px 6px 6px;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+                .cover-btn:hover{
+                    background-color:#00000029
+                }
+                .icon-card-cover{
+                    line-height: revert
+                }
+
+                .icon-card-cover::before {
+                    content: "\e914";
+                }
+            }
+
+
         }
-        .task-edit-container{
+
+        .task-edit-container {
             padding: 5px 10px;
-            .close-btn{
+
+            .close-btn {
                 background-color: #00000014;
                 cursor: pointer;
                 border-radius: 50%;
@@ -83,47 +125,50 @@
                 z-index: 2;
                 font-size: 20px;
                 line-height: 32px;
-                      &:hover,
-                  &:focus {
+
+                &:hover,
+                &:focus {
                     // background-color: rgba(255, 255, 255, 0);
                     background-color: rgba(14, 16, 16, 0.15);
-                  }
+                }
             }
-            .close-btn::before{
+
+            .close-btn::before {
                 content: "\e91c";
             }
-        
-        // .task-edit-header {
-        //     // min-height: 125px;
-        //     display: flex;
-        //     align-items: center;
-        //     width: 100%;
-        //     .task-section {
-        //         display: flex;
-        //         align-items: center;
-        //         width: 100%;
-        //         margin-bottom: 10px;
-        //         .main-title {
-        //             display: flex;
-        //             flex-direction: column;
-        //             width: 100%;
-        //         }
-        //         // .icon-card {
-                    
-        //         // }
 
-        //         .icon-card:before {
-        //             content: "\e912";
-        //         }
-        //     }
-        // }
-    }
+            // .task-edit-header {
+            //     // min-height: 125px;
+            //     display: flex;
+            //     align-items: center;
+            //     width: 100%;
+            //     .task-section {
+            //         display: flex;
+            //         align-items: center;
+            //         width: 100%;
+            //         margin-bottom: 10px;
+            //         .main-title {
+            //             display: flex;
+            //             flex-direction: column;
+            //             width: 100%;
+            //         }
+            //         // .icon-card {
+
+            //         // }
+
+            //         .icon-card:before {
+            //             content: "\e912";
+            //         }
+            //     }
+            // }
+        }
     }
 }
 
-.task-label-container{
+.task-label-container {
     display: flex;
 }
+
 .controls-btns {
     display: flex;
     align-items: center;
@@ -142,13 +187,14 @@
     //     @include xBtn;
     // }
 }
-.button-link{
+
+.button-link {
     position: relative;
     display: flex;
     gap: 8px;
     align-items: center;
     font-size: 14px;
-    background-color: rgba(9,30,66,.04);
+    background-color: rgba(9, 30, 66, .04);
     border: none;
     border-radius: 3px;
     //  width: 100%; 
@@ -157,53 +203,66 @@
     margin-top: 8px;
     text-transform: capitalize;
     cursor: pointer;
-   
+
     @include hover-supported {
         background-color: rgba(9, 30, 66, 0.08);
     }
 }
-.icon-Members{
+
+.icon-Members {
     margin: 0 6px 0 -6px;
-    
+
 }
-.icon-Members:before{
+
+.icon-Members:before {
     content: "\e946";
 }
-.icon-Labels{
+
+.icon-Labels {
     margin: 0 6px 0 -6px;
-   
+
 }
-.icon-Labels:before{
+
+.icon-Labels:before {
     content: "\e93f";
 }
-.icon-Checklist{
+
+.icon-Checklist {
     margin: 0 6px 0 -6px;
-   
+
 }
-.icon-Checklist:before{
+
+.icon-Checklist:before {
     content: "\e91a";
 }
-.icon-Dates{
+
+.icon-Dates {
     margin: 0 6px 0 -6px;
-   
+
 }
-.icon-Dates:before{
+
+.icon-Dates:before {
     content: "\e946";
 }
-.icon-Attachment{
+
+.icon-Attachment {
     margin: 0 6px 0 -6px;
-   
+
 }
-.icon-Attachment:before{
+
+.icon-Attachment:before {
     content: "\e908";
 }
-.icon-Cover{
+
+.icon-Cover {
     margin: 0 6px 0 -6px;
-    
+
 }
-.icon-Cover:before{
+
+.icon-Cover:before {
     content: "\e944";
 }
+
 // ::content{
 //     /* members */
 //         content: "\e946";
