@@ -70,7 +70,7 @@ export default {
     toggleMember(member) {
         const idx = this.task.members.findIndex((memb) => memb._id === member._id)
         if(idx > -1 ) this.task.members.splice(idx,1)
-        this.task.members.push(member);
+        else this.task.members.push(member)
         this.$emit('toggleMember')
     },
   },
