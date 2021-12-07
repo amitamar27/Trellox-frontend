@@ -1,5 +1,10 @@
 <template >
   <div v-if="board"  class="board-container" >
+
+    <board-header
+      :board="board"
+     />
+    
     <!-- {{board}} -->
     <group-list  @dragEnd="dragEnd" @pickTask="pickTask" :board="board" v-if="board" ></group-list>
     <!-- <router-view /> -->
@@ -11,7 +16,8 @@
 
 <script>
 import groupList from "../components/group-list.vue";
-import taskEdit from './task-edit.vue'
+import taskEdit from './task-edit.vue';
+import boardHeader from '../components/board-header.vue';
 export default {
    watch: {
         '$route.params.boardId': {
@@ -52,7 +58,8 @@ export default {
 
   components: {
     groupList,
-    taskEdit
+    taskEdit,
+    boardHeader
   },
 };
 </script>
