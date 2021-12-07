@@ -2,17 +2,22 @@
   <div class="card-main">
     <div @click="cardClick(groupId, task.id)" class="card-container">
       <div class="card-preview">
-      <div v-if="taskLabels.length" class="labels">
-        <div
-          class="task-label"
-          v-for="label in taskLabels"
-          :key="label.id"
-          :style="{ backgroundColor: label.color }"
-        
-        ></div>
-      </div>
+        <div v-if="taskLabels.length" class="labels">
+          <div
+            class="task-label"
+            v-for="label in taskLabels"
+            :key="label.id"
+            @click.prevent.stop="toggleSize"
+            :style="{ backgroundColor: label.color }"
+            :class="{
+              shrinkLabel: changeLabelSize,
+              increaseLabel: !changeLabelSize,
+            }"
 
-      
+          ></div>
+             <!-- <span v-if="!changeLabelSize">{{ label.title }}</span> -->
+        </div>
+
         {{ task.title }}
       </div>
     </div>
@@ -42,6 +47,7 @@ export default {
     return {
       taskLabels: [],
       boardId: '',
+      changeLabelSize: true,
       // changeLabelSize: true,
 
     }
@@ -59,11 +65,11 @@ export default {
         });
     },
     getLabels() {
-      console.log('gettttttt',this.task);
-      if(!this.task.labelIds) return
-      console.log('this.task.labelIds',this.task.labelIds);
+      console.log('gettttttt', this.task);
+      if (!this.task.labelIds) return
+      console.log('this.task.labelIds', this.task.labelIds);
       this.boardLabels.forEach((label) => {
-        console.log('label',label);
+        console.log('label', label);
         if (this.task.labelIds.includes(label.id)) this.taskLabels.push(label);
       });
       console.log('bbbbbb', this.taskLabels);
@@ -71,7 +77,11 @@ export default {
       // return false
 
     },
-    
+    toggleSize() {
+      this.changeLabelSize = !this.changeLabelSize;
+      console.log('this.changeLabelSize', this.changeLabelSize);
+    },
+
     // toggleSize() {
     //             this.changeLabelSize = !this.changeLabelSize;
     //             console.log('this.changeLabelSize', this.changeLabelSize);
@@ -80,7 +90,7 @@ export default {
   created() {
     const { boardId } = this.$route.params;
     this.boardId = boardId
-    console.log('labels task',this.taskLabels);
+    console.log('labels task', this.taskLabels);
     console.log('labels', this.task.labelIds);
     this.getLabels();
 

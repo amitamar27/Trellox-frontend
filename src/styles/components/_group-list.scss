@@ -67,6 +67,25 @@
                         }
                    
                     }
+                    .increaseLabel {
+                        transition: all 0.5s;
+                        padding: 0 8px;
+                        height: 16px;
+                        min-width: 56px;
+                        span {
+                            opacity: 1;
+                        }
+                    }
+                    .shrinkLabel {
+                        transition: all 0.5s;
+                        padding: 0;
+                        width: 40px;
+                        min-width: 40px;
+                        height: 8px;
+                        span {
+                            opacity: 0;
+                        }
+                    }
 
              
 
