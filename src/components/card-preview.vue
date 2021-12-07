@@ -15,7 +15,7 @@
             }"
 
           ></div>
-             <!-- <span v-if="!changeLabelSize">{{ label.title }}</span> -->
+             <!-- <span class="label-title" v-if="!changeLabelSize">{{ label.title }}</span> -->
         </div>
 
         {{ task.title }}
@@ -81,11 +81,6 @@ export default {
       this.changeLabelSize = !this.changeLabelSize;
       console.log('this.changeLabelSize', this.changeLabelSize);
     },
-
-    // toggleSize() {
-    //             this.changeLabelSize = !this.changeLabelSize;
-    //             console.log('this.changeLabelSize', this.changeLabelSize);
-    //         },
   },
   created() {
     const { boardId } = this.$route.params;
