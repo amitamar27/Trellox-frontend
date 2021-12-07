@@ -9,7 +9,12 @@
       <el-input></el-input>
       <h4>Board members</h4>
       <section>
-        <div class="member" v-for="member in board.members" :key="member.id" @click="toggleMember(member)">
+        <div
+          class="member"
+          v-for="member in board.members"
+          :key="member.id"
+          @click="toggleMember(member)"
+        >
           <div class="member-info flex">
             <avatar
               :size="32"
@@ -68,10 +73,12 @@ export default {
       return this.task.members.some((member) => member._id === id);
     },
     toggleMember(member) {
-        const idx = this.task.members.findIndex((memb) => memb._id === member._id)
-        if(idx > -1 ) this.task.members.splice(idx,1)
-        else this.task.members.push(member)
-        this.$emit('toggleMember')
+      const idx = this.task.members.findIndex(
+        (memb) => memb._id === member._id
+      );
+      if (idx > -1) this.task.members.splice(idx, 1);
+      else this.task.members.push(member);
+      this.$emit("toggleMember");
     },
   },
   computed: {},
