@@ -31,7 +31,10 @@ export default {
     },
     group:{
       type: Object,
-    } 
+    },
+    idx:{
+      type:String
+    }
   },
   data() {
     return {

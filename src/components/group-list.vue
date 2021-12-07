@@ -9,7 +9,7 @@
         @end="dragEnd"
       >
         <div
-          v-for="group in board.groups"
+          v-for="(group, idx) in board.groups"
           :groupId="group.id"
           :key="group.id"
           class="group-preview"
@@ -37,7 +37,7 @@
                 <span class="span-2 icon-sm"></span>
               </span>
               <div
-                @click.prevent.stop="openGroupMenu(group.id)"
+                @click.prevent.stop="openGroupMenu(group.id, idx)"
                 class="
                   group-header-extras-menu
                   span-1
@@ -51,13 +51,13 @@
               @mousedown.stop=""
               v-if="isMenuOpened && group"
               @closeMenu="closeGroupMenu"
+              :idx="idx"
               :group="group"
               :title="'List actions'"
             ></group-menu>
           </div>
 
-        
-           <card-list
+          <card-list
             @dragEnd="dragEnd"
             @pickTask="pickTask"
             :tasks="group.tasks"
@@ -69,8 +69,6 @@
           >
           </card-list>
 
-     
-         
           <div
             v-if="isAdding && group.id === currGroupId"
             class="card-add-edit"
@@ -168,7 +166,7 @@ export default {
   data() {
     return {
       isAddingTitle: false,
-      boardId : '',
+      boardId: '',
       newTitle: "",
       newGroupTitle: "",
       isMenuOpened: false,
@@ -199,13 +197,13 @@ export default {
       this.newGroupTitle = "";
 
     },
-    async openGroupMenu(groupId) {
+    async openGroupMenu(groupId, idx) {
 
       const board = this.$store.getters.board
       const groupDetails = { board, groupId }
       this.isMenuOpened = !this.isMenuOpened
       const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
-      this.group = group
+      this.group = group // check if used
 
 
 
@@ -264,7 +262,7 @@ export default {
     editTitle() {
       if (!this.newTitle) return;
     },
- 
+
   },
 
 };
