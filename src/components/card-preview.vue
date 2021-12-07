@@ -59,13 +59,19 @@ export default {
         });
     },
     getLabels() {
-      console.log('gettttttt');
+      console.log('gettttttt',this.task);
+      if(!this.task.labelIds) return
+      console.log('this.task.labelIds',this.task.labelIds);
       this.boardLabels.forEach((label) => {
+        console.log('label',label);
         if (this.task.labelIds.includes(label.id)) this.taskLabels.push(label);
       });
       console.log('bbbbbb', this.taskLabels);
+      // if(this.taskLabels) return true;
+      // return false
 
     },
+    
     // toggleSize() {
     //             this.changeLabelSize = !this.changeLabelSize;
     //             console.log('this.changeLabelSize', this.changeLabelSize);
@@ -74,6 +80,7 @@ export default {
   created() {
     const { boardId } = this.$route.params;
     this.boardId = boardId
+    console.log('labels task',this.taskLabels);
     console.log('labels', this.task.labelIds);
     this.getLabels();
 
@@ -87,3 +94,5 @@ export default {
 
 <style>
 </style>
+
+

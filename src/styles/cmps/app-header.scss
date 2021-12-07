@@ -24,12 +24,14 @@
 
         button{
             background-color: #ffffff4a;
-            border: none;
-            border-radius: 4px;
-            padding: 3px 6px;
+            align-items: center;
+            padding: 3px;
+            display: flex;
             cursor: pointer;
+            border: none;
+            border-radius: 3px;
             @include hover-supported {
-                background-color: #6cadd3;
+                background-color: #ccd7dbec;
                 cursor: pointer;
             }
         }
@@ -79,4 +81,15 @@
         }
     }
     
+}
+
+.second-header{
+    display: flex;
+
+    .menu-btn{
+        color: rgb(242, 240, 240);
+        background-color: rgba(255, 255, 255, 0.2);
+        margin-left: 10px;
+        padding: 0 12px 0 0;
+    }
 }
