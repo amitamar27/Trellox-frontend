@@ -244,11 +244,12 @@ function _creareBoards(){
                                 "id": "ZdPnm",
                                 "txt": "also @yaronb please CR this",
                                 "createdAt": 1590999817436.0,
-                                "byMember": {
+                                "byMember":  {
                                     "_id": "u101",
-                                    "fullname": "Tal Tarablus",
-                                    "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                                }
+                                    "username": "korenlevi",
+                                    "fullname": "Koren Levi",
+                                    "imgUrl": "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889545/Trellox/korenlevi.jpg"
+                                },
                             }
                         ],
                         "checklists": [
@@ -272,19 +273,25 @@ function _creareBoards(){
                         "members": [
                             {
                                 "_id": "u101",
-                                "username": "Tal",
-                                "fullname": "Tal Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                                "username": "korenlevi",
+                                "fullname": "Koren Levi",
+                                "imgUrl": "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889545/Trellox/korenlevi.jpg"
+                            },
+                            {
+                                "_id": "u102",
+                                "username": "amitamar",
+                                "fullname": "Amit Amar",
+                                "imgUrl": "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889554/Trellox/amitamar.jpg"
                             }
                         ],
                         "labelIds": ["l101", "l102"],
                         "createdAt": 1590999730348,
                         "dueDate": 16156215211,
-                        "byMember": {
+                        "byMember":  {
                             "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            "username": "korenlevi",
+                            "fullname": "Koren Levi",
+                            "imgUrl": "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889545/Trellox/korenlevi.jpg"
                         },
                         "style": {
                             "bgColor": "#26de81"
@@ -296,11 +303,11 @@ function _creareBoards(){
                         "activities": [{
                             "txt": "Changed Color",
                             "createdAt": 1625816076030,
-                            "byMember": {
+                            "byMember":  {
                                 "_id": "u101",
-                                "username": "Koren",
+                                "username": "korenlevi",
                                 "fullname": "Koren Levi",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                                "imgUrl": "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889545/Trellox/korenlevi.jpg"
                             },
                         },],
                         
@@ -315,7 +322,7 @@ function _creareBoards(){
                                 "txt": "also @yaronb please CR this",
                                 "createdAt": 1590999817436.0,
                                 "byMember": {
-                                    "_id": "u101",
+                                    "_id": "u103",
                                     "fullname": "Tal Tarablus",
                                     "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                                 }
@@ -336,7 +343,7 @@ function _creareBoards(){
                         ],
                         "members": [
                             {
-                                "_id": "u101",
+                                "_id": "u103",
                                 "username": "Tal",
                                 "fullname": "Tal Tarablus",
                                 "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
@@ -345,11 +352,11 @@ function _creareBoards(){
                         "labelIds": ["l101", "l102"],
                         "createdAt": 1590999730348,
                         "dueDate": 16156215211,
-                        "byMember": {
+                        "byMember":  {
                             "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            "username": "korenlevi",
+                            "fullname": "Koren Levi",
+                            "imgUrl": "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889545/Trellox/korenlevi.jpg"
                         },
                         "style": {
                             "bgColor": "#26de81"
@@ -361,11 +368,11 @@ function _creareBoards(){
                         "activities": [{
                             "txt": "Changed Color",
                             "createdAt": 1625816076030,
-                            "byMember": {
+                            "byMember":  {
                                 "_id": "u101",
-                                "username": "Koren",
+                                "username": "korenlevi",
                                 "fullname": "Koren Levi",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                                "imgUrl": "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889545/Trellox/korenlevi.jpg"
                             },
                         },]
                     }
@@ -386,9 +393,10 @@ function _creareBoards(){
                             "txt": "also @yaronb please CR this",
                             "createdAt": 1590999817436.0,
                             "byMember": {
-                                "_id": "u101",
-                                "fullname": "Tal Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                                "_id": "u102",
+                                "username": "amitamar",
+                                "fullname": "Amit Amar",
+                                "imgUrl": "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889554/Trellox/amitamar.jpg"
                             }
                         }
                     ],
@@ -412,20 +420,20 @@ function _creareBoards(){
                     ],
                     "members": [
                         {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            "_id": "u102",
+                            "username": "amitamar",
+                            "fullname": "Amit Amar",
+                            "imgUrl": "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889554/Trellox/amitamar.jpg"
                         }
                     ],
                     "labelIds": ["l101", "l102"],
                     "createdAt": 1590999730348,
                     "dueDate": 16156215211,
-                    "byMember": {
-                        "_id": "u101",
-                        "username": "Tal",
-                        "fullname": "Tal Tarablus",
-                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                    "byMember":{
+                        "_id": "u102",
+                        "username": "amitamar",
+                        "fullname": "Amit Amar",
+                        "imgUrl": "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889554/Trellox/amitamar.jpg"
                     },
                     "style": {
                         "bgColor": "#26de81"
@@ -438,11 +446,11 @@ function _creareBoards(){
                         "txt": "Changed Color",
                         "createdAt": 1625816076030,
                         "byMember": {
-                            "_id": "u101",
-                            "username": "Koren",
-                            "fullname": "Koren Levi",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                        },
+                            "_id": "u102",
+                            "username": "amitamar",
+                            "fullname": "Amit Amar",
+                            "imgUrl": "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889554/Trellox/amitamar.jpg"
+                        }
                     },],
                     
                 },
@@ -456,7 +464,7 @@ function _creareBoards(){
                             "txt": "also @yaronb please CR this",
                             "createdAt": 1590999817436.0,
                             "byMember": {
-                                "_id": "u101",
+                                "_id": "u103",
                                 "fullname": "Tal Tarablus",
                                 "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                             }
@@ -477,7 +485,7 @@ function _creareBoards(){
                     ],
                     "members": [
                         {
-                            "_id": "u101",
+                            "_id": "u103",
                             "username": "Tal",
                             "fullname": "Tal Tarablus",
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
@@ -487,7 +495,7 @@ function _creareBoards(){
                     "createdAt": 1590999730348,
                     "dueDate": 16156215211,
                     "byMember": {
-                        "_id": "u101",
+                        "_id": "u103",
                         "username": "Tal",
                         "fullname": "Tal Tarablus",
                         "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
@@ -553,7 +561,7 @@ function _creareBoards(){
                             "txt": "also @yaronb please CR this",
                             "createdAt": 1590999817436.0,
                             "byMember": {
-                                "_id": "u101",
+                                "_id": "u103",
                                 "fullname": "Tal Tarablus",
                                 "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                             }
@@ -574,7 +582,7 @@ function _creareBoards(){
                     ],
                     "members": [
                         {
-                            "_id": "u101",
+                            "_id": "u103",
                             "username": "Tal",
                             "fullname": "Tal Tarablus",
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
@@ -584,7 +592,7 @@ function _creareBoards(){
                     "createdAt": 1590999730348,
                     "dueDate": 16156215211,
                     "byMember": {
-                        "_id": "u101",
+                        "_id": "u103",
                         "username": "Tal",
                         "fullname": "Tal Tarablus",
                         "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
@@ -643,7 +651,7 @@ function _creareBoards(){
                             "txt": "also @yaronb please CR this",
                             "createdAt": 1590999817436.0,
                             "byMember": {
-                                "_id": "u101",
+                                "_id": "u103",
                                 "fullname": "Tal Tarablus",
                                 "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                             }
@@ -664,7 +672,7 @@ function _creareBoards(){
                     ],
                     "members": [
                         {
-                            "_id": "u101",
+                            "_id": "u103",
                             "username": "Tal",
                             "fullname": "Tal Tarablus",
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
@@ -674,7 +682,7 @@ function _creareBoards(){
                     "createdAt": 1590999730348,
                     "dueDate": 16156215211,
                     "byMember": {
-                        "_id": "u101",
+                        "_id": "u103",
                         "username": "Tal",
                         "fullname": "Tal Tarablus",
                         "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
@@ -747,9 +755,20 @@ function _createBoard(title,groups=[],style={}){
         }
     ],
         members:[{
-            _id:makeId(),
-            fullname:'koren',
-            imgUrl:''
+            _id:'u101',
+            fullname:'Koren Levi',
+            username:'korenlevi',
+            imgUrl:'https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889545/Trellox/korenlevi.jpg'
+        },{
+            _id:'u102',
+            fullname:'Amit Amar',
+            username:'amitamar',
+            imgUrl:'https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889554/Trellox/amitamar.jpg'
+        },{
+        _id:'u103',
+        fullname: "Tal Tarablus",
+        username: "Tal",
+        imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
         }],
         groups,
         style

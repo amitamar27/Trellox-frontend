@@ -136,9 +136,7 @@ export default {
     addLabel(idx) {
       const id = "l10" + (idx + 1);
       console.log("id", id);
-      const newIdx = this.labels.findIndex(
-        (label) => label.color === this.colors[idx]
-      );
+      const newIdx = this.labels.findIndex((label) => label.color === this.colors[idx]);
       console.log("newIdx", newIdx);
       if (newIdx > -1) {
         this.labels.splice(newIdx, 1);

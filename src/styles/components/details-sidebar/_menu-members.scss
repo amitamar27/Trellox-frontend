@@ -42,7 +42,10 @@
         text-decoration: none;
         text-overflow: ellipsis;
         white-space: nowrap;
-
+        justify-content: space-between;
+        .member-info{
+            display: flex;
+        }
         .fullname {
             margin-left: 8px;
         }
@@ -51,6 +54,11 @@
             // color: #252e3d;
             background-color: #091e420a;
 
+        }
+        .icon-check{
+            display: flex;
+            align-items: center;
+            margin-top: 2px;
         }
     }
 }

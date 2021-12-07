@@ -5,22 +5,25 @@
       <a class="icon-sm icon-close" @click="closeMenu"></a>
     </header>
 
-    <main class="menu-members-container" v-if="currMembers">
+    <main class="menu-members-container">
       <el-input></el-input>
       <h4>Board members</h4>
-      <section v-for="member in currMembers" :key="member.id">
-        <div class="member">
-          <avatar
-            :size="32"
-            :rounded="true"
-            :username="member.username"
-            :src="member.imgUrl"
-          >
-          </avatar>
-          <span class="fullname">
-            {{ member.fullname }}
+      <section>
+        <div class="member" v-for="member in board.members" :key="member.id" @click="toggleMember(member)">
+          <div class="member-info flex">
+            <avatar
+              :size="32"
+              :rounded="true"
+              :username="member.username"
+              :src="member.imgUrl"
+            >
+            </avatar>
+            <span class="fullname">
+              {{ member.fullname }} <span>&nbsp({{ member.username }})</span>
+            </span>
+          </div>
+          <span v-if="isTaskMember(member._id)" class="icon-check icon-sm">
           </span>
-          <span class="icon-check icon-sm"> </span>
         </div>
       </section>
     </main>
@@ -28,6 +31,7 @@
 </template>
 
 <script>
+//
 import avatar from "vue-avatar";
 export default {
   props: {
@@ -35,10 +39,10 @@ export default {
       type: Object,
       required: true,
     },
-    // board: {
-    //     type:Array,
-    //     required: true,
-    // }
+    board: {
+      type: Object,
+      required: true,
+    },
     // members:{
     //     type:Array,
     //     required: true,
@@ -46,11 +50,12 @@ export default {
   },
   data() {
     return {
-      currMembers: null,
+      members: null,
     };
   },
   created() {
-    this.currMembers = this.task.members;
+    this.members = this.task.members;
+    console.log("thiss", this.members);
   },
   methods: {
     closeMenu() {
@@ -59,12 +64,17 @@ export default {
     allMembers() {
       return this.members;
     },
+    isTaskMember(id) {
+      return this.task.members.some((member) => member._id === id);
+    },
+    toggleMember(member) {
+        const idx = this.task.members.findIndex((memb) => memb._id === member._id)
+        if(idx > -1 ) this.task.members.splice(idx,1)
+        this.task.members.push(member);
+        this.$emit('toggleMember')
+    },
   },
-  computed: {
-    // members(){
-    //   return this.members
-    // },
-  },
+  computed: {},
   components: {
     avatar,
   },
@@ -72,4 +82,7 @@ export default {
 </script>
 
 <style>
+/* .member-info{
+    display: flex;
+} */
 </style>
