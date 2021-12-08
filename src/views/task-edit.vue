@@ -1,7 +1,11 @@
 <template>
   <main class="card-edit-window" ref="task" @click="closeDarkScreen">
     <div v-if="task" class="card-edit" @click.stop="">
-      <header v-if="task.cover.bgColor" :style="taskBgColor" class="task-edit-bg-title">
+      <header
+        v-if="task.cover.bgColor"
+        :style="taskBgColor"
+        class="task-edit-bg-title"
+      >
         <a class="icon-md" @click="closeDarkScreen"></a>
         <div class="task-edit-bg-btn">
           <a class="cover-btn" @click="openCoverMenu">
@@ -30,17 +34,16 @@
 
           </header> -->
         <transition
-      
-      enter-active-class="animate__animated animate__fadeInRight animate__faster"
-      leave-active-class="animate__animated animate__fadeOutRight animate__faster"
-    >
-        <task-cover 
-        v-if="isCoverClick" 
-        @closeCover="closeCover"
-        :task="task"
-        :board="board"
-        ></task-cover>
-         </transition>
+          enter-active-class="animate__animated animate__fadeInRight animate__faster"
+          leave-active-class="animate__animated animate__fadeOutRight animate__faster"
+        >
+          <task-cover
+            v-if="isCoverClick"
+            @closeCover="closeCover"
+            :task="task"
+            :board="board"
+          ></task-cover>
+        </transition>
         <task-title :task="task" @saveTask="saveTask"> </task-title>
         <a
           class="icon-md close-btn"
@@ -159,7 +162,7 @@ export default {
     },
     board() {
       // return
-      // const board = 
+      // const board =
       // console.log("this.$store.getters.board", board);
       return this.$store.getters.board;
     },
@@ -202,7 +205,11 @@ export default {
       console.log(this.currTask);
       console.log("labelId", labelId);
       const { groupId } = this.$route.params;
-      this.$store.dispatch({type: "saveTask",groupId,taskToSave: this.currTask,});
+      this.$store.dispatch({
+        type: "saveTask",
+        groupId,
+        taskToSave: this.currTask,
+      });
     },
     toggleMember() {
       console.log(this.currTask);
@@ -222,8 +229,8 @@ export default {
     openCoverMenu() {
       this.isCoverClick = true;
     },
-    closeCover(){
-    this.isCoverClick = false;
+    closeCover() {
+      this.isCoverClick = false;
     },
   },
   components: {
@@ -278,7 +285,7 @@ export default {
   margin-bottom: 30px;
 }
 .task-edit-bg-title {
-  height: 150px;
+  height: 116px;
   width: 100%;
   position: relative;
 }

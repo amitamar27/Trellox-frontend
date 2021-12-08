@@ -57,7 +57,7 @@
         v-model="currLabel.title"
         @keydown.enter="saveLabel"
       />
-      <button class="save-btn" @mousedown="saveLabel">Save</button>
+      <button class="save-btn" @click="saveLabel">Save</button>
       
     </section>
   </section>
@@ -130,7 +130,9 @@ export default {
     },
     saveLabel() {
       console.log("labels 1 ");
-      this.$emit("saveLabels", this.labels);
+      // this.$emit("saveLabels", this.labels);
+      this.$emit('saveTask');
+      this.$emit('closeMenu');
     },
     goBack() {
       this.isInEdit = false;
