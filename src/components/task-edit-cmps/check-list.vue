@@ -1,82 +1,74 @@
 <template>
   <main class="task-checkList">
-		<transition-group
-			enter-active-class="animate__animated animate__fadeInRight animate__faster"
-			leave-active-class="animate__animated animate__fadeOutRight animate__faster"
-		>
-			<section
-				class="task-todos"
-				v-for="(checklist, idx) in taskToSave.checklists"
-				:key="checklist.id"
-			>
-           
-				<header class="checkList-header">
-					<div class="checklist-icons">
-					<span class="icon-lg icon card icon-Checklist">
-						</span>	
-						<h3>{{ checklist.title }}</h3>	
-						</div>
-					<div>			
-					<button @click="removeChecklist(idx)">
-						Delete
-					</button>
-					</div>
-				</header>
+    <transition-group
+      enter-active-class="animate__animated animate__fadeInRight animate__faster"
+      leave-active-class="animate__animated animate__fadeOutRight animate__faster"
+    >
+      <section
+        class="task-todos"
+        v-for="(checklist, idx) in task.checklists"
+        :key="checklist.id"
+      >
+        <header class="checkList-header">
+          <div class="checklist-icons">
+            <span class="icon-lg icon card icon-Checklist"> </span>
+            <h3>{{ checklist.title }}</h3>
+          </div>
+          <div>
+            <button @click="removeChecklist(idx)">Delete</button>
+          </div>
+        </header>
 
-				<todos-preview
-					:list="checklist"
-					@saveChecklist="saveChecklist"
-				/>
-			</section>
-		</transition-group>
-	</main>
+        <todos-preview :list="checklist" @saveChecklist="saveChecklist" />
+      </section>
+    </transition-group>
+  </main>
 </template>
 
 <script>
-import todosPreview from './todos-preview.vue'
+import todosPreview from "./todos-preview.vue";
 export default {
-    props: {
-		task:{
-            type: Object,
-            required: true,
-        } 
-	},
-	computed: {
-		taskToSave() {
-			return JSON.parse(JSON.stringify(this.task))
-            // console.log('saving task');
-		}
-	},
-	methods: {
-		saveNewTask() {
-			// const { groupId } = this.$route.params
-            // console.log('groupIdgroupId',groupId);
-            // var taskk = this.taskToSave
-            console.log('taskktaskk',this.taskToSave);
-			this.$emit('saveTask',this.taskToSave)
-			// this.$store.dispatch({ type: 'saveTask', groupId, taskToSave: taskk })
-		},
-		saveChecklist(checklist) {
-			const idx = this.taskToSave.checklists.findIndex(l => l.id === checklist.id)
-            console.log('idxidxidx',idx);
-			if (idx < 0) return
-			this.taskToSave.checklists.splice(idx, 1, checklist)
+  props: {
+    task: {
+      type: Object,
+      required: true,
+    },
+  },
+//   computed: {
+//     task() {
+//       return JSON.parse(JSON.stringify(this.task));
+//       // console.log('saving task');
+//     },
+//   },
+  methods: {
+    saveNewTask() {
+    
+      console.log("taskktaskk", this.task);
+      this.$emit("saveTask", this.task);
+      // this.$store.dispatch({ type: 'saveTask', groupId, task: taskk })
+    },
+    saveChecklist(checklist) {
+      console.log("checklist", checklist);
+      const idx = this.task.checklists.findIndex((l) => l.id === checklist.id);
+      console.log("idxidxidx", idx);
+      if (idx < 0) return;
+      this.task.checklists.splice(idx, 1, checklist);
+      console.log("this.task.checklists", this.task.checklists);
+      this.saveNewTask();
+    },
+    removeChecklist(idx) {
+      if (idx < 0) return;
+      this.task.checklists.splice(idx, 1);
 
-			this.saveNewTask()
-		},
-		removeChecklist(idx) {
-			if (idx < 0) return
-			this.taskToSave.checklists.splice(idx, 1)
-
-			this.saveNewTask()
-			//   console.log('taskktaskk',this.taskToSave);
-			// this.$emit('saveTask',this.taskToSave)
-		}
-	},
-	components: {
-		todosPreview
-	},
-}
+      this.saveNewTask();
+      //   console.log('taskktaskk',this.task);
+      // this.$emit('saveTask',this.task)
+    },
+  },
+  components: {
+    todosPreview,
+  },
+};
 </script>
 
 <style lang="scss" >
@@ -97,7 +89,7 @@ export default {
 //     border: none;
 //     cursor: pointer;
 //     transition: all .2s;
-	
+
 // 	//  @include hover-supported {
 //     //         background-color: $secondaryBtnsGray;
 //     //     }

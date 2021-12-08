@@ -1,13 +1,14 @@
 <template>
   <main class="card-edit-window" ref="task" @click="closeDarkScreen">
     <div v-if="task" class="card-edit" @click.stop="">
-      <header
-        v-if="task.cover"
-        @click="closeDarkScreen"
-        :style="taskBgColor"
-        class="task-edit-bg-title"
-      >
-        <a class="icon-md"></a>
+      <header v-if="task.cover" :style="taskBgColor" class="task-edit-bg-title">
+        <a class="icon-md" @click="closeDarkScreen"></a>
+        <div class="task-edit-bg-btn">
+          <a class="cover-btn" @click="openCoverMenu">
+            <span class="icon-sm icon-card-cover"></span>
+            Cover</a
+          >
+        </div>
       </header>
       <main class="task-edit-container">
         <!-- <header class="task-edit-header">
@@ -24,12 +25,17 @@
           </header> -->
 
         <!-- <header  v-if="task.cover"> 
+              align-items: center;
+
 
           </header> -->
-        <task-title :task="task" @saveTask="saveTask">
-          
-        </task-title>
-        <a class="icon-md close-btn" v-if="!task.cover" @click="closeDarkScreen"></a>
+        <task-cover v-if="isCoverClick"></task-cover>
+        <task-title :task="task" @saveTask="saveTask"> </task-title>
+        <a
+          class="icon-md close-btn"
+          v-if="!task.cover"
+          @click="closeDarkScreen"
+        ></a>
         <section class="main-content">
           <div class="main-content-details">
             <section class="task-details">
@@ -78,10 +84,12 @@
           </div>
 
           <aside class="task-side-bar">
-            <task-aside :task="task" :key="6"
-            @addLabel="addLabel"
-            @saveTask="saveTask"
-            
+            <task-aside
+              :task="task"
+              :key="6"
+              @addLabel="addLabel"
+              @saveTask="saveTask"
+              :board="board"
             ></task-aside>
           </aside>
         </section>
@@ -103,12 +111,15 @@ import taskAside from "../components/task-edit-cmps/task-aside.vue";
 import taskAttachment from "../components/task-edit-cmps/task-attachment.vue";
 import checkList from "../components/task-edit-cmps/check-list.vue";
 import taskTitle from "../components/task-edit-cmps/task-title.vue";
+import taskCover from "../components/task-edit-cmps/task-cover.vue";
+
 export default {
   name: "task-edit",
   props: {},
   data() {
     return {
       currTask: null,
+      isCoverClick: false,
       // board:null,
     };
   },
@@ -133,11 +144,13 @@ export default {
       }
     },
     isCheckLists() {
-      // console.log('this.task',this.task);
-      // const { groupId } = this.$route.params;
-      // this.$store.commit({ type: "getGroupById", groupId });
-      // const group = this.$store.getters.currGroup
       return this.task().checkList;
+    },
+    board() {
+      // return
+      const board = this.$store.getters.board;
+      console.log("this.$store.getters.board", board);
+      return board;
     },
   },
   methods: {
@@ -152,12 +165,14 @@ export default {
     saveTask(task) {
       // alert('saving..')
       console.log("rass", task);
-      if (!task) return;
-      console.log("boardId task", task);
       const { groupId } = this.$route.params;
       console.log("groupId", groupId);
       if (groupId)
-        this.$store.dispatch({ type: "saveTask", groupId, taskToSave: task });
+        this.$store.dispatch({
+          type: "saveTask",
+          groupId,
+          taskToSave: this.currTask,
+        });
     },
     labels() {
       const labels = this.$store.getters.labels;
@@ -169,27 +184,33 @@ export default {
       console.log("newLabels", newLabels);
       return newLabels;
     },
-    saveLabels({labels}){
-      console.log('labels tp',labels);
+    saveLabels({ labels }) {
+      console.log("labels tp", labels);
     },
-    addLabel(labelId){
+    addLabel(labelId) {
       console.log(this.currTask);
-      console.log('labelId',labelId);
+      console.log("labelId", labelId);
+      const { groupId } = this.$route.params;
+      this.$store.dispatch({type: "saveTask",groupId,taskToSave: this.currTask,});
+    },
+    toggleMember() {
+      console.log(this.currTask);
       const { groupId } = this.$route.params;
       // alert('calling saveTask')
-      this.$store.dispatch({ type: "saveTask", groupId, taskToSave: this.currTask });
+      this.$store.dispatch({
+        type: "saveTask",
+        groupId,
+        taskToSave: this.currTask,
+      });
     },
-    members(){
-      const memberss = this.$store.getters.members
-      console.log('memberss',memberss);
-      return this.$store.getters.members
+    members() {
+      const memberss = this.$store.getters.members;
+      console.log("memberss", memberss);
+      return this.$store.getters.members;
     },
-    board(){
-      // return
-      this.board = this.$store.getters.board
-      console.log('this.$store.getters.board',board);
-      return this.board
-    }
+    openCoverMenu() {
+      this.isCoverClick = true;
+    },
   },
   components: {
     labels,
@@ -200,6 +221,7 @@ export default {
     taskAside,
     checkList,
     taskTitle,
+    taskCover,
   },
 };
 </script>
@@ -244,6 +266,7 @@ export default {
 .task-edit-bg-title {
   height: 150px;
   width: 100%;
+  position: relative;
 }
 /* .icon-md{
   background-color: #00000014;

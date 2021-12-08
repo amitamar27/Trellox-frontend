@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main >
     <aside>
       <h3 class="head-lines">Add to card</h3>
     </aside>
@@ -14,22 +14,10 @@
       <span>{{ option.title }}</span>
     </a>
     <transition
-      v-if="menuIdx"
+      
       enter-active-class="animate__animated animate__fadeInRight animate__faster"
       leave-active-class="animate__animated animate__fadeOutRight animate__faster"
     >
-    
-    </transition>
-    <!-- <component
-            v-clickoutside="closeEditPopup"
-            class="popup dynamic-component"
-            v-if="isPopupShow"
-            :is="currAction.type"
-            :card="card"
-            :action="currAction"
-            @close="closeEditPopup"
-            @updateCard="saveCard"
-          /> -->
     <component
       @click="showMenu(idx)"
       class="popup is-show dynamic-component"
@@ -37,9 +25,13 @@
       :task="this.task"
       @addLabel="addLabel"
       @closeMenu="closeMenu"
-      
+      @toggleMember="toggleMember"
+      :board="board"
        
     />
+    </transition>
+ 
+    
   </main>
 </template>
 
@@ -54,10 +46,11 @@ export default {
       type: Object,
       required: true,
     },
-    // board:{
-    //     // type: Object,
-    //     required: true,
-    // }
+    board:{
+        type: Object,
+        required: true,
+    },
+    // board: Object,
    
   },
   data() {
@@ -75,12 +68,13 @@ export default {
       currComponent: "",
     };
   },
+  created(){
+    //   if(board)console.log('boardddd',board);
+  },
 
   methods: {
     setClass(idx) {
-      const style = "icon-sm icon-" + this.options[idx].title;
-      return style;
-      // return
+       return "icon-sm icon-" + this.options[idx].title;
     },
     openMenu(idx) {
         
@@ -103,15 +97,9 @@ export default {
         console.log('labelId',labelId);
         this.$emit('addLabel')
     },
-    // currentProperties(){
-    //     if(this.currComponent === 'currComponent') console.log(board);
-    //     return board
-    // },
-    // labels(){
-    //     const lab =  this.$emit('labels');
-    //     console.log('lab',lab);
-    // }
-
+    toggleMember(){
+        this.$emit('saveTask')
+    },
 
   },
   computed: {},

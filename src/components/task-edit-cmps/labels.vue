@@ -5,7 +5,7 @@
       <section
         v-for="label in labels"
         :key="label.id"
-        class="task-label"
+        class="task-label-list"
         :style="'background-color:' + label.color"
       >
         {{ label.title }}
@@ -22,7 +22,6 @@ export default {
       type: Array,
       required: true,
     },
-  
   },
 
   computed: {
@@ -40,17 +39,37 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.task-label-container {
+  display: flex;
+  /* padding-right: 25px; */
+  margin-top: 9.7px;
+
+  .task-label-list {
+    border-radius: 4px;
+    line-height: 32px;
+    height: 32px;
+    min-width: 60px;
+    //   padding: 0 12px;
+    //   margin: 0 4px 4px 0;
+    margin-right: 5px;
+    color: #fff;
+    white-space: nowrap;
+    cursor: pointer;
+    cursor: pointer;
+  }
+}
 .task-label {
-  border-radius: 4px;
-  line-height: 32px;
-  height: 32px;
-  min-width: 20px;
-  padding: 0 12px;
-  margin: 0 4px 4px 0;
-  color: #fff;
-  white-space: nowrap;
-  cursor: pointer;
-  cursor: pointer;
+    border-radius: 4px;
+    line-height: 32px;
+    height: 32px;
+    min-width: 20px;
+      padding: 0 12px;
+      margin: 0 4px 4px 0;
+    // margin-right: 5px;
+    color: #fff;
+    white-space: nowrap;
+    cursor: pointer;
+    cursor: pointer;
 }
 </style>

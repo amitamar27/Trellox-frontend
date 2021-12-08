@@ -120,7 +120,10 @@ export default {
 			this.editingTodo = null
 		},
 		toggleTodo(idx) {
+			console.log('this.checklist.todos[idx].isDone',this.checklist.todos[idx].isDone);
 			this.checklist.todos[idx].isDone = !this.checklist.todos[idx].isDone
+						console.log('this.checklist.todos[idx].isDone',this.checklist.todos[idx].isDone);
+
 			this.saveChanges()
 		},
 		updateTodo() {
