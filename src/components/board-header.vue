@@ -37,7 +37,7 @@
         :board="board"
         :class="menuBarIsShown"
         @openMenu="openMenu"
-        @updateBgcBoard="editBgcBoard"
+        @updateBgcBoard="editBgcBoard"  
       ></aside-menu
     ></transition>
   </section>
@@ -64,6 +64,9 @@ export default {
     }
 
   },
+  created(){
+      this.boardId = this.$route.params.boardId;
+  },
 
   methods: {
     openEditing() {
@@ -84,6 +87,9 @@ export default {
       this.isShown = !this.isShown;
       console.log(this.isShown);
     },
+    editBgcBoard(){
+        console.log('in board header');
+    }
   },
 
   computed: {

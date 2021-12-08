@@ -666,7 +666,7 @@ function _creareBoards() {
 
 }
 
-function _createBoard(title, groups = [], style = {}) {
+function _createBoard(title, groups = []) {
     return {
         _id: makeId(),
         title,
@@ -676,7 +676,7 @@ function _createBoard(title, groups = [], style = {}) {
             fullname: 'gilad',
             imgUrl: '',
         },
-        style: {},
+        style: {bgColor:'' , bgImg: ''},
         labels: [{
                 "id": "l101",
                 "title": "Done",
@@ -725,7 +725,6 @@ function _createBoard(title, groups = [], style = {}) {
             imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
         }],
         groups,
-        style
 
     }
 

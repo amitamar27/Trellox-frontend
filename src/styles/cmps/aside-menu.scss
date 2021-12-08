@@ -1,38 +1,43 @@
 .aside-menu {
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(246, 248, 252);
     width: 200px;
     right: 0;
     top: 42px;
     width: 339px;
+    color: #172b4d;
     height: 90vh;
     background-color: #f4f5f7;
     padding: 12px 6px 12px 12px;
-    z-index: 1000;
+    z-index: 1;
     box-shadow: 0 0 2px 1px #e1e2e8;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    transform: translateX(360px);
 
     .aside-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         text-align: center;
         min-height: 40px;
-        padding: 0 32px;
-        margin: 0 12px;
         font-size: 16px;
-        line-height: 40px;
         border-bottom: 1px solid rgba(9, 30, 66, .13);
         color: #172a4d;
         position: relative;
         text-overflow: ellipsis;
         white-space: nowrap;
-        overflow: hidden;
-        z-index: 30;
+        z-index: 1;
+        .header {
+            display: flex;
+        }
+
+        
 
         .close-aside-btn {
             display: flex;
             justify-content: center;
             align-self: center;
-           
+
             margin-left: 5px;
             position: absolute;
             top: 14px;
@@ -40,22 +45,45 @@
             height: 14px;
             width: 14px;
 
-            
+
         }
 
     }
-    img{
-                width: 12px;
-            }
+
+    img {
+        width: 12px;
+    }
+
+    .menu-container {
+        padding: 6px 6px 6px 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        display: flex;
+
+        .bgc-btn {
+            padding: 6px 6px 6px 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            font-size: 14px;
+        }
+
+        .bgc-btn:hover {
+            background-color: #e7e9e9;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    }
 
 }
+
+
 
 
 
 .aside-menu-open {
     opacity: 1;
     margin-right: 0;
-    transform: translateX(0px);
     overflow: visible;
     transition: all 0.5s ease;
 

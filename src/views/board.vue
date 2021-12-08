@@ -1,13 +1,14 @@
 <template >
-  <div v-if="board"  class="board-container" >
-    
+  <div v-if="board" class="board-container">
+    <board-header :board="board" @editBgcBoard="editBgcBoard" />
 
-    <board-header 
-      :board="board"
-     />
-    
     <!-- {{board}} -->
-    <group-list  @dragEnd="dragEnd" @pickTask="pickTask" :board="board" v-if="board" ></group-list>
+    <group-list
+      @dragEnd="dragEnd"
+      @pickTask="pickTask"
+      :board="board"
+      v-if="board"
+    ></group-list>
     <!-- <router-view /> -->
     <!-- <task-edit></task-edit> -->
     <router-view />
@@ -20,41 +21,44 @@ import groupList from "../components/group-list.vue";
 import taskEdit from './task-edit.vue';
 import boardHeader from '../components/board-header.vue';
 export default {
-   watch: {
-        '$route.params.boardId': {
-            handler() {
-               const { boardId } = this.$route.params;
-                 
-            },
-            immediate: true
-        }
-    },
+  watch: {
+    '$route.params.boardId': {
+      handler() {
+        const { boardId } = this.$route.params;
+
+      },
+      immediate: true
+    }
+  },
   computed: {
     board() {
       // :style="getStyle"
       return this.$store.getters.board;
     },
-    getStyle(){
+    getStyle() {
       if (this.board.style.backgroundSrc) {
-        const url =this.board.style.backgroundSrc
-       return {'background-image':`url(${url})`}
+        const url = this.board.style.backgroundSrc
+        return { 'background-image': `url(${url})` }
       }
-      else{
-        const backgroundColor =this.board.style.backgroundColor
-        return {backgroundColor:`${backgroundColor}`}
+      else {
+        const backgroundColor = this.board.style.backgroundColor
+        return { backgroundColor: `${backgroundColor}` }
       }
     }
   },
-  methods:{
-    pickTask(){
+  methods: {
+    pickTask() {
       console.log(this.board);
     },
-    dragEnd(){
-      const board =this.board
-      this.$store.dispatch({type:'setBoard', board})
+    dragEnd() {
+      const board = this.board
+      this.$store.dispatch({ type: 'setBoard', board })
     },
-    
-    
+    editBgcBoard(style) {
+      this.$emit('setBg', style);
+    },
+
+
   },
 
   components: {
