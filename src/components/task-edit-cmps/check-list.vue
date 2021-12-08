@@ -1,31 +1,36 @@
 <template>
   <main class="task-checkList">
-    <transition-group
-      enter-active-class="animate__animated animate__fadeInRight animate__faster"
-      leave-active-class="animate__animated animate__fadeOutRight animate__faster"
+    <section
+      class="task-todos"
+      v-for="(checklist, idx) in task.checklists"
+      :key="checklist.id"
     >
-      <section
-        class="task-todos"
-        v-for="(checklist, idx) in task.checklists"
-        :key="checklist.id"
-      >
-        <header class="checkList-header">
-          <div class="checklist-icons">
-            <span class="icon-lg icon card icon-Checklist"> </span>
-            <h3>{{ checklist.title }}</h3>
-          </div>
-          <div>
-            <button @click="removeChecklist(idx)">Delete</button>
-          </div>
-        </header>
+      <header class="checkList-header">
+        <div class="checklist-icons">
+          <span class="icon-lg icon card icon-Checklist"> </span>
+          <h3>{{ checklist.title }}</h3>
+        </div>
 
+        <div>
+          <button @click="removeChecklist(idx)">Delete</button>
+        </div>
+      </header>
+      <transition
+        enter-active-class="animate__animated animate__fadeIn animate__faster"
+        leave-active-class="animate__animated animate__fadeOut animate__faster"
+      >
         <todos-preview :list="checklist" @saveChecklist="saveChecklist" />
-      </section>
-    </transition-group>
+      </transition>
+    </section>
   </main>
 </template>
 
 <script>
+// <transition-group
+//     enter-active-class="animate__animated animate__fadeInRight animate__faster"
+//     leave-active-class="animate__animated animate__fadeOutRight animate__faster"
+//   >
+//  </transition-group>
 import todosPreview from "./todos-preview.vue";
 export default {
   props: {
@@ -34,15 +39,14 @@ export default {
       required: true,
     },
   },
-//   computed: {
-//     task() {
-//       return JSON.parse(JSON.stringify(this.task));
-//       // console.log('saving task');
-//     },
-//   },
+  //   computed: {
+  //     task() {
+  //       return JSON.parse(JSON.stringify(this.task));
+  //       // console.log('saving task');
+  //     },
+  //   },
   methods: {
     saveNewTask() {
-    
       console.log("taskktaskk", this.task);
       this.$emit("saveTask", this.task);
       // this.$store.dispatch({ type: 'saveTask', groupId, task: taskk })

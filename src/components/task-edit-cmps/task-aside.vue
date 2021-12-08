@@ -25,6 +25,7 @@
         @addLabel="addLabel"
         @closeMenu="closeMenu"
         @toggleMember="toggleMember"
+        @saveTask ="saveTask"
         :board="board"
       />
     </transition>
@@ -93,6 +94,9 @@ export default {
       this.$emit("addLabel");
     },
     toggleMember() {
+      this.$emit("saveTask");
+    },
+    saveTask(){
       this.$emit("saveTask");
     },
   },

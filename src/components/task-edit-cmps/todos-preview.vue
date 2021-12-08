@@ -40,7 +40,7 @@
 						<button class="save-btn" @click.stop="updateTodo">
 							Save
 						</button>
-						<span class="icon-lg icon-close" @click.stop="closeEditTodo">
+						<span class="icon-lg icon-close icon-checklist-close" @click.stop="closeEditTodo">
 							
 						</span>
 					</span>
@@ -63,12 +63,12 @@
 			>
 			</el-input>
 
-			<span class="controls-btns">
+			<div class="controls-btns">
 				<button class="save-btn" @mousedown.stop.prevent="saveNewTodo">Save</button>
-				<span class="icon-lg icon-close cancel-btn" @click.stop.prevent="closeEditTodo">
+				<span class="icon-lg icon-close icon-checklist-close" @click.stop.prevent="closeEditTodo">
 							
 				</span>
-			</span>
+			</div>
 		</section>
 	</section>
 </template>
@@ -77,6 +77,10 @@
 import progressBar from './progress-bar.vue'
 import { utilService } from '../../services/util.service'
 
+// <transition  v-else
+//         enter-active-class="animate__animated animate__fadeIn animate__faster"
+//         leave-active-class="animate__animated animate__fadeOut animate__faster"
+//       >
 export default {
 	props: {
 		list: {
@@ -148,7 +152,7 @@ export default {
 			this.checklist.todos.push(this.newTodo)
 			this.zeroNewTodo()
 			console.log('this.$refs',this.$refs);
-			this.$refs.textareaAdd.focus()
+			// this.$refs.textareaAdd.focus()
 
 			this.saveChanges()
 		},

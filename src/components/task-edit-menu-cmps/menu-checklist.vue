@@ -1,7 +1,7 @@
 <template>
   <section class="checklist-menu">
     <header class="main-title">
-      <p>Labels</p>
+      <p>Add checklist</p>
       <a class="icon-sm icon-close" @click="closeMenu"></a>
     </header>
     <main class="main-container">

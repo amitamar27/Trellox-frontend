@@ -1,28 +1,31 @@
 .task-checkList {
     margin-bottom: 45px;
+    transition: all 0.8s;
 
-    .checkList-header{
+    .checkList-header {
         display: flex;
         justify-content: space-between;
         padding: 10px;
-        button{
+
+        button {
             display: flex;
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            background-color: rgba(9,30,66,.0392156862745098);
+            background-color: rgba(9, 30, 66, .0392156862745098);
             color: #172a4d;
             border-radius: 3px;
             padding: 9px 15px;
             border: none;
             cursor: pointer;
             transition: all .2s;
-            
-             @include hover-supported {
-                    background-color: $secondaryBtnsGray;
-                }
+
+            @include hover-supported {
+                background-color: $secondaryBtnsGray;
+            }
         }
-        .checklist-icons{
+
+        .checklist-icons {
             display: flex;
         }
     }
@@ -45,16 +48,15 @@
                     display: flex;
                     gap: 15px;
 
-                  
+
 
                     >h3 {
                         margin-bottom: 3px;
                         font-size: 16px;
                     }
                 }
-                span{
-                    
-                }
+
+                span {}
             }
 
             button:not(.cancel-btn) {
@@ -86,8 +88,9 @@
                     background-color: $secondaryBtnsGray;
                 }
             }
-            .add-todo-btn{
-                
+
+            .add-todo-btn {
+
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -99,6 +102,9 @@
                 border: none;
                 cursor: pointer;
                 transition: all .2s;
+                // transition-duration: 85ms;
+                // transition-property: background-color, border-color, box-shadow;
+                // transition-timing-function: ease;
             }
         }
     }
@@ -117,12 +123,16 @@
         padding: 5px;
         padding-left: 0;
         gap: 10px;
-
+        cursor: pointer;
         // input:not(.checkbox) {
         //     @include primaryInput;
         //     width: 210px;
         // }
-
+        .el-input {
+            margin: 4px 0 12px;
+            width: 100%;
+           
+        }
         @include hover-supported {
             background-color: $secondaryGray;
             cursor: pointer;
@@ -154,19 +164,30 @@
                 margin-left: 11px;
             }
 
-            >.cancel-btn {
-                @include xBtn;
-                position: unset;
-                display: flex;
-                justify-content: center;
-                align-self: center;
-                margin-left: 5px;
-                box-sizing: content-box;
-                width: 10px;
-                height: 14px;
-                padding: unset;
-                padding-left: 6px;
+            // >.cancel-btn {
+            //     @include xBtn;
+            //     position: unset;
+            //     display: flex;
+            //     justify-content: center;
+            //     align-self: center;
+            //     margin-left: 5px;
+            //     box-sizing: content-box;
+            //     width: 10px;
+            //     height: 14px;
+            //     padding: unset;
+            //     padding-left: 6px;
+            // }
+            .icon-checklist-close {
+                line-height: 1.4;
+                padding-left: 3px;
+                cursor: pointer;
+                @include hover-supported {
+                    color: #252e3d;
+                    
+    
+                }
             }
+           
         }
     }
 
@@ -174,6 +195,7 @@
         margin-top: 13px;
         margin-left: 38px;
     }
+
     button:not(.cancel-btn) {
         display: flex;
         justify-content: center;
@@ -191,11 +213,12 @@
             background-color: $secondaryBtnsGray;
         }
     }
+
     .add-todo-area {
         >.textarea {
             max-width: 100%;
             box-sizing: border-box;
-
+            transition: all 0.2s;
             textarea {
                 display: block;
                 background-color: rgba(9, 30, 66, 0.04);
@@ -263,6 +286,17 @@
 
                 @include hover-supported {
                     background-color: unset;
+                }
+            }
+            .icon-checklist-close {
+                line-height: 1.4;
+                padding-left: 3px;
+                cursor: pointer;
+                cursor: pointer;
+                @include hover-supported {
+                    color: #252e3d;
+                    
+    
                 }
             }
         }
