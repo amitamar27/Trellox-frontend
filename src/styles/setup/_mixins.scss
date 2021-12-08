@@ -78,7 +78,7 @@
     font-size: 14px;
 
     transition: all 5ms;
-
+    
     @include hover-supported {
         background-color: #006aa7;
         cursor: pointer;
@@ -139,5 +139,25 @@
               background-color: #fff;
           }
       }
+  }
+}
+@mixin primaryInput {
+  box-shadow: inset 0 0 0 2px #dfe1e6;
+  background-color: #fafbfc;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  // padding: 8px 12px;
+  padding: 0 15px;
+  margin: 4px 0 4px;
+  
+  &:hover:not(:focus) {
+      background-color: #ebecf0;
+  }
+
+  &:focus {
+    transition: box-shadow .2s cubic-bezier(.645,.045,.355,1);
+      box-shadow: inset 0 0 0 2px $boxShadowMain;
+      
   }
 }

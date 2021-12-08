@@ -12,11 +12,11 @@
       <!-- </section> -->
 
       <section v-if="!filter">
-        <div v-for="(color, idx) in colors" :key="idx">
+        <div v-for="(label, idx) in board.labels" :key="idx">
           <div
             class="edit-labels mod-selectable task-labels"
-            :style="`background-color: ${color}`"
-            @click="addLabel(idx)"
+            :style="`background-color: ${label.color}`"
+            @click="addLabel(label.id,idx)"
           >
             <!-- <p v-if="labelsId(idx)">{{labels[idx].title}}</p> -->
             <p>{{ defaulsLabels[idx].title }}</p>
@@ -30,7 +30,7 @@
         </div>
       </section>
 
-      <section v-else>
+      <section class="label-edit-menu" v-else>
         <div v-for="(color, idx) in colors" :key="idx">
           <div
             v-if="color"
@@ -49,6 +49,7 @@
     <section v-else class="edit-label">
       <a v-if="isInEdit" class="icon-sm icon-back" @click="goBack"> </a>
       <h5 class="h-title">Name</h5>
+      
       <el-input
         ref="input"
         type="text"
@@ -56,7 +57,8 @@
         v-model="currLabel.title"
         @keydown.enter="saveLabel"
       />
-      <button class="save-btn" @mousedown="saveLabel">Save</button>
+      <button class="save-btn" @click="saveLabel">Save</button>
+      
     </section>
   </section>
 </template>
@@ -66,6 +68,10 @@ import { utilService } from "../../services/util.service.js";
 export default {
   props: {
     task: {
+      type: Object,
+      required: true,
+    },
+     board: {
       type: Object,
       required: true,
     },
@@ -124,7 +130,9 @@ export default {
     },
     saveLabel() {
       console.log("labels 1 ");
-      this.$emit("saveLabels", this.labels);
+      // this.$emit("saveLabels", this.labels);
+      this.$emit('saveTask');
+      this.$emit('closeMenu');
     },
     goBack() {
       this.isInEdit = false;
@@ -132,15 +140,15 @@ export default {
     closeMenu() {
       this.$emit("closeMenu");
     },
-    addLabel(idx) {
-      const id = "l10" + (idx + 1);
+    addLabel(labelId,idx) {
+      // const labelId = "l10" + (idx + 1);
       const newIdx = this.labels.findIndex((label) => label.color === this.colors[idx]);
       if (newIdx > -1) {
         this.labels.splice(newIdx, 1);
-        const idx = this.task.labelIds.findIndex((lId) => lId === id);
+        const idx = this.task.labelIds.findIndex((lId) => lId === labelId);
         this.task.labelIds.splice(idx, 1);
       } else{
-      this.task.labelIds.push(id);
+      this.task.labelIds.push(labelId);
       this.currLabels();
       }
       this.$emit("addLabel");

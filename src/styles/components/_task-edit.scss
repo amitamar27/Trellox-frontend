@@ -90,10 +90,12 @@
                     text-decoration: none;
                     cursor: pointer;
                 }
-                .cover-btn:hover{
-                    background-color:#00000029
+
+                .cover-btn:hover {
+                    background-color: #00000029
                 }
-                .icon-card-cover{
+
+                .icon-card-cover {
                     line-height: revert
                 }
 
@@ -237,7 +239,7 @@
 }
 
 .icon-Dates {
-    margin: 0 6px 0 -6px;
+     margin: 0 6px 0 -6px;
 
 }
 
@@ -246,7 +248,7 @@
 }
 
 .icon-Attachment {
-    margin: 0 6px 0 -6px;
+     margin: 0 6px 0 -6px;
 
 }
 
@@ -255,13 +257,15 @@
 }
 
 .icon-Cover {
-    margin: 0 6px 0 -6px;
+     margin: 0 6px 0 -6px;
 
 }
-
-.icon-Cover:before {
-    content: "\e944";
+.icons-aside-bar {
+    margin: 4px 0 0 -6px;
 }
+// .icon-Cover:before {
+//     content: "\e944";
+// }
 
 // ::content{
 //     /* members */
