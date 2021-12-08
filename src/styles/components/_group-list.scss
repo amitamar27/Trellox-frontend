@@ -59,21 +59,23 @@
                         display: flex;
                         padding-top: 5px;
                         .task-label{
-                            height: 13px;
-                            line-height: 7px;
+                            // height: 13px;
+                            line-height: 14px;
                             width: 34px;
                             max-width: 184px;
-                            padding: 0 8px;
+                            // padding: 0 8px;
                         }
 
                         .label-title{
                             z-index: 111;
                         }
+
+                        
                    
                     }
                     .increaseLabel {
                         transition: all 0.5s;
-                        padding: 0 8px;
+                        padding: 0 5px;
                         height: 16px;
                         min-width: 56px;
                         span {
@@ -89,6 +91,11 @@
                         span {
                             opacity: 0;
                         }
+                    }
+
+
+                    .task-label:hover{
+                        box-shadow: inset 20px 20px 20px rgb(0 0 0 / 12%);
                     }
 
              
@@ -266,7 +273,6 @@
 
 .group-list-container {
     // z-index: 10;
-    margin-left: 5px;
     margin-top: 45px;
     display: flex;
     // width: -webkit-fit-content;

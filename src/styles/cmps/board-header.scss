@@ -1,0 +1,120 @@
+.board-header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 7px 4px;
+    max-height: 30px;
+    // user-select: none;
+    z-index: 1;
+    position: fixed;
+    justify-content: space-between;
+    padding: 8px 4px 0px 12px;
+
+    .border-divider {
+        height: 19px;
+        border-left: 1px solid hsla(0, 0%, 100%, 0.24);
+        margin-left: 5px;
+        padding-right: 5px;
+
+        
+    }
+
+
+    .left-board-header {
+        display: flex;
+        align-items: center;
+
+        .board-title-header {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            gap: 5px;
+            h1 {
+                background-color: hsla(0, 0%, 100%, 0.24);
+                font-size: 20px;
+                line-height: 32px;
+                padding: 0 8px;
+                font-family: "segoe-ui-bold";
+                border-radius: 3px;
+                color: #ffffff;
+                cursor: pointer;
+                @include hover-supported {
+                    background-color: #fffff750;
+                }
+            }
+
+            input {
+                border: none;
+                background-color: hsla(0, 0%, 100%, 0.24);
+                font-size: 20px;
+                line-height: 32px;
+                padding: 0 4px 0 10px;
+                font-family: "segoe-ui-bold";
+                border-radius: 3px;
+                color: #ffffff;
+                cursor: pointer;
+                width: unset;
+                @include hover-supported {
+                    background-color: #fffff750;
+                }
+
+                &:focus {
+                    outline: none;
+                    background-color: #ffffff;
+                    box-shadow: inset 0 0 0 2px $boxShadowMain;
+                    color: #627087;
+                }
+            }
+        }
+
+        .fav {
+            font-family: icomoon;
+            width: 20px;
+
+            i{
+                font-style: normal;
+                font-size: 16px;
+                font-weight: 400;
+            }
+            
+        }
+    }
+
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: hsla(0,0%,100%,.24);
+        color: #fff;
+        border-radius: 3px;
+        height: 32px;
+        padding: 0 15px;
+        border: none;
+
+        @include hover-supported {
+            cursor: pointer;
+            background-color: hsla(0, 0%, 100%, 0.32);
+        }
+    }
+
+
+        .right-board-header {
+        display: flex;
+        gap: 5px;
+
+        .board-header-btn {
+            img {
+                filter: invert(243%) sepia(100%) saturate(732%) hue-rotate(166deg) brightness(864%) contrast(101%);
+
+                height: 26px;
+                margin-right: 9px;
+            }
+        }
+        // > .statistics-btn {
+        //     @include tablet-size-display;
+        // }
+    }
+}

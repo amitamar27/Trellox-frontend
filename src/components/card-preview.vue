@@ -57,14 +57,10 @@ export default {
       // console.log('gettttttt',this.task);
       const labels = []
       if (!this.task.labelIds) return
-      // console.log('this.task.labelIds',this.task.labelIds);
       this.boardLabels.forEach((label) => {
-        // console.log('label',label);
         if (this.task.labelIds.includes(label.id)) labels.push(label);
       });
-      // console.log('bbbbbb', this.taskLabels);
-      // if(this.taskLabels) return true;
-      // return false
+
       return labels
     },
 

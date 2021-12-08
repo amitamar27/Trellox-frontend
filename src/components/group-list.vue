@@ -9,7 +9,7 @@
         @end="dragEnd"
       >
         <div
-          v-for="(group, idx) in board.groups"
+          v-for="group in board.groups"
           :groupId="group.id"
           :key="group.id"
           class="group-preview"
@@ -46,15 +46,7 @@
               ></div>
             </div>
 
-            <group-menu
-              @addCard="onAddCard"
-              @mousedown.stop=""
-              v-if="isMenuOpened && group"
-              @closeMenu="closeGroupMenu"
-              :idx="idx"
-              :group="group"
-              :title="'List actions'"
-            ></group-menu>
+          
           </div>
 
           <card-list
@@ -95,6 +87,19 @@
           </div>
         </div>
       </draggable>
+
+        <group-menu
+              @addCard="onAddCard"
+              @mousedown.stop=""
+              v-if="isMenuOpened && group"
+              @closeMenu="closeGroupMenu"
+              :group="group"
+              :title="'List actions'"
+              :style="{
+                top: menuPosition.posY + 'px',
+                left: menuPosition.posX + 'px',
+              }"
+            ></group-menu>
 
       <!-- <group-menu
         @addCard="onAddCard"
@@ -173,6 +178,7 @@ export default {
       group: null,
       isAdding: false,
       currGroupId: null,
+      menuPosition: { posX: "", posY: "" },
       task: {
         title: ''
       }

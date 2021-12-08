@@ -55,6 +55,9 @@ export default new Vuex.Store({
       state.isDarkScreen = true;
       console.log("state.isDarkScreen", state.isDarkScreen);
     },
+    // saveBoardTitle(state, { boardTitle }) {
+    //   state.board.title = boardTitle
+    // },
 
     closeDarkScreen(state) {
       state.isDarkScreen = false;
@@ -106,7 +109,10 @@ export default new Vuex.Store({
     },
     updateLabels(state, {labels}){
       state.board.labels = labels;
-    }
+    },
+    toggleBoardIsFavorite(state, { isFav }) {
+      state.board.isFavorite = isFav
+    },
   },
 
   actions: {

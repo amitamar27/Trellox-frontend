@@ -25,7 +25,8 @@
 @import 'components/task-activities';
 @import 'components/task-title';
 @import 'components/task-details-sidebar';
-
+@import 'cmps/board-header.scss';
+@import 'cmps/aside-menu.scss';
 @import 'components/details-sidebar/menu-members';
 //VIEWS
 @import 'views/board.scss';

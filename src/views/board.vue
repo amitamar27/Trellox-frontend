@@ -1,7 +1,8 @@
 <template >
   <div v-if="board"  class="board-container" >
+    
 
-    <board-header
+    <board-header 
       :board="board"
      />
     
