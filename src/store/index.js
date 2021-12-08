@@ -55,21 +55,17 @@ export default new Vuex.Store({
       state.isDarkScreen = true;
       console.log("state.isDarkScreen", state.isDarkScreen);
     },
-
     closeDarkScreen(state) {
       state.isDarkScreen = false;
     },
-
     setBoard(state, { board }) {
       console.log("board", board);
       state.board = board;
     },
-
     updateGroup(state, { updatedGroup }) {
       var index = state.board.groups.findIndex((group) => group.id === updatedGroup.id);
       state.board.groups.splice(index, 1, updatedGroup);
     },
-
     getGroupById(state, { groupId }) {
       // alert('here')
       console.log('groupId',groupId);
@@ -194,7 +190,6 @@ export default new Vuex.Store({
         
       } catch (err) {}
     },
-    
     async loadBoards({ commit }) {
       var boards = await boardService.queryBoards();
       commit({ type: "setBoards", boards });
@@ -215,15 +210,11 @@ export default new Vuex.Store({
       try{
         var board = await boardService.addNewBoard(boardDetails)
         commit({ type: "setBoard", board });
-
-
       }catch(err){
         console.log('faild to add new board', err);
       }
     },
-
-   async saveTask({ commit }, {groupId,taskToSave}) {
-    //  alert('saveTask action')
+    async saveTask({ commit }, {groupId,taskToSave}) {
     console.log('taskToSave',taskToSave);
       commit({ type: 'saveTask' ,groupId,taskToSave})
       console.log('taskToSave',taskToSave);

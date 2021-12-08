@@ -42,10 +42,7 @@ export default {
 //   },
   methods: {
     saveNewTask() {
-      // const { groupId } = this.$route.params
-      // console.log('groupIdgroupId',groupId);
-      // var taskk = this.task
-      // alert('15')
+    
       console.log("taskktaskk", this.task);
       this.$emit("saveTask", this.task);
       // this.$store.dispatch({ type: 'saveTask', groupId, task: taskk })

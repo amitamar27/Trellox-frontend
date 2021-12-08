@@ -110,7 +110,6 @@ export default {
       labels.forEach((label) => {
         if (this.task.labelIds.includes(label.id)) this.labels.push(label);
       });
-      //   this.labels= newLabels
       console.log("this.labels", this.labels);
     },
     labelsId(idx) {
@@ -135,26 +134,18 @@ export default {
     },
     addLabel(idx) {
       const id = "l10" + (idx + 1);
-      console.log("id", id);
       const newIdx = this.labels.findIndex((label) => label.color === this.colors[idx]);
-      console.log("newIdx", newIdx);
       if (newIdx > -1) {
         this.labels.splice(newIdx, 1);
         const idx = this.task.labelIds.findIndex((lId) => lId === id);
         this.task.labelIds.splice(idx, 1);
-        this.$emit('addLabel',id)
-        return;
-      }
+      } else{
       this.task.labelIds.push(id);
       this.currLabels();
-      console.log("this.labels", this.labels);
-      console.log("labelId", id);
-
-      this.$emit("addLabel", id);
+      }
+      this.$emit("addLabel");
     },
-    // saveLabel(){
 
-    // }
   },
 };
 </script>

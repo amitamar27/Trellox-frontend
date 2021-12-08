@@ -30,16 +30,7 @@
        
     />
     </transition>
-    <!-- <component
-            v-clickoutside="closeEditPopup"
-            class="popup dynamic-component"
-            v-if="isPopupShow"
-            :is="currAction.type"
-            :card="card"
-            :action="currAction"
-            @close="closeEditPopup"
-            @updateCard="saveCard"
-          /> -->
+ 
     
   </main>
 </template>
@@ -83,9 +74,7 @@ export default {
 
   methods: {
     setClass(idx) {
-      const style = "icon-sm icon-" + this.options[idx].title;
-      return style;
-      // return
+       return "icon-sm icon-" + this.options[idx].title;
     },
     openMenu(idx) {
         

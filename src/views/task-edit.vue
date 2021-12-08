@@ -191,12 +191,7 @@ export default {
       console.log(this.currTask);
       console.log("labelId", labelId);
       const { groupId } = this.$route.params;
-      // alert('calling saveTask')
-      this.$store.dispatch({
-        type: "saveTask",
-        groupId,
-        taskToSave: this.currTask,
-      });
+      this.$store.dispatch({type: "saveTask",groupId,taskToSave: this.currTask,});
     },
     toggleMember() {
       console.log(this.currTask);
