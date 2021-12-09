@@ -106,6 +106,11 @@ export default new Vuex.Store({
     toggleBoardIsFavorite(state, { isFav }) {
       state.board.isFavorite = isFav
     },
+    updateBoard(state, payload) {
+      const idx = state.boards.findIndex(board => board._id === payload.board._id)
+      state.boards.splice(idx, 1, payload.board)
+      state.board = payload.board
+  },
   },
 
   actions: {
@@ -234,6 +239,17 @@ export default new Vuex.Store({
         console.log('faild to add new board', err);
       }
       
+    },
+    async updateBoardBgc({ commit }, { boardId, style }){
+      try{
+        const saveBgcBoard = await boardService.updateBgcBoard(boardId, style)
+        commit({ type: 'updateBoard', board: saveBgcBoard })
+        return saveBgcBoard;
+      }catch(err){
+        console.log('updateBoard in store:', err);
+        throw err;
+
+      }
     }
   },
   modules: {

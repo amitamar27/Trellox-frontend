@@ -8,7 +8,7 @@
     top: 42px;
     width: 339px;
     color: #172b4d;
-    height: 90vh;
+    height: 100vh;
     background-color: #f4f5f7;
     padding: 12px 6px 12px 12px;
     z-index: 1;
@@ -66,14 +66,61 @@
             font-weight: 600;
             display: flex;
             font-size: 14px;
+            width: 100%;
+            div {
+                height: 20px;
+                margin-right: 8px;
+                width: 20px;
+                display: inline-block;
+                background-size: cover;
+                border-radius: 3px;
+            }
         }
 
         .bgc-btn:hover {
             background-color: #e7e9e9;
             border-radius: 3px;
             cursor: pointer;
+            
         }
+
+        .bgc-btns{
+            height: 60vh;
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 9px;
+            padding: 12px 12px 12px 12px;
+
+            .img-options{
+                width: 152px;
+                height: 98px;
+                background-image: url(~@/assets/bgs.jpg);
+                background-size: cover;
+                border-radius: 8px;
+                background-color: #dfe1e6;
+            }
+
+            .color-options{
+                width: 152px;
+                height: 98px;
+                background-image: url(~@/assets/colors.jpg);
+                background-size: cover;
+                border-radius: 8px;
+                background-color: #dfe1e6;
+            }
+            div {
+                height: 80px;
+                border-radius: 3px;
+                background-size: cover;
+            }
+
+
+        }
+
+
     }
+
+
 
 }
 

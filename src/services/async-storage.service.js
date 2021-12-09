@@ -261,17 +261,7 @@ function removeTaskByCardId(entityType, details) {
                 _save(entityType,boards)
                 return boards[boardIdx]
                 
-            
-            
-            
-            
-            
-
-
-          
-            
-            
-            
+        
         })
 }
 function postBoard(key,board){
