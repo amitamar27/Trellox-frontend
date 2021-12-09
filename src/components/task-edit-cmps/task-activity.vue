@@ -5,13 +5,15 @@
           <h3>Activity</h3>
       </header>
       <div class="add-comment">
+		  <div>
              <avatar
+			 v-if="task.byMember"
 				class="user-avatar"
 				:size="32"
 				:username="task.byMember.fullName"
 				:src="task.byMember.imgUrl"
 			></avatar>
-
+			</div>
             <main
             :class="border"
             @click="openComment"

@@ -80,7 +80,7 @@
               </button>
             </div>
           </div>
-          <div @click="opemModal(group.id)" v-else class="card-add-btn">
+          <div @click="openModal(group.id)" v-else class="card-add-btn">
             <button>
               <img :src="require('@/assets/add.svg')" />Add a card
             </button>
@@ -243,7 +243,7 @@ export default {
       console.log('gothere');
       this.$emit('pickTask')
     },
-    opemModal(groupId) {
+    openModal(groupId) {
       console.log('hello');
       this.isAdding = true;
       this.currGroupId = groupId
@@ -261,8 +261,6 @@ export default {
       } catch (err) {
         console.log(err);
       }
-
-
     },
     onAddCard(groupId) {
       this.isAdding = true

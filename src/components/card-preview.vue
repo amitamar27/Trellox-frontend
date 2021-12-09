@@ -54,13 +54,13 @@ export default {
   },
   computed: {
     getLabels() {
-      // console.log('gettttttt',this.task);
+      console.log('gettttttt',this.task);
       const labels = []
       if (!this.task.labelIds) return
       this.boardLabels.forEach((label) => {
         if (this.task.labelIds.includes(label.id)) labels.push(label);
       });
-
+console.log('.group-menu',labels);
       return labels
     },
 
@@ -87,7 +87,7 @@ export default {
     const { boardId } = this.$route.params;
     this.boardId = boardId
     console.log('labels task', this.taskLabels);
-    console.log('labels', this.task.labelIds);
+    console.log('labels', this.task);
     // this.getLabels();
 
   },

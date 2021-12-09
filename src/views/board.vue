@@ -2,17 +2,13 @@
   <div v-if="board" class="board-container">
     <board-header :board="board" @editBgcBoard="editBgcBoard" />
 
-    <!-- {{board}} -->
     <group-list
       @dragEnd="dragEnd"
       @pickTask="pickTask"
       :board="board"
       v-if="board"
     ></group-list>
-    <!-- <router-view /> -->
-    <!-- <task-edit></task-edit> -->
     <router-view />
-    <!-- <div class="scroller"></div> -->
   </div>
 </template>
 
@@ -31,7 +27,7 @@ export default {
     '$route.params.boardId': {
       handler() {
         const { boardId } = this.$route.params;
-
+        console.log('boardId',boardId);
       },
       immediate: true
     }
@@ -46,6 +42,7 @@ export default {
       return this.$store.getters.board;
     },
     getStyle() {
+      console.log('this.board',this.board);
       if (this.board.style.backgroundSrc) {
         const url = this.board.style.backgroundSrc
         return { 'background-image': `url(${url})` }
