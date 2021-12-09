@@ -2,7 +2,7 @@
   <main class="card-edit-window" ref="task" @click="closeDarkScreen">
     <div v-if="task" class="card-edit" @click.stop="">
       <header
-        v-if="task.cover.bgColor"
+        v-if="task.cover"
         :style="taskBgColor"
         class="task-edit-bg-title"
       >
@@ -65,6 +65,7 @@
               ></labels>
               <task-dates
                :task="task"
+               v-if="task.dueDate"
               >
                
               </task-dates>
