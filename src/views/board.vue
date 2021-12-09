@@ -23,7 +23,8 @@ import boardHeader from '../components/board-header.vue';
 export default {
   data() {
     return {
-      boardId: ''
+      boardId: '',
+      currBoard:'',
     }
   },
   watch: {
@@ -37,10 +38,11 @@ export default {
   },
   created() {
     this.boardId = this.$route.params.boardId;
+    this.loadBoard()
+    
   },
   computed: {
     board() {
-
       return this.$store.getters.board;
     },
     getStyle() {
@@ -65,13 +67,25 @@ export default {
     async editBgcBoard(style) {
       try {
         await this.$store.dispatch({ type: 'updateBoardBgc', boardId: this.boardId, style: style })
-       
+        this.$emit('setBg',style.bgImg)
       } catch (err) {
         console.log('Error in updateBoard (board-header):', err);
         throw err;
       }
 
     },
+    async loadBoard(){
+      const { boardId } = this.$route.params;
+      try{
+        const board = await this.$store.dispatch({type:'getBoardById',boardId})
+        this.currBoard = board
+        this.$emit('setBg',this.currBoard.style.bgImg)
+        console.log('currrrrboard',this.currBoard);
+      }catch(err){
+        console.log('Error in loadboard :', err);
+        throw err;
+      }
+    }
 
 
 

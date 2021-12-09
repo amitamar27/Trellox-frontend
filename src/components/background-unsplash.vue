@@ -4,6 +4,7 @@
             type="text"
             placeholder="Photos"
             v-model="search"
+            @change="getImgsBySearch"
             
         />
         <div v-if="results">
@@ -35,7 +36,7 @@
         },
         methods: {
             async getImgsBySearch() {
-                let searchWord = 'street';
+                let searchWord = 'flowers';
                 if (this.search) searchWord = this.search;
 
                 try {

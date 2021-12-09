@@ -5,8 +5,8 @@
          </div>
           <div class="board-boards">
               <div class="boards-list-header">
-                  <i class="el-icon-user"></i>
-              <h1> boards</h1>
+                  
+              <h2> Boards</h2>
               </div>
           <div class="boards-container">
               <div v-for="board in boards" :key="board.id">

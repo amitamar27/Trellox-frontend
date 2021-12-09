@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     closeMenu() {
-      console.log('sasdfasfdasds');
+      
       this.$emit('openMenu');
     },
     openBgcMenu() {
@@ -104,8 +104,7 @@ export default {
   },
   computed: {
     openBgcOption() {
-      console.log('open bgc menu');
-      console.log('this.bgcIsClick', this.bgcIsClick);
+      
       // this.closeMenu();
       return {
         'aside-bgc-open': this.bgcIsClick,

@@ -107,7 +107,7 @@ export default new Vuex.Store({
       state.board.isFavorite = isFav
     },
     updateBoard(state, payload) {
-      const idx = state.boards.findIndex(board => board._id === payload.board._id)
+      const idx = state.boards.findIndex(board => board.id === payload.board.id)
       state.boards.splice(idx, 1, payload.board)
       state.board = payload.board
   },
@@ -206,6 +206,7 @@ export default new Vuex.Store({
       try{
         var board = await boardService.getBoardById(boardId);
         commit({ type: "setBoard", board });
+        return board
 
       }catch(err){
         console.log(err);

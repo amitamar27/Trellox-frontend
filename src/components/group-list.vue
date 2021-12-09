@@ -180,7 +180,11 @@ export default {
       currGroupId: null,
       menuPosition: { posX: "", posY: "" },
       task: {
-        title: ''
+        title: '',
+        labelIds:[],
+        cover:{
+          bgColor:'',
+        }
       }
     };
   },

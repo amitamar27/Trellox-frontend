@@ -2,7 +2,7 @@
   <main class="card-edit-window" ref="task" @click="closeDarkScreen">
     <div v-if="task" class="card-edit" @click.stop="">
       <header
-        v-if="task.cover.bgColor"
+        v-if="task.cover && task.cover.bgColor"
         :style="taskBgColor"
         class="task-edit-bg-title"
       >
@@ -158,7 +158,7 @@ export default {
       return task;
     },
     taskBgColor() {
-      if (this.currTask.cover.bgColor) {
+      if (this.currTask.cover && this.currTask.cover.bgColor) {
         return `background-color:${this.currTask.cover.bgColor}`;
       }
     },

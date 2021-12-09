@@ -2,8 +2,8 @@
   <div id="app" class="app" :style="background">
     <!-- <dark-screen /> -->
     <!-- <side-nav></side-nav> -->
-    <app-header />
-    <router-view />
+    <app-header :style="appHeaderStyle" />
+    <router-view @setBg="setBg" />
   </div>
 </template>
 
@@ -21,66 +21,92 @@ export default {
     sideNav,
     darkScreen
   },
+  data() {
+    return {
+      bgStyle: 'url(https://res.cloudinary.com/taskit-sprint/image/upload/v1622319307/background%20for%20Taskit/background_6_lqcaex.jpg)'
+    }
+  },
   computed: {
     background() {
-      console.log('this.$route.name', this.$route.name);
-      if (this.$route.name === 'Home') {
-        return {
-          backgroundImage: `url('https://res.cloudinary.com/taskit-sprint/image/upload/v1622319307/background%20for%20Taskit/background_6_lqcaex.jpg')`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }
-      }
-      if (this.$route.name === 'taskEdit') {
-        return {
-          backgroundImage: 'url(https://res.cloudinary.com/giladtoy/image/upload/v1638531202/u27ypkc1wfre9x9vgmrb.jpg)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }
-      }
-      if (this.$route.name === 'Board') {
-        return {
-          backgroundImage: 'url(https://res.cloudinary.com/giladtoy/image/upload/v1638531202/u27ypkc1wfre9x9vgmrb.jpg)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }
-      }
-      if (this.$store.getters.board && this.$route.path.includes('board')) {
-        const boardStyle = this.$store.getters.board.style
 
-
-        const res = {
-          backgroundImage: '',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }
-
-        if (boardStyle.bgImg) {
-          res.backgroundImage = `url('${boardStyle.bgImg}')`
-          return res
-        }
-        if (boardStyle.bgColor) return { backgroundColor: `${boardStyle.bgColor}` }
+      // if (this.$route.name === 'Home' || this.$route.name === 'Boards') {
+      //   return {
+      //     backgroundImage: 'url(https://res.cloudinary.com/taskit-sprint/image/upload/v1622319307/background%20for%20Taskit/background_6_lqcaex.jpg)',
+      //     backgroundRepeat: 'no-repeat',
+      //     backgroundSize: 'cover',
+      //     backgroundPosition: 'center'
+      //   }
+      // }
+      return {
+        backgroundImage: this.bgStyle,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }
+
     },
-    appHeaderStyle() {
-      if (this.$route.name === 'Home') {
-        return {
-          backgroundColor: 'rgb(255 255 255 / 16%)',
-        }
-      }
-      if (this.$route.name === 'Board') {
-        return {
-          backgroundColor: 'rgb(255 255 255 / 16%)',
-        }
-      }
+    //   if (this.$route.name === 'taskEdit') {
+    //     return {
+    //       backgroundImage: 'url(https://res.cloudinary.com/giladtoy/image/upload/v1638531202/u27ypkc1wfre9x9vgmrb.jpg)',
+    //       backgroundRepeat: 'no-repeat',
+    //       backgroundSize: 'cover',
+    //       backgroundPosition: 'center'
+    //     }
+    //   }
+    //   if ( this.$route.name === 'Board') {
+    //     return {
+    //       backgroundImage: `url(${this.bgStyle})`,
+    //       backgroundRepeat: 'no-repeat',
+    //       backgroundSize: 'cover',
+    //       backgroundPosition: 'center'
+    //     }
+    //   }
+    //   if (this.$store.getters.board && this.$route.path.includes('board')) {
+    //     const boardStyle = this.$store.getters.board.style
+
+
+    //     const res = {
+    //       backgroundImage: '',
+    //       backgroundRepeat: 'no-repeat',
+    //       backgroundSize: 'cover',
+    //       backgroundPosition: 'center'
+    //     }
+
+    //     if (this.boardStyle.style) {
+    //       res.backgroundImage = `url('${boardStyle.bgImg}')`
+    //       return res
+    //     }
+    //     if (boardStyle.bgColor) return { backgroundColor: `${boardStyle.bgColor}` }
+    //   }
+    // },
+    // appHeaderStyle() {
+    //   if (this.$route.name === 'Home') {
+    //     return {
+    //       backgroundColor: 'rgb(255 255 255 / 16%)',
+    //     }
+    //   }
+    //   if (this.$route.name === 'Board') {
+    //     return {
+    //       backgroundColor: 'rgb(255 255 255 / 16%)',
+    //     }
+    //   }
+    // }
+    	appHeaderStyle() {
+			if (this.$route.name === 'Home' || this.$route.name === 'Boards') {
+				return {
+					backgroundColor: '#026AA7',
+				}
+			}
+		}
+
+
+  },
+  methods: {
+    setBg(style) {
+      this.bgStyle = style
+      console.log('bgStyleeeee', this.bgStyle);
     }
-
-
-  }
+  },
   //   :style="appHeaderStyle"
 
 }

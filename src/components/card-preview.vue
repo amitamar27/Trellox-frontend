@@ -2,7 +2,7 @@
   <div class="card-main">
     <div @click="cardClick(groupId, task.id)" class="card-container">
       <div class="card-preview">
-        <div v-if="task.labelIds.length" class="labels">
+        <div v-if="task.labelIds && task.labelIds.length" class="labels">
           <div
             class="task-label"
             v-for="label in getLabels"

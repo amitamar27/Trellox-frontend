@@ -1,10 +1,23 @@
 <template>
   <div class="home">
-    <router-link class="router" to="/boards"> 
-    <button class="home-btn" > Lets start our project</button>
-    </router-link>
-    
-    
+    <section class="inner-home">
+      <!-- <img src="../assets/home/hero.jpg" alt="" /> -->
+
+      <section class="content">
+        <h1>Welcome to Trellox</h1>
+        <p>
+         Trellox is the visual work management tool that empowers teams to ideate,
+          plan, manage, and celebrate their work together in a collaborative, productive, and organized way.
+        </p>
+        <span>
+         
+          <router-link class="router"  to="/boards">
+            <button >Lets start our project</button>
+          </router-link>
+        
+        </span>
+      </section>
+    </section>
   </div>
 </template>
 
@@ -13,12 +26,17 @@
 
 export default {
   name: 'Home',
-   created() {
+  created() {
     // this.$store.dispatch({ type:"loadBoard" });
-    var boards = this.$store.dispatch({type:'loadBoards'})
+    var boards = this.$store.dispatch({ type: 'loadBoards' })
   },
   computed: {
-   
+
   },
 }
 </script>
+
+
+
+
+

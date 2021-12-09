@@ -34,6 +34,7 @@ const routes = [
   },
   {
     path:'/boards',
+    name:'Boards',
     component:boards
     
     

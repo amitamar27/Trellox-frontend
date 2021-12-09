@@ -1,33 +1,126 @@
-.home{
+// .home{
+//     display: flex;
+//     justify-content: center;
+
+//     .router{
+//         text-decoration: none;
+//     }
+// }
+// .home-btn{
+//     background-color: rgb(35, 101, 187);
+//     box-shadow: 0 10px 30px -10px #0af;
+//     color: #fff;
+//     line-height: 50px;
+//     height: 70px;
+//     padding: 0 35px;
+//     font-size: 25px;
+//     border-radius: 36px;
+//     -webkit-appearance: none;
+//     font-family: "Avenir","Avenir Next","Segoe UI",Helvetica,Arial,sans-serif;
+//     font-weight: 700;
+//     border: none;
+//     resize: none;
+//     cursor: pointer;
+//     text-align: center;
+//     margin: 55px 0;
+//     display: -webkit-flex;
+//     display: flex;
+//     align-items: center;
+//     -webkit-justify-content: center;
+//     justify-content: center;
+//     &:hover{
+//         background-color: rgb(25, 86, 167);
+//     }
+// }
+
+
+
+
+
+
+.home {
     display: flex;
-    justify-content: center;
-    .router{
-        text-decoration: none;
-    }
-}
-.home-btn{
-    background-color: rgb(35, 101, 187);
-    box-shadow: 0 10px 30px -10px #0af;
-    color: #fff;
-    line-height: 50px;
-    height: 70px;
-    padding: 0 35px;
-    font-size: 25px;
-    border-radius: 36px;
-    -webkit-appearance: none;
-    font-family: "Avenir","Avenir Next","Segoe UI",Helvetica,Arial,sans-serif;
-    font-weight: 700;
-    border: none;
-    resize: none;
-    cursor: pointer;
-    text-align: center;
-    margin: 55px 0;
-    display: -webkit-flex;
-    display: flex;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    &:hover{
-        background-color: rgb(25, 86, 167);
+    flex-direction: column;
+    height: fit-content;
+    z-index: 121212;
+    color: #091e42;
+    overflow-x: hidden;
+
+    .inner-home {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url("../assets/5137807.jpg");
+        background-size: cover;
+        background-position: center;
+
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 70vw;
+            max-width: 1000px;
+            background-color: rgba(255, 255, 255, 0.705);
+            border-radius: 8px;
+            padding: 40px;
+            position: relative;
+            bottom: 76px;
+
+            >h1 {
+                font-family: Segoe UI;
+                font-size: 55px;
+                line-height: 60px;
+
+
+            }
+
+            >p {
+                margin-top: 10px;
+                font-size: 23px;
+                line-height: 32px;
+
+
+            }
+
+            >span {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                justify-content: center;
+
+                .router {
+
+                    >button {
+                        @include primaryBtn;
+
+                        background-color: #0079bf;
+                        font-weight: 600;
+                        text-align: center;
+                        border-radius: 8px;
+                        color: white;
+                        padding: 10px 16px;
+                        margin-top: 0;
+                        font-size: 14px;
+                        transition: all 5ms;
+                        width: fit-content;
+                        margin: 20px 0;
+                        font-size: 23px;
+                        border: none;
+                    }
+
+                    >a {
+                        cursor: pointer;
+                        color: $textClr;
+
+                    }
+
+                }
+
+
+            }
+        }
     }
 }
