@@ -7,7 +7,7 @@ import {
 export const boardService = {
     query,
     addTask,
-    makeTask,
+    setTask,
     getNewGroup,
     saveBoard,
     removeGroup,
@@ -170,8 +170,6 @@ async function query() {
 
 async function addTask(taskDetails, board) {
     return await asyncgStorageService.postTask(KEYS, taskDetails, board)
-
-
 }
 async function saveBoard(board) {
     return await asyncgStorageService.getAndSaveBoard(KEYS, board)
@@ -180,11 +178,39 @@ async function getTaskById(groupId, cardId) {
     return await asyncgStorageService.getTask(KEYS, groupId, cardId)
 
 }
-
-function makeTask(title) {
+// activities: Array(1)
+// byMember: Object
+// checklists: Array(1)
+// comments: Array(1)
+// cover: Object
+// createdAt: 1590999730348
+// description: ""
+// dueDate: Object
+// id: "c104"
+// labelIds: Array(2)
+// members: Array(3)
+// style: Object
+// title: "Who's the best person to fix my HTML snag?"
+function setTask(title) {
     return {
         id: makeId(),
-        title
+        title,
+        activities:[],
+        byMember: {
+            _id: "u101",
+            username: "korenlevi",
+            fullname: "Koren Levi",
+            imgUrl: "https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889545/Trellox/korenlevi.jpg"
+        },
+        checklists:[],
+        comments: [],
+        cover:null,
+        createdAt:Date.now(),
+        description: "",
+        dueDate: null,
+        labelIds: [],
+        members:[],
+        style:{}
     }
 }
 
@@ -193,6 +219,8 @@ function getNewGroup(title, tasks = []) {
         id: makeId(),
         title,
         tasks,
+       
+
 
     }
 }

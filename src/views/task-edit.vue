@@ -2,7 +2,7 @@
   <main class="card-edit-window" ref="task" @click="closeDarkScreen">
     <div v-if="task" class="card-edit" @click.stop="">
       <header
-        v-if="task.cover"
+        v-if="task.cover && task.cover.bgColor"
         :style="taskBgColor"
         class="task-edit-bg-title"
       >
@@ -54,21 +54,16 @@
           <div class="main-content-details">
             <section class="task-details">
               <task-members
-                v-if="task.members"
+                v-if="task.members && task.members.length"
                 :members="task.members"
                 :key="task.id"
               ></task-members>
               <labels
-                v-if="task.labelIds"
+                v-if="task.labelIds && task.labelIds.length"
                 :labelIds="task.labelIds"
                 :key="1"
               ></labels>
-              <task-dates
-               :task="task"
-               v-if="task.dueDate"
-              >
-               
-              </task-dates>
+              <task-dates :task="task" v-if="task.dueDate"> </task-dates>
             </section>
 
             <section class="task-description">
@@ -100,6 +95,13 @@
                 :key="5"
                 @saveTask="saveTask"
               ></task-activity>
+            </section>
+
+            <section class="task-edit-actions">
+              <a class="delete-task-btn" @click="removeTask">
+                <span class="icon-sm icon-remove"></span>
+                <span>Delete</span>
+              </a>
             </section>
           </div>
 
@@ -238,6 +240,12 @@ export default {
     closeCover() {
       this.isCoverClick = false;
     },
+    removeTask(){
+      const { groupId } = this.$route.params;
+      const { taskId } = this.$route.params;
+      this.$store.dispatch({type:'removeTask',groupId,taskId})
+      this.closeDarkScreen()
+    },
   },
   components: {
     labels,
@@ -249,12 +257,12 @@ export default {
     checkList,
     taskTitle,
     taskCover,
-    taskDates
+    taskDates,
   },
 };
 </script>
 
-<style>
+<style lang="scss">
 .task-details {
   display: flex;
   margin-left: 42px;
@@ -296,6 +304,78 @@ export default {
   width: 100%;
   position: relative;
 }
+.task-edit-actions {
+  // display: flex;
+    margin: 20px 0;
+  .delete-task-btn {
+    display: flex;
+    border-radius: 3px;
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 32px;
+    margin-top: 8px;
+    max-width: 300px;
+    overflow: hidden;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition-duration: 85ms;
+    transition-property: background-color, border-color, box-shadow;
+    transition-timing-function: ease;
+    -webkit-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+
+    width: calc(50% - 8px);
+
+    background-color: #b04632;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+
+    &:hover {
+      background-color: #933b27;
+      border: none;
+      box-shadow: none;
+      color: #fff;
+    }
+
+    .icon-remove {
+      color: #fff;
+      margin: 0 6px 0 -6px;
+      line-height: 1.38;
+    }
+  }
+}
+
+// .delete-task-btn {
+//   border-radius: 3px;
+//   box-sizing: border-box;
+//   cursor: pointer;
+//   height: 32px;
+//   margin-top: 8px;
+//   max-width: 300px;
+//   overflow: hidden;
+//   padding: 6px 12px;
+//   // position: relative;
+//   text-decoration: none;
+//   text-overflow: ellipsis;
+//   transition-duration: 85ms;
+//   transition-property: background-color, border-color, box-shadow;
+//   transition-timing-function: ease;
+//   -webkit-user-select: none;
+//   user-select: none;
+//   white-space: nowrap;
+
+//   // display: inline-block;
+//   // margin-right: 8px;
+
+// }
+.delete-task-btn {
+  // display: flex;
+}
+
 /* .icon-md{
   background-color: #00000014;
   cursor: pointer;

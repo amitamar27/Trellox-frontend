@@ -50,8 +50,9 @@ export default {
     return {
       isCoverClick: false,
       isCoverSelected: false,
-      currCover: this.task.cover.bgColor,
-      currCoverIdx: null
+      currCover: null,
+      currCoverIdx: null,
+      // currCover: this.task.cover.bgColor,
     };
   },
   created() {
@@ -60,6 +61,7 @@ export default {
     if(this.currCoverIdx) document.querySelector(".idx-" + this.currCoverIdx)
     .classList.add('cover-box')
     else console.log('no');
+    if(this.task.cover) this.currCover = this.task.cover.bgColor
   },
   computed: {},
   methods: {
@@ -69,6 +71,7 @@ export default {
     },
     setShadow() {},
     coverClick(cover, idx) {
+
       const elCover = document.querySelector(".cover-box");
       const elCurrCover = document.querySelector(".idx-" + idx);
       if (elCover && !elCurrCover.classList.contains("cover-box")) {
@@ -79,8 +82,13 @@ export default {
       elCurrCover.classList.remove("cover-box");
         this.task.cover.bgColor = ''
       }
-        
-      else{
+      else if(!this.task.cover){
+        this.task.cover = {
+          bgColor: cover,
+          isFull: false,
+        }
+        console.log('this.task.cover',this.task.cover);
+      }else{
         elCurrCover.classList.add("cover-box");
         this.task.cover.bgColor = cover
       } 

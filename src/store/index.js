@@ -92,7 +92,14 @@ export default new Vuex.Store({
       const idx = state.boards.findIndex(board => board._id === payload.board._id)
       state.boards.splice(idx, 1, payload.board)
       state.board = payload.board
-  },
+    },
+    removeTask(state, {groupId,taskId}){
+      const group = state.board.groups.find(g => g.id === groupId)
+      const taskIdx = group.tasks.findIndex(t => t.id === taskId)
+      if (taskIdx < 0) return
+
+      group.tasks.splice(taskIdx, 1)
+    }
   },
 
   actions: {
@@ -119,7 +126,6 @@ export default new Vuex.Store({
     async setBoard({commit},{board}){
       try{
         var board = await boardService.saveBoard(board)
-        alert('f')
         console.log('board',board);
       }catch(err){
         console.log('problem with save board', err);
@@ -140,7 +146,7 @@ export default new Vuex.Store({
 
     async addTask(context, { task }) {
       try {
-        var addedTask = await boardService.makeTask(task.title);
+        var addedTask = await boardService.setTask(task.title);
         const taskDetails= {
           task:addedTask,
           groupId:task.groupId
@@ -234,9 +240,18 @@ export default new Vuex.Store({
       }catch(err){
         console.log('updateBoard in store:', err);
         throw err;
-
       }
-    }
+    },
+    async removeTask({commit }, payload){
+      try{
+        commit(payload)
+        const board = this.getters.board
+        await boardService.saveBoard(board)
+      } catch(err){
+        console.dir('error',err)
+        throw err;
+      }
+  },
   },
   modules: {
     taskDetails,
