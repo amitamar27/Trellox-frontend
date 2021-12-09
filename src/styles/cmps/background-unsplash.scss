@@ -1,0 +1,54 @@
+.background-unsplash {
+
+    input {
+        margin: 0px;
+        padding: 8px;
+        width: 95%;
+        border-radius: 3px;
+        border: none;
+    }
+
+    &>div {
+        margin-top: 8px;
+        
+
+        &::-webkit-scrollbar {
+            width: 8px;
+            padding: none;
+        }
+
+        &::-webkit-scrollbar-track {
+            border-radius: 1rem;
+            background-color: rgb(224, 224, 224);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 1rem;
+            border-left: none;
+        }
+
+
+        &::-webkit-scrollbar-track-piece {
+            background: rgba(167, 167, 167, 0);
+        }
+
+        display: grid;
+        padding-right: 1px;
+        height: 60.5vh;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        overflow-y: auto;
+
+        .unsplash-box {
+            height: 80px;
+            border-radius: 3px;
+            background-size: cover;
+            cursor: pointer;
+
+            &:hover {
+                filter: brightness(85%);
+            }
+        }
+    }
+}

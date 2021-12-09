@@ -21,6 +21,11 @@ import groupList from "../components/group-list.vue";
 import taskEdit from './task-edit.vue';
 import boardHeader from '../components/board-header.vue';
 export default {
+  data() {
+    return {
+      boardId: ''
+    }
+  },
   watch: {
     '$route.params.boardId': {
       handler() {
@@ -30,9 +35,12 @@ export default {
       immediate: true
     }
   },
+  created() {
+    this.boardId = this.$route.params.boardId;
+  },
   computed: {
     board() {
-      // :style="getStyle"
+
       return this.$store.getters.board;
     },
     getStyle() {
@@ -54,9 +62,17 @@ export default {
       const board = this.board
       this.$store.dispatch({ type: 'setBoard', board })
     },
-    editBgcBoard(style) {
-      this.$emit('setBg', style);
+    async editBgcBoard(style) {
+      try {
+        await this.$store.dispatch({ type: 'updateBoardBgc', boardId: this.boardId, style: style })
+       
+      } catch (err) {
+        console.log('Error in updateBoard (board-header):', err);
+        throw err;
+      }
+
     },
+
 
 
   },

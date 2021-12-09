@@ -87,8 +87,9 @@ export default {
       this.isShown = !this.isShown;
       console.log(this.isShown);
     },
-    editBgcBoard(){
-        console.log('in board header');
+    editBgcBoard(style){
+        console.log('in board header',style);
+        this.$emit('editBgcBoard', style);
     }
   },
 
