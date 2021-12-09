@@ -1,6 +1,6 @@
 <template>
   <main class="task-members">
-    <h3 class="task-details-h">MEMBERS</h3>
+    <h3 class="task-details-h">Members</h3>
     <div class="task-members-container">
       <section v-for="member in members" :key="member.id" class="member">
         <avatar

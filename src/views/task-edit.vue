@@ -63,6 +63,11 @@
                 :labelIds="task.labelIds"
                 :key="1"
               ></labels>
+              <task-dates
+               :task="task"
+              >
+               
+              </task-dates>
             </section>
 
             <section class="task-description">
@@ -126,7 +131,7 @@ import taskAttachment from "../components/task-edit-cmps/task-attachment.vue";
 import checkList from "../components/task-edit-cmps/check-list.vue";
 import taskTitle from "../components/task-edit-cmps/task-title.vue";
 import taskCover from "../components/task-edit-cmps/task-cover.vue";
-
+import taskDates from "../components/task-edit-cmps/task-dates.vue";
 export default {
   name: "task-edit",
   props: {},
@@ -243,6 +248,7 @@ export default {
     checkList,
     taskTitle,
     taskCover,
+    taskDates
   },
 };
 </script>
