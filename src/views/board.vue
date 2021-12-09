@@ -33,13 +33,8 @@ export default {
   },
   created() {
     const { boardId } = this.$route.params;
-    // console.log('boardId',boardId);
-    // this.boardId = this.$route.params.boardId;
     this.boardId =  boardId
-    if(this.boardId){
-      this.$store.dispatch({type:'setBoardById',boardId})
-    }
-    console.log('this.boardId',this.boardId);
+    if(this.boardId)this.$store.dispatch({type:'setBoardById',boardId})
   },
   computed: {
     board() {
