@@ -284,7 +284,10 @@ function _creareBoards() {
                                 ],
                                 "labelIds": ["l101", "l102"],
                                 "createdAt": 1590999730348,
-                                "dueDate": 16156215211,
+                                "dueDate":{
+                                    "isDone" : false,
+                                    "time":16156215211
+                                },
                                 "byMember": {
                                     "_id": "u101",
                                     "username": "korenlevi",
@@ -341,7 +344,10 @@ function _creareBoards() {
                                 }],
                                 "labelIds": ["l101", "l102"],
                                 "createdAt": 1590999730348,
-                                "dueDate": 16156215211,
+                                "dueDate":{
+                                    "isDone" : false,
+                                    "time":16156215211
+                                },
                                 "byMember": {
                                     "_id": "u101",
                                     "username": "korenlevi",
@@ -410,7 +416,10 @@ function _creareBoards() {
                                 }],
                                 "labelIds": ["l101", "l102"],
                                 "createdAt": 1590999730348,
-                                "dueDate": 16156215211,
+                                "dueDate":{
+                                    "isDone" : false,
+                                    "time":16156215211
+                                },
                                 "byMember": {
                                     "_id": "u102",
                                     "username": "amitamar",
@@ -467,7 +476,10 @@ function _creareBoards() {
                                 }],
                                 "labelIds": ["l101", "l102"],
                                 "createdAt": 1590999730348,
-                                "dueDate": 16156215211,
+                                "dueDate":{
+                                    "isDone" : false,
+                                    "time":16156215211
+                                },
                                 "byMember": {
                                     "_id": "u103",
                                     "username": "Tal",
@@ -554,7 +566,10 @@ function _creareBoards() {
                             }],
                             "labelIds": ["l101", "l102"],
                             "createdAt": 1590999730348,
-                            "dueDate": 16156215211,
+                            "dueDate":{
+                                "isDone" : false,
+                                "time":16156215211
+                            },
                             "byMember": {
                                 "_id": "u103",
                                 "username": "Tal",
@@ -633,7 +648,10 @@ function _creareBoards() {
                             }],
                             "labelIds": ["l101", "l102"],
                             "createdAt": 1590999730348,
-                            "dueDate": 16156215211,
+                            "dueDate":{
+                                "isDone" : false,
+                                "time":16156215211
+                            },
                             "byMember": {
                                 "_id": "u103",
                                 "username": "Tal",
@@ -667,7 +685,7 @@ function _creareBoards() {
 
 }
 
-function _createBoard(title, groups = []) {
+function _createBoard(title, groups = [],style={}) {
     return {
         _id: makeId(),
         title,

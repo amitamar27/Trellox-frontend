@@ -1,6 +1,6 @@
 <template>
   <main v-if="labels && labelIds" class="task-members">
-    <h3 class="task-details-h">LABELS</h3>
+    <h3 class="task-details-h">Labels</h3>
     <div class="task-label-container flex">
       <section
         v-for="label in labels"
