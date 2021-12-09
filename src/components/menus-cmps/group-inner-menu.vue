@@ -31,8 +31,8 @@ export default {
     async removeGroup(groupId) {
         const board = this.$store.getters.board
         const groupDetails = {board,groupId}
-       await this.$store.dispatch({ type: 'removeGroup', groupDetails })
-       this.$emit('closeMenu');
+        await this.$store.dispatch({ type: 'removeGroup', groupDetails })
+        this.$emit('closeMenu');
        
     }
   }

@@ -2,17 +2,13 @@
   <div v-if="board" class="board-container">
     <board-header :board="board" @editBgcBoard="editBgcBoard" />
 
-    <!-- {{board}} -->
     <group-list
       @dragEnd="dragEnd"
       @pickTask="pickTask"
       :board="board"
       v-if="board"
     ></group-list>
-    <!-- <router-view /> -->
-    <!-- <task-edit></task-edit> -->
     <router-view />
-    <!-- <div class="scroller"></div> -->
   </div>
 </template>
 
@@ -30,20 +26,27 @@ export default {
     '$route.params.boardId': {
       handler() {
         const { boardId } = this.$route.params;
-
+        console.log('boardId',boardId);
       },
       immediate: true
     }
   },
   created() {
-    this.boardId = this.$route.params.boardId;
+    const { boardId } = this.$route.params;
+    // console.log('boardId',boardId);
+    // this.boardId = this.$route.params.boardId;
+    this.boardId =  boardId
+    if(this.boardId){
+      this.$store.dispatch({type:'setBoardById',boardId})
+    }
+    console.log('this.boardId',this.boardId);
   },
   computed: {
     board() {
-
       return this.$store.getters.board;
     },
     getStyle() {
+      console.log('this.board',this.board);
       if (this.board.style.backgroundSrc) {
         const url = this.board.style.backgroundSrc
         return { 'background-image': `url(${url})` }
@@ -65,7 +68,6 @@ export default {
     async editBgcBoard(style) {
       try {
         await this.$store.dispatch({ type: 'updateBoardBgc', boardId: this.boardId, style: style })
-       
       } catch (err) {
         console.log('Error in updateBoard (board-header):', err);
         throw err;

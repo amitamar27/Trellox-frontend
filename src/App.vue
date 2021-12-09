@@ -50,8 +50,6 @@ export default {
       }
       if (this.$store.getters.board && this.$route.path.includes('board')) {
         const boardStyle = this.$store.getters.board.style
-
-
         const res = {
           backgroundImage: '',
           backgroundRepeat: 'no-repeat',
