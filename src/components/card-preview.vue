@@ -17,13 +17,49 @@
               @click.prevent.stop="toggleSize"
               :class="labelClick"
             >
-              <span class="label-title" >
+              <span class="label-title">
                 {{ label.title }}
               </span>
             </div>
           </div>
           <div class="card-text-container">
             <span>{{ task.title }}</span>
+          </div>
+          <!-- TASK DETAILS -->
+          <div class="task-details-container">
+            <!-- members -->
+            <div class="list-task-members">
+              <div
+                class="member"
+                v-for="member in task.members"
+                :key="member.id"
+              >
+                <avatar
+                  class="user-avatar"
+                  backgroundColor="lightblue"
+                  color="black"
+                  :size="28"
+                  :username="member.fullname"
+                  :src="member.imgUrl"
+                ></avatar>
+              </div>
+            </div>
+            <!-- checklist -->
+            <section
+              v-if="task.checklists && todosCounters.todosCounter"
+              class="checklist-badge"
+              :class="{
+                'done-checklist':
+                  todosCounters.isDoneCounter === todosCounters.todosCounter,
+              }"
+            >
+              <img
+                :src="require('@/assets/checklist.svg')"
+                alt=""
+                title="Checklist items"
+              />
+              {{ todosCounters.isDoneCounter }}/{{ todosCounters.todosCounter }}
+            </section>
           </div>
         </div>
       </div>
@@ -37,6 +73,7 @@
 //                 increaseLabel: changeLabelSize,
 //               }"
 import taskEdit from "../views/task-edit.vue";
+import Avatar from 'vue-avatar';
 export default {
   props: {
     task: {
@@ -89,6 +126,20 @@ export default {
       // if(!this.changeLabelSize) return 'shrinkLabel'
       // return 'increaseLabel'
     },
+    todosCounters() {
+      const counters = { todosCounter: 0, isDoneCounter: 0 }
+      this.task.checklists.forEach(cl => {
+        counters.isDoneCounter += cl.todos.reduce((acc, todo) => {
+          counters.todosCounter++
+          if (todo.isDone) acc++
+          return acc
+        }, 0)
+      })
+      return counters
+    },
+    	isCheckLists() {
+			return this.task.checklists?.todos
+		},
   },
   methods: {
     cardClick(groupId, taskId) {
@@ -117,6 +168,7 @@ export default {
 
   components: {
     taskEdit,
+    Avatar,
   },
 };
 </script>

@@ -1,4 +1,43 @@
-.card-preview{
+.card-preview {
     overflow-wrap: break-word;
     word-break: break-all;
+}
+
+.task-details-container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    flex-wrap: wrap;
+    gap: 5px 0;
+    align-items: center;
+
+    .list-task-members {
+        display: flex;
+
+    }
+
+
+
+}
+
+.checklist-badge {
+    padding: 3px;
+    border-radius: 3px;
+    background-color: transparent;
+    filter: invert(48%) sepia(13%) saturate(602%) hue-rotate(179deg) brightness(92%) contrast(87%);
+
+    >img {
+        position: relative;
+        top: 2px;
+        align-items: center;
+        -o-object-position: center;
+        object-position: center;
+        height: 14px;
+    }
+
+    &.done-checklist {
+        color: white;
+        background-color: #61bd4f;
+    }
 }
