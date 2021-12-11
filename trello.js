@@ -14,6 +14,7 @@
 // Store Mutation - saveBoard
 // state.board = board
 // Later, support switching a specific task
+// background-color: #61bd4f; green 
 
 // Cmp Mehotds:
 function updateTask(cmpType, data) {

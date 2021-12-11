@@ -15,24 +15,11 @@
         </div>
       </header>
       <main class="task-edit-container">
-        <!-- <header class="task-edit-header">
-              <section class="task-section">
-                  <span class="icon-card icon-lg">
-           
-                  </span>
-                  
-                <textarea >
-
-                  </textarea> 
-       
-              </section>
-          </header> -->
-
-        <!-- <header  v-if="task.cover"> 
-              align-items: center;
+      
+             
 
 
-          </header> -->
+         
         <transition
           enter-active-class="animate__animated animate__fadeInRight animate__faster"
           leave-active-class="animate__animated animate__fadeOutRight animate__faster"
@@ -246,6 +233,11 @@ export default {
       this.$store.dispatch({type:'removeTask',groupId,taskId})
       this.closeDarkScreen()
     },
+    updateBoard(){
+       const { boardId } = this.$route.params;
+       this.$store.dispatch({type:'updateBoard',boardId})
+    }
+    
   },
   components: {
     labels,

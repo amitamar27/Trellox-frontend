@@ -96,7 +96,8 @@ export default {
       this.bgcIsClick = !this.bgcIsClick;
     },
     changeImgUrl(url) {
-      this.bgcType === true;
+      // url = 'https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639080486/Trellox/code-2560x1080_z9fqnz.jpg'
+      this.bgcType = true;
       this.boardStyle.bgImg = `url(${url})`;
       this.boardStyle.bgColor = 'none';
       this.$emit('updateBgcBoard', this.boardStyle);
@@ -104,7 +105,7 @@ export default {
   },
   computed: {
     openBgcOption() {
-      
+      // https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639080486/Trellox/code-2560x1080_z9fqnz.jpg
       // this.closeMenu();
       return {
         'aside-bgc-open': this.bgcIsClick,

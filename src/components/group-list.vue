@@ -75,7 +75,7 @@
             ></textarea>
             <div class="card-actions">
               <a @click="addTask(group.id)">Add card</a>
-              <button @click="isAdding = false">
+              <button @click="closeAddCard">
                 <img :src="require('@/assets/cancel-icon.png')" />
               </button>
             </div>
@@ -228,6 +228,10 @@ export default {
       this.$emit('dragEnd')
       console.log('dragEnd');
 
+    },
+    closeAddCard(){
+       this.task.title ='';
+       this. isAdding = false;
     },
 
     changeGroup(ev) {

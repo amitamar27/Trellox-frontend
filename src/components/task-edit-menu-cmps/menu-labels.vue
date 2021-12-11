@@ -16,7 +16,7 @@
           <div
             class="edit-labels mod-selectable task-labels"
             :style="`background-color: ${label.color}`"
-            @click="addLabel(label.id,idx)"
+            @click="addLabel(label.id, idx)"
           >
             <!-- <p v-if="labelsId(idx)">{{labels[idx].title}}</p> -->
             <p>{{ defaulsLabels[idx].title }}</p>
@@ -49,16 +49,15 @@
     <section v-else class="edit-label">
       <a v-if="isInEdit" class="icon-sm icon-back" @click="goBack"> </a>
       <h5 class="h-title">Name</h5>
-      
+
       <el-input
         ref="input"
         type="text"
         placeholder="Set label..."
         v-model="currLabel.title"
-        @keydown.enter="saveLabel"
+        @keydown.enter="saveBoard"
       />
-      <button class="save-btn" @click="saveLabel">Save</button>
-      
+      <button class="save-btn" @click="saveBoard">Save</button>
     </section>
   </section>
 </template>
@@ -71,7 +70,7 @@ export default {
       type: Object,
       required: true,
     },
-     board: {
+    board: {
       type: Object,
       required: true,
     },
@@ -96,8 +95,6 @@ export default {
     };
   },
   created() {
-    // this.labels = this.$emit("labels");
-    // console.log("this.labels", this.labels);
     this.defaulsLabels = this.$store.getters.labels;
     this.currLabels();
   },
@@ -111,12 +108,10 @@ export default {
     currLabels() {
       const labels = this.$store.getters.labels;
       this.labels = [];
-      console.log("labels", labels);
       const newLabels = [];
       labels.forEach((label) => {
         if (this.task.labelIds.includes(label.id)) this.labels.push(label);
       });
-      console.log("this.labels", this.labels);
     },
     labelsId(idx) {
       return this.labels.includes(this.defaulsLabels[idx]);
@@ -129,10 +124,19 @@ export default {
       this.isInEdit = true;
     },
     saveLabel() {
-      console.log("labels 1 ");
-      // this.$emit("saveLabels", this.labels);
-      this.$emit('saveTask');
-      this.$emit('closeMenu');
+      console.log("boardd", this.board);
+
+      this.$emit("saveTask");
+      this.$emit("closeMenu");
+    },
+    saveBoard() {
+      console.log('this.board.labels',this.board.labels);
+      console.log('this.currLabel',this.currLabel);
+      this.board.labels.forEach((label) => {
+        if (label.id === this.currLabel.id) label.title = this.currLabel.title;
+      });
+      this.$emit("updateBoard");
+      this.$emit("closeMenu");
     },
     goBack() {
       this.isInEdit = false;
@@ -140,20 +144,21 @@ export default {
     closeMenu() {
       this.$emit("closeMenu");
     },
-    addLabel(labelId,idx) {
+    addLabel(labelId, idx) {
       // const labelId = "l10" + (idx + 1);
-      const newIdx = this.labels.findIndex((label) => label.color === this.colors[idx]);
+      const newIdx = this.labels.findIndex(
+        (label) => label.color === this.colors[idx]
+      );
       if (newIdx > -1) {
         this.labels.splice(newIdx, 1);
         const idx = this.task.labelIds.findIndex((lId) => lId === labelId);
         this.task.labelIds.splice(idx, 1);
-      } else{
-      this.task.labelIds.push(labelId);
-      this.currLabels();
+      } else {
+        this.task.labelIds.push(labelId);
+        this.currLabels();
       }
       this.$emit("addLabel");
     },
-
   },
 };
 </script>
