@@ -1,6 +1,8 @@
 .board-container {
     // height: calc(100% );
-    height: calc(100% - 57px);
+    // height: calc(100% - 57px);
+    flex: 1;
+    padding: 0 0 40px;
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;

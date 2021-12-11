@@ -173,8 +173,11 @@ p {
 
     position: absolute;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     z-index: 10;
+    flex: 1;
     //   overflow-y: hidden;
     // overflow-x: auto;
     // overflow-y: auto;

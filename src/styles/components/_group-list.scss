@@ -6,6 +6,7 @@
     // width: 100vw;
     flex-basis: auto;
     margin: 0px 5px;
+    align-items: flex-start;
 
     .group-preview {
         cursor: default;
@@ -14,6 +15,7 @@
         --animate-duration: 1s;
         --animate-delay: 1s;
         --animate-repeat: 1;
+        max-height: 100%;
     }
 
     .cards-container {
@@ -22,12 +24,17 @@
         overflow-x: hidden;
         scroll-behavior: smooth;
         padding: 0px 4px;
+<<<<<<< HEAD
+=======
+        flex: 1;
+>>>>>>> 51a7df77c36411fff530b92aa2c7687d3fd4be90
 
         .draggable-groups {
-            height: 100%;
+            // height: 100%;
             position: relative;
-            min-height: 30px;
+            // min-height: 30px;
             min-width: 30px;
+            align-items: flex-start;
 
 
 
@@ -59,14 +66,13 @@
                     // }
                     .labels {
                         display: flex;
-                        // padding-top: 5px;
-                        // padding-left: 5px;
-
-                        span {
-                            height: 16px;
-                            line-height: 16px;
-                            // width: 34px;
-                            max-width: 198px;
+                        padding-top: 5px;
+                        flex-wrap: wrap;
+                        .task-label{
+                            // height: 13px;
+                            line-height: 14px;
+                            width: 34px;
+                            max-width: 184px;
                             // padding: 0 8px;
                         }
 
@@ -336,6 +342,7 @@
         // padding: 6px 8px 2px 2px;
         // margin: 10px 8px;
         // padding: 5px 5px;
+        // flex: 1;
         text-align: left;
         min-height: 34px;
         // border-radius: 3px;
@@ -493,12 +500,14 @@
     // z-index: 10;
     margin-top: 45px;
     display: flex;
+    height: 100%;
+    align-items: flex-start;
     // width: -webkit-fit-content;
     // width: -moz-fit-content;
     // width: fit-content;
     // margin: 38px 4px;
     // max-height: 100%;
-    height: fit-content;
+    // height: fit-content;
     width: fit-content;
     // -webkit-user-select: none;
     // -moz-user-select: none;
@@ -604,8 +613,13 @@
 
 .group-add-container {
     border-radius: 3px;
+<<<<<<< HEAD
     height: 100%;
     background-color: hsla(0, 0%, 100%, .24);
+=======
+    // height: 100%;
+    background-color: hsla(0,0%,100%,.24);
+>>>>>>> 51a7df77c36411fff530b92aa2c7687d3fd4be90
 
     p {
         color: #ffff;

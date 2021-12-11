@@ -37,7 +37,7 @@
                 <span class="span-2 icon-sm"></span>
               </span>
               <div
-                @click.prevent.stop="openGroupMenu(group.id, idx)"
+                @click.prevent.stop="openGroupMenu(group.id)"
                 class="
                   group-header-extras-menu
                   span-1
