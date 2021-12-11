@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      bgStyle: ''
+      bgStyle: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639076920/Trellox/5137807_o4zvys.jpg)'
     }
   },
   computed: {
