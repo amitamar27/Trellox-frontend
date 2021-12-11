@@ -109,6 +109,7 @@ export default ({
     computed:{
         boards(){
             return this.$store.getters.boards
+            
         },
         backgroundObject(){
             if(!this.imgUrl){

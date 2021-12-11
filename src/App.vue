@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      bgStyle: 'url(https://res.cloudinary.com/taskit-sprint/image/upload/v1622319307/background%20for%20Taskit/background_6_lqcaex.jpg)'
+      bgStyle: ''
     }
   },
   computed: {
