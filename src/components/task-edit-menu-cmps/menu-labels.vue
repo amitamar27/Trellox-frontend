@@ -112,6 +112,7 @@ export default {
       labels.forEach((label) => {
         if (this.task.labelIds.includes(label.id)) this.labels.push(label);
       });
+      console.log('this.labels-this.labels',this.labels);
     },
     labelsId(idx) {
       return this.labels.includes(this.defaulsLabels[idx]);
@@ -120,7 +121,12 @@ export default {
       this.currLabel = labels[idx];
     },
     goInMenu(idx) {
-      this.currLabel = this.labels[idx];
+      console.log('idx',idx);
+      console.log('this.labels[idx]',this.board.labels[idx]);
+      console.log('this.labels[idx]',this.labels[idx]);
+       this.currLabel = this.board.labels[idx];
+      // this.currLabel = this.labels[idx];
+      console.log('this.currLabel',this.currLabel);
       this.isInEdit = true;
     },
     saveLabel() {
@@ -149,12 +155,15 @@ export default {
       const newIdx = this.labels.findIndex(
         (label) => label.color === this.colors[idx]
       );
+      console.log('newIdx',newIdx);
       if (newIdx > -1) {
         this.labels.splice(newIdx, 1);
         const idx = this.task.labelIds.findIndex((lId) => lId === labelId);
         this.task.labelIds.splice(idx, 1);
       } else {
+        console.log('labelId',labelId);
         this.task.labelIds.push(labelId);
+        console.log('this.task.labelIds',this.task.labelIds);
         this.currLabels();
       }
       this.$emit("addLabel");

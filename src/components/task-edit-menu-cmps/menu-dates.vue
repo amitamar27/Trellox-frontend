@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     closeMenu() {
-      this.task.dueDate.time = this.time;
+      // this.task.dueDate.time = this.time;
       this.$emit("closeMenu");
     },
     saveDate() {

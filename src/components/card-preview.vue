@@ -17,7 +17,7 @@
               @click.prevent.stop="toggleSize"
               :class="labelClick"
             >
-              <span class="label-title" >
+              <span class="label-title">
                 {{ label.title }}
               </span>
             </div>
@@ -69,6 +69,7 @@ export default {
       this.boardLabels.forEach((label) => {
         if (this.task.labelIds.includes(label.id)) labels.push(label);
       });
+      console.log("korenn", labels);
       return labels;
     },
     labelClick() {
@@ -77,7 +78,7 @@ export default {
           el.classList.remove("increaseLabel");
           el.classList.add("shrinkLabel");
         });
-        return
+        return;
       }
       const el = document.querySelectorAll(".shrinkLabel").forEach((el) => {
         el.classList.remove("shrinkLabel");
@@ -104,6 +105,7 @@ export default {
     },
 
     toggleSize() {
+      // alert('d')
       this.changeLabelSize = !this.changeLabelSize;
     },
   },
