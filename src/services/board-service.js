@@ -22,158 +22,49 @@ export const boardService = {
 
 
 }
+import { httpService } from "./http.service"
 const KEY = 'board'
 // for future
 const KEYS = 'boards'
 
 
-// const gBoard = {
-//     "_id": "b101",
-//     "title": "Robot dev proj",
-//     "createdAt": 1589983468418,
-//     "createdBy": {
-//         "_id": "u101",
-//         "fullname": "Abi Abambi",
-//         "imgUrl": "http://some-img"
-//     },
-//     "style": {},
-//     "labels": [
-//         {
-//             "id": "l101",
-//             "title": "Done",
-//             "color": "#61bd4f"
-//         }
-//     ],
-//     "members": [
-//         {
-//             "_id": "u101",
-//             "fullname": "Tal Tarablus",
-//             "imgUrl": "https://www.google.com"
-//         }
-//     ],
 
-//     "groups": [
-//         {
-//             "id": "g101",
-//             "title": "Group 1",
-//             "tasks": [
-//                 {
-//                     "id": "c101",
-//                     "title": "Replace logo"
-//                 },
-//                 {
-//                     "id": "c102",
-//                     "title": "Add Samples",
-//                     labels:{
-//                         bcg:'blue',
-//                         title:'gilad'
-//                     }
-//                 }
-//             ],
-//             "style": {}
-//         },
-//         {
-//             "id": "g102",
-//             "title": "Group 2",
-//             "tasks": [
-//                 {
-//                     "id": "c103",
-//                     "title": "Do that"
-//                 },
-//                 {
-//                     "id": "c104",
-//                     "title": "Help me",
-//                     "description": "description",
-//                     "comments": [
-//                         {
-//                             "id": "ZdPnm",
-//                             "txt": "also @yaronb please CR this",
-//                             "createdAt": 1590999817436.0,
-//                             "byMember": {
-//                                 "_id": "u101",
-//                                 "fullname": "Tal Tarablus",
-//                                 "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-//                             }
-//                         }
-//                     ],
-//                     "checklists": [
-//                         {
-//                             "id": "YEhmF",
-//                             "title": "Checklist",
-//                             "todos": [
-//                                 {
-//                                     "id": "212jX",
-//                                     "title": "To Do 1",
-//                                     "isDone": false
-//                                 }
-//                             ]
-//                         }
-//                     ],
-//                     "members": [
-//                         {
-//                             "_id": "u101",
-//                             "username": "Tal",
-//                             "fullname": "Tal Tarablus",
-//                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-//                         }
-//                     ],
-//                     "labelIds": ["l101", "l102"],
-//                     "createdAt": 1590999730348,
-//                     "dueDate": 16156215211,
-//                     "byMember": {
-//                         "_id": "u101",
-//                         "username": "Tal",
-//                         "fullname": "Tal Tarablus",
-//                         "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-//                     },
-//                     "style": {
-//                         "bgColor": "#6deca9"
-//                     },
-//                     "cover": {
-//                         "isFull": false,
-//                         "bgColor": "#6deca9"
-//                     }
-//                 }
-//             ],
-//             "style": {
+// async function query() {
+//     var board = await asyncgStorageService.query(KEY)
+//     if (!board || !board.length) {
+//         board = gBoard
+//     }
 
-//             }
-//         }
-//     ],
-//     // פעילויות בתוך כרטיס
-//     "activities": [
-//         {
-//             "id": "a101",
-//             "txt": "Changed Color",
-//             "createdAt": 154514,
-//             "byMember": {
-//                 "_id": "u101",
-//                 "fullname": "Abi Abambi",
-//                 "imgUrl": "http://some-img"
-//             },
-//             "task": {
-//                 "id": "c101",
-//                 "title": "Replace Logo"
-//             }
-//         }
-//     ],
+//     return board
 // }
 
-async function query() {
-    var board = await asyncgStorageService.query(KEY)
-    if (!board || !board.length) {
-        board = gBoard
-    }
-
-    return board
+async function query(filterBy = {}) {
+	try {
+		// return await storageService.query(KEY)
+		const res = await httpService.get('board', { params: filterBy });
+        // console.log('res',res.data);
+		return res;
+	} catch (err) {
+		console.log(err);
+	}
 }
 
 async function addTask(taskDetails, board) {
     return await asyncgStorageService.postTask(KEYS, taskDetails, board)
 }
 async function saveBoard(board) {
-    return await asyncgStorageService.getAndSaveBoard(KEYS, board)
+    // return await asyncgStorageService.getAndSaveBoard(KEYS, board)
+    try{
+        console.log('boardboard',board.groups[1].tasks[1]);
+        return httpService.put('board', { board })
+        // console.log('res',res);
+        // if (board._id) 
+        // return httpService.post('board', { board })
+    } catch(err){
+        console.dir(err)
+    }
 }
+
 async function getTaskById(groupId, cardId) {
     return await asyncgStorageService.getTask(KEYS, groupId, cardId)
 
@@ -220,9 +111,6 @@ function getNewGroup(title, tasks = []) {
         id: makeId(),
         title,
         tasks,
-       
-
-
     }
 }
 async function getBoardByTaskId(taskDetails) {
@@ -237,6 +125,7 @@ async function getGroupById(groupDetails) {
 
 
 async function addNewGroup(board, newGroup) {
+    // return await httpService.put
     return await asyncgStorageService.postGroup(KEYS, board, newGroup)
 
 }
@@ -774,8 +663,7 @@ function _createBoard(title, groups = [],style={}) {
         }],
         groups,
         
-        covers:['#7bc86c','#f5dd29','#ffaf3f','#ef7564','#cd8de5','#5ba4cf','#29cce5','#6deca9',
-    '#ff8ed4','#172b4d'],
+        covers:['#7bc86c','#f5dd29','#ffaf3f','#ef7564','#cd8de5','#5ba4cf','#29cce5','#6deca9','#ff8ed4','#172b4d'],
 
     }
 
@@ -785,12 +673,22 @@ async function queryBoards() {
     var boards = await asyncgStorageService.query(KEYS)
     if (!boards || !boards.length) {
         boards = _creareBoards()
+        // localStorage.setItem(KEY, JSON.stringify(boards))
     }
     return boards
 
 }
 async function getBoardById(boardId) {
-    return await asyncgStorageService.getBoard(KEYS, boardId)
+    // return await asyncgStorageService.getBoard(KEYS, boardId)
+    try {
+		// const currBoard = await storageService.get(KEY, boardId)
+		// return currBoard
+		const res = await httpService.get('board/' + boardId);
+        // console.log('res',res.data);
+		return res;
+	} catch (err) {
+		console.log(err);
+	}
 
 }
 async function removeBoard(baordId) {

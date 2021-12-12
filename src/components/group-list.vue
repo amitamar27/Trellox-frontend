@@ -203,21 +203,25 @@ export default {
       if (this.newGroupTitle === "") return;
       this.isAddingTitle = false;
       var groupTitle = this.newGroupTitle;
+      console.log('groupTitle',groupTitle);
       this.$store.dispatch({ type: "addGroup", groupTitle });
       this.newGroupTitle = "";
 
     },
     async openGroupMenu(groupId, idx) {
+      // console.log('groupId',groupId);
+      // const board = this.$store.getters.board
+      // const groupDetails = { board, groupId }
+      // this.isMenuOpened = !this.isMenuOpened
+      // const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
+      // // const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
+      // this.group = group // check if used
 
-      const board = this.$store.getters.board
-      const groupDetails = { board, groupId }
+      const group = this.board.groups.find(group => {
+        return group.id === groupId
+      })
+      this.group = group 
       this.isMenuOpened = !this.isMenuOpened
-      const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
-      this.group = group // check if used
-
-
-
-      // console.log(group);
     },
     closeGroupMenu() {
       console.log('close group menu')
@@ -259,9 +263,12 @@ export default {
       if (!this.task.title) return
       this.isAdding = false;
       const task = { title: this.task.title, groupId }
+      const taskTitle = this.task.title;
+
       this.task.title = '';
       try {
-        await this.$store.dispatch({ type: 'addTask', task });
+        // await this.$store.dispatch({ type: 'addTask', task });
+        await this.$store.dispatch({ type: 'addTask', taskTitle , groupId });
       } catch (err) {
         console.log(err);
       }

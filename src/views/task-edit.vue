@@ -173,9 +173,9 @@ export default {
     },
     saveTask(task) {
       // alert('saving..')
-      console.log("rass", task);
+      // console.log("rass", task);
       const { groupId } = this.$route.params;
-      console.log("groupId", groupId);
+      // console.log("groupId", groupId);
       if (groupId)
         this.$store.dispatch({
           type: "saveTask",
@@ -197,14 +197,10 @@ export default {
       console.log("labels tp", labels);
     },
     addLabel(labelId) {
-      console.log(this.currTask);
-      console.log("labelId", labelId);
+      // console.log(this.currTask);
+      // console.log("labelId", labelId);
       const { groupId } = this.$route.params;
-      this.$store.dispatch({
-        type: "saveTask",
-        groupId,
-        taskToSave: this.currTask,
-      });
+      this.$store.dispatch({type: "saveTask",groupId,taskToSave: this.currTask});
     },
     toggleMember() {
       console.log(this.currTask);

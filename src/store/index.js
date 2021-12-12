@@ -61,7 +61,7 @@ export default new Vuex.Store({
       state.isDarkScreen = false;
     },
     setBoard(state, { board }) {
-      console.log('boardboardboard',board);
+      // console.log('boardboardboard',board);
       state.board = board;
     },
     updateGroup(state, { updatedGroup }) {
@@ -77,6 +77,7 @@ export default new Vuex.Store({
       state.currTask = task;
     },
     setBoards(state, { boards }) {
+      // console.log('boardsboards',boards);
       state.boards = boards;
     },
     setCardToEdit(state, { card }) {
@@ -100,7 +101,7 @@ export default new Vuex.Store({
     //   state.board = payload.board
     // },
     removeTask(state, {groupId,taskId}){
-      const group = state.board.groups.find(g => g.id === groupId)
+      const group = state.board.groups.find(group => group.id === groupId)
       const taskIdx = group.tasks.findIndex(t => t.id === taskId)
       if (taskIdx < 0) return
 
@@ -116,13 +117,27 @@ export default new Vuex.Store({
           }
       })
   },
+    addGroup(state, {newGroup}){
+      state.board.groups ??= []
+      state.board.groups.push(newGroup);
+    },
+    addTask(state, {newTask , groupId}){
+      console.log('newTask',newTask);
+      const group = state.board.groups.find(group => group.id === groupId)
+      group.tasks.push(newTask)
+    },
+    removeGroup(state , {groupId}){
+      const groupIdx = state.board.groups.findIndex(g => g.id === groupId)
+      if (groupIdx < 0) return
+      state.board.groups.splice(groupIdx, 1)
+    }
   },
 
   actions: {
     async setBoardById({commit}, {boardId}){
       try {
         const board = await boardService.getBoardById(boardId)
-        console.log('board',board);
+        // console.log('board',board);
         commit({type:'setBoard',board})
       }catch(err){
         console.dir("error",err);
@@ -139,42 +154,46 @@ export default new Vuex.Store({
         console.log("could not load board", err);
       }
     },
-    async setBoard({commit},{board}){
+    async setBoard({commit , dispatch},{board}){
       try{
+        // dispatch({type: 'saveBoard'})
         var board = await boardService.saveBoard(board)
-        console.log('board',board);
+        // console.log('board',board);
       }catch(err){
         console.log('problem with save board', err);
       }
     },
 
-    async addGroup(context, { groupTitle }) {
+    async addGroup({commit , dispatch}, { groupTitle }) {
       try {
-        const boards =await boardService.queryBoards()
-        var currboard = context.state.board;
-        var newGroup = await boardService.getNewGroup(groupTitle);
-        var board =await boardService.addNewGroup(currboard,newGroup,boards);
-        context.commit({type:'setBoard', board})
+        // const boards = await boardService.query()
+        // var currboard = context.state.board;
+        
+        const newGroup = await boardService.getNewGroup(groupTitle);
+        commit({type: 'addGroup',newGroup})
+        dispatch({type: 'saveBoard'})
+        // const board = this.getters.board
+        // boardService.saveBoard(board)
+        // context.commit({type:'setBoard', board})
+        // var board = await boardService.addNewGroup(currboard,newGroup,boards);
+        
       } catch (err) {
         console.log("could not add group to the board", err);
       }
     },
 
-    async addTask(context, { task }) {
+    async addTask({commit}, { taskTitle ,groupId}) {
       try {
-        var addedTask = await boardService.setTask(task.title);
-        const taskDetails= {
-          task:addedTask,
-          groupId:task.groupId
-        }
-        var currBoard=context.state.board
-        var board = await boardService.addTask(taskDetails,currBoard);
-         context.commit({ type: "setBoard", board });
+        const newTask = await boardService.setTask(taskTitle);
+        commit({type: 'addTask', newTask , groupId})
+        const board = this.getters.board
+        boardService.saveBoard(board)
       } catch (err) {
         console.log("faild in add task", err);
       }
     },
 
+    // No more use
     async getGroupById({ commit }, { groupDetails }) {
       try {
         // commit({type: 'getGroupById',groupId})
@@ -186,12 +205,21 @@ export default new Vuex.Store({
       }
     },
 
-    async removeGroup({commit}, {groupDetails}) {
+    // async removeGroup({commit}, {groupDetails}) {
+    //   try {
+    //     commit({type: 'removeGroup' , groupId })
+    //     var board = await boardService.removeGroup(groupDetails);
+    //     console.log(board);
+    //     commit({ type: 'setBoard', board });
+    //     // return board
+    //   } catch (err) {
+    //     console.log("coldent remove group", err);
+    //   }
+    // },
+    async removeGroup({commit , dispatch}, {groupId}) {
       try {
-        var board = await boardService.removeGroup(groupDetails);
-        console.log(board);
-        commit({ type: 'setBoard', board });
-        return board
+        commit({type: 'removeGroup' , groupId })
+        dispatch({type: 'saveBoard'})
       } catch (err) {
         console.log("coldent remove group", err);
       }
@@ -213,12 +241,23 @@ export default new Vuex.Store({
       } catch (err) {}
     },
     async loadBoards({ commit }) {
-      var boards = await boardService.queryBoards();
-      commit({ type: "setBoards", boards });
+      // var boards = await boardService.queryBoards();
+      try {
+        console.log('loading boards');
+        const boards = await boardService.query();
+        // console.log('boards',boards);
+        commit({ type: "setBoards", boards });
+        return boards
+      } catch(err){
+        console.dir('error',err)
+      }
+     
     },
     async getBoardById({ commit }, { boardId }) {  
       try{
+        // console.log('boardId',boardId);
         var board = await boardService.getBoardById(boardId);
+        console.log('board',board);
         commit({ type: "setBoard", board });
         return board
 
@@ -269,7 +308,15 @@ export default new Vuex.Store({
         console.dir('error',err)
         throw err;
       }
-  },
+    },
+    async saveBoard({state}){
+      try {
+        boardService.saveBoard(state.board)
+      } catch(err){
+        console.dir('error',err)
+        throw err
+      }
+    }
   },
   modules: {
     taskDetails,

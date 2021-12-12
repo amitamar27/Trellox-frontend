@@ -5,6 +5,7 @@
       <div class="board-boards">
         <div class="boards-list-header">
           <h2>Boards</h2>
+        
         </div>
         <div class="boards-container">
           <div v-for="board in boards" :key="board.id">
@@ -105,16 +106,22 @@ export default {
       ],
       imgUrl: null,
       colorSelected: null,
+      // boards:
     };
   },
   created() {
       console.log('this.imgsBackground[0].url',this.imgsBackground[0].url);
     this.imgUrl = this.imgsBackground[0].url;
     console.log("this.imgUrl", this.imgUrl);
+    // this.$store.dispatch({ type: 'loadBoards' })
   },
   computed: {
     boards() {
-      return this.$store.getters.boards;
+      // this.$store.dispatch({ type: 'loadBoards' })
+      if(this.$store.getters.boards){
+        return this.$store.getters.boards
+      }
+      // return this.$store.getters.boards;
     },
     backgroundObject() {
       if (!this.imgUrl) {
@@ -150,6 +157,7 @@ export default {
       this.colorSelected = color;
     },
     setBackground(imgUrl) {
+      // console.log('imgUrl',imgUrl);
       this.colorSelected = null;
       this.imgUrl = imgUrl;
     },
@@ -157,8 +165,9 @@ export default {
       console.log("board", board.style);
       if (board.style.bgImg) {
         const url = board.style.bgImg;
-        console.log('url',url);
-        console.log("board.style.backgroundSrc", board.style.bgImg);
+        // console.log('board.style.bgImg',board.style.bgImg);
+        // console.log('url',url);
+        // console.log("board.style.backgroundSrc", board.style.bgImg);
         return { "background-image": `${url}` };
       } else {
         const backgroundColor = board.style.bgColor;

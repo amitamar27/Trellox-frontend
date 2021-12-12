@@ -72,6 +72,7 @@ export default {
       // const { boardId } = this.$route.params
       // console.log();
       // this.$store.commit({ type: "openBlack" })
+      console.log('groupId, taskId',groupId, taskId);
       this.$router
         .push("/details/" + groupId + "/" + taskId)
         .catch((err) => { console.log('error'); })
