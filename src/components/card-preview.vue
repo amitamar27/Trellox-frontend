@@ -106,7 +106,7 @@ export default {
       this.boardLabels.forEach((label) => {
         if (this.task.labelIds.includes(label.id)) labels.push(label);
       });
-      console.log("korenn", labels);
+      // console.log("korenn", labels);
       return labels;
     },
     labelClick() {

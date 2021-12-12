@@ -27,7 +27,7 @@ export default {
     '$route.params.boardId': {
       handler() {
         const { boardId } = this.$route.params;
-        console.log('boardId',boardId);
+        // console.log('boardId',boardId);
       },
       immediate: true
     }
@@ -42,9 +42,10 @@ export default {
       return this.$store.getters.board;
     },
     getStyle() {
-      console.log('this.board',this.board);
+      // console.log('this.board',this.board);
       if (this.board.style.backgroundSrc) {
         const url = this.board.style.backgroundSrc
+        // console.log('url',url);
         return { 'background-image': `url(${url})` }
       }
       else {
@@ -55,7 +56,7 @@ export default {
   },
   methods: {
     pickTask() {
-      console.log(this.board);
+      // console.log(this.board);
     },
     dragEnd() {
       const board = this.board
@@ -74,10 +75,13 @@ export default {
     async loadBoard(){
       const { boardId } = this.$route.params;
       try{
+        // console.log('loading board');
+        const boards = await this.$store.dispatch({type:'loadBoards'})
+        console.log('boards',boards);
         const board = await this.$store.dispatch({type:'getBoardById',boardId})
         this.currBoard = board
         this.$emit('setBg',this.currBoard.style.bgImg)
-        console.log('currrrrboard',this.currBoard);
+        // console.log('currrrrboard',this.currBoard);
       }catch(err){
         console.log('Error in loadboard :', err);
         throw err;

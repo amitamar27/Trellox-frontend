@@ -104,7 +104,7 @@ export default {
   methods: {
     setBg(style) {
       this.bgStyle = style
-      console.log('bgStyleeeee', this.bgStyle);
+      // console.log('bgStyleeeee', this.bgStyle);
     }
   },
   //   :style="appHeaderStyle"

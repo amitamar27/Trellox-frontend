@@ -29,9 +29,9 @@ export default {
       console.log('need add card');
     },
     async removeGroup(groupId) {
-        const board = this.$store.getters.board
-        const groupDetails = {board,groupId}
-        await this.$store.dispatch({ type: 'removeGroup', groupDetails })
+        // const board = this.$store.getters.board
+        // const groupDetails = {board,groupId}
+        await this.$store.dispatch({ type: 'removeGroup', groupId })
         this.$emit('closeMenu');
        
     }

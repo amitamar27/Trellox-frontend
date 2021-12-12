@@ -121,27 +121,25 @@ export default {
       this.currLabel = labels[idx];
     },
     goInMenu(idx) {
-      console.log('idx',idx);
-      console.log('this.labels[idx]',this.board.labels[idx]);
-      console.log('this.labels[idx]',this.labels[idx]);
+      // console.log('idx',idx);
+      // console.log('this.labels[idx]',this.board.labels[idx]);
+      // console.log('this.labels[idx]',this.labels[idx]);
        this.currLabel = this.board.labels[idx];
       // this.currLabel = this.labels[idx];
-      console.log('this.currLabel',this.currLabel);
+      // console.log('this.currLabel',this.currLabel);
       this.isInEdit = true;
     },
     saveLabel() {
-      console.log("boardd", this.board);
+      // console.log("boardd", this.board);
 
       this.$emit("saveTask");
       this.$emit("closeMenu");
     },
     saveBoard() {
-      console.log('this.board.labels',this.board.labels);
-      console.log('this.currLabel',this.currLabel);
       this.board.labels.forEach((label) => {
         if (label.id === this.currLabel.id) label.title = this.currLabel.title;
       });
-      this.$emit("updateBoard");
+      this.$emit('saveTask')
       this.$emit("closeMenu");
     },
     goBack() {
