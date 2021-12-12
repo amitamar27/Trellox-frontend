@@ -364,9 +364,9 @@ export default {
 //   // margin-right: 8px;
 
 // }
-.delete-task-btn {
+
   // display: flex;
-}
+
 
 /* .icon-md{
   background-color: #00000014;

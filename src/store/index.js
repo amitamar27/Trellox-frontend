@@ -18,6 +18,9 @@ export default new Vuex.Store({
       console.log('state.board',state.board);
       return state.board;
     },
+    // members() {
+		// 	return this.$store.getters.members
+		// },
     groups(state) {
       return state.board.groups;
     },
@@ -44,7 +47,10 @@ export default new Vuex.Store({
     },
     members(state) {
       return JSON.parse(JSON.stringify(state.board.members))
-    }
+    },
+    groupIdByTaskId(state) {
+      return state.groupIdByTaskId
+  },
   },
 
   mutations: {
@@ -88,18 +94,28 @@ export default new Vuex.Store({
     toggleBoardIsFavorite(state, { isFav }) {
       state.board.isFavorite = isFav
     },
-    updateBoard(state, payload) {
-      const idx = state.boards.findIndex(board => board.id === payload.board.id)
-      state.boards.splice(idx, 1, payload.board)
-      state.board = payload.board
-    },
+    // updateBoard(state, payload) {
+    //   const idx = state.boards.findIndex(board => board.id === payload.board.id)
+    //   state.boards.splice(idx, 1, payload.board)
+    //   state.board = payload.board
+    // },
     removeTask(state, {groupId,taskId}){
       const group = state.board.groups.find(g => g.id === groupId)
       const taskIdx = group.tasks.findIndex(t => t.id === taskId)
       if (taskIdx < 0) return
 
       group.tasks.splice(taskIdx, 1)
-    }
+    },
+    getGroupIdByTaskId(state, { taskId }) {
+      const groups = state.board.groups
+      groups.forEach(g => {
+          const task = g.tasks?.find(t => t.id === taskId)
+          if (task) {
+              state.groupIdByTaskId = g.id
+              return
+          }
+      })
+  },
   },
 
   actions: {

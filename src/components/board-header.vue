@@ -22,6 +22,18 @@
         </button>
 
         <span class="border-divider"> </span>
+
+        <div v-if="members.length" class="users">
+          <avatar
+            class="sum-img"
+            :size="32"
+            :rounded="true"
+            :username="member.username"
+            :src="member.imgUrl"
+            v-for="member in members"
+            :key="member._id"
+          ></avatar>
+        </div>
       </section>
     </div>
 
@@ -33,11 +45,11 @@
     </div>
 
     <transition>
-      <aside-menu 
+      <aside-menu
         :board="board"
         :class="menuBarIsShown"
         @openMenu="openMenu"
-        @updateBgcBoard="editBgcBoard"  
+        @updateBgcBoard="editBgcBoard"
       ></aside-menu
     ></transition>
   </section>
@@ -48,6 +60,7 @@
 <script>
 
 import asideMenu from './aside-menu.vue'
+import Avatar from 'vue-avatar'
 
 export default {
   props: ['board'],
@@ -64,8 +77,8 @@ export default {
     }
 
   },
-  created(){
-      this.boardId = this.$route.params.boardId;
+  created() {
+    this.boardId = this.$route.params.boardId;
   },
 
   methods: {
@@ -87,9 +100,9 @@ export default {
       this.isShown = !this.isShown;
       console.log(this.isShown);
     },
-    editBgcBoard(style){
-        console.log('in board header',style);
-        this.$emit('editBgcBoard', style);
+    editBgcBoard(style) {
+      console.log('in board header', style);
+      this.$emit('editBgcBoard', style);
     }
   },
 
@@ -104,6 +117,11 @@ export default {
         'aside-close': !this.isShown,
       };
     },
+    members() {
+      // return this.board.members.reverse();
+      return this.board.members;
+    },
+     
 
   },
   mounted() {
@@ -120,8 +138,9 @@ export default {
       }
     }
   },
-  components:{
-      asideMenu
+  components: {
+    asideMenu,
+    Avatar
   }
 }
 </script>

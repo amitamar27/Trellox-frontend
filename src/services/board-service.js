@@ -208,6 +208,7 @@ function setTask(title) {
         createdAt:Date.now(),
         description: "",
         dueDate: null,
+        isDueDateDone: false,
         labelIds: [],
         members:[],
         style:{}

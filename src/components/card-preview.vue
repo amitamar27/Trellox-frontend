@@ -27,6 +27,61 @@
           </div>
           <!-- TASK DETAILS -->
           <div class="task-details-container">
+            <div class="tasks">
+              <!-- due-date -->
+              <section
+                v-if="task.dueDate"
+                class="due-later-badge"
+                :class="dueDateClass"
+                @click.stop.prevent="toggleIsDone"
+              >
+                <img
+                  :src="require('@/assets/clock.png')"
+                  alt="Due Date"
+                  title="This card is due later"
+                />
+                <!-- <i class="icon-clock"> </i> -->
+
+                <template v-if="task.dueDate.length < 2">{{
+                  task.dueDate[0] | moment("MMM D")
+                }}</template>
+                <template v-else>{{
+                  task.dueDate[1] | moment("MMM D")
+                }}</template>
+              </section>
+
+               <!-- comment -->
+              <section v-if="task.comments" class="comments-badge">
+                <img
+                  :src="require('@/assets/comments.png')"
+                  alt="comments"
+                  title="Comments"
+                />
+                {{ task.comments.length }}
+              </section>
+
+              <!-- checklist -->
+              <section
+                v-if="task.checklists && todosCounters.todosCounter"
+                class="checklist-badge"
+                :class="{
+                  'done-checklist':
+                    todosCounters.isDoneCounter === todosCounters.todosCounter,
+                }"
+              >
+                <img
+                  :src="require('@/assets/checklist.svg')"
+                  alt=""
+                  title="Checklist items"
+                />
+                {{ todosCounters.isDoneCounter }}/{{
+                  todosCounters.todosCounter
+                }}
+              </section> 
+
+             
+            </div>
+
             <!-- members -->
             <div class="list-task-members">
               <div
@@ -44,34 +99,14 @@
                 ></avatar>
               </div>
             </div>
-            <!-- checklist -->
-            <section
-              v-if="task.checklists && todosCounters.todosCounter"
-              class="checklist-badge"
-              :class="{
-                'done-checklist':
-                  todosCounters.isDoneCounter === todosCounters.todosCounter,
-              }"
-            >
-              <img
-                :src="require('@/assets/checklist.svg')"
-                alt=""
-                title="Checklist items"
-              />
-              {{ todosCounters.isDoneCounter }}/{{ todosCounters.todosCounter }}
-            </section>
           </div>
         </div>
       </div>
     </div>
-    <!-- <task-edit v-if="isClick"></task-edit> -->
   </div>
 </template>
 <script>
-//  :class="{
-//                 shrinkLabel: !changeLabelSize,
-//                 increaseLabel: changeLabelSize,
-//               }"
+
 import taskEdit from "../views/task-edit.vue";
 import Avatar from 'vue-avatar';
 export default {
@@ -106,7 +141,7 @@ export default {
       this.boardLabels.forEach((label) => {
         if (this.task.labelIds.includes(label.id)) labels.push(label);
       });
-      console.log("korenn", labels);
+      // console.log("korenn", labels);
       return labels;
     },
     labelClick() {
@@ -138,9 +173,31 @@ export default {
       })
       return counters
     },
-    	isCheckLists() {
-			return this.task.checklists?.todos
-		},
+    isCheckLists() {
+      return this.task.checklists?.todos
+    },
+    calculateTime() {
+      const currTime = +Date.now()
+      const targetTime = this.task.dueDate?.[this.task.dueDate?.length - 1]
+      const targetTimeStemp = +new Date(targetTime).getTime()
+
+      const day = 1000 * 60 * 60 * 24
+      const diff = targetTimeStemp - currTime
+      let result = -1
+
+      if (diff < day) result = 1
+      if (diff < 0) result = 0
+      else if (diff > day) result = 2
+      return result
+    },
+    dueDateClass() {
+      const calcTime = (this.task.isDueDateDone) ? -1 : this.calculateTime
+      return {
+        'due-date-done': this.task.isDueDateDone,
+        'due-date-soon': calcTime === 1,
+        'due-date-late': calcTime === 0
+      }
+    },
   },
   methods: {
     cardClick(groupId, taskId) {
@@ -159,6 +216,16 @@ export default {
       // alert('d')
       this.changeLabelSize = !this.changeLabelSize;
     },
+    toggleIsDone() {
+      this.task.isDueDateDone = !this.task.isDueDateDone
+      this.$store.commit({ type: 'getGroupIdByTaskId', taskId: this.task.id })
+      const groupId = this.$store.getters.groupIdByTaskId
+
+      this.$store.dispatch({ type: 'saveTask', groupId, taskToSave: this.task })
+    },
+    // moment: function () {
+    //   return moment();
+    // }
   },
   created() {
     const { boardId } = this.$route.params;
@@ -167,6 +234,7 @@ export default {
     // console.log("labels", this.task);
     // this.getLabels();
   },
+
 
   components: {
     taskEdit,

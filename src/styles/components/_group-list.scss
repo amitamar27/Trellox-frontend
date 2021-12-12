@@ -440,6 +440,7 @@
         margin-inline-end: 8px;
         font-size: 40px;
         background-color: inherit;
+        display: flex;
     }
 
     img {
@@ -615,6 +616,10 @@
 
     p {
         color: #ffff;
+    }
+
+    .add-group-close{
+        display: flex;
     }
 
 
