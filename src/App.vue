@@ -29,14 +29,14 @@ export default {
   computed: {
     background() {
 
-      // if (this.$route.name === 'Home' || this.$route.name === 'Boards') {
-      //   return {
-      //     backgroundImage: 'url(https://res.cloudinary.com/taskit-sprint/image/upload/v1622319307/background%20for%20Taskit/background_6_lqcaex.jpg)',
-      //     backgroundRepeat: 'no-repeat',
-      //     backgroundSize: 'cover',
-      //     backgroundPosition: 'center'
-      //   }
-      // }
+      if (this.$route.name === 'Home' || this.$route.name === 'Boards') {
+        return {
+          backgroundImage: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639076920/Trellox/5137807_o4zvys.jpg)',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }
+      }
       return {
         backgroundImage: this.bgStyle,
         backgroundRepeat: 'no-repeat',
