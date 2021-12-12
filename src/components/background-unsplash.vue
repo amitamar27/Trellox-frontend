@@ -48,7 +48,6 @@
                 }
             },
             sendUrl(url) {
-                console.log('url', url);
                 this.$emit('onSaveImg', url);
             },
         },

@@ -91,7 +91,7 @@ export default {
       this.$emit("saveLabels", this.labels);
     },
     addLabel(labelId) {
-      console.log("labelId", labelId);
+      // console.log("labelId", labelId);
       this.$emit("addLabel");
     },
     toggleMember() {

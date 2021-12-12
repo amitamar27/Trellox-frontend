@@ -1,14 +1,13 @@
 .board-container {
-    // height: calc(100% );
-    // height: calc(100% - 57px);
-    flex: 1;
-    padding: 0 0 40px;
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  
+  // height: calc(100% );
+  height: calc(100% - 100px);
+  flex: 1;
+  padding: 0 0 40px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  // background-size: cover;
+  // background-repeat: no-repeat;
+}

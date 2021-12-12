@@ -110,9 +110,9 @@ export default {
     };
   },
   created() {
-      console.log('this.imgsBackground[0].url',this.imgsBackground[0].url);
+      // console.log('this.imgsBackground[0].url',this.imgsBackground[0].url);
     this.imgUrl = this.imgsBackground[0].url;
-    console.log("this.imgUrl", this.imgUrl);
+    // console.log("this.imgUrl", this.imgUrl);
     // this.$store.dispatch({ type: 'loadBoards' })
   },
   computed: {
@@ -162,7 +162,7 @@ export default {
       this.imgUrl = imgUrl;
     },
     getBackground(board) {
-      console.log("board", board.style);
+      // console.log("board", board.style);
       if (board.style.bgImg) {
         const url = board.style.bgImg;
         // console.log('board.style.bgImg',board.style.bgImg);

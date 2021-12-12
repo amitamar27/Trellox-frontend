@@ -140,11 +140,11 @@ export default {
     task() {
       const { groupId } = this.$route.params;
       const { taskId } = this.$route.params;
-      console.log(groupId, taskId);
+      // console.log(groupId, taskId);
       this.$store.commit({ type: "getTaskById", taskId, groupId });
       const task = this.$store.getters.currTask;
       this.currTask = task;
-      console.log("task", task);
+      // console.log("task", task);
       return task;
     },
     taskBgColor() {
@@ -166,8 +166,8 @@ export default {
     // @click.stop="closeDarkScreen"
     closeDarkScreen() {
       const { boardId } = this.$route.params;
-      console.log("boardId", boardId);
-      console.log("clic");
+      // console.log("boardId", boardId);
+      // console.log("clic");
       this.$store.commit({ type: "closeDarkScreen" });
       this.$router.push("/board/" + boardId);
     },
@@ -185,16 +185,16 @@ export default {
     },
     labels() {
       const labels = this.$store.getters.labels;
-      console.log("labels", labels);
+      // console.log("labels", labels);
       const newLabels = [];
       labels.forEach((label) => {
         if (this.currTask.labelIds.includes(label.id)) newLabels.push(label);
       });
-      console.log("newLabels", newLabels);
+      // console.log("newLabels", newLabels);
       return newLabels;
     },
     saveLabels({ labels }) {
-      console.log("labels tp", labels);
+      // console.log("labels tp", labels);
     },
     addLabel(labelId) {
       // console.log(this.currTask);
@@ -203,7 +203,7 @@ export default {
       this.$store.dispatch({type: "saveTask",groupId,taskToSave: this.currTask});
     },
     toggleMember() {
-      console.log(this.currTask);
+      // console.log(this.currTask);
       const { groupId } = this.$route.params;
       // alert('calling saveTask')
       this.$store.dispatch({
@@ -214,7 +214,7 @@ export default {
     },
     members() {
       const memberss = this.$store.getters.members;
-      console.log("memberss", memberss);
+      // console.log("memberss", memberss);
       return this.$store.getters.members;
     },
     openCoverMenu() {

@@ -34,14 +34,14 @@ export default {
           backgroundImage: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639076920/Trellox/5137807_o4zvys.jpg)',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center center'
         }
       }
       return {
         backgroundImage: this.bgStyle,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundPosition: 'center center'
       }
 
     },

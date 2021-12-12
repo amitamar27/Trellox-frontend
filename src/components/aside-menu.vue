@@ -82,7 +82,7 @@ export default {
   },
   created() {
     this.boardId = this.$route.params.boardId;
-    console.log(' this.boardId', this.boardId);
+
   },
   methods: {
     closeMenu() {

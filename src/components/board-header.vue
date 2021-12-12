@@ -98,10 +98,8 @@ export default {
 
     openMenu() {
       this.isShown = !this.isShown;
-      console.log(this.isShown);
     },
     editBgcBoard(style) {
-      console.log('in board header', style);
       this.$emit('editBgcBoard', style);
     }
   },

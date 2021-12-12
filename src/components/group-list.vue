@@ -203,7 +203,7 @@ export default {
       if (this.newGroupTitle === "") return;
       this.isAddingTitle = false;
       var groupTitle = this.newGroupTitle;
-      console.log('groupTitle',groupTitle);
+  
       this.$store.dispatch({ type: "addGroup", groupTitle });
       this.newGroupTitle = "";
 
@@ -230,7 +230,8 @@ export default {
     },
     dragEnd() {
       this.$emit('dragEnd')
-      console.log('dragEnd');
+      // this.$emit('socketUpdateBoard')
+      // console.log('dragEnd');
 
     },
     closeAddCard(){
@@ -239,7 +240,7 @@ export default {
     },
 
     changeGroup(ev) {
-      console.log(ev);
+      // console.log(ev);
       const fromIndex = ev.oldIndex
       const toIndex = ev.newIndex
       if (fromIndex === toIndex) return
@@ -248,11 +249,11 @@ export default {
       this.$store.dispatch({ type: 'changeGroupPos', payload })
     },
     pickTask() {
-      console.log('gothere');
+      // console.log('gothere');
       this.$emit('pickTask')
     },
     openModal(groupId) {
-      console.log('hello');
+      // console.log('hello');
       this.isAdding = true;
       this.currGroupId = groupId
 
@@ -264,11 +265,11 @@ export default {
       this.isAdding = false;
       const task = { title: this.task.title, groupId }
       const taskTitle = this.task.title;
-
       this.task.title = '';
       try {
         // await this.$store.dispatch({ type: 'addTask', task });
         await this.$store.dispatch({ type: 'addTask', taskTitle , groupId });
+        // this.$emit('socketUpdateBoard')
       } catch (err) {
         console.log(err);
       }

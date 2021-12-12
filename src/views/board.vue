@@ -7,6 +7,7 @@
       @pickTask="pickTask"
       :board="board"
       v-if="board"
+      
     ></group-list>
     <router-view />
   </div>
@@ -16,6 +17,7 @@
 import groupList from "../components/group-list.vue";
 import taskEdit from './task-edit.vue';
 import boardHeader from '../components/board-header.vue';
+import { socketService,SOCKET_EMIT_BOARD_WATCH, SOCKET_EVENT_BOARD_UPDATED,SOCKET_ON_BOARD_UPDATE , SOCKET_EMIT_BOARD_UPDATE } from "../services/socket.service.js"
 export default {
   data() {
     return {
@@ -25,18 +27,38 @@ export default {
   },
   watch: {
     '$route.params.boardId': {
-      handler() {
+     async handler() {
         const { boardId } = this.$route.params;
+        try {
+
+        //   socketService.off(SOCKET_EVENT_BOARD_UPDATED)
+				// socketService.off('user-watch-task')
+				// socketService.off('add-msg')
+				// socketService.terminate()
+
+				  this.setup()
+          console.log('this.boardId !!!!',boardId);
+          socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId);
+        } catch(err){
+          console.log("ERROR: cannot get board",err);
+        }
+				
         // console.log('boardId',boardId);
       },
-      immediate: true
+      immediate: true,
+      deep: true,
     }
   },
   created() {
     this.boardId = this.$route.params.boardId;
     this.loadBoard()
-    
   },
+  	destroyed() {
+		socketService.off(SOCKET_EVENT_BOARD_UPDATED)
+		socketService.off('user-watch-task')
+		socketService.off('add-msg')
+		socketService.terminate()
+	},
   computed: {
     board() {
       return this.$store.getters.board;
@@ -55,6 +77,35 @@ export default {
     }
   },
   methods: {
+    async setup() {
+			const { boardId } = this.$route.params
+			if (!boardId) return
+
+
+      // await this.loadBoard(boardId)
+			await socketService.setup()
+			
+
+			// SOCKETS
+			// socketService.emit('register-board', boardId)
+			socketService.on(SOCKET_EVENT_BOARD_UPDATED, this.loadBoard)
+			socketService.on('add-msg', () => {
+				this.$store.commit({ type: 'updateChatUnreadMsgs', action: 'increase' })
+				// this.$store.dispatch({type: 'updateUSer'})
+			})
+			socketService.on('user-watch-task', ({ taskId, taskTitle, userId }) => {
+				this.$store.commit({ type: 'setNoti', mode: true })
+				if (userId !== this.$store.getters.loggedinUser?._id) return
+				this.$store.commit({ type: 'setMsgTime', time: 4500 })
+				this.$store.commit({ type: 'setMsgTxt', txt: `You have been tagged in ${taskTitle}!` })
+				this.$store.dispatch({ type: 'activeMsg' })
+			})
+		},
+    
+	// 	toggleChat() {
+	// 		this.isChatOpen = !this.isChatOpen
+	// 	}
+	// },
     pickTask() {
       // console.log(this.board);
     },
@@ -77,8 +128,9 @@ export default {
       try{
         // console.log('loading board');
         const boards = await this.$store.dispatch({type:'loadBoards'})
-        console.log('boards',boards);
+        // console.log('boards',boards);
         const board = await this.$store.dispatch({type:'getBoardById',boardId})
+        console.log('sdsds',board);
         this.currBoard = board
         this.$emit('setBg',this.currBoard.style.bgImg)
         // console.log('currrrrboard',this.currBoard);

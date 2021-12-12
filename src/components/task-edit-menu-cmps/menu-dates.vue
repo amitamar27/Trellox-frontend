@@ -57,7 +57,7 @@ export default {
           time: this.time,
         };
       } else {
-        console.log("this.time", this.time);
+        // console.log("this.time", this.time);
         // console.log(this.time);
         // this.time = new Date(this.time);
         // console.log(this.time);
@@ -65,7 +65,7 @@ export default {
         // this.time = this.time.substring(0, this.time.length - 13);
         // console.log(this.time);
         this.task.dueDate.time = Date.parse(this.time);
-        console.log('this.task.dueDate.time',this.task.dueDate.time);
+        // console.log('this.task.dueDate.time',this.task.dueDate.time);
       }
       this.$emit("saveTask");
       this.$emit("closeMenu");
