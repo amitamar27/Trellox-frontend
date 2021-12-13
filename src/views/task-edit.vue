@@ -34,7 +34,7 @@
         <task-title :task="task" @saveTask="saveTask"> </task-title>
         <a
           class="icon-md close-btn"
-          v-if="!task.cover"
+          v-if="!task.cover || !task.cover.bgColor"
           @click="closeDarkScreen"
         ></a>
         <section class="main-content">
@@ -144,7 +144,7 @@ export default {
       this.$store.commit({ type: "getTaskById", taskId, groupId });
       const task = this.$store.getters.currTask;
       this.currTask = task;
-      // console.log("task", task);
+      console.log("task", task);
       return task;
     },
     taskBgColor() {

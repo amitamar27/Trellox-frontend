@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       boardId: '',
-      currBoard:'',
+      currBoard:null,
     }
   },
   watch: {
@@ -30,14 +30,11 @@ export default {
      async handler() {
         const { boardId } = this.$route.params;
         try {
-
-        //   socketService.off(SOCKET_EVENT_BOARD_UPDATED)
-				// socketService.off('user-watch-task')
-				// socketService.off('add-msg')
-				// socketService.terminate()
-
-				  this.setup()
+           const currBoard = await this.$store.dispatch({type: "loadBoard",boardId});
+           this.currBoard = currBoard
+           this.$emit('setBg',this.currBoard.style.bgImg)
           console.log('this.boardId !!!!',boardId);
+          // socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId);
           socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId);
         } catch(err){
           console.log("ERROR: cannot get board",err);
@@ -49,19 +46,21 @@ export default {
       deep: true,
     }
   },
-  created() {
+   created() {
     this.boardId = this.$route.params.boardId;
-    this.loadBoard()
+    //  this.loadBoard()
   },
   	destroyed() {
-		socketService.off(SOCKET_EVENT_BOARD_UPDATED)
-		socketService.off('user-watch-task')
-		socketService.off('add-msg')
-		socketService.terminate()
+		// socketService.off(SOCKET_EVENT_BOARD_UPDATED)
+		// socketService.off('user-watch-task')
+		// socketService.off('add-msg')
+		// socketService.terminate()
 	},
   computed: {
     board() {
-      return this.$store.getters.board;
+       const b = this.$store.getters.board;
+       console.log('board.vue', b);
+       return b
     },
     getStyle() {
       // console.log('this.board',this.board);
@@ -80,8 +79,6 @@ export default {
     async setup() {
 			const { boardId } = this.$route.params
 			if (!boardId) return
-
-
       // await this.loadBoard(boardId)
 			await socketService.setup()
 			
@@ -110,8 +107,7 @@ export default {
       // console.log(this.board);
     },
     dragEnd() {
-      const board = this.board
-      this.$store.dispatch({ type: 'setBoard', board })
+      this.$store.dispatch({ type: 'saveBoard'})
     },
     async editBgcBoard(style) {
       try {
@@ -126,14 +122,15 @@ export default {
     async loadBoard(){
       const { boardId } = this.$route.params;
       try{
-        // console.log('loading board');
-        const boards = await this.$store.dispatch({type:'loadBoards'})
-        // console.log('boards',boards);
         const board = await this.$store.dispatch({type:'getBoardById',boardId})
-        console.log('sdsds',board);
+        // console.log('board by id',board);
+        await socketService.on(SOCKET_ON_BOARD_UPDATE, board => {
+          console.log('socket board',board);
+        })
         this.currBoard = board
+        // console.log('this.currBoard',this.currBoard);
         this.$emit('setBg',this.currBoard.style.bgImg)
-        // console.log('currrrrboard',this.currBoard);
+        return board
       }catch(err){
         console.log('Error in loadboard :', err);
         throw err;

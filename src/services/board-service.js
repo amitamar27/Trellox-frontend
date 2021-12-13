@@ -22,6 +22,13 @@ export const boardService = {
 
 
 }
+// query
+// getBoardById
+// saveBoard
+// getNewGroup
+// setTask
+// addNewBoard
+// _createBoard
 import { httpService } from "./http.service"
 const KEY = 'board'
 // for future
@@ -55,7 +62,6 @@ async function addTask(taskDetails, board) {
 async function saveBoard(board) {
     // return await asyncgStorageService.getAndSaveBoard(KEYS, board)
     try{
-        console.log('boardboard',board.groups[1].tasks[1]);
         return httpService.put('board', { board })
         // console.log('res',res);
         // if (board._id) 
@@ -700,7 +706,18 @@ async function removeGroup(groupDetails) {
     return await asyncgStorageService.removeGroup(KEYS, groupDetails)
 }
 
+// async function addNewBoard(boardDetails) {
+//     console.log('board sservice with', boardDetails);
+//     const board = _createBoard(boardDetails.title, [], boardDetails.background)
+//     try {
+//         await asyncgStorageService.postBoard(KEYS, board)
+//         return board
 
+//     } catch (err) {
+//         console.log(err);
+//     }
+
+// }
 async function addNewBoard(boardDetails) {
     console.log('board sservice with', boardDetails);
     const board = _createBoard(boardDetails.title, [], boardDetails.background)

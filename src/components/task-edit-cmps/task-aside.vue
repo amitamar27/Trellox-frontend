@@ -25,7 +25,7 @@
         @addLabel="addLabel"
         @closeMenu="closeMenu"
         @toggleMember="toggleMember"
-        @saveTask ="saveTask"
+        @saveTask="saveTask"
         :board="board"
       />
     </transition>
@@ -97,7 +97,7 @@ export default {
     toggleMember() {
       this.$emit("saveTask");
     },
-    saveTask(){
+    saveTask() {
       this.$emit("saveTask");
     },
   },
@@ -107,7 +107,7 @@ export default {
     menuMembers,
     taskCover,
     menuChecklist,
-    menuDates
+    menuDates,
   },
 };
 </script>
@@ -157,7 +157,7 @@ export default {
   min-height: 50px;
   overflow-x: hidden;
   /* z-index: 30; */
-  top: 165px;
+  top: 90px;
   box-shadow: 0 0 2px 1px #e1e2e8;
   overflow-y: hidden;
 }

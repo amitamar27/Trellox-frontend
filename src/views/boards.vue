@@ -113,7 +113,7 @@ export default {
       // console.log('this.imgsBackground[0].url',this.imgsBackground[0].url);
     this.imgUrl = this.imgsBackground[0].url;
     // console.log("this.imgUrl", this.imgUrl);
-    // this.$store.dispatch({ type: 'loadBoards' })
+    this.$store.dispatch({ type: 'loadBoards' })
   },
   computed: {
     boards() {
@@ -149,7 +149,7 @@ export default {
       this.$router.push(`/board/${this.newBoardTitle}`);
     },
     setBoard(boardId) {
-      this.$store.dispatch({ type: "getBoardById", boardId });
+      // this.$store.dispatch({ type: "getBoardById", boardId });
       this.$router.push(`/board/${boardId}`);
     },
     setColorBackground(color) {

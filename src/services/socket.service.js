@@ -16,7 +16,7 @@ export const socketService = createSocketService()
 window.socketService = socketService
 
 var socketIsReady = false
-socketService.setup()
+// socketService.setup()
 
 
 function createSocketService() {
@@ -27,7 +27,8 @@ function createSocketService() {
             // await httpService.get('setup-session')
             // socket = io(baseUrl, { reconnection: false })
             // console.log('socket',socket);
-            if(socket) return
+            // if(socket) return
+            console.log('not socket');
             socket = io(baseUrl)
             // console.log('socket',socket);
             socketIsReady = true
@@ -35,6 +36,7 @@ function createSocketService() {
         async on(eventName, cb) {
             if (!socket) await socketService.setup()
             socket.on(eventName, cb)
+            console.log('socket connected 1 ');
         },
         async off(eventName, cb = null) {
             if (!socket) await socketService.setup()
@@ -43,11 +45,12 @@ function createSocketService() {
             else socket.off(eventName, cb)
         },
         async emit(eventName, data) {
-            console.log('data',data);
-            console.log('eventName',eventName);
+            // console.log('data',data);
+            // console.log('eventName',eventName);
             if (!data) return
             if (!socket) await socketService.setup()
             socket.emit(eventName, data)
+            console.log('socket connected 2 ');
         },
         terminate() {
             socket = null

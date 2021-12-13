@@ -4,6 +4,7 @@
     <!-- <side-nav></side-nav> -->
     <app-header :style="appHeaderStyle" />
     <router-view @setBg="setBg" />
+    <!-- <login /> -->
   </div>
 </template>
 
@@ -14,17 +15,29 @@
 import appHeader from './components/app-header.vue'
 import sideNav from './components/side-navbar.vue'
 import darkScreen from './components/dark-screen.vue'
-
+import { socketService } from "./services/socket.service.js"
+import login from './views/Login.vue'
 export default {
   components: {
     appHeader,
     sideNav,
-    darkScreen
+    darkScreen,
+    login
   },
   data() {
     return {
       bgStyle: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639076920/Trellox/5137807_o4zvys.jpg)'
     }
+  },
+  async created(){
+    try{
+      console.log('app created');
+      await this.$store.dispatch({ type: "loadBoards" });
+      // await socketService.setup();
+    }catch (err){
+       console.log("ERROR cannot load users or boards");
+    }
+    
   },
   computed: {
     background() {
@@ -36,6 +49,16 @@ export default {
           backgroundSize: 'cover',
           backgroundPosition: 'center center'
         }
+      }
+       if(this.$route.name === 'Login'){
+        return {
+          // backgroundImage: '',
+          backgroundColor: 'rgb(250, 251, 252)',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center'
+        }
+        
       }
       return {
         backgroundImage: this.bgStyle,

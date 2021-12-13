@@ -18,7 +18,7 @@ export default new Vuex.Store({
   getters: {
     board(state) {
       // const { boardId } = this.$route.params
-      // console.log('state.board',state.board);
+      console.log('getters.board',);
       return state.board;
     },
     // members() {
@@ -63,11 +63,11 @@ export default new Vuex.Store({
       state.isDarkScreen = false;
     },
     setBoard(state, { board }) {
-      // console.log('boardboardboard',board);
       socketService.on(SOCKET_ON_BOARD_UPDATE, board => {
         console.log('FROM STORE FROM SOCKET', board);
-        state.currBoard = board
-     })
+        state.board = board
+      })
+      // console.log('board board', board);
       state.board = board;
     },
     updateGroup(state, { updatedGroup }) {
@@ -122,7 +122,7 @@ export default new Vuex.Store({
               return
           }
       })
-  },
+    },
     addGroup(state, {newGroup}){
       state.board.groups ??= []
       state.board.groups.push(newGroup);
@@ -136,26 +136,26 @@ export default new Vuex.Store({
       const groupIdx = state.board.groups.findIndex(g => g.id === groupId)
       if (groupIdx < 0) return
       state.board.groups.splice(groupIdx, 1)
-    }
+    },
   },
 
   actions: {
-    async setBoardById({commit}, {boardId}){
+    // async setBoardById({commit}, {boardId}){
+    //   try {
+    //     const board = await boardService.getBoardById(boardId)
+    //     // socketService.on(SOCKET_ON_BOARD_UPDATE, board)
+    //     console.log('setBoardById - store');
+    //     commit({type:'setBoard',board})
+    //   }catch(err){
+    //     console.dir("error",err);
+    //   }
+    // },
+    async loadBoard({ commit } , {boardId}) {
       try {
-        const board = await boardService.getBoardById(boardId)
-        // console.log('board',board);
-        commit({type:'setBoard',board})
-      }catch(err){
-        console.dir("error",err);
-      }
-    },
-    async loadBoard({ commit }) {
-      try {
-        var board = await boardService.query();
-        commit({
-          type: "setBoard",
-          board,
-        });
+        var board = await boardService.getBoardById(boardId)
+        console.log('loadBoard - store');
+        commit({type: "setBoard",board});
+        return board
       } catch (err) {
         console.log("could not load board", err);
       }
@@ -164,7 +164,8 @@ export default new Vuex.Store({
       try{
         // dispatch({type: 'saveBoard'})
         var board = await boardService.saveBoard(board)
-        // console.log('board',board);
+        dispatch({type:'socketUpdateBoard'})
+        // console.log('setBoard - store');
       }catch(err){
         console.log('problem with save board', err);
       }
@@ -203,21 +204,6 @@ export default new Vuex.Store({
       }
     },
 
-    //need to aproval
-    // async removeTask(context,payload) {
-    //   try {
-    //     const {taskId, groupId}= payload
-    //     var boardId = context.state.board._id
-    //     var details ={
-    //       taskId,
-    //       groupId,
-    //       boardId
-    //     }
-    //     var board = await boardService.getBoardByTaskId(details);
-    //     context.commit({type:'setBoard', board})
-        
-    //   } catch (err) {}
-    // },
     async loadBoards({ commit }) {
       // var boards = await boardService.queryBoards();
       try {
@@ -233,10 +219,10 @@ export default new Vuex.Store({
     },
     async getBoardById({ commit }, { boardId }) {  
       try{
-        // console.log('boardId',boardId);
+        console.log('getBoardById - store');
         var board = await boardService.getBoardById(boardId);
         // console.log('board',board);
-        commit({ type: "setBoard", board });
+        // commit({ type: "setBoard", board });
         return board
 
       }catch(err){
@@ -245,6 +231,7 @@ export default new Vuex.Store({
     },
     async createNewBoard({commit}, {boardDetails}){
       try{
+        console.log('createNewBoard - store');
         var board = await boardService.addNewBoard(boardDetails)
         commit({ type: "setBoard", board });
       }catch(err){
@@ -252,7 +239,7 @@ export default new Vuex.Store({
       }
     },
     async saveTask({ commit , dispatch}, {groupId,taskToSave}) {
-      // console.log('taskToSave',taskToSave);
+      console.log('saving new task !');
       commit({ type: 'saveTask' ,groupId,taskToSave})
       dispatch({type:'socketUpdateBoard'})
       const board = this.getters.board
@@ -266,14 +253,14 @@ export default new Vuex.Store({
         await boardService.saveBoard(board)
       } catch(err){
         console.log('faild to add new board', err);
+        throw err;
       }
       
     },
-    async updateBoardBgc({ commit }, { boardId, style }){
+    async updateBoardBgc({state , commit }, { boardId, style }){
       try{
-        const saveBgcBoard = await boardService.updateBgcBoard(boardId, style)
-        // commit({ type: 'updateBoard', board: saveBgcBoard })
-        return saveBgcBoard;
+        state.board.style = style
+        await boardService.saveBoard(state.board)
       }catch(err){
         console.log('updateBoard in store:', err);
         throw err;
@@ -281,7 +268,7 @@ export default new Vuex.Store({
     },
     async removeTask({commit ,dispatch}, payload){
       try{
-        commit(payload)
+        commit({type: 'removeTask' , payload})
         const board = this.getters.board
         dispatch({type:'socketUpdateBoard'})
         await boardService.saveBoard(board)
@@ -292,15 +279,16 @@ export default new Vuex.Store({
     },
     async saveBoard({state , dispatch}){
       try {
-        
+        console.log('saving');
         boardService.saveBoard(state.board)
+        dispatch({type:'socketUpdateBoard'})
       } catch(err){
         console.dir('error',err)
         throw err
       }
     },
     socketUpdateBoard({state}) {
-      console.log("SOCKETUPDATEBOARDMOTHREREUFJKER SOCKETING");
+      // console.log("SOCKETUPDATEBOARDMOTHREREUFJKER SOCKETING");
       // console.log('this.board',state.board);
       socketService.emit(SOCKET_EMIT_BOARD_UPDATE, state.board);
     },
