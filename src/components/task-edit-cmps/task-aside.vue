@@ -109,10 +109,7 @@ export default {
     taskCover,
     menuChecklist,
     menuDates,
-<<<<<<< HEAD
     attachmentMenu
-=======
->>>>>>> 458d2c9df623a399245791a74996fe7d34967354
   },
 };
 </script>
