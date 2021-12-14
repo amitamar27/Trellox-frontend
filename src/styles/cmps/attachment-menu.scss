@@ -1,0 +1,77 @@
+.attachment-menu {
+    box-sizing: border-box;
+    padding: 0 0 10px;
+    margin: 0 13px 10px;
+    color: #5e6c84;
+
+    main {
+        h5 {
+            display: flex;
+            justify-content: space-between;
+            color: #091e42;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 7px 0;
+            cursor: pointer;
+
+            span {
+                display: none;
+            }
+            @include hover-supported {
+                background-color: #091e420a;
+                box-shadow: -20px 0px 0px 0px #091e420a, 20px 0px 0px 0px #091e420a;
+                span {
+                    display: block;
+                }
+            }
+
+            &:last-child {
+                border-bottom: 1px solid #091e4221;
+                padding-bottom: 11px;
+            }
+        }
+    }
+
+    .link-upload {
+        padding-bottom: 8px;
+        border-bottom: 1px solid #091e4221;
+        & > {
+            width: 100%;
+            h5 {
+                font-weight: 700;
+                font-size: 15px;
+                line-height: 16px;
+                margin-top: 12px;
+                margin-bottom: 4px;
+            }
+            p.bold-font {
+                font-size: 13px;
+                margin-top: 8px;
+            }
+            input {
+                @include primaryInput;
+                box-sizing: border-box;
+                width: 100%;
+            }
+
+            button {
+                background-color: #091e420a;
+                border-radius: 3px;
+                text-align: center;
+                border: none;
+                font-weight: 400;
+                padding: 6px 12px;
+                margin: 8px 4px 0 0;
+                cursor: pointer;
+
+                @include hover-supported {
+                    background-color: $secondaryBtnsGray;
+                }
+            }
+        }
+    }
+    .tips {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+}

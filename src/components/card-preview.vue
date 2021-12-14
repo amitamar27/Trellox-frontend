@@ -2,6 +2,17 @@
   <div class="card-main">
     <div @click="cardClick(groupId, task.id)" class="card-container">
       <div class="card-preview">
+                  <!-- cover -->
+          <div
+            v-if="cover && !cover.isFull && cover.bgUrl"
+            class="half-cover img"
+            :style="coverStyle"
+          ></div>
+          <div
+            v-if="cover && !cover.isFull && cover.bgColor"
+            class="half-cover color"
+            :style="coverStyle"
+          ></div>
         <div
           class="card-preview-bg-header"
           v-if="task.cover && task.cover.bgColor"
@@ -26,6 +37,8 @@
             <span>{{ task.title }}</span>
           </div>
           <!-- TASK DETAILS -->
+          
+
           <div class="task-details-container">
             <div class="tasks">
               <!-- due-date -->
@@ -50,7 +63,7 @@
                 }}</template>
               </section>
 
-               <!-- comment -->
+              <!-- comment -->
               <section v-if="task.comments" class="comments-badge">
                 <img
                   :src="require('@/assets/comments.png')"
@@ -77,9 +90,7 @@
                 {{ todosCounters.isDoneCounter }}/{{
                   todosCounters.todosCounter
                 }}
-              </section> 
-
-             
+              </section>
             </div>
 
             <!-- members -->
@@ -198,6 +209,35 @@ export default {
         'due-date-late': calcTime === 0
       }
     },
+    	cover() {
+			return this.task.cover
+		},
+    	coverStyle() {
+			const cover = this.task.cover
+			if (cover.bgColor) {
+				const style = `background-color:${cover.bgColor}`
+				return style
+			} else if (cover.bgUrl) {
+				// const style = `background-image: url('${cover.bgUrl}';  background-size:cover;)`
+				const style = `background-image: url('${cover.bgUrl}');  background-size:cover; background-position:center; height: 256px;border-radius: 3px 3px 0px 0px;`
+				return style
+			}
+		},
+    		coverClass() {
+			const cover = this.task.cover
+			// return (cover.bgColor) ? 'full-cover color full' : 'full-cover img full'
+			return (cover.bgColor) ? 'full-cover color' : 'full-cover img'
+		},
+		coverType() {
+			const cover = this.task.cover
+			if (cover?.isFull) {
+				return (cover?.bgColor) ? 'full-cover color ' : 'full-cover img '
+			} else if (cover?.bgColor) {
+				return 'half-cover color'
+			} else {
+				return (cover?.bgUrl) ? 'half-cover img ' : ''
+			}
+		},
   },
   methods: {
     cardClick(groupId, taskId) {

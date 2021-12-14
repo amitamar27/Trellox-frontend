@@ -130,7 +130,15 @@ export default new Vuex.Store({
       const groupIdx = state.board.groups.findIndex(g => g.id === groupId)
       if (groupIdx < 0) return
       state.board.groups.splice(groupIdx, 1)
-    }
+    },
+      // --------------- Attachments ---------------
+      addAttachments(state, { attachments, taskId, groupId }) {
+        const group = state.board.groups.find(g => g.id === groupId)
+        const task = group.tasks.find(t => t.id === taskId)
+        if (!task.attachments) Vue.set(task, 'attachments', [])
+        task.attachments = task.attachments.concat(attachments)
+        state.currTask = JSON.parse(JSON.stringify(task))
+    },
   },
 
   actions: {

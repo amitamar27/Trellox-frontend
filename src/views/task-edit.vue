@@ -117,7 +117,7 @@ import taskDescription from "../components/task-edit-cmps/task-description.vue";
 // import taskAttachments from '../components/task-edit-cmps/task-attachments.vue'
 import taskActivity from "../components/task-edit-cmps/task-activity.vue";
 import taskAside from "../components/task-edit-cmps/task-aside.vue";
-import taskAttachment from "../components/task-edit-cmps/task-attachment.vue";
+import taskAttachment from "../components/task-attachment.vue"
 import checkList from "../components/task-edit-cmps/check-list.vue";
 import taskTitle from "../components/task-edit-cmps/task-title.vue";
 import taskCover from "../components/task-edit-cmps/task-cover.vue";
