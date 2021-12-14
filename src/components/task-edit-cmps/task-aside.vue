@@ -40,6 +40,7 @@ import menuMembers from "../task-edit-menu-cmps/menu-members.vue";
 import taskCover from "../task-edit-cmps/task-cover.vue";
 import menuChecklist from "../task-edit-menu-cmps/menu-checklist.vue";
 import menuDates from "../task-edit-menu-cmps/menu-dates.vue";
+import attachmentMenu from './attachment-menu.vue'
 export default {
   props: {
     task: {
@@ -59,7 +60,7 @@ export default {
         { icon: "", title: "Labels", component: "menu-labels" },
         { icon: "", title: "Checklist", component: "menu-checklist" },
         { icon: "", title: "Dates", component: "menu-dates" },
-        { icon: "", title: "Attachment" },
+        { icon: "", title: "Attachment", component:'attachment-menu'},
         { icon: "", title: "Cover", component: "task-cover" },
       ],
       menuIdx: null,
@@ -108,6 +109,10 @@ export default {
     taskCover,
     menuChecklist,
     menuDates,
+<<<<<<< HEAD
+    attachmentMenu
+=======
+>>>>>>> 458d2c9df623a399245791a74996fe7d34967354
   },
 };
 </script>

@@ -1,6 +1,7 @@
 .card-preview {
     overflow-wrap: break-word;
     // word-break: break-all;
+  
 }
 
 .task-details-container {
@@ -132,6 +133,9 @@
         }
     
     }
+
+   
+    
     
 
 
@@ -166,110 +170,6 @@
 
 
 
-
-
-
-
-
-
-// .due-later-badge {
-//     display: flex;
-//     align-items: center;
-//     gap: 2px;
-//     padding: 3px;
-
-//     &.due-date-done {
-//         color: white;
-//         background-color: #61bd4f;
-//         border-radius: 3px;
-
-//         > img {
-//             filter: invert(91%) sepia(100%) saturate(2%) hue-rotate(166deg) brightness(104%) contrast(101%);
-//             width: 13px;
-//         }
-
-//         @include hover-supported {
-//             background-color: darken(#61bd4f, 10%);
-
-//             & > img {
-//                 display: none;
-//             }
-//             &::before {
-//                 background-image: url("~@/assets/checklist.svg");
-//                 background-size: 15px 15px;
-//                 background-repeat: no-repeat;
-//                 display: inline-block;
-//                 height: 15px;
-//                 width: 15px;
-//                 content: "";
-//                 filter: invert(91%) sepia(100%) saturate(2%) hue-rotate(166deg) brightness(104%) contrast(101%);
-
-//                 img {
-//                     max-width: 5px;
-//                     max-height: 5px;
-//                 }
-//             }
-//         }
-//     }
-//     &.due-date-late {
-//         color: white;
-//         background-color: #eb5a46;
-//         border-radius: 3px;
-
-//         > img {
-//             filter: invert(91%) sepia(100%) saturate(2%) hue-rotate(166deg) brightness(104%) contrast(101%);
-//         }
-
-//         @include hover-supported {
-//             background-color: #b04632;
-
-//             > img {
-//                 display: none;
-//             }
-//             &::before {
-//                 font-family: cursive;
-//                 content: "\e919";
-//                 font-size: 16px;
-
-//                 img {
-//                     max-width: 5px;
-//                     max-height: 5px;
-//                 }
-//             }
-//         }
-//     }
-//     &.due-date-soon {
-//         color: white;
-//         background-color: #f2d600;
-//         border-radius: 3px;
-
-//         > img {
-//             filter: invert(91%) sepia(100%) saturate(2%) hue-rotate(166deg) brightness(104%) contrast(101%);
-//         }
-
-//         @include hover-supported {
-//             background-color: #d9b51c;
-
-//             > img {
-//                 display: none;
-//             }
-//             &::before {
-//                 font-family: cursive;
-//                 content: "\e919";
-//                 font-size: 16px;
-
-//                 img {
-//                     max-width: 5px;
-//                     max-height: 5px;
-//                 }
-//             }
-//         }
-//     }
-
-// }
-
-
-
 .comments-badge {
     display: flex;
     gap: 2px;
@@ -280,6 +180,5 @@
 
 
 
-// img{
-//     width: 13px;
-// }
+
+
