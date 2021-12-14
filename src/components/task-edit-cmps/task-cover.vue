@@ -56,8 +56,8 @@ export default {
     };
   },
   created() {
-    console.log("task", this.task);
-    console.log("covers", this.board);
+    // console.log("task", this.task);
+    // console.log("covers", this.board);
     if(this.currCoverIdx) document.querySelector(".idx-" + this.currCoverIdx)
     .classList.add('cover-box')
     else console.log('no');
@@ -76,7 +76,7 @@ export default {
       const elCurrCover = document.querySelector(".idx-" + idx);
       if (elCover && !elCurrCover.classList.contains("cover-box")) {
         elCover.classList.remove("cover-box");
-        console.log('cover',cover);
+        // console.log('cover',cover);
       }
       if (elCurrCover.classList.contains("cover-box")){
       elCurrCover.classList.remove("cover-box");
@@ -87,7 +87,7 @@ export default {
           bgColor: cover,
           isFull: false,
         }
-        console.log('this.task.cover',this.task.cover);
+        // console.log('this.task.cover',this.task.cover);
       }else{
         elCurrCover.classList.add("cover-box");
         this.task.cover.bgColor = cover

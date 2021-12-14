@@ -33,11 +33,11 @@ export default {
     };
   },
   created() {
-    console.log(" this.time", this.time);
+    // console.log(" this.time", this.time);
   },
   computed: {
     isDone() {
-      console.log("this.task.dueDate", this.task.dueDate);
+      // console.log("this.task.dueDate", this.task.dueDate);
       if (!this.task.dueDate) return false;
       return this.task.dueDate.isDone;
     },
@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     toggleIsDone() {
-      console.log("{{this.task.dueDate.time}}", this.task.dueDate);
+      // console.log("{{this.task.dueDate.time}}", this.task.dueDate);
       this.task.dueDate.isDone = !this.task.dueDate.isDone;
     },
     // setTime() {

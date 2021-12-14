@@ -24,9 +24,9 @@ export default {
   methods: {
     addCard(groupId) {
       // todo emit
-      console.log('idddddd',groupId);
+      // console.log('idddddd',groupId);
       this.$emit('addCard',groupId)
-      console.log('need add card');
+      // console.log('need add card');
     },
     async removeGroup(groupId) {
         // const board = this.$store.getters.board

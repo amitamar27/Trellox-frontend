@@ -47,17 +47,17 @@ export default {
   //   },
   methods: {
     saveNewTask() {
-      console.log("taskktaskk", this.task);
+      // console.log("taskktaskk", this.task);
       this.$emit("saveTask", this.task);
       // this.$store.dispatch({ type: 'saveTask', groupId, task: taskk })
     },
     saveChecklist(checklist) {
-      console.log("checklist", checklist);
+      // console.log("checklist", checklist);
       const idx = this.task.checklists.findIndex((l) => l.id === checklist.id);
-      console.log("idxidxidx", idx);
+      // console.log("idxidxidx", idx);
       if (idx < 0) return;
       this.task.checklists.splice(idx, 1, checklist);
-      console.log("this.task.checklists", this.task.checklists);
+      // console.log("this.task.checklists", this.task.checklists);
       this.saveNewTask();
     },
     removeChecklist(idx) {

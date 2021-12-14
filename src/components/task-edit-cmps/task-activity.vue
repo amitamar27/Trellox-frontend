@@ -119,7 +119,7 @@ export default {
             this.$refs.comment.focus()
         },
         saveComment(){
-            console.log('this',this.task);
+            // console.log('this',this.task);
             if(!this.comment) return
             const comment = {
                 id: utilService.makeId(),

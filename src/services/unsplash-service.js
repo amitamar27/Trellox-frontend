@@ -2,7 +2,7 @@ import axios from 'axios';
 export const unsplashService = {
     getSplashImgs
 }
-async function getSplashImgs(searchWord) {
+async function getSplashImgs(searchWord ) {
     console.log('searchword', searchWord);
 
     try {

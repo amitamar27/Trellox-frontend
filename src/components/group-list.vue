@@ -45,8 +45,6 @@
                 "
               ></div>
             </div>
-
-          
           </div>
 
           <card-list
@@ -88,18 +86,18 @@
         </div>
       </draggable>
 
-        <group-menu
-              @addCard="onAddCard"
-              @mousedown.stop=""
-              v-if="isMenuOpened && group"
-              @closeMenu="closeGroupMenu"
-              :group="group"
-              :title="'List actions'"
-              :style="{
-                top: menuPosition.posY + 'px',
-                left: menuPosition.posX + 'px',
-              }"
-            ></group-menu>
+      <group-menu
+        @addCard="onAddCard"
+        @mousedown.stop=""
+        v-if="isMenuOpened && group"
+        @closeMenu="closeGroupMenu"
+        :group="group"
+        :title="'List actions'"
+        :style="{
+          top: menuPosition.posY + 'px',
+          left: menuPosition.posX + 'px',
+        }"
+      ></group-menu>
 
       <!-- <group-menu
         @addCard="onAddCard"
@@ -145,7 +143,7 @@
 import groupPreview from "./group-preview.vue";
 import draggable from "vuedraggable";
 import cardList from "./card-list.vue";
-import groupMenu from './menus-cmps/group-menu.vue'
+import groupMenu from "./menus-cmps/group-menu.vue";
 import taskEdit from "../views/task-edit.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
 
@@ -156,7 +154,7 @@ export default {
     groupMenu,
     Container,
     taskEdit,
-    draggable
+    draggable,
   },
   props: {
     board: {
@@ -166,12 +164,11 @@ export default {
     // boardLabels: {
     //   type: Array,
     // },
-
   },
   data() {
     return {
       isAddingTitle: false,
-      boardId: '',
+      boardId: "",
       newTitle: "",
       newGroupTitle: "",
       isMenuOpened: false,
@@ -180,12 +177,12 @@ export default {
       currGroupId: null,
       menuPosition: { posX: "", posY: "" },
       task: {
-        title: '',
-        labelIds:[],
-        cover:{
-          bgColor:'',
-        }
-      }
+        title: "",
+        labelIds: [],
+        cover: {
+          bgColor: "",
+        },
+      },
     };
   },
   computed: {
@@ -194,8 +191,6 @@ export default {
     // },
     // groups(){
     //  return this.$store.getters.groups;
-
-
     // }
   },
   methods: {
@@ -203,10 +198,9 @@ export default {
       if (this.newGroupTitle === "") return;
       this.isAddingTitle = false;
       var groupTitle = this.newGroupTitle;
-      console.log('groupTitle',groupTitle);
+
       this.$store.dispatch({ type: "addGroup", groupTitle });
       this.newGroupTitle = "";
-
     },
     async openGroupMenu(groupId, idx) {
       // console.log('groupId',groupId);
@@ -217,73 +211,68 @@ export default {
       // // const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
       // this.group = group // check if used
 
-      const group = this.board.groups.find(group => {
-        return group.id === groupId
-      })
-      this.group = group 
-      this.isMenuOpened = !this.isMenuOpened
+      const group = this.board.groups.find((group) => {
+        return group.id === groupId;
+      });
+      this.group = group;
+      this.isMenuOpened = !this.isMenuOpened;
     },
     closeGroupMenu() {
-      console.log('close group menu')
-      this.isMenuOpened = false
+      console.log("close group menu");
+      this.isMenuOpened = false;
       // console.log('close');
     },
     dragEnd() {
-      this.$emit('dragEnd')
-      console.log('dragEnd');
-
+      this.$emit("dragEnd");
+      // this.$emit('socketUpdateBoard')
+      // console.log('dragEnd');
     },
-    closeAddCard(){
-       this.task.title ='';
-       this. isAdding = false;
+    closeAddCard() {
+      this.task.title = "";
+      this.isAdding = false;
     },
 
     changeGroup(ev) {
-      console.log(ev);
-      const fromIndex = ev.oldIndex
-      const toIndex = ev.newIndex
-      if (fromIndex === toIndex) return
-      const board = this.board
-      const payload = { board, fromIndex, toIndex }
-      this.$store.dispatch({ type: 'changeGroupPos', payload })
+      // console.log(ev);
+      const fromIndex = ev.oldIndex;
+      const toIndex = ev.newIndex;
+      if (fromIndex === toIndex) return;
+      const board = this.board;
+      const payload = { board, fromIndex, toIndex };
+      this.$store.dispatch({ type: "changeGroupPos", payload });
     },
     pickTask() {
-      console.log('gothere');
-      this.$emit('pickTask')
+      // console.log('gothere');
+      this.$emit("pickTask");
     },
     openModal(groupId) {
-      console.log('hello');
+      // console.log('hello');
       this.isAdding = true;
-      this.currGroupId = groupId
-
-
-
+      this.currGroupId = groupId;
     },
     async addTask(groupId) {
-      if (!this.task.title) return
+      if (!this.task.title) return;
       this.isAdding = false;
-      const task = { title: this.task.title, groupId }
+      const task = { title: this.task.title, groupId };
       const taskTitle = this.task.title;
-
-      this.task.title = '';
+      this.task.title = "";
       try {
         // await this.$store.dispatch({ type: 'addTask', task });
-        await this.$store.dispatch({ type: 'addTask', taskTitle , groupId });
+        await this.$store.dispatch({ type: "addTask", taskTitle, groupId });
+        // this.$emit('socketUpdateBoard')
       } catch (err) {
         console.log(err);
       }
     },
     onAddCard(groupId) {
-      this.isAdding = true
-      this.currGroupId = groupId
-      this.isMenuOpened = false
+      this.isAdding = true;
+      this.currGroupId = groupId;
+      this.isMenuOpened = false;
     },
     editTitle() {
       if (!this.newTitle) return;
     },
-
   },
-
 };
 </script>
 

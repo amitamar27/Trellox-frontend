@@ -90,7 +90,7 @@ methods:{
   },
   //container
   changeGroup(ev){
-      console.log(ev);
+      // console.log(ev);
       const fromIndex =ev.oldIndex
       const toIndex =ev.newIndex
       if(fromIndex===toIndex)return

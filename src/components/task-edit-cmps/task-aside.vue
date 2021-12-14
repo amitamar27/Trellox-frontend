@@ -25,7 +25,7 @@
         @addLabel="addLabel"
         @closeMenu="closeMenu"
         @toggleMember="toggleMember"
-        @saveTask ="saveTask"
+        @saveTask="saveTask"
         :board="board"
       />
     </transition>
@@ -92,13 +92,13 @@ export default {
       this.$emit("saveLabels", this.labels);
     },
     addLabel(labelId) {
-      console.log("labelId", labelId);
+      // console.log("labelId", labelId);
       this.$emit("addLabel");
     },
     toggleMember() {
       this.$emit("saveTask");
     },
-    saveTask(){
+    saveTask() {
       this.$emit("saveTask");
     },
   },
@@ -109,7 +109,10 @@ export default {
     taskCover,
     menuChecklist,
     menuDates,
+<<<<<<< HEAD
     attachmentMenu
+=======
+>>>>>>> 458d2c9df623a399245791a74996fe7d34967354
   },
 };
 </script>
@@ -159,7 +162,7 @@ export default {
   min-height: 50px;
   overflow-x: hidden;
   /* z-index: 30; */
-  top: 165px;
+  top: 90px;
   box-shadow: 0 0 2px 1px #e1e2e8;
   overflow-y: hidden;
 }
