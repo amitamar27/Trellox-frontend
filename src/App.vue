@@ -26,8 +26,8 @@ export default {
   },
   data() {
     return {
-      bgStyle: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639076920/Trellox/5137807_o4zvys.jpg)',
-      // bgStyle: 'url(https://trellex.herokuapp.com/img/hero.984d3367.jpg)'
+      // bgStyle: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639076920/Trellox/5137807_o4zvys.jpg)',
+      bgStyle: ''
     }
   },
   async created(){

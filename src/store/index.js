@@ -52,7 +52,7 @@ export default new Vuex.Store({
     },
     groupIdByTaskId(state) {
       return state.groupIdByTaskId
-  },
+    },
   },
 
   mutations: {
@@ -63,6 +63,7 @@ export default new Vuex.Store({
       state.isDarkScreen = false;
     },
     setBoard(state, { board }) {
+      console.log('setBoard 2');
       socketService.on(SOCKET_ON_BOARD_UPDATE, board => {
         console.log('FROM STORE FROM SOCKET', board);
         state.board = board
@@ -145,6 +146,10 @@ export default new Vuex.Store({
         task.attachments = task.attachments.concat(attachments)
         state.currTask = JSON.parse(JSON.stringify(task))
     },
+    addBoard(state , {board}){
+      console.log('addBoard 1');
+      state.boards.push(board);
+    }
   },
 
   actions: {
@@ -240,8 +245,11 @@ export default new Vuex.Store({
     async createNewBoard({commit}, {boardDetails}){
       try{
         console.log('createNewBoard - store');
-        var board = await boardService.addNewBoard(boardDetails)
+        const board = await boardService.addNewBoard(boardDetails)
+        console.log('board',board);
+        commit({ type: "addBoard", board });
         commit({ type: "setBoard", board });
+        return board
       }catch(err){
         console.log('faild to add new board', err);
       }

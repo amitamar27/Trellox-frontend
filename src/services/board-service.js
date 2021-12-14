@@ -153,9 +153,9 @@ function saveTask(boardId, groupId, task, activity) {
 function updateBoard(board) {
 
 }
-queryBoards()
+// queryBoards()
 // in case we have couple of boards
-const gBoards = _creareBoards()
+// const gBoards = _creareBoards()
 
 function _creareBoards() {
     var boards = storageService.load(KEYS)
@@ -609,17 +609,61 @@ function _creareBoards() {
 
 }
 
-function _createBoard(title, groups = [],style={}) {
+
+
+async function queryBoards() {
+    var boards = await asyncgStorageService.query(KEYS)
+    if (!boards || !boards.length) {
+        boards = _creareBoards()
+        // localStorage.setItem(KEY, JSON.stringify(boards))
+    }
+    return boards
+
+}
+async function getBoardById(boardId) {
+    // return await asyncgStorageService.getBoard(KEYS, boardId)
+    try {
+		// const currBoard = await storageService.get(KEY, boardId)
+		// return currBoard
+		const res = await httpService.get('board/' + boardId);
+        // console.log('res',res.data);
+		return res;
+	} catch (err) {
+		console.log(err);
+	}
+
+}
+async function removeBoard(baordId) {
+    return await asyncgStorageService.removeBoard(KEYS, baordId)
+}
+
+
+async function removeGroup(groupDetails) {
+    return await asyncgStorageService.removeGroup(KEYS, groupDetails)
+}
+
+// function addNewBoard(boardDetails) {
+//     console.log('board sservice with', boardDetails);
+//     const board = _createBoard(boardDetails.title, [], boardDetails.background)
+//     try {
+//        return httpService.post('board', {board})
+//         return board
+
+//     } catch (err) {
+//         console.log(err);
+//     }
+
+function _createBoard(title, groups = [], style = { bgColor:'' , bgImg: ''}) {
+    console.log('style',style);
     return {
-        _id: makeId(),
         title,
         createdAt: Date.now(),
         createdBy: {
             _id: makeId(),
-            fullname: 'gilad',
+            fullname: 'Koren',
             imgUrl: '',
         },
-        style: {bgColor:'' , bgImg: ''},
+        style,
         labels: [{
                 "id": "l101",
                 "title": "Done",
@@ -668,62 +712,19 @@ function _createBoard(title, groups = [],style={}) {
             imgUrl: "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
         }],
         groups,
-        
         covers:['#7bc86c','#f5dd29','#ffaf3f','#ef7564','#cd8de5','#5ba4cf','#29cce5','#6deca9','#ff8ed4','#172b4d'],
 
     }
 
 }
 
-async function queryBoards() {
-    var boards = await asyncgStorageService.query(KEYS)
-    if (!boards || !boards.length) {
-        boards = _creareBoards()
-        // localStorage.setItem(KEY, JSON.stringify(boards))
-    }
-    return boards
-
-}
-async function getBoardById(boardId) {
-    // return await asyncgStorageService.getBoard(KEYS, boardId)
-    try {
-		// const currBoard = await storageService.get(KEY, boardId)
-		// return currBoard
-		const res = await httpService.get('board/' + boardId);
-        // console.log('res',res.data);
-		return res;
-	} catch (err) {
-		console.log(err);
-	}
-
-}
-async function removeBoard(baordId) {
-    return await asyncgStorageService.removeBoard(KEYS, baordId)
-}
-
-
-async function removeGroup(groupDetails) {
-    return await asyncgStorageService.removeGroup(KEYS, groupDetails)
-}
-
-// async function addNewBoard(boardDetails) {
-//     console.log('board sservice with', boardDetails);
-//     const board = _createBoard(boardDetails.title, [], boardDetails.background)
-//     try {
-//         await asyncgStorageService.postBoard(KEYS, board)
-//         return board
-
-//     } catch (err) {
-//         console.log(err);
-//     }
-
-// }
 async function addNewBoard(boardDetails) {
     console.log('board sservice with', boardDetails);
-    const board = _createBoard(boardDetails.title, [], boardDetails.background)
+    const board = _createBoard(boardDetails.title, [], boardDetails.style)
+    // console.log('board',board);
     try {
-        await asyncgStorageService.postBoard(KEYS, board)
-        return board
+        console.log('board',board);
+       return httpService.post('board', {board})
 
     } catch (err) {
         console.log(err);
