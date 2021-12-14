@@ -26,7 +26,8 @@ export default {
   },
   data() {
     return {
-      bgStyle: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639076920/Trellox/5137807_o4zvys.jpg)'
+      bgStyle: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639076920/Trellox/5137807_o4zvys.jpg)',
+      // bgStyle: 'url(https://trellex.herokuapp.com/img/hero.984d3367.jpg)'
     }
   },
   async created(){
@@ -41,10 +42,10 @@ export default {
   },
   computed: {
     background() {
-
+      console.log('this.$route.name',this.$route.name);
       if (this.$route.name === 'Home' || this.$route.name === 'Boards') {
         return {
-          backgroundImage: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639076920/Trellox/5137807_o4zvys.jpg)',
+          backgroundImage: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639434430/Trellox/austin-distel-rxpThOwuVgE-unsplash_mufsjc.jpg)',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center center'

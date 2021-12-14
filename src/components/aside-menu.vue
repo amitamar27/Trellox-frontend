@@ -86,13 +86,14 @@ export default {
   },
   methods: {
     closeMenu() {
-      
+      this.bgcIsClick = false
       this.$emit('openMenu');
     },
     openBgcMenu() {
       this.openColorMenu = false;
       this.openImgMenu = false;
       this.bgcType = false;
+      console.log('this.bgcIsClick',this.bgcIsClick);
       this.bgcIsClick = !this.bgcIsClick;
     },
     changeImgUrl(url) {
