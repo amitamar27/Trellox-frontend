@@ -28,14 +28,34 @@
           :data-group="group.id"
         >
           <div class="group-preview-header">
-            <p
+            <!-- <p
               class="group-title"
               dir="auto"
               maxlength="512"
               style="overflow: hidden; overflow-wrap: break-word; height: 28px"
             >
               {{ group.title }}
-            </p>
+            </p> -->
+
+                <!-- <el-input
+           
+            @mousedown.stop=""
+            v-model="group.title"
+            type="text"
+				    placeholder="Title"
+            	@change="addGroup"
+				@keydown.enter="addGroup"
+            >
+            </el-input> -->
+
+            <input
+				ref="titleInput"
+				type="text"
+				placeholder="Title"
+				v-model="group.title"
+        @change="saveGroup(group)"
+				@mousedown.stop=""
+			/>
 
             <group-menu
             @addCard="onAddCard"
@@ -213,6 +233,9 @@ export default {
 			},
     };
   },
+  created(){
+
+  },
   computed: {
   adaptDeviceDND() {
     
@@ -223,16 +246,7 @@ export default {
     getChildPayload(index) {
 			return this.group.tasks[index]
 		},
-    // onDropTask(items, dropResult) {
-		// 	const newItems = applyDrag(items, dropResult)
-		// 	  this.$store.commit({
-		// 		type: "setTasks",
-		// 		tasksToSave: newItems,
-		// 		groupId: this.group.id,
-		// 	  })
-
-		// 	  this.$emit('saveBoard')
-		//   },
+ 
     saveBoard(){
       this.$emit('saveBoard')
     },
@@ -270,16 +284,7 @@ export default {
       this.newGroupTitle = "";
     },
     async openGroupMenu(groupId, ev) {
-      console.log('ev',ev);
-      // console.log('groupId',groupId);
-      // const board = this.$store.getters.board
-      // const groupDetails = { board, groupId }
-      // this.isMenuOpened = !this.isMenuOpened
-      // const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
-      // // const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
-      // this.group = group // check if used
-      // this.menuPosition.posX = ev.pageX;
-      // this.menuPosition.posY = ev.pageY;
+
       const group = this.board.groups.find((group) => {
         return group.id === groupId;
       });
@@ -292,6 +297,13 @@ export default {
       this.groupId= null
       this.isMenuOpened = false;
       // console.log('close');
+    },
+    saveGroup(group){
+      if(!group) return
+      let idx = this.board.groups.findIndex(g => g.id === group.id)
+      this.board.groups[idx] = group
+      this.group = group
+      this.$emit("saveGroup",group,idx);
     },
     dragEnd() {
       this.$emit("dragEnd");

@@ -48,6 +48,7 @@
     <group-list-new
       @dragEnd="dragEnd"
       @pickTask="pickTask"
+      @saveGroup="saveGroup"
       :board="board"
       v-if="board"
     ></group-list-new>
@@ -179,6 +180,9 @@ export default {
     },
     saveBoard() {
       this.$store.dispatch({ type: "saveBoard" });
+    },
+    saveGroup(group,idx){
+      this.$store.dispatch({ type: "saveGroup" ,group,idx});
     },
     async editBgcBoard(style) {
       try {

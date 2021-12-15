@@ -23,7 +23,10 @@
                 @keyup.enter="$event.target.blur()"
                 
             /> -->
+           
             <p
+            v-if="!isEditingTitle"
+            @click="editingTitle"
               class="group-title"
               dir="auto"
               maxlength="512"
@@ -32,12 +35,23 @@
               {{ group.title }}
             </p>
 
+             <el-input
+            v-if="isEditingTitle"
+            @mousedown.stop=""
+            v-model="group.title"
+            type="text"
+				    placeholder="Title"
+            class="group-title"
+            >
+
+            </el-input>
+
             <div class="group-preview-btn">
               <span class="span-1 hide">
                 <span class="span-2 icon-sm"></span>
               </span>
               <div
-                @click.prevent.stop="openGroupMenu(group.id,$event)"
+                @click.prevent.stop="openGroupMenu(group.id)"
                 class="
                   group-header-extras-menu
                   span-1
@@ -161,13 +175,11 @@ export default {
       type: Object,
       required: true,
     },
-    // boardLabels: {
-    //   type: Array,
-    // },
   },
   data() {
     return {
       isAddingTitle: false,
+      isEditingTitle:false,
       boardId: "",
       newTitle: "",
       newGroupTitle: "",
@@ -183,17 +195,17 @@ export default {
           bgColor: "",
         },
       },
+      
     };
   },
   computed: {
-    // board() {
-    //   return this.$store.getters.board;
-    // },
-    // groups(){
-    //  return this.$store.getters.groups;
-    // }
+    
   },
   methods: {
+    editingTitle(){
+      console.log('this.isEditingTitle',this.isEditingTitle);
+      this.isEditingTitle = !this.isEditingTitle
+    },
     addNewGroup() {
       if (this.newGroupTitle === "") return;
       this.isAddingTitle = false;
@@ -202,16 +214,7 @@ export default {
       this.$store.dispatch({ type: "addGroup", groupTitle });
       this.newGroupTitle = "";
     },
-    async openGroupMenu(groupId, ev) {
-      console.log('ev',ev);
-      // console.log('groupId',groupId);
-      // const board = this.$store.getters.board
-      // const groupDetails = { board, groupId }
-      // this.isMenuOpened = !this.isMenuOpened
-      // const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
-      // // const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
-      // this.group = group // check if used
-
+    async openGroupMenu(groupId) {
       const group = this.board.groups.find((group) => {
         return group.id === groupId;
       });

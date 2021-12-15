@@ -246,8 +246,6 @@ export default new Vuex.Store({
       try{
         console.log('getBoardById - store');
         var board = await boardService.getBoardById(boardId);
-        // console.log('board',board);
-        // commit({ type: "setBoard", board });
         return board
 
       }catch(err){
@@ -305,8 +303,10 @@ export default new Vuex.Store({
         throw err;
       }
     },
-    async saveBoard({state , dispatch}){
+    async saveBoard({state , commit , dispatch}){
       try {
+        // commit({type:'setBoard'})
+        
         console.log('saving');
         boardService.saveBoard(state.board)
         dispatch({type:'socketUpdateBoard'})
@@ -315,9 +315,17 @@ export default new Vuex.Store({
         throw err
       }
     },
+    async saveGroup({state , commit , dispatch}, {group,idx}){
+      try{
+        state.board.groups[idx] = group
+        boardService.saveBoard(state.board)
+        dispatch({type:'socketUpdateBoard'})
+      }catch(err){
+        console.dir('error',err)
+        throw err
+      }
+    },
     socketUpdateBoard({state}) {
-      // console.log("SOCKETUPDATEBOARDMOTHREREUFJKER SOCKETING");
-      // console.log('this.board',state.board);
       socketService.emit(SOCKET_EMIT_BOARD_UPDATE, state.board);
     },
   },
