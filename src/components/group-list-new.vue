@@ -1,28 +1,33 @@
 <template>
   <div v-if="board" class="group-list-container">
-    <div class="group-list">
-      <draggable
-        data-dragscroll
-        class="group-list"
-        groups="groups"
-        :list="board.groups"
-        @end="dragEnd"
+   
+      <Container
+        v-if="board.groups && board.groups.length"
+        orientation="horizontal"
+        drag-class="card-ghost"
+        drop-class="card-ghost-drop"
+        :get-child-payload="getParentPayload"
+        :drop-placeholder="dropPlaceholderOptionsGroup"
+        :non-drag-area-selector="'.fill'"
+        :drag-begin-delay="adaptDeviceDND"
+        group-name="1"
+        class="outter"
+        @drop="onDrop(board.groups, $event)"
+        @drag-start="calcPlaceholder"
+        @drag-end="dragging = false"
       >
+
+       <template>
+        <Draggable
+         v-for="group in board.groups"
+         :key="group.id"
+         class="group-list outter"
+        >
         <div
-          v-for="group in board.groups"
-          :groupId="group.id"
-          :key="group.id"
           class="group-preview"
+          :data-group="group.id"
         >
           <div class="group-preview-header">
-            <!-- <input
-                class="input-title"
-                type="text"
-                v-model="newTitle"
-                @blur="editTitle"
-                @keyup.enter="$event.target.blur()"
-                
-            /> -->
             <p
               class="group-title"
               dir="auto"
@@ -32,10 +37,24 @@
               {{ group.title }}
             </p>
 
+            <group-menu
+            @addCard="onAddCard"
+            @mousedown.stop=""
+            v-if="isMenuOpened && group.id === groupId"
+            @closeMenu="closeGroupMenu"
+            :group="group"
+            :title="'List actions'"
+            :style="{
+              top: menuPosition.posY + 'px',
+              left: menuPosition.posX + 'px',
+              }"
+      ></group-menu>
+
             <div class="group-preview-btn">
               <span class="span-1 hide">
                 <span class="span-2 icon-sm"></span>
               </span>
+                  
               <div
                 @click.prevent.stop="openGroupMenu(group.id,$event)"
                 class="
@@ -43,11 +62,14 @@
                   span-1
                   icon-sm icon-overflow-menu-horizontal
                 "
-              ></div>
+              >
+   
+              </div>
             </div>
           </div>
-
-          <card-list
+      <template>
+      
+          <card-list-new
             @dragEnd="dragEnd"
             @pickTask="pickTask"
             :tasks="group.tasks"
@@ -56,8 +78,12 @@
             :groupId="group.id"
             :boardLabels="board.labels"
             @addTask="addTask"
+            @saveBoard="saveBoard"
           >
-          </card-list>
+          </card-list-new>
+       
+          </template>
+  <!-- </Container> -->
 
           <div
             v-if="isAdding && group.id === currGroupId"
@@ -84,30 +110,17 @@
             </button>
           </div>
         </div>
-      </draggable>
 
-      <group-menu
-        @addCard="onAddCard"
-        @mousedown.stop=""
-        v-if="isMenuOpened && group"
-        @closeMenu="closeGroupMenu"
-        :group="group"
-        :title="'List actions'"
-        :style="{
-          top: menuPosition.posY + 'px',
-          left: menuPosition.posX + 'px',
-        }"
-      ></group-menu>
+        </Draggable>
+        
+      </template>
 
-      <!-- <group-menu
-        @addCard="onAddCard"
-        @mousedown.stop=""
-        v-if="isMenuOpened && group"
-        @closeMenu="closeGroupMenu"
-        :group="group"
-        :title="'List actions'"
-      ></group-menu> -->
-    </div>
+      </Container>
+  
+      <!-- <div class="group-list">
+    
+    </div> -->
+   
     <div class="group-add-container">
       <div class="group-add-btn">
         <p v-if="!isAddingTitle" @click="isAddingTitle = true">
@@ -142,19 +155,22 @@
 <script>
 import groupPreview from "./group-preview.vue";
 import draggable from "vuedraggable";
-import cardList from "./card-list.vue";
+// import cardList from "./card-list.vue";
+import cardListNew from "./card-list-new.vue";
 import groupMenu from "./menus-cmps/group-menu.vue";
 import taskEdit from "../views/task-edit.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
-
+import { applyDrag } from "../services/applyDrag.js";
 export default {
   components: {
     groupPreview,
-    cardList,
+    // cardList,
     groupMenu,
     Container,
     taskEdit,
     draggable,
+    Draggable,
+    cardListNew
   },
   props: {
     board: {
@@ -173,6 +189,7 @@ export default {
       newGroupTitle: "",
       isMenuOpened: false,
       group: null,
+      groupId:null,
       isAdding: false,
       currGroupId: null,
       menuPosition: { posX: "", posY: "" },
@@ -183,18 +200,68 @@ export default {
           bgColor: "",
         },
       },
+      dragging: false,
+      dropPlaceholderOptionsGroup: {
+				className: "drop-preview",
+				animationDuration: "0",
+				showOnTop: false,
+			},
+      	dropPlaceholderOptionsTasks: {
+				className: "drop-preview",
+				animationDuration: "150",
+				showOnTop: false,
+			},
     };
   },
   computed: {
-    // board() {
-    //   return this.$store.getters.board;
-    // },
-    // groups(){
-    //  return this.$store.getters.groups;
-    // }
+  adaptDeviceDND() {
+    
+			return (window.innerWidth < 600) ? 100 : 0
+		},
   },
   methods: {
+    getChildPayload(index) {
+			return this.group.tasks[index]
+		},
+    // onDropTask(items, dropResult) {
+		// 	const newItems = applyDrag(items, dropResult)
+		// 	  this.$store.commit({
+		// 		type: "setTasks",
+		// 		tasksToSave: newItems,
+		// 		groupId: this.group.id,
+		// 	  })
+
+		// 	  this.$emit('saveBoard')
+		//   },
+    saveBoard(){
+      this.$emit('saveBoard')
+    },
+    	getParentPayload(index) {
+			return this.board.groups[index]
+		  },
+    calcPlaceholder(ev) {
+			if (!ev.isSource) return
+      console.log('ev.payload.id',ev.payload.id);
+			const item = document.querySelector(`[data-group=${ev.payload.id}]`)
+			this.dragging = true
+			this.calcing = setInterval(() => {
+        // console.log('this.dragging',this.dragging);
+				if (!this.dragging) clearInterval(this.calcing)
+
+				const placeholder = document.querySelector('.outter > .smooth-dnd-drop-preview-constant-class')
+				if (!placeholder) return
+				placeholder.style.height = item.offsetHeight + 'px'
+			}, 5)
+		},
+    onDrop(items, dropResult) {
+			const newItems = applyDrag(items, dropResult)
+      // console.log('newItems',newItems);
+			this.$store.commit({ type: "setGroups", groups: newItems })
+      // this.$emit('setGroups',newItems)
+			this.$emit('dragEnd')
+		},
     addNewGroup() {
+      
       if (this.newGroupTitle === "") return;
       this.isAddingTitle = false;
       var groupTitle = this.newGroupTitle;
@@ -211,15 +278,18 @@ export default {
       // const group = await this.$store.dispatch({ type: 'getGroupById', groupId });
       // // const group = await this.$store.dispatch({ type: 'getGroupById', groupDetails });
       // this.group = group // check if used
-
+      // this.menuPosition.posX = ev.pageX;
+      // this.menuPosition.posY = ev.pageY;
       const group = this.board.groups.find((group) => {
         return group.id === groupId;
       });
       this.group = group;
+      this.groupId = group.id
       this.isMenuOpened = !this.isMenuOpened;
     },
     closeGroupMenu() {
       console.log("close group menu");
+      this.groupId= null
       this.isMenuOpened = false;
       // console.log('close');
     },
@@ -281,4 +351,13 @@ export default {
 /* .group-list-container {
   overflow-x: auto;
 } */
+/* .outter {
+  display: flex;
+  gap: 7px;
+  height: 100%;
+} */
+.fill {
+  height: 100vh;
+  cursor: move;
+}
 </style>

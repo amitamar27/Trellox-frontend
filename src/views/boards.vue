@@ -1,7 +1,74 @@
 <template>
   <div v-if="boards" class="boards-page-container">
-    <div class="boards">
-      <div class="nav-side"></div>
+
+    <div class="boards-list-container">
+      <div class="boards-header">
+        <h1>Boards</h1>
+      </div>
+
+      <div class="boards-container">
+            <div
+            v-for="board in boards" :key="board.id"
+              :style="getBackground(board)"
+              class="boards-list"
+              @click="setBoard(board._id)"
+            >
+              <div class="board-title-container"><p>{{ board.title }}</p></div>
+            </div>
+
+             <div @click="isModalOpen = true" class="boards-list-add-board">
+            <p>create new board</p>
+          </div>
+
+          <div 
+          v-if="isModalOpen"
+          class="modal-window"
+          >
+          <div class="board-add-modal">
+            <form>
+              <div class="add-modal-header" :style="backgroundObject">
+                <div class="input">
+                  <input
+                    v-model="newBoardTitle"
+                    type="text"
+                    placeholder="Enter board title..."
+                  />
+                </div>
+                <!-- <a class="close-modal-btn"></a> -->
+                  <a @click="isModalOpen = false"  class="close-modal-btn el-icon-close"></a>
+                
+              </div>
+            </form>
+            <div class="background-options">
+              <button
+                @click="setColorBackground(color.color)"
+                :style="{ backgroundColor: color.color }"
+                v-for="color in colors"
+                :key="color.id"
+              ></button>
+              <button
+                @click="setBackground(img.url)"
+                class="background-img-btn"
+                v-for="img in imgsBackground"
+                :style="{ 'background-image': `url(${img.url})` }"
+                :key="img.url"
+              ></button>
+            </div>
+            <div class="create-board-btn">
+              <button @click="createEmptyBoard">Create board</button>
+            </div>
+          </div>
+          </div>
+          
+      </div>
+
+
+    </div>
+
+
+
+
+    <!-- <div class="boards">
       <div class="board-boards">
         <div class="boards-list-header">
           <h2>Boards</h2>
@@ -58,7 +125,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

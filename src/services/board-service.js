@@ -753,6 +753,9 @@ function makeId(length = 5) {
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     for (var i = 0; i < length; i++) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length));
+        if(i===0 && typeof txt === 'number'){
+            txt = 'g'
+        }
     }
     return txt;
 }

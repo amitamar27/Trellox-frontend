@@ -81,6 +81,7 @@ export default {
     }
   },
   created() {
+    // alert('f')
     this.boardId = this.$route.params.boardId;
 
   },

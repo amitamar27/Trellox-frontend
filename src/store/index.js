@@ -149,7 +149,16 @@ export default new Vuex.Store({
     addBoard(state , {board}){
       console.log('addBoard 1');
       state.boards.push(board);
-    }
+    },
+    setTasks(state, { groupId, tasksToSave }) {
+      const groupIdx = state.board.groups.findIndex(g => g.id === groupId)
+      if (groupIdx < 0) return
+
+      state.board.groups[groupIdx].tasks = tasksToSave
+    },
+    setGroups(state, { groups }) {
+      state.board.groups = groups
+    },
   },
 
   actions: {
@@ -163,6 +172,9 @@ export default new Vuex.Store({
     //     console.dir("error",err);
     //   }
     // },
+    async setGroups({commit} , {groups}){
+      commit({type: 'setGroups' ,  groups})
+    },
     async loadBoard({ commit } , {boardId}) {
       try {
         var board = await boardService.getBoardById(boardId)

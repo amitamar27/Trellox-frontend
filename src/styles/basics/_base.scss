@@ -21,7 +21,6 @@ html {
 
     ::-webkit-scrollbar-track {
         background-color: rgba(0, 0, 0, .15);
-        // background: rgba(9,30,66,.08);
         border-radius: 20px;
     }
 
@@ -37,16 +36,8 @@ html {
 }
 
 body {
-    // height: 100%;
-    // margin: 0;
-    // background-color: lightblue;
-    // font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
-    // // font-family: Segoe UI;
-    // -webkit-font-smoothing: antialiased;
-    // color: #172b4d;;
-    // font-size: 14px;
+
     margin: 0;
-    // color: #172b4d;
     color: rgb(23,43,77);
     font-family: Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 14px;
@@ -123,7 +114,6 @@ p {
 
 .slide-fade-enter,
 .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */
 
 {
     transform: translateX(10px);
@@ -143,45 +133,69 @@ p {
     transform: translateY(100vh);
     opacity: 0;
 }
-// .slide-fade-enter-active {
-//     transition: all 0.3s ease;
-// }
 
-// .slide-fade-leave-active {
-//     transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-// }
-
-// .slide-fade-enter,
-// .slide-fade-leave-to
 .flex{
     display: flex;
 }
 .app {
-    // font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-
-    // color: #2c3e50;
-    // width: 100%;
-    // height: 100vh;
-    // position: absolute;
-    // top: 0;
-    // left: 0;
-    // z-index: -1;
-    // background-size: cover;
-
     position: absolute;
     height: 100vh;
-    // display: flex;
     flex-direction: column;
     width: 100%;
     z-index: 10;
     flex: 1;
-    //   overflow-y: hidden;
-    // overflow-x: auto;
-    // overflow-y: auto;
+
 }
+
+
+.outter {
+    // margin-right: 7px;
+
+    > .smooth-dnd-drop-preview-constant-class {
+        background-color: rgba(36, 36, 36, 0.308);
+        width: 272px;
+        margin: 0 7px;
+        border-radius: 3px;
+
+        transition: none;
+    }
+}
+
+.tasks-container {
+    > .smooth-dnd-drop-preview-constant-class {
+        background-color: rgba(109, 109, 109, 0.1);
+        min-height: 0px;
+        max-width: calc(100% - 10px);
+        border-radius: 3px;
+    }
+    overflow-y: auto!important;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.files-container {
+    > .smooth-dnd-drop-preview-constant-class {
+        background-color: rgba(109, 109, 109, 0.1);
+        min-height: 0px;
+        max-width: 656px;
+        border-radius: 3px;
+    }
+}
+.card-ghost {
+    transition: transform 0.18s ease;
+    transform: rotateZ(5deg);
+    cursor: grabbing;
+}
+.card-ghost-drop {
+    transition: transform 0.18s ease-in-out;
+    transform: rotateZ(0deg);
+}
+// .smooth-dnd-container {
+//     min-height: 15px;
+// }
 
 @font-face {
     font-family: Roboto;

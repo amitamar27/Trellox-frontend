@@ -2,9 +2,11 @@
   <section class="board-header">
     <div class="left-board-header">
       <section class="board-title-header">
-        <h1 v-if="!titleIsEditing" @click="openEditing">
+        <div v-if="!titleIsEditing" class="board-title-container">
+        <h1  @click="openEditing">
           {{ boardTitle }}
         </h1>
+        </div>
         <input
           v-else
           type="text"
@@ -97,6 +99,7 @@ export default {
     },
 
     openMenu() {
+      // document.querySelector('.aside-menu').style.display = 'flex'
       this.isShown = !this.isShown;
     },
     editBgcBoard(style) {
