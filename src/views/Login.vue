@@ -204,11 +204,11 @@ export default {
                   cursor: pointer;
                   margin: 0;
                 }
-                button:hover {
-                  // color:rgb(255, 255, 255);
-                  // background-color: #94942b50;
-                  // background: linear-gradient(to bottom, #8f9c8c 0%, #1c1f1b 100%);
-                }
+                // button:hover {
+                //   // color:rgb(255, 255, 255);
+                //   // background-color: #94942b50;
+                //   // background: linear-gradient(to bottom, #8f9c8c 0%, #1c1f1b 100%);
+                // }
                 a {
                   background: transparent;
                   text-decoration: none;
