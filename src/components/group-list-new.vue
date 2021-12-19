@@ -3,6 +3,7 @@
    
       <Container
         v-if="board.groups && board.groups.length"
+        :style="getStyle"
         orientation="horizontal"
         drag-class="card-ghost"
         drop-class="card-ghost-drop"
@@ -242,6 +243,9 @@ export default {
     
 			return (window.innerWidth < 600) ? 100 : 0
 		},
+     getStyle(){
+      return 'display: flex'
+    }
   },
   methods: {
     getChildPayload(index) {
@@ -357,6 +361,7 @@ export default {
     editTitle() {
       if (!this.newTitle) return;
     },
+   
   },
 };
 </script>
@@ -374,10 +379,10 @@ export default {
   height: 100vh;
   cursor: move;
 }
-.smooth-dnd-container {
-     .horizontal {
-         display: flex;
-     }
- }
+// .smooth-dnd-container {
+//      .horizontal {
+//          display: flex;
+//      }
+//  }
 
 </style>
