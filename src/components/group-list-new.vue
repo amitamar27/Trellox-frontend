@@ -361,7 +361,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 /* .group-list-container {
   overflow-x: auto;
 } */
@@ -374,4 +374,10 @@ export default {
   height: 100vh;
   cursor: move;
 }
+.smooth-dnd-container {
+     .horizontal {
+         display: flex;
+     }
+ }
+
 </style>
