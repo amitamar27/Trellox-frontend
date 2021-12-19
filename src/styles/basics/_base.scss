@@ -159,7 +159,6 @@ p {
         width: 272px;
         margin: 0 7px;
         border-radius: 3px;
-
         transition: none;
     }
 }
@@ -195,9 +194,12 @@ p {
     transition: transform 0.18s ease-in-out;
     transform: rotateZ(0deg);
 }
-// .smooth-dnd-container {
-//     min-height: 15px;
-// }
+.smooth-dnd-container {
+    .horizontal{
+        display: flex;
+    }
+    // min-height: 15px;
+}
 
 @font-face {
     font-family: Roboto;

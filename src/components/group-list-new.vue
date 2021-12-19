@@ -258,12 +258,14 @@ export default {
 			if (!ev.isSource) return
       console.log('ev.payload.id',ev.payload.id);
 			const item = document.querySelector(`[data-group=${ev.payload.id}]`)
+      // console.log('item',item);
 			this.dragging = true
 			this.calcing = setInterval(() => {
         // console.log('this.dragging',this.dragging);
 				if (!this.dragging) clearInterval(this.calcing)
 
 				const placeholder = document.querySelector('.outter > .smooth-dnd-drop-preview-constant-class')
+        // console.log('placeholder',placeholder);
 				if (!placeholder) return
 				placeholder.style.height = item.offsetHeight + 'px'
 			}, 5)
@@ -294,7 +296,6 @@ export default {
       this.isMenuOpened = !this.isMenuOpened;
     },
     closeGroupMenu() {
-      console.log("close group menu");
       this.groupId= null
       this.isMenuOpened = false;
       // console.log('close');

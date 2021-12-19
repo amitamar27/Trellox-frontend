@@ -108,8 +108,11 @@ export default new Vuex.Store({
     //   state.board = payload.board
     // },
     removeTask(state, {groupId,taskId}){
+      console.log('groupId,taskId',groupId,taskId);
       const group = state.board.groups.find(group => group.id === groupId)
+      console.log('group',group);
       const taskIdx = group.tasks.findIndex(t => t.id === taskId)
+      console.log('taskIdx',taskIdx);
       if (taskIdx < 0) return
 
       group.tasks.splice(taskIdx, 1)
@@ -294,9 +297,10 @@ export default new Vuex.Store({
         throw err;
       }
     },
-    async removeTask({state, commit ,dispatch}, payload){
+    async removeTask({state, commit ,dispatch}, {groupId,taskId}){
       try{
-        commit({type: 'removeTask' , payload})
+        console.log('payload',groupId,taskId);
+        commit({type: 'removeTask' , groupId,taskId})
         const board = state.board
         dispatch({type:'socketUpdateBoard'})
         await boardService.saveBoard(board)
