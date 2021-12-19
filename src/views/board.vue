@@ -2,47 +2,6 @@
   <div v-if="board" class="board-container">
     <board-header :board="board" @editBgcBoard="editBgcBoard" />
 
-    <!-- <group-list
-      @dragEnd="dragEnd"
-      @pickTask="pickTask"
-      :board="board"
-      v-if="board"
-      
-    ></group-list> -->
-    <!-- <Container
-      v-if="board.groups && board.groups.length"
-      orientation="horizontal"
-      drag-class="card-ghost"
-      drop-class="card-ghost-drop"
-      :get-child-payload="getParentPayload"
-      :drop-placeholder="dropPlaceholderOptions"
-      :non-drag-area-selector="'.fill'"
-      :drag-begin-delay="adaptDeviceDND"
-      group-name="1"
-      class="outter"
-      @drop="onDrop(board.groups, $event)"
-      @drag-start="calcPlaceholder"
-      @drag-end="dragging = false"
-    >
-      <template v-if="!isQuickEdit">
-        <Draggable v-for="(group, idx) in board.groups" :key="group.id">
-          <group-preview
-            :data-group="group.id"
-            :group="group"
-            @saveBoard="countChangessToSave"
-          />
-          <div data-dragscroll class="fill"></div>
-        </Draggable>
-      </template>
-      <template v-else>
-        <group-preview
-          v-for="group in board.groups"
-          :key="group.id"
-          :group="group"
-          @saveBoard="countChangessToSave"
-        />
-      </template>
-    </Container> -->
 
     
     <group-list-new
@@ -96,7 +55,7 @@ export default {
             boardId,
           });
           this.currBoard = currBoard;
-          this.$emit("setBg", this.currBoard.style.bgImg);
+          this.$emit("setBg", this.currBoard.style.bgImg || this.currBoard.style.bgColor);
           console.log("this.boardId !!!!", boardId);
           // socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId);
           socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId);

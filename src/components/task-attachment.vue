@@ -1,5 +1,5 @@
 <template>
-  <section class="task-attachments">
+  <section class="task-attachments" >
     <header>
       <img :src="require('@/assets/Attachment-menu.svg')" alt="" />
       <h3>Attachments</h3>
@@ -43,6 +43,12 @@
 import attachmentMenu from '../components/task-edit-cmps/attachment-menu.vue'
 
 export default {
+  props:{
+    task:{
+      type: Object,
+      required: true,
+    }
+  },
   data() {
     return {
       editedFileId: null,
@@ -62,19 +68,20 @@ export default {
     	removeFile(file) {
 			const idx = this.task.attachments.findIndex(f => f.id === file.id)
 			this.task.attachments.splice(idx, 1)
-			const { taskId, groupId } = this.$route.params
-			this.$store.commit({ type: "removeFile", groupId, taskId, fileId: file.id })
-			this.$store.dispatch({ type: "saveBoard" })
+      this.$emit('saveTask')
+			// const { taskId, groupId } = this.$route.params
+			// this.$store.commit({ type: "removeFile", groupId, taskId, fileId: file.id })
+			// this.$store.dispatch({ type: "saveBoard" })
 		},
     getParentPayload(index) {
       return this.task.attachments[index]
     },
   },
-  computed: {
-    task() {
-      return this.$store.getters.currTask
-    }
-  },
+  // computed: {
+  //   task() {
+  //     return this.$store.getters.currTask
+  //   }
+  // },
   components:{
       attachmentMenu
   }

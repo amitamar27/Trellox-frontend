@@ -15,6 +15,7 @@
       >
         <Draggable v-for="task in tasks" :key="task.id">
           <card-preview
+          v-if="task"
             :boardLabels="boardLabels"
             :group="group"
             :task="task"
@@ -23,27 +24,13 @@
           ></card-preview>
         </Draggable>
       </Container>
-      <!-- <draggable
-        :emptyInsertThreshold="100"
-        class="draggable-groups"
-        data-dragscroll
-        :list="group.tasks"
-        @end="dragEnd"
-        group="tasks"
-      >
-        <transition-group type="transition" name="flip">
-
-         
-          
-        </transition-group>
-      </draggable> -->
     </div>
   </div>
 </template>
 
 <script>
 import cardPreview from "./card-preview.vue";
-import draggable from "vuedraggable";
+// import draggable from "vuedraggable";
 import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag } from "../services/applyDrag.js";
 export default {
@@ -56,12 +43,13 @@ export default {
       type: String,
       required: true,
     },
-    groups: {
-      // type:String,
-      // required:true
-    },
+    // groups: {
+    //   // type:String,
+    //   // required:true
+    // },
     group: {
       type: Object,
+      required: true,
     },
     boardLabels: {
       type: Array,
@@ -80,13 +68,12 @@ export default {
   },
   components: {
     cardPreview,
-    draggable,
+  
     Draggable,
     Container,
   },
   computed: {
     adaptDeviceDND() {
-      console.log("window.innerWidth", window.innerWidth);
       return window.innerWidth < 600 ? 100 : 0;
     },
   },
@@ -111,7 +98,6 @@ export default {
       });
     },
     dragEnd() {
-      console.log("end");
       this.$emit("dragEnd");
     },
   },

@@ -94,7 +94,7 @@
             @pickTask="pickTask"
             :tasks="group.tasks"
             :group="group"
-            :groups="board.groups"
+            
             :groupId="group.id"
             :boardLabels="board.labels"
             @addTask="addTask"
@@ -173,6 +173,7 @@
 </template>
 
 <script>
+// :groups="board.groups"
 import groupPreview from "./group-preview.vue";
 import draggable from "vuedraggable";
 // import cardList from "./card-list.vue";

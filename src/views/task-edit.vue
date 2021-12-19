@@ -30,6 +30,7 @@
         ></a>
         <section class="main-content">
           <div class="main-content-details">
+            <div class="main-content-details-container">
             <section class="task-details">
               <task-members
                 v-if="task.members && task.members.length"
@@ -53,7 +54,7 @@
               ></task-description>
             </section>
 
-            <section class="check-list" v-if="task.checklists">
+            <section class="check-list" v-if="task.checklists && task.checklists.length">
               <header></header>
               <check-list
                 :task="task"
@@ -62,8 +63,10 @@
               ></check-list>
             </section>
 
-            <section class="task-attachments" v-if="task.attachments">
-              <task-attachment :task="task" :key="4"></task-attachment>
+            <section class="task-attachments" v-if="task.attachments && task.attachments.length">
+              <task-attachment :task="task" :key="4"
+              @saveTask="saveTask"
+              ></task-attachment>
             </section>
 
             <section class="task-activities" v-if="task.activities">
@@ -74,7 +77,7 @@
                 @saveTask="saveTask"
               ></task-activity>
             </section>
-
+          </div>
             <section class="task-edit-actions">
               <a class="delete-task-btn" @click="removeTask">
                 <span class="icon-sm icon-remove"></span>
@@ -135,7 +138,6 @@ export default {
       return task;
     },
     taskBgColor() {
-      console.log("this.currTask.cover", this.currTask.cover);
       if (this.currTask.cover.bgColor) {
         return `background-color:${this.currTask.cover.bgColor}`;
       }
@@ -248,12 +250,18 @@ export default {
   flex-grow: 1;
   justify-content: space-between;
   gap: 12px;
+  min-height: 80vh;
+}
+.main-content-details-container{
+  display: flex;
+      flex-direction: column;
 }
 
 .main-content-details {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .task-attachments {

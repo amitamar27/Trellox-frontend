@@ -169,7 +169,9 @@ p {
         background-color: rgba(109, 109, 109, 0.1);
         min-height: 0px;
         max-width: calc(100% - 10px);
+        // width: 252px;
         border-radius: 3px;
+        margin: 0 auto;
     }
     overflow-y: auto!important;
     overflow-x: hidden;
