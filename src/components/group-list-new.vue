@@ -29,26 +29,7 @@
           :data-group="group.id"
         >
           <div class="group-preview-header">
-            <!-- <p
-              class="group-title"
-              dir="auto"
-              maxlength="512"
-              style="overflow: hidden; overflow-wrap: break-word; height: 28px"
-            >
-              {{ group.title }}
-            </p> -->
-
-                <!-- <el-input
-           
-            @mousedown.stop=""
-            v-model="group.title"
-            type="text"
-				    placeholder="Title"
-            	@change="addGroup"
-				@keydown.enter="addGroup"
-            >
-            </el-input> -->
-
+         
             <input
 				ref="titleInput"
 				type="text"
