@@ -257,7 +257,7 @@ export default {
     calcPlaceholder(ev) {
 			if (!ev.isSource) return
       console.log('ev.payload.id',ev.payload.id);
-			const item = document.querySelector(`[data-group=${ev.payload.id}]`)
+			var item = document.querySelector(`[data-group=${ev.payload.id}]`)
       // console.log('item',item);
 			this.dragging = true
 			this.calcing = setInterval(() => {

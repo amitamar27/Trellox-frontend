@@ -496,9 +496,10 @@
 }
 
 .group-list-container {
-    @media (min-height: 510px){
-        // height: 100%;
-    }
+    // @media (min-height: 510px){
+    //     height: 100%;
+    // }
+    height: min-content;
     margin-top: 45px;
     display: flex;
    

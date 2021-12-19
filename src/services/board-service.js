@@ -120,7 +120,7 @@ function setTask(title) {
 
 function getNewGroup(title, tasks = []) {
     return {
-        id: makeId(),
+        id: 'g' + makeId(),
         title,
         tasks,
     }
