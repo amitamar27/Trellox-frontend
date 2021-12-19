@@ -165,7 +165,9 @@ p {
 
 }
 
-
+.smooth-dnd-container.horizontal {
+    display: flex;
+}
 .outter {
     // margin-right: 7px;
 
@@ -225,7 +227,7 @@ p {
     }
 }
 
-.smooth-dnd-container .horizontal {
+.smooth-dnd-container.horizontal {
         display: flex;
     }
 
