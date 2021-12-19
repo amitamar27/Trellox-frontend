@@ -65,7 +65,6 @@ function mainBoards(boards){
         if(board.createdBy._id === 'guest' || 
         board.createdBy.fullname === 'Koren Levi') mainBoards.push(board)
     })
-    console.log('mainBoards',mainBoards);
     return mainBoards
 }
 
