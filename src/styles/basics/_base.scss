@@ -225,6 +225,10 @@ p {
     }
 }
 
+.smooth-dnd-container.horizontal {
+        display: flex;
+    }
+}
 @font-face {
     font-family: Roboto;
     src: url(~@/assets/fonts/Roboto-Regular.ttf);
