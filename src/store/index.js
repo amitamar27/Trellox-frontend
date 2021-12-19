@@ -159,6 +159,11 @@ export default new Vuex.Store({
     setGroups(state, { groups }) {
       state.board.groups = groups
     },
+    removeBoard(state,{boardId}){
+      const boardIdx = state.boards.findIndex(b => b._id === boardId)
+      if (boardIdx < 0) return
+      state.boards.splice(boardIdx, 1)
+    }
   },
 
   actions: {
@@ -318,6 +323,11 @@ export default new Vuex.Store({
         console.dir('error',err)
         throw err
       }
+    },
+    async removeBoard({commit},{boardId}){
+      console.log('boardId',boardId);
+      commit('removeBoard');
+      // await boardService.removeBoard(boardId);
     },
     socketUpdateBoard({state}) {
       socketService.emit(SOCKET_EMIT_BOARD_UPDATE, state.board);

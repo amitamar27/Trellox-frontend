@@ -18,7 +18,8 @@ export const boardService = {
     addNewGroup,
     addNewBoard,
     getGroupById,
-    updateBgcBoard
+    updateBgcBoard,
+    removeBoard
 
 
 }
@@ -43,10 +44,11 @@ async function query() {
         console.log('user--',user);
         if(!user || user.fullname === 'Guest' ) return mainBoards(res)
         // !user.boardsIds ||
+        console.log('user.boardsIds.length',user.boardsIds.length);
         if( !user.boardsIds.length) return []
         const boards = []
         res.forEach((board) => {
-            if(user.boardsIds.include(board._id)){
+            if(user.boardsIds.includes(board._id)){
                 boards.push(board);
             }
         })
@@ -622,8 +624,9 @@ async function getBoardById(boardId) {
 	}
 
 }
-async function removeBoard(baordId) {
-    return await asyncgStorageService.removeBoard(KEYS, baordId)
+async function removeBoard(boardId) {
+    // return await asyncgStorageService.removeBoard(KEYS, baordId)/
+    return httpService.delete('board/' + boardId)
 }
 
 

@@ -8,12 +8,18 @@
 
       <div class="boards-container">
             <div
-            v-for="board in boards" :key="board.id"
+            v-for="board in boards" :key="board._id"
               :style="getBackground(board)"
               class="boards-list"
-              @click="setBoard(board._id)"
+              @click.stop="setBoard(board._id)"
             >
-              <div class="board-title-container"><p>{{ board.title }}</p></div>
+            <!-- <a class="icon-md icon-close"></a> -->
+              <div class="board-title-container">
+                <a class="icon-md icon-close" @click.stop="removeBoard(board._id)"></a> 
+                <p>{{ board.title }}</p>
+                
+                </div>
+                
             </div>
 
              <div @click="isModalOpen = true" class="boards-list-add-board">
@@ -138,16 +144,13 @@ export default {
   },
   methods: {
     createEmptyBoard() {
-
       if (this.newBoardTitle === '') return;
       this.isModalOpen = false;
-
       let style = null;
-    
+      
       if (!this.imgUrl){ style = { bgColor: `${this.colorSelected}`, bgImg: '' };}
       else { style = { bgColor: '', bgImg: `url(${this.imgUrl})` }; }
       const boardDetails = {title: this.newBoardTitle,style};
-
       this.$store.dispatch({ type: "createNewBoard", boardDetails })
       .then(res => {
         this.$router.push(`/board/${res._id}`);
@@ -176,6 +179,40 @@ export default {
        // const backgroundColor = board.style.bgColor;
         return { backgroundColor: `${board.style.bgColor}` };
     },
+    removeBoard(boardId){
+      // console.log('boardId',boardId);
+      this.$store.dispatch({type: 'removeBoard', boardId})
+    },
   },
 };
 </script>
+
+<style lang="scss">
+// .icon-md{
+
+//       position: absolute;
+//     top: 10px;
+//     /* left: 0px; */
+//     right: 5px;
+//   background-color: #00000014;
+//     cursor: pointer;
+//     border-radius: 50%;
+//     color: #42526e;
+//     height: 32px;
+//     margin: 4px;
+//     overflow: hidden;
+//     padding: 4px;
+//     // position: absolute;
+//     // right: 0;
+//     // top: 0;
+//     transition: background-color 85ms, color 85ms;
+//     width: 32px;
+//     z-index: 2;
+//     font-size: 20px;
+//     // line-height: 32px;
+// }
+.icon-close{
+  color: white;
+}
+
+</style>

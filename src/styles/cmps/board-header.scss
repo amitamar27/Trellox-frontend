@@ -53,9 +53,14 @@
                 cursor: pointer;
                 display: flex;
                 width: max-content;
+                // width: auto;
                 height: 32px;
                 line-height: 3;
                 align-items: center;
+                flex-grow: 1;
+                // min-width: 100px;
+                // width: 100%;
+                // max-width: 180px;
                 // background-color: rgba(255, 255, 255, 0.24);
                 
             }

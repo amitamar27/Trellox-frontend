@@ -1,6 +1,6 @@
 <template >
   <div v-if="board" class="board-container">
-    <board-header :board="board" @editBgcBoard="editBgcBoard" />
+    <board-header :board="board" @editBgcBoard="editBgcBoard" @saveBoard="saveBoard" />
 
 
     
