@@ -170,11 +170,12 @@ p {
 }
 .outter {
     // margin-right: 7px;
-
+    
     >.smooth-dnd-drop-preview-constant-class {
         background-color: rgba(36, 36, 36, 0.308);
         width: 272px;
         // margin: 0 7px;
+        margin: 0 0 5px 5px;
         border-radius: 3px;
         transition: none;
     }
@@ -187,13 +188,16 @@ p {
 //     transition: none;
 // }
 .tasks-container {
-    >.smooth-dnd-drop-preview-constant-class {
+    // margin-bottom: 5px;
+    .smooth-dnd-drop-preview-constant-class {
         background-color: rgba(109, 109, 109, 0.1);
         min-height: 0px;
         max-width: calc(100% - 10px);
         // width: 252px;
         border-radius: 3px;
-        margin: 0 auto;
+        // margin: 0 auto;
+        margin: 0 0 5px 5px;
+        // margin-bottom: 3em;
     }
 
     overflow-y: auto !important;
