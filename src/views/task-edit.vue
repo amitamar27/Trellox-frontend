@@ -236,7 +236,16 @@ export default {
   gap: 10px;
   flex-wrap: wrap;
   transition: all 0.2s;
+
+  @media (max-width: 500px){
+        display: flex;
+    margin-bottom: 15px;
+    gap: 10px;
+    transition: all .2s;
+    margin-left: 3px;
+  }
 }
+
 .task-details-h {
   color: #5e6c84;
   font-size: 12px;
@@ -249,7 +258,7 @@ export default {
   width: 100%;
   flex-grow: 1;
   justify-content: space-between;
-  gap: 12px;
+  // gap: 12px;
   min-height: 80vh;
 }
 .main-content-details-container{

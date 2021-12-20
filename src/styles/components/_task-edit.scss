@@ -169,7 +169,9 @@
 }
 
 .task-label-container {
-    display: flex;
+    display: grid;
+    width: 100px;
+    gap: 3px;
 }
 
 .controls-btns {
