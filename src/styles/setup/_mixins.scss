@@ -163,3 +163,26 @@
 }
 
 
+@mixin tablet-size-display {
+  @media screen and (max-width: 620px) {
+      & {
+          display: none;
+      }
+  }
+}
+
+@mixin mobile-size-display {
+  @media screen and (max-width: 480px) {
+      & {
+          display: none;
+      }
+  }
+}
+
+@mixin tablet-size-content {
+  @media screen and (max-width: 620px) {
+      & {
+          @content;
+      }
+  }
+}

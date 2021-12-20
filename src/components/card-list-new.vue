@@ -21,6 +21,7 @@
             :task="task"
             :groupId="groupId"
             @click="openCardDetails(groupId, task.id)"
+            @scroll.stop=""
           ></card-preview>
         </Draggable>
       </Container>

@@ -19,14 +19,22 @@
         max-height: 79vh
     }
 
-    .cards-container {
+     .cards-container {
 
         overflow-y: auto !important;
         overflow-x: hidden;
         scroll-behavior: smooth;
         padding: 0px 4px;
         flex: 1;
-
+height: fit-content;
+        &::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        &::-webkit-scrollbar-track-piece {
+            background: rgba(9, 30, 66, 0.08);
+            border-radius: 10px;
+        }
         .draggable-groups {
             // height: 100%;
             position: relative;
@@ -464,7 +472,7 @@
     border-radius: 4px;
     margin-bottom: 8px;
     text-align: left;
-
+    margin-top: 4px;
     button {
         display: flex;
         justify-content: center;

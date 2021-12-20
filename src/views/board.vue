@@ -1,5 +1,5 @@
 <template >
-  <div v-if="board" class="board-container">
+  <div v-if="board" class="board-container" @touchend="fixActionRestriction">
     <board-header :board="board" @editBgcBoard="editBgcBoard" @saveBoard="saveBoard" />
 
 
@@ -96,7 +96,12 @@ export default {
      },
   },
   methods: {
-    
+    fixActionRestriction() {
+			document.body.classList.remove(
+				"smooth-dnd-no-user-select",
+				"smooth-dnd-disable-touch-action"
+			)
+		},
     pickTask() {
       // console.log(this.board);
     },
