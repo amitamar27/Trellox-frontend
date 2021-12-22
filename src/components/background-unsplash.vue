@@ -41,7 +41,6 @@
 
                 try {
                     const res = await unsplashService.getSplashImgs(searchWord);
-                    // console.log('res', res);
                     this.results = res;
                 } catch (err) {
                     throw err;

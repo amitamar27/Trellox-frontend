@@ -2,36 +2,38 @@
   <div class="cards-container">
     <!-- <div>task : {{task}}</div> -->
     <div class="draggable-groups">
-      <draggable
-        :emptyInsertThreshold="100"
-        class="draggable-groups"
-        data-dragscroll
-        :list="group.tasks"
-        @end="dragEnd"
-        group="tasks"
+      <Container
+        drag-class="card-ghost"
+        drop-class="card-ghost-drop"
+        :get-child-payload="getChildPayload"
+        :drop-placeholder="dropPlaceholderOptionsTasks"
+        :drag-begin-delay="adaptDeviceDND"
+        group-name="2"
+        v-if="group"
+        class="tasks-container"
+        @drop="onDropTask(group.tasks, $event)"
       >
-        <transition-group type="transition" name="flip">
-
+        <Draggable v-for="task in tasks" :key="task.id">
           <card-preview
+          v-if="task"
             :boardLabels="boardLabels"
             :group="group"
-            v-for="task in tasks"
             :task="task"
-            :key="task.id"
             :groupId="groupId"
             @click="openCardDetails(groupId, task.id)"
+            @scroll.stop=""
           ></card-preview>
-          
-        </transition-group>
-      </draggable>
+        </Draggable>
+      </Container>
     </div>
   </div>
 </template>
 
 <script>
-import cardPreview from './card-preview.vue'
-import draggable from "vuedraggable";
-
+import cardPreview from "./card-preview.vue";
+// import draggable from "vuedraggable";
+import { Container, Draggable } from "vue-smooth-dnd";
+import { applyDrag } from "../services/applyDrag.js";
 export default {
   props: {
     tasks: {
@@ -40,14 +42,15 @@ export default {
     },
     groupId: {
       type: String,
-      required: true
+      required: true,
     },
-    groups: {
-      // type:String,
-      // required:true
-    },
+    // groups: {
+    //   // type:String,
+    //   // required:true
+    // },
     group: {
-      type: Object
+      type: Object,
+      required: true,
     },
     boardLabels: {
       type: Array,
@@ -56,41 +59,53 @@ export default {
 
   data() {
     return {
-      boardId: ''
-    }
+      boardId: "",
+      dropPlaceholderOptionsTasks: {
+        className: "drop-preview",
+        animationDuration: "150",
+        showOnTop: false,
+      },
+    };
   },
   components: {
     cardPreview,
-    draggable
-
+  
+    Draggable,
+    Container,
   },
   computed: {
+    adaptDeviceDND() {
+      return window.innerWidth < 600 ? 100 : 0;
+    },
   },
 
   methods: {
+    onDropTask(items, dropResult) {
+      const newItems = applyDrag(items, dropResult);
+      this.$store.commit({
+        type: "setTasks",
+        tasksToSave: newItems,
+        groupId: this.group.id,
+      });
+      this.$emit("dragEnd");
+      this.$emit("saveBoard");
+    },
+    getChildPayload(index) {
+      return this.group.tasks[index];
+    },
     openCardDetails(groupId, taskId) {
-      // const { boardId } = this.$route.params
-      
-      // this.$store.commit({ type: "openBlack" })
-  
-      this.$router
-        .push("/details/" + groupId + "/" + taskId)
-        .catch((err) => { console.log('error'); })
-
+      this.$router.push("/details/" + groupId + "/" + taskId).catch((err) => {
+        console.log("error");
+      });
     },
     dragEnd() {
-      this.$emit('dragEnd')
-    }
-
-
+      this.$emit("dragEnd");
+    },
   },
   created() {
     this.boardId = this.$route.params.boardId;
-    // console.log('in card list',this.boardId);
   },
-  
-
-}
+};
 </script>
 
 <style>

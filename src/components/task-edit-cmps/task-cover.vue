@@ -29,12 +29,6 @@
 </template>
 
 <script>
-// :class="setClass(color, idx)"
-// :style="setStyle(cover)"
-// :class="`idx-${idx}`"
-// `background-color: ${cover}`
-// :class="setClass(cover)"
-// :class="{ coverbox: isCoverClick }"
 export default {
   props: {
     task: {
@@ -52,15 +46,11 @@ export default {
       isCoverSelected: false,
       currCover: null,
       currCoverIdx: null,
-      // currCover: this.task.cover.bgColor,
     };
   },
   created() {
-    // console.log("task", this.task);
-    // console.log("covers", this.board);
     if(this.currCoverIdx) document.querySelector(".idx-" + this.currCoverIdx)
     .classList.add('cover-box')
-    else console.log('no');
     if(this.task.cover) this.currCover = this.task.cover.bgColor
   },
   computed: {},
@@ -76,7 +66,6 @@ export default {
       const elCurrCover = document.querySelector(".idx-" + idx);
       if (elCover && !elCurrCover.classList.contains("cover-box")) {
         elCover.classList.remove("cover-box");
-        // console.log('cover',cover);
       }
       if (elCurrCover.classList.contains("cover-box")){
       elCurrCover.classList.remove("cover-box");
@@ -87,24 +76,14 @@ export default {
           bgColor: cover,
           isFull: false,
         }
-        // console.log('this.task.cover',this.task.cover);
       }else{
         elCurrCover.classList.add("cover-box");
         this.task.cover.bgColor = cover
       } 
       this.$emit('saveTask')
-      // document.querySelector('.task-edit-bg-title').style.backgroundColor = cover
     },
    
     setStyle(cover,idx) {
-      // console.log(this.currCover,idx);
-      // const el = document.querySelector(".idx-" + (idx+1))
-      // var x = document.querySelector(".cover-color-btn");
-      // console.log('el',x);
-      // if(this.currCover && el) {
-      //  el.classList.add("cover-box")
-      // }
-  
       return "background-color: " + cover;
     },
   },

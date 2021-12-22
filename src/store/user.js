@@ -25,10 +25,8 @@ export default {
         },
         async login({state},{user}){
             try{
-                console.log('user',user);
                const currUser = await userService.login(user)
                state.currUser = currUser
-               console.log('state.currUser',state.currUser);
                return currUser
             } catch(err){
                 console.log('error while signing in');
@@ -37,7 +35,6 @@ export default {
         },
         async addUserBoard({state},{boardId}){
             try{
-                console.log('boardId',boardId);
                 if(boardId)state.currUser.boardsIds.push(boardId);
                 if(boardId)await userService.update(state.currUser)
             }catch(err){
@@ -46,12 +43,10 @@ export default {
             }
         },
         async logOut(){
-            console.log('logout');
             await userService.logout()
             userService.getLoggedinUser()
         },
          tryDemo({}){
-             console.log('demo');
              userService.tryDemo()
         }
 

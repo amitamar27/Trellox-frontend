@@ -168,11 +168,14 @@
     }
 }
 
-.task-label-container {
-    display: grid;
-    width: 100px;
-    gap: 3px;
+@media (max-width:500px){
+    .task-label-container {
+        display: grid;
+        width: 100px;
+        gap: 3px;
+    }
 }
+
 
 .controls-btns {
     display: flex;

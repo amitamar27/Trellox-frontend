@@ -42,7 +42,7 @@
                 :labelIds="task.labelIds"
                 :key="1"
               ></labels>
-              <task-dates :task="task" v-if="task.dueDate"> </task-dates>
+              <task-dates @saveTask="saveTask" :task="task" v-if="task.dueDate"> </task-dates>
             </section>
 
             <section class="task-description">
@@ -125,7 +125,6 @@ export default {
     };
   },
   created() {
-    console.log("created!", this.currTask);
   },
   computed: {
     task() {
@@ -134,7 +133,6 @@ export default {
       this.$store.commit({ type: "getTaskById", taskId, groupId });
       const task = this.$store.getters.currTask;
       this.currTask = task;
-      console.log("task", task);
       return task;
     },
     taskBgColor() {

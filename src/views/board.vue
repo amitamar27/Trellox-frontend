@@ -4,22 +4,14 @@
 
 
     
-    <group-list-new
+    <group-list
       @dragEnd="dragEnd"
-      @pickTask="pickTask"
+      
       @saveGroup="saveGroup"
       :board="board"
       v-if="board"
-    ></group-list-new>
-     <!-- <transition>
-      <aside-menu
-        v-if="isMenuShown"
-        :board="board"
-        :class="menuBarIsShown"
-        @openMenu="openMenu"
-        @updateBgcBoard="editBgcBoard"
-      ></aside-menu
-    ></transition> -->
+    ></group-list>
+   
     <router-view />
   </div>
 </template>
@@ -27,7 +19,6 @@
 <script>
 import asideMenu from '../components/aside-menu.vue'
 import groupList from "../components/group-list.vue";
-import groupListNew from "../components/group-list-new.vue";
 import taskEdit from "./task-edit.vue";
 import boardHeader from "../components/board-header.vue";
 import {
@@ -56,14 +47,11 @@ export default {
           });
           this.currBoard = currBoard;
           this.$emit("setBg", this.currBoard.style.bgImg || this.currBoard.style.bgColor);
-          console.log("this.boardId !!!!", boardId);
           // socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId);
           socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId);
         } catch (err) {
           console.log("ERROR: cannot get board", err);
         }
-
-        // console.log('boardId',boardId);
       },
       immediate: true,
       deep: true,
@@ -75,9 +63,7 @@ export default {
  
   computed: {
     board() {
-      const b = this.$store.getters.board;
-      console.log("board.vue", b);
-      return b;
+      return this.$store.getters.board;
     },
     getStyle() {
       if (this.board.style.backgroundSrc) {
@@ -102,11 +88,7 @@ export default {
 				"smooth-dnd-disable-touch-action"
 			)
 		},
-    pickTask() {
-      // console.log(this.board);
-    },
     openMenu() {
-      console.log('here');
       this.isMenuShown = !this.isMenuShown;
     },
     setGroups(){
@@ -131,11 +113,6 @@ export default {
       socketService.on("user-watch-task", ({ taskId, taskTitle, userId }) => {
         this.$store.commit({ type: "setNoti", mode: true });
         if (userId !== this.$store.getters.loggedinUser?._id) return;
-        this.$store.commit({ type: "setMsgTime", time: 4500 });
-        this.$store.commit({
-          type: "setMsgTxt",
-          txt: `You have been tagged in ${taskTitle}!`,
-        });
         this.$store.dispatch({ type: "activeMsg" });
       });
     },
@@ -168,12 +145,10 @@ export default {
           type: "getBoardById",
           boardId,
         });
-        // console.log('board by id',board);
         await socketService.on(SOCKET_ON_BOARD_UPDATE, (board) => {
           console.log("socket board", board);
         });
         this.currBoard = board;
-        // console.log('this.currBoard',this.currBoard);
         this.$emit("setBg", this.currBoard.style.bgImg);
         return board;
       } catch (err) {
@@ -184,34 +159,14 @@ export default {
   },
 
   components: {
-    groupList,
     taskEdit,
     boardHeader,
-    groupListNew,
+    groupList,
     asideMenu
   },
 };
 </script>
 
 <style>
-/* .scroller::-webkit-scrollbar {
-  height: 15px;
-  width: 12px;
-}
 
-.scroller::-webkit-scrollbar-track {
-  
-  background: rgba(9, 30, 66, 0.08);
-  border-radius: 20px;
-}
-
-.scroller::-webkit-scrollbar-button {
-  height: 4px;
-  width: 4px;
-}
-
-.scroller::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.425);
-  border-radius: 20px;
-} */
 </style>

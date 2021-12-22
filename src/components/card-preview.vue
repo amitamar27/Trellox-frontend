@@ -43,7 +43,7 @@
             <div class="tasks">
               <!-- due-date -->
               <section
-                v-if="task.dueDate"
+                v-if="task.dueDate && task.dueDate.time"
                 class="due-later-badge"
                 :class="dueDateClass"
                 @click.stop.prevent="toggleIsDone"
@@ -53,14 +53,14 @@
                   alt="Due Date"
                   title="This card is due later"
                 />
-                <!-- <i class="icon-clock"> </i> -->
-
-                <template v-if="task.dueDate.length < 2">{{
-                  task.dueDate[0] | moment("MMM D")
+        
+                  
+                <template>{{
+                  task.dueDate | moment("MMM D")
                 }}</template>
-                <template v-else>{{
-                  task.dueDate[1] | moment("MMM D")
-                }}</template>
+             
+                
+              
               </section>
 
               <!-- comment -->
@@ -146,13 +146,13 @@ export default {
     };
   },
   computed: {
+  
     getLabels() {
       const labels = [];
       if (!this.task.labelIds) return;
       this.boardLabels.forEach((label) => {
         if (this.task.labelIds.includes(label.id)) labels.push(label);
       });
-      // console.log("korenn", labels);
       return labels;
     },
     labelClick() {
@@ -167,11 +167,7 @@ export default {
         el.classList.remove("shrinkLabel");
         el.classList.add("increaseLabel");
       });
-      // els.forEach((el) => {
-      //   el.classLists.remove
-      // })
-      // if(!this.changeLabelSize) return 'shrinkLabel'
-      // return 'increaseLabel'
+ 
     },
     todosCounters() {
       const counters = { todosCounter: 0, isDoneCounter: 0 }
@@ -188,8 +184,10 @@ export default {
       return this.task.checklists?.todos
     },
     calculateTime() {
+      if(!this.task.dueDate || !this.task.dueDate.time) return
       const currTime = +Date.now()
-      const targetTime = this.task.dueDate?.[this.task.dueDate?.length - 1]
+      // const targetTime = this.task.dueDate?.[this.task.dueDate?.length - 1]
+      const targetTime = this.task.dueDate.time
       const targetTimeStemp = +new Date(targetTime).getTime()
 
       const day = 1000 * 60 * 60 * 24
@@ -218,8 +216,7 @@ export default {
 				const style = `background-color:${cover.bgColor}`
 				return style
 			} else if (cover.bgUrl) {
-				// const style = `background-image: url('${cover.bgUrl}';  background-size:cover;)`
-				const style = `background-image: url('${cover.bgUrl}');  background-size:cover; background-position:center; height: 256px;border-radius: 3px 3px 0px 0px;`
+				const style = `background-image: url('${cover.bgUrl}');  background-size:cover; background-position:center; height: 256px;border-radius: 3px 3px 0px 0px; width: 100%;`
 				return style
 			}
 		},
@@ -240,10 +237,9 @@ export default {
 		},
   },
   methods: {
+    
     cardClick(groupId, taskId) {
-      // console.log("card is clicked");
       const { boardId } = this.$route.params;
-      // console.log('boardId',boardId);
       this.$store.commit({ type: "setDarkScreen" });
       this.$router
         .push(boardId + "/taskEdit/" + groupId + "/" + taskId)
@@ -253,26 +249,21 @@ export default {
     },
 
     toggleSize() {
-      // alert('d')
       this.changeLabelSize = !this.changeLabelSize;
     },
     toggleIsDone() {
       this.task.isDueDateDone = !this.task.isDueDateDone
+      this.task.dueDate.isDone = this.task.isDueDateDone
       this.$store.commit({ type: 'getGroupIdByTaskId', taskId: this.task.id })
       const groupId = this.$store.getters.groupIdByTaskId
 
       this.$store.dispatch({ type: 'saveTask', groupId, taskToSave: this.task })
     },
-    // moment: function () {
-    //   return moment();
-    // }
+ 
   },
   created() {
     const { boardId } = this.$route.params;
     this.boardId = boardId;
-    // console.log("labels task", this.taskLabels);
-    // console.log("labels", this.task);
-    // this.getLabels();
   },
 
 

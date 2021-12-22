@@ -9,9 +9,7 @@ export const boardService = {
 }
 async function query(filterBy = {}) {
 	try {
-		// return await storageService.query(KEY)
 		const res = await httpService.get('board', { params: filterBy });
-        console.log('res',res.data);
 		return res;
 	} catch (err) {
 		console.log(err);

@@ -32,8 +32,6 @@ export default {
   name: 'Home',
   created() {
     this.$store.dispatch({ type: 'loadBoards' })
-    // var boards = this.$store.dispatch({ type: 'loadBoards' })
-    // console.log(boards);
   },
   computed: {
 

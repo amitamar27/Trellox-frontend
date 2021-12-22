@@ -15,8 +15,7 @@
         --animate-duration: 1s;
         --animate-delay: 1s;
         --animate-repeat: 1;
-        max-height: 100%;
-        max-height: 68vh
+        max-height: 75vh;
     }
 
      .cards-container {
@@ -26,7 +25,7 @@
         scroll-behavior: smooth;
         padding: 0px 4px;
         flex: 1;
-height: fit-content;
+        height: fit-content;
         &::-webkit-scrollbar {
             height: 8px;
             width: 8px;
@@ -405,7 +404,7 @@ height: fit-content;
         box-shadow: 0 1px 0 #091e4240;
         resize: none;
         max-height: 50px;
-
+        margin: 0 8.5px 0 2.9px;
 
     }
 
@@ -518,10 +517,8 @@ height: fit-content;
     margin-left: 6.8px;
     > .outter {
         display: flex;
-        // gap: 7px;
         gap: 3px;
-        margin-left: 5px;
-        // height: 100%;
+        margin-left: 6px;
     }
 
 }

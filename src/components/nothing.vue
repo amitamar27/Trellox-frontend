@@ -72,14 +72,10 @@ methods:{
     
   },
   pickTask(ev){
-    // this.$emit('pickTask')
-    // console.log(ev);
+
   },
   
   openCardDetails(groupId,taskId){
-			// const { boardId } = this.$route.params
-      // console.log();
-			// this.$store.commit({ type: "openBlack" })
 			this.$router
 				.push("/details/" + groupId + "/" + taskId)
 				.catch((err) => { console.log('error');})

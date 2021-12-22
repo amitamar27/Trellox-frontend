@@ -91,27 +91,18 @@ export default {
     saveToCloud() {
       this.loading = true;
       const formData = new FormData();
-      // const formData = new File();
-      console.log("attach");
       formData.append("file", event.target.files[0]);
       formData.append("upload_preset", "lmfle9ek");
-      console.log("formData", formData);
-
-      // this.saveAttachments(res.data.secure_url);
       axios
         .post(this.clURL, formData)
         .then((res) => {
-          console.log(res, "res");
           this.saveAttachments(res.data.secure_url);
         })
         .catch(() => {
           this.loading = false;
-          console.log("sss");
         });
     },
     saveAttachments(imgLink = null) {
-      // console.log('imgLink',imgLink);
-      // return
       if (imgLink === "") return;
       if (imgLink) {
         const attachment = {
@@ -121,7 +112,6 @@ export default {
           fileUrl: imgLink,
         };
         this.attachments.push(attachment);
-        console.log("Attachments", this.attachments);
         this.loading = false;
       }
       const { taskId, groupId } = this.$route.params;

@@ -121,7 +121,6 @@ export default {
       ],
       imgUrl: null,
       colorSelected: null,
-      // boards:
     };
   },
   created() {
@@ -173,14 +172,11 @@ export default {
     },
     getBackground(board) {
       if (board.style.bgImg) {
-        // const url = board.style.bgImg;
         return { "background-image": `${board.style.bgImg}` };
       } 
-       // const backgroundColor = board.style.bgColor;
         return { backgroundColor: `${board.style.bgColor}` };
     },
     removeBoard(boardId){
-      // console.log('boardId',boardId);
       this.$store.dispatch({type: 'removeBoard', boardId})
     },
   },
@@ -188,29 +184,7 @@ export default {
 </script>
 
 <style lang="scss">
-// .icon-md{
 
-//       position: absolute;
-//     top: 10px;
-//     /* left: 0px; */
-//     right: 5px;
-//   background-color: #00000014;
-//     cursor: pointer;
-//     border-radius: 50%;
-//     color: #42526e;
-//     height: 32px;
-//     margin: 4px;
-//     overflow: hidden;
-//     padding: 4px;
-//     // position: absolute;
-//     // right: 0;
-//     // top: 0;
-//     transition: background-color 85ms, color 85ms;
-//     width: 32px;
-//     z-index: 2;
-//     font-size: 20px;
-//     // line-height: 32px;
-// }
 .icon-close{
   color: white;
 }

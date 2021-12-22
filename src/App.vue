@@ -33,7 +33,6 @@ export default {
   },
   async created(){
     try{
-      console.log('app created');
       await this.$store.dispatch({ type: "loadBoards" });
     }catch (err){
        console.log("ERROR cannot load users or boards");
@@ -42,7 +41,6 @@ export default {
   },
   computed: {
     background() {
-      console.log('this.$route.name',this.$route.name);
       if (this.$route.name === 'Home' || this.$route.name === 'Boards') {
         this.isSigning = false
         return {

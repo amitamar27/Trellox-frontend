@@ -60,10 +60,8 @@ export default {
   computed:{
     setAvatar(){
       const user =  this.$store.getters.currUser
-      console.log('user-',user);
       if(user.fullname) return user.fullname
       return 'Guest'
-      // backgroundColor="lightblue"
     },
   
   },
@@ -74,7 +72,6 @@ export default {
       this.$router.push(`board/${id}`);
     },
     async logOut(){
-      console.log('logo llogut');
       this.$store.dispatch({type: 'logOut'})
       this.$router.push(`/`);
     },
