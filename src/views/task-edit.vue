@@ -1,7 +1,7 @@
 <template>
   <main class="card-edit-window" ref="task" @click="closeDarkScreen">
     <div v-if="task" class="card-edit" @click.stop="">
-      <header v-if="task.cover" :style="taskBgColor" class="task-edit-bg-title">
+      <header v-if="task.cover && (task.cover.bgColor || task.cover.bgUrl)" :style="taskBgColor" class="task-edit-bg-title">
         <a class="icon-md" @click="closeDarkScreen"></a>
         <div class="task-edit-bg-btn">
           <a class="cover-btn" @click="openCoverMenu">

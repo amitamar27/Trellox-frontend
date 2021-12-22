@@ -113,6 +113,7 @@ function setTask(title) {
         isDueDateDone: false,
         labelIds: [],
         members:[],
+        attachments: [],
         style:{}
     }
 }

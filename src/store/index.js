@@ -146,7 +146,9 @@ export default new Vuex.Store({
         const group = state.board.groups.find(g => g.id === groupId)
         const task = group.tasks.find(t => t.id === taskId)
         if (!task.attachments) Vue.set(task, 'attachments', [])
-        task.attachments = task.attachments.concat(attachments)
+        // task.attachments = task.attachments.concat(attachments)
+        task.attachments = attachments
+         console.log(' task.attachments', task.attachments);
         state.currTask = JSON.parse(JSON.stringify(task))
     },
     addBoard(state , {board}){

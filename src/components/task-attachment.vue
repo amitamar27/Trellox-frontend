@@ -58,16 +58,21 @@ export default {
     makeCover(fileUrl) {
       if (!this.task) return
       const { groupId } = this.$route.params
-      const taskToSave = this.task
-      taskToSave.cover ??= {}
-      taskToSave.cover.bgUrl = fileUrl
-      taskToSave.cover.bgColor = ''
-      this.$store.commit({ type: 'saveTask', groupId, taskToSave })
+      // const taskToSave = this.task
+      this.task.cover ??= {}
+      console.log(' this.task', this.task);
+      this.task.cover.bgUrl = fileUrl
+      this.task.cover.bgColor = ''
+      console.log(' this.task', this.task);
+      this.$emit('saveTask')
+      // this.$store.dispatch({ type: 'saveTask', groupId, taskToSave:this.task })
     //   this.$store.dispatch({ type: 'saveBoard' })
     },
     	removeFile(file) {
 			const idx = this.task.attachments.findIndex(f => f.id === file.id)
 			this.task.attachments.splice(idx, 1)
+      this.task.cover.bgUrl = ''
+      // if(this.task.cover.bgUrl) 
       this.$emit('saveTask')
 			// const { taskId, groupId } = this.$route.params
 			// this.$store.commit({ type: "removeFile", groupId, taskId, fileId: file.id })
