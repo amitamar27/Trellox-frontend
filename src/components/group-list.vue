@@ -1,4 +1,5 @@
 <template>
+
   <div v-if="board" class="group-list-container">
    
       <Container
@@ -17,14 +18,18 @@
         @drag-start="calcPlaceholder"
         @drag-end="dragging = false"
       >
-
+<!-- style="display: flex" -->
        <template>
+          <!-- <Skeleton style="display: flex"> -->
+        <!-- <Skeleton > -->
         <Draggable
          v-for="group in board.groups"
          :key="group.id"
          class="group-list outter"
         >
+        <!-- <vcl-facebook></vcl-facebook> -->
         <div
+        
           class="group-preview"
           :data-group="group.id"
         >
@@ -69,7 +74,7 @@
               </div>
             </div>
           </div>
-      <template>
+      <template  >
       
           <card-list
             @dragEnd="dragEnd"
@@ -112,13 +117,16 @@
             </button>
           </div>
         </div>
-
+<!-- </Skeleton> -->
+        <!-- <Skeleton v-else /> -->
         </Draggable>
+          <!-- </Skeleton> -->
         
       </template>
 
       </Container>
-  
+
+    
       <!-- <div class="group-list">
     
     </div> -->
@@ -151,6 +159,7 @@
         </form>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -162,6 +171,7 @@ import groupMenu from "./menus-cmps/group-menu.vue";
 import taskEdit from "../views/task-edit.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag } from "../services/applyDrag.js";
+// import {Skeleton}  from 'vue-loading-skeleton';
 export default {
   components: {
     groupPreview,
@@ -224,9 +234,19 @@ export default {
 		},
      getStyle(){
       return 'display: flex'
-    }
+    },
+     timeset(){
+       setTimeout(function(){
+        return true
+        } , 10000)
+    },
   },
   methods: {
+    // timeset(){
+    //   setTimeout(function(){
+    //     return true
+    //     } , 10000)
+    // },
     getChildPayload(index) {
 			return this.group.tasks[index]
 		},

@@ -16,6 +16,10 @@
         --animate-delay: 1s;
         --animate-repeat: 1;
         max-height: 75vh;
+
+        @media (max-width:510px){
+            max-height: 68vh;
+        }
     }
 
      .cards-container {

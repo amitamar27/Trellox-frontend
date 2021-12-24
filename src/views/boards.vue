@@ -14,8 +14,8 @@
               @click.stop="setBoard(board._id)"
             >
             <!-- <a class="icon-md icon-close"></a> -->
-              <div class="board-title-container">
-                <a class="icon-md icon-close" @click.stop="removeBoard(board._id)"></a> 
+              <div  class="board-title-container">
+                <a v-if="!currUser.email === 'guest@gmail.com' " class="icon-md icon-close" @click.stop="removeBoard(board._id)"></a> 
                 <p>{{ board.title }}</p>
                 
                 </div>
@@ -132,6 +132,9 @@ export default {
       if(this.$store.getters.boards){
         return this.$store.getters.boards
       }
+    },
+    currUser(){
+      return this.$store.getters.currUser
     },
     backgroundObject() {
       if (!this.imgUrl) {

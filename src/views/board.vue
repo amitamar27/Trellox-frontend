@@ -24,7 +24,7 @@ import boardHeader from "../components/board-header.vue";
 import {
   socketService,
   SOCKET_EMIT_BOARD_WATCH,
-  SOCKET_EVENT_BOARD_UPDATED,
+  // SOCKET_EVENT_BOARD_UPDATED,
   SOCKET_ON_BOARD_UPDATE,
   SOCKET_EMIT_BOARD_UPDATE,
 } from "../services/socket.service.js";
