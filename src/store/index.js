@@ -97,6 +97,9 @@ export default new Vuex.Store({
     toggleBoardIsFavorite(state, { isFav }) {
       state.board.isFavorite = isFav
     },
+    setBoardStyle(state, { boardStyle }) {
+      state.board.style = boardStyle
+    },
     // updateBoard(state, payload) {
     //   const idx = state.boards.findIndex(board => board.id === payload.board.id)
     //   state.boards.splice(idx, 1, payload.board)

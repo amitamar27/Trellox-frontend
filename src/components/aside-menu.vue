@@ -81,7 +81,6 @@ export default {
     }
   },
   created() {
-    // alert('f')
     this.boardId = this.$route.params.boardId;
 
   },
@@ -94,14 +93,20 @@ export default {
       this.openColorMenu = false;
       this.openImgMenu = false;
       this.bgcType = false;
-      console.log('this.bgcIsClick',this.bgcIsClick);
       this.bgcIsClick = !this.bgcIsClick;
     },
     changeImgUrl(url) {
       // url = 'https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639080486/Trellox/code-2560x1080_z9fqnz.jpg'
       this.bgcType = true;
       this.boardStyle.bgImg = `url(${url})`;
-      this.boardStyle.bgColor = 'none';
+      this.boardStyle.bgColor = '';
+      this.$emit('updateBgcBoard', this.boardStyle);
+    },
+     chosenBg(color) {
+      // url = 'https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639080486/Trellox/code-2560x1080_z9fqnz.jpg'
+      this.bgcType = true;
+      this.boardStyle.bgImg = '';
+      this.boardStyle.bgColor = color;
       this.$emit('updateBgcBoard', this.boardStyle);
     },
   },

@@ -266,6 +266,8 @@ export default {
 
 				const placeholder = document.querySelector('.outter > .smooth-dnd-drop-preview-constant-class')
 				if (!placeholder) return
+        // placeholder.style.margin = '0 0 5px 5px'
+        //  placeholder.style.width = 272 + 'px'
 				placeholder.style.height = item.offsetHeight + 'px'
 			}, 5)
 		},

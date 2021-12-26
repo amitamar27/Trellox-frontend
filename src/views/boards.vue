@@ -15,7 +15,7 @@
             >
             <!-- <a class="icon-md icon-close"></a> -->
               <div  class="board-title-container">
-                <a v-if="!currUser.email === 'guest@gmail.com' " class="icon-md icon-close" @click.stop="removeBoard(board._id)"></a> 
+                <a v-if="currUser.email !== 'guest@gmail.com' " class="icon-md icon-close" @click.stop="removeBoard(board._id)"></a> 
                 <p>{{ board.title }}</p>
                 
                 </div>

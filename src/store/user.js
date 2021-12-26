@@ -42,9 +42,9 @@ export default {
                 throw err
             }
         },
-        async logOut(){
+        async logOut({state}){
             await userService.logout()
-            userService.getLoggedinUser()
+            state.currUser = userService.getLoggedinUser()
         },
          tryDemo({}){
              userService.tryDemo()

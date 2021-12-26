@@ -26,7 +26,6 @@ function createSocketService() {
     const socketService = {
         async setup() {
             socket = io(baseUrl)
-            console.log('socket',socket);
             socketIsReady = true
         },
         async on(eventName, cb) {
@@ -42,7 +41,6 @@ function createSocketService() {
         },
         async emit(eventName, data) {
             // console.log('data',data);
-            console.log('eventName',eventName);
             if (!data) return
             if (!socket) await socketService.setup()
             socket.emit(eventName, data)

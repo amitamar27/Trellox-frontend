@@ -46,7 +46,7 @@ export default {
             boardId,
           });
           this.currBoard = currBoard;
-          this.$emit("setBg", this.currBoard.style.bgImg || this.currBoard.style.bgColor);
+          this.$emit("setBg", this.currBoard.style);
           // socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId);
           socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId);
         } catch (err) {
@@ -126,13 +126,14 @@ export default {
       this.$store.dispatch({ type: "saveGroup" ,group,idx});
     },
     async editBgcBoard(style) {
+      console.log(style);
       try {
         await this.$store.dispatch({
           type: "updateBoardBgc",
           boardId: this.boardId,
           style: style,
         });
-        this.$emit("setBg", style.bgImg);
+        this.$emit("setBg", style);
       } catch (err) {
         console.log("Error in updateBoard (board-header):", err);
         throw err;
