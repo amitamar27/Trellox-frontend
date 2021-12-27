@@ -21,10 +21,7 @@ const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 async function query() {
     try {
         const res = await httpService.get('board');
-        // const b = asyncgStorageService.queryBoards('boards',res._id)
-        
-        // console.log('b',b);
-        // if(b && b.length) return b
+       
         const user = getLoggedinUser()
 
         if (!user || user.fullname === 'Guest') return mainBoards(res)
