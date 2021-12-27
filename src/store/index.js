@@ -238,6 +238,7 @@ export default new Vuex.Store({
     },
     async createNewBoard({commit, dispatch}, {boardDetails}){
       try{
+        // console.log(boardService.addNewBoard(boardDetails));
         const board = await boardService.addNewBoard(boardDetails)
         commit({ type: "addBoard", board });
         commit({ type: "setBoard", board });

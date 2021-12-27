@@ -60,10 +60,12 @@ async function saveBoard(board) {
     try {
         // if((!user || !user.isAdmin) && board._id) return asyncgStorageService.postBoard('boards',board)
         // if((!user || !user.isAdmin) && board._id) return 
-        if(board._id === '61b5232979d1b61989d421d9' || board.createdBy._id === 'IbVtx') return
-        return httpService.put('board', {
-            board
-        })
+        if(!board._id === '61b5232979d1b61989d421d9' && board.createdBy._id !== 'IbVtx'){
+            return httpService.put('board', {
+                board
+            })
+        }
+        return
     } catch (err) {
         console.dir(err)
     }
@@ -124,14 +126,14 @@ function _createBoard(title, groups = [], style = {
     bgImg: ''
 }) {
     const user = getLoggedinUser()
+    // console.log('user',user);
     return {
         title,
         createdAt: Date.now(),
         createdBy: {
-            _id: user._id || 'guest',
-            fullname: user.fullname || 'Koren Levi',
+            _id: (user)? user._id : 'guest',
+            fullname: (user)? user.fullname : 'guest',
             imgUrl: 'https://res.cloudinary.com/dnmyqfcjm/image/upload/v1638889545/Trellox/korenlevi.jpg',
-
         },
         style,
         labels: [{
@@ -184,11 +186,10 @@ function _createBoard(title, groups = [], style = {
 }
 
 async function addNewBoard(boardDetails) {
+    // console.log('boardDetails',boardDetails);
     const board = _createBoard(boardDetails.title, [], boardDetails.style)
     try {
-        return httpService.post('board', {
-            board
-        })
+        return httpService.post('board', {board})
     } catch (err) {
         console.log(err);
     }

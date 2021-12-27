@@ -89,7 +89,10 @@ export default {
     },
     signUp() {
       if (!this.email || !this.password || !this.fullName) return;
-      // if(!this.isValidEmailAddress(this.email)) return
+      if(!this.isValidEmailAddress(this.email)) {
+        this.isInvaild = true; 
+        return
+      }
       const newUser = {
         fullname: this.fullName,
         email: this.email,

@@ -21,7 +21,7 @@
 
         <button @click="toggleFav" class="fav">
   
-          <i v-if="board.isFavorite" class="icon-star" > </i>
+          <i v-if="!board.isFavorite" class="icon-star" > </i>
           <i v-else class="icon-starred" style="color: gold"> </i>
         </button>
 
