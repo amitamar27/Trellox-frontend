@@ -12,12 +12,32 @@ export const asyncgStorageService = {
     getAndSaveBoard,
     postBoard,
     getGroupById,
-    removeGroup
+    removeGroup,
+    queryBoards
     
 }
+import { storageService } from "./storage-service"
+const BOARD_KEY = 'boards';
+function postBoard(key,board){
+    return query(key)
+    .then(boards=>{
+        console.log('boards',boards);
+        boards.push(board)
+        _save(key,boards)
+        return board
 
+    })
+}
+function queryBoards(entityType, delay=0) {
+    var entities = JSON.parse(localStorage.getItem(entityType)) || []
+    console.log('entities',entities);
+    if(entities) return entities
+    return null
+   
+}
 function query(entityType, delay=0) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
+    console.log('entities',entities);
     return new Promise((resolve)=>{
         setTimeout(()=>{
             resolve(entities)
@@ -25,9 +45,11 @@ function query(entityType, delay=0) {
     })
 }
 function getAndSaveBoard(key,currBoard){
-    console.log(currBoard._id);
+    console.log(currBoard);
+    // _save(key,currBoard)
     return query(key)
     .then((boards)=>{
+        console.log('boards',boards);
         const idx =boards.findIndex((board)=> board._id === currBoard._id)
         if (idx < 0) throw new Error(`Unknown Entity ${idx}`)
         console.log('currBoard',currBoard);
@@ -142,18 +164,7 @@ function removeTaskByCardId(entityType, details) {
         
         })
 }
-function postBoard(key,board){
-    return query(key)
-    .then(boards=>{
-        boards.push(board)
-        _save(key,boards)
-        return board
 
-    })
-    
-    
-
-}
 
 
 function _save(entityType, entities) {

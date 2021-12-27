@@ -15,12 +15,18 @@ import {
 import {
     userService
 } from './user-service.js'
+import { asyncgStorageService } from "./async-storage.service"
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
 async function query() {
     try {
         const res = await httpService.get('board');
+        // const b = asyncgStorageService.queryBoards('boards',res._id)
+        
+        // console.log('b',b);
+        // if(b && b.length) return b
         const user = getLoggedinUser()
+
         if (!user || user.fullname === 'Guest') return mainBoards(res)
         if (!user.boardsIds.length) return []
         const boards = []
@@ -48,9 +54,13 @@ function mainBoards(boards) {
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || 'null')
 }
-
+// 61b5232979d1b61989d421d9
 async function saveBoard(board) {
+    // const user = getLoggedinUser()
     try {
+        // if((!user || !user.isAdmin) && board._id) return asyncgStorageService.postBoard('boards',board)
+        // if((!user || !user.isAdmin) && board._id) return 
+        if(board._id === '61b5232979d1b61989d421d9' || board.createdBy._id === 'IbVtx') return
         return httpService.put('board', {
             board
         })
