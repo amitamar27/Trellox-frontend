@@ -31,11 +31,9 @@
 export default {
   name: 'Home',
   created() {
-    this.$store.dispatch({ type: 'loadBoards' })
+    // this.$store.dispatch({ type: 'loadBoards' })
   },
-  computed: {
-
-  },
+  
 }
 </script>
 

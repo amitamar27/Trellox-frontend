@@ -1,23 +1,29 @@
 <template >
-  <div v-if="board" class="board-container" @touchend="fixActionRestriction">
-    <board-header :board="board" @editBgcBoard="editBgcBoard" @saveBoard="saveBoard" />
+  <div style="height: 100%">
+    <div v-if="board" class="board-container" @touchend="fixActionRestriction">
+      <board-header
+        :board="board"
+        @editBgcBoard="editBgcBoard"
+        @saveBoard="saveBoard"
+      />
 
+      <group-list
+        @dragEnd="dragEnd"
+        @saveGroup="saveGroup"
+        :board="board"
+        v-if="board"
+      ></group-list>
 
-    
-    <group-list
-      @dragEnd="dragEnd"
-      
-      @saveGroup="saveGroup"
-      :board="board"
-      v-if="board"
-    ></group-list>
-   
-    <router-view />
+      <router-view />
+    </div>
+    <div v-else class="loader-container">
+      <div class="loader"></div>
+    </div>
   </div>
 </template>
 
 <script>
-import asideMenu from '../components/aside-menu.vue'
+import asideMenu from "../components/aside-menu.vue";
 import groupList from "../components/group-list.vue";
 import taskEdit from "./task-edit.vue";
 import boardHeader from "../components/board-header.vue";
@@ -33,7 +39,7 @@ export default {
     return {
       boardId: "",
       currBoard: null,
-      isMenuShown:false,
+      isMenuShown: false,
     };
   },
   watch: {
@@ -60,7 +66,7 @@ export default {
   created() {
     this.boardId = this.$route.params.boardId;
   },
- 
+
   computed: {
     board() {
       return this.$store.getters.board;
@@ -74,25 +80,25 @@ export default {
         return { backgroundColor: `${backgroundColor}` };
       }
     },
-     menuBarIsShown() {
+    menuBarIsShown() {
       return {
-        'aside-menu-open': this.isMenuShown,
-        'aside-close': !this.isMenuShown,
+        "aside-menu-open": this.isMenuShown,
+        "aside-close": !this.isMenuShown,
       };
-     },
+    },
   },
   methods: {
     fixActionRestriction() {
-			document.body.classList.remove(
-				"smooth-dnd-no-user-select",
-				"smooth-dnd-disable-touch-action"
-			)
-		},
+      document.body.classList.remove(
+        "smooth-dnd-no-user-select",
+        "smooth-dnd-disable-touch-action"
+      );
+    },
     openMenu() {
       this.isMenuShown = !this.isMenuShown;
     },
-    setGroups(){
-      this.$store.commit({ type: "setGroups", groups: newItems })
+    setGroups() {
+      this.$store.commit({ type: "setGroups", groups: newItems });
     },
     async setup() {
       const { boardId } = this.$route.params;
@@ -122,8 +128,8 @@ export default {
     saveBoard() {
       this.$store.dispatch({ type: "saveBoard" });
     },
-    saveGroup(group,idx){
-      this.$store.dispatch({ type: "saveGroup" ,group,idx});
+    saveGroup(group, idx) {
+      this.$store.dispatch({ type: "saveGroup", group, idx });
     },
     async editBgcBoard(style) {
       console.log(style);
@@ -163,11 +169,10 @@ export default {
     taskEdit,
     boardHeader,
     groupList,
-    asideMenu
+    asideMenu,
   },
 };
 </script>
 
 <style>
-
 </style>
