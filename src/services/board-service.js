@@ -6,7 +6,8 @@ export const boardService = {
     getBoardById,
     addNewBoard,
     updateBgcBoard,
-    removeBoard
+    removeBoard,
+    getLocalBoard
 }
 
 import {
@@ -21,9 +22,7 @@ const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 async function query() {
     try {
         const res = await httpService.get('board');
-       
         const user = getLoggedinUser()
-
         if (!user || user.fullname === 'Guest') return mainBoards(res)
         if (!user.boardsIds.length) return []
         const boards = []
@@ -51,7 +50,6 @@ function mainBoards(boards) {
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || 'null')
 }
-// 61b5232979d1b61989d421d9
 async function saveBoard(board) {
     // const user = getLoggedinUser()
     try {
@@ -62,7 +60,9 @@ async function saveBoard(board) {
                 board
             })
         }
-        return
+        // return asyncgStorageService.put('board',board)
+        localStorage.setItem('currBoard', JSON.stringify(board))
+        return board
     } catch (err) {
         console.dir(err)
     }
@@ -205,6 +205,12 @@ async function updateBgcBoard(boardId, style) {
     }
 }
 
+
+function getLocalBoard(){
+    return JSON.parse(localStorage.getItem('currBoard'))
+    // return asyncgStorageService.query('currBoard')
+    // .then(res => res.data)
+}
 
 
 // utils

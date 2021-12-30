@@ -67,6 +67,12 @@ export default new Vuex.Store({
       })
       state.board = board;
     },
+    setLocalBoard(state,  {localBoard} ) {
+      socketService.on(SOCKET_ON_BOARD_UPDATE, localBoard => {
+        state.board = localBoard
+      })
+      state.board = localBoard;
+    },
     updateGroup(state, { updatedGroup }) {
       var index = state.board.groups.findIndex((group) => group.id === updatedGroup.id);
       state.board.groups.splice(index, 1, updatedGroup);
@@ -169,7 +175,17 @@ export default new Vuex.Store({
     },
     async loadBoard({ commit } , {boardId}) {
       try {
-        var board = await boardService.getBoardById(boardId)
+        const user = this.getters.currUser
+        var localBoard = boardService.getLocalBoard()
+        if(user.fullname === "Guest" && localBoard){
+          commit({type: "setLocalBoard",localBoard});
+          return localBoard
+          // var board  = boardService.getLocalBoard()
+          // console.log(board);
+        } else{
+          var board = await boardService.getBoardById(boardId)
+        }
+        // console.log(board);
         commit({type: "setBoard",board});
         return board
       } catch (err) {

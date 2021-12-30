@@ -178,7 +178,7 @@ export default {
       });
       return newLabels;
     },
-    addLabel(labelId) {
+    addLabel() {
       const { groupId } = this.$route.params;
       this.$store.dispatch({
         type: "saveTask",
@@ -199,6 +199,7 @@ export default {
     },
     closeCover() {
       this.isCoverClick = false;
+      this.saveTask()
     },
     removeTask() {
       const { groupId } = this.$route.params;

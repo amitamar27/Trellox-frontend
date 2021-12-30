@@ -168,7 +168,6 @@ function removeTaskByCardId(entityType, details) {
 
 
 function _save(entityType, entities) {
-    
     localStorage.setItem(entityType, JSON.stringify(entities))
 }
 
