@@ -321,6 +321,15 @@ export default new Vuex.Store({
         throw err
       }
     },
+    async demoBoard({state,commit}){
+      try {
+        const demoBoard = [require('../demo/demoData.json')]
+        this.state.boards = demoBoard
+      }catch(err){
+        console.log('err',err)
+        throw err;
+      }
+    },
     async removeBoard({commit},{boardId}){
       commit('removeBoard',{boardId});
       if(userStore.state.currUser._id !== "guest") await boardService.removeBoard(boardId);

@@ -5,7 +5,6 @@
         <div class="boards-header">
           <h1>Boards</h1>
         </div>
-
         <div class="boards-container">
           <div
             v-for="board in boards"
@@ -77,6 +76,7 @@
 </template>
 
 <script>
+// import {demoData} from '../demo/demoData.json'
 export default {
   data() {
     return {
@@ -128,9 +128,16 @@ export default {
   },
   computed: {
     boards() {
-      if (this.$store.getters.boards) {
+      // var demoData = require('../demo/demoData.json')
+      // // console.log(demoData);
+      // if (!this.$store.getters.boards && demoData) {
+      //   console.log(demoData);
+      //   var boards = []
+      //   // const demoBoard = JSON.parse(demoData)
+      //   boards.push(demoData)
+      //   return boards
+      // }
         return this.$store.getters.boards;
-      }
     },
     currUser() {
       return this.$store.getters.currUser;
@@ -148,7 +155,6 @@ export default {
       if (this.newBoardTitle === "") return;
       this.isModalOpen = false;
       let style = null;
-
       if (!this.imgUrl) {
         style = { bgColor: `${this.colorSelected}`, bgImg: "" };
       } else {

@@ -16,6 +16,7 @@ import appHeader from "./components/app-header.vue";
 import sideNav from "./components/side-navbar.vue";
 import darkScreen from "./components/dark-screen.vue";
 import { socketService } from "./services/socket.service.js";
+import {boardService} from './services/board-service'
 import login from "./views/Login.vue";
 export default {
   components: {
@@ -35,7 +36,9 @@ export default {
   },
   async created() {
     try {
-      await this.$store.dispatch({ type: "loadBoards" });
+      const user = boardService.getLoggedinUser()
+      if (!user || user.fullname === 'Guest') await this.$store.dispatch({type:'demoBoard'})
+      else await this.$store.dispatch({ type: "loadBoards" });
     } catch (err) {
       console.log("ERROR cannot load users or boards");
     }

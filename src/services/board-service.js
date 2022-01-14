@@ -7,7 +7,8 @@ export const boardService = {
     addNewBoard,
     updateBgcBoard,
     removeBoard,
-    getLocalBoard
+    getLocalBoard,
+    getLoggedinUser
 }
 
 import {
