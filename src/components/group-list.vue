@@ -1,77 +1,96 @@
 <template>
+
   <div v-if="board" class="group-list-container">
-    <div class="group-list">
-      <draggable
-        data-dragscroll
-        class="group-list"
-        groups="groups"
-        :list="board.groups"
-        @end="dragEnd"
+   
+      <Container
+        v-if="board.groups && board.groups.length"
+        :style="getStyle"
+        orientation="horizontal"
+        drag-class="card-ghost"
+        drop-class="card-ghost-drop"
+        :get-child-payload="getParentPayload"
+        :drop-placeholder="dropPlaceholderOptionsGroup"
+        :non-drag-area-selector="'.fill'"
+        :drag-begin-delay="adaptDeviceDND"
+        group-name="1"
+        class="outter"
+        @drop="onDrop(board.groups, $event)"
+        @drag-start="calcPlaceholder"
+        @drag-end="dragging = false"
       >
+<!-- style="display: flex" -->
+       <template>
+          <!-- <Skeleton style="display: flex"> -->
+        <!-- <Skeleton > -->
+        <Draggable
+         v-for="group in board.groups"
+         :key="group.id"
+         class="group-list outter"
+        >
+        <!-- <vcl-facebook></vcl-facebook> -->
         <div
-          v-for="group in board.groups"
-          :groupId="group.id"
-          :key="group.id"
+        
           class="group-preview"
+          :data-group="group.id"
         >
           <div class="group-preview-header">
-            <!-- <input
-                class="input-title"
-                type="text"
-                v-model="newTitle"
-                @blur="editTitle"
-                @keyup.enter="$event.target.blur()"
-                
-            /> -->
-           
-            <p
-            v-if="!isEditingTitle"
-            @click="editingTitle"
-              class="group-title"
-              dir="auto"
-              maxlength="512"
-              style="overflow: hidden; overflow-wrap: break-word; height: 28px"
-            >
-              {{ group.title }}
-            </p>
+         
+            <input
+				ref="titleInput"
+				type="text"
+				placeholder="Title"
+				v-model="group.title"
+        @change="saveGroup(group)"
+				@mousedown.stop=""
+			/>
 
-             <el-input
-            v-if="isEditingTitle"
+            <group-menu
+            @addCard="onAddCard"
             @mousedown.stop=""
-            v-model="group.title"
-            type="text"
-				    placeholder="Title"
-            class="group-title"
-            >
-
-            </el-input>
+            v-if="isMenuOpened && group.id === groupId"
+            @closeMenu="closeGroupMenu"
+            :group="group"
+            :title="'List actions'"
+            :style="{
+              top: menuPosition.posY + 'px',
+              left: menuPosition.posX + 'px',
+              }"
+      ></group-menu>
 
             <div class="group-preview-btn">
               <span class="span-1 hide">
                 <span class="span-2 icon-sm"></span>
               </span>
+                  
               <div
-                @click.prevent.stop="openGroupMenu(group.id)"
+                @click="openGroupMenu(group.id)"
                 class="
                   group-header-extras-menu
                   span-1
                   icon-sm icon-overflow-menu-horizontal
                 "
-              ></div>
+              >
+   
+              </div>
             </div>
           </div>
-
+      <template  >
+      
           <card-list
             @dragEnd="dragEnd"
             @pickTask="pickTask"
             :tasks="group.tasks"
             :group="group"
-            :groups="board.groups"
+            
             :groupId="group.id"
             :boardLabels="board.labels"
             @addTask="addTask"
+            @saveBoard="saveBoard"
           >
           </card-list>
+       
+          </template>
+  <!-- </Container> -->
 
           <div
             v-if="isAdding && group.id === currGroupId"
@@ -98,30 +117,20 @@
             </button>
           </div>
         </div>
-      </draggable>
+<!-- </Skeleton> -->
+        <!-- <Skeleton v-else /> -->
+        </Draggable>
+          <!-- </Skeleton> -->
+        
+      </template>
 
-      <group-menu
-        @addCard="onAddCard"
-        @mousedown.stop=""
-        v-if="isMenuOpened && group"
-        @closeMenu="closeGroupMenu"
-        :group="group"
-        :title="'List actions'"
-        :style="{
-          top: menuPosition.posY + 'px',
-          left: menuPosition.posX + 'px',
-        }"
-      ></group-menu>
+      </Container>
 
-      <!-- <group-menu
-        @addCard="onAddCard"
-        @mousedown.stop=""
-        v-if="isMenuOpened && group"
-        @closeMenu="closeGroupMenu"
-        :group="group"
-        :title="'List actions'"
-      ></group-menu> -->
-    </div>
+    
+      <!-- <div class="group-list">
+    
+    </div> -->
+   
     <div class="group-add-container">
       <div class="group-add-btn">
         <p v-if="!isAddingTitle" @click="isAddingTitle = true">
@@ -150,6 +159,7 @@
         </form>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -160,7 +170,8 @@ import cardList from "./card-list.vue";
 import groupMenu from "./menus-cmps/group-menu.vue";
 import taskEdit from "../views/task-edit.vue";
 import { Container, Draggable } from "vue-smooth-dnd";
-
+import { applyDrag } from "../services/applyDrag.js";
+// import {Skeleton}  from 'vue-loading-skeleton';
 export default {
   components: {
     groupPreview,
@@ -169,22 +180,27 @@ export default {
     Container,
     taskEdit,
     draggable,
+    Draggable,
+    // cardListNew
   },
   props: {
     board: {
       type: Object,
       required: true,
     },
+    // boardLabels: {
+    //   type: Array,
+    // },
   },
   data() {
     return {
       isAddingTitle: false,
-      isEditingTitle:false,
       boardId: "",
       newTitle: "",
       newGroupTitle: "",
       isMenuOpened: false,
       group: null,
+      groupId:null,
       isAdding: false,
       currGroupId: null,
       menuPosition: { posX: "", posY: "" },
@@ -195,18 +211,74 @@ export default {
           bgColor: "",
         },
       },
-      
+      dragging: false,
+      dropPlaceholderOptionsGroup: {
+				className: "drop-preview",
+				animationDuration: "0",
+				showOnTop: false,
+			},
+      	dropPlaceholderOptionsTasks: {
+				className: "drop-preview",
+				animationDuration: "150",
+				showOnTop: false,
+			},
     };
   },
+  created(){
+
+  },
   computed: {
+  adaptDeviceDND() {
     
+			return (window.innerWidth < 600) ? 100 : 0
+		},
+     getStyle(){
+      return 'display: flex'
+    },
+     timeset(){
+       setTimeout(function(){
+        return true
+        } , 10000)
+    },
   },
   methods: {
-    editingTitle(){
-      console.log('this.isEditingTitle',this.isEditingTitle);
-      this.isEditingTitle = !this.isEditingTitle
+    // timeset(){
+    //   setTimeout(function(){
+    //     return true
+    //     } , 10000)
+    // },
+    getChildPayload(index) {
+			return this.group.tasks[index]
+		},
+ 
+    saveBoard(){
+      this.$emit('saveBoard')
     },
+    	getParentPayload(index) {
+			return this.board.groups[index]
+		  },
+    calcPlaceholder(ev) {
+			if (!ev.isSource) return
+			var item = document.querySelector(`[data-group=${ev.payload.id}]`)
+			this.dragging = true
+			this.calcing = setInterval(() => {
+				if (!this.dragging) clearInterval(this.calcing)
+
+				const placeholder = document.querySelector('.outter > .smooth-dnd-drop-preview-constant-class')
+				if (!placeholder) return
+        // placeholder.style.margin = '0 0 5px 5px'
+        //  placeholder.style.width = 272 + 'px'
+				placeholder.style.height = item.offsetHeight + 'px'
+			}, 5)
+		},
+    onDrop(items, dropResult) {
+			const newItems = applyDrag(items, dropResult)
+			this.$store.commit({ type: "setGroups", groups: newItems })
+      // this.$emit('setGroups',newItems)
+			this.$emit('dragEnd')
+		},
     addNewGroup() {
+      
       if (this.newGroupTitle === "") return;
       this.isAddingTitle = false;
       var groupTitle = this.newGroupTitle;
@@ -214,22 +286,29 @@ export default {
       this.$store.dispatch({ type: "addGroup", groupTitle });
       this.newGroupTitle = "";
     },
-    async openGroupMenu(groupId) {
+    async openGroupMenu(groupId, ev) {
+
       const group = this.board.groups.find((group) => {
         return group.id === groupId;
       });
       this.group = group;
+      this.groupId = group.id
       this.isMenuOpened = !this.isMenuOpened;
     },
     closeGroupMenu() {
-      console.log("close group menu");
+      this.groupId= null
       this.isMenuOpened = false;
-      // console.log('close');
+    },
+    saveGroup(group){
+      if(!group) return
+      let idx = this.board.groups.findIndex(g => g.id === group.id)
+      this.board.groups[idx] = group
+      this.group = group
+      this.$emit("saveGroup",group,idx);
     },
     dragEnd() {
       this.$emit("dragEnd");
       // this.$emit('socketUpdateBoard')
-      // console.log('dragEnd');
     },
     closeAddCard() {
       this.task.title = "";
@@ -237,7 +316,6 @@ export default {
     },
 
     changeGroup(ev) {
-      // console.log(ev);
       const fromIndex = ev.oldIndex;
       const toIndex = ev.newIndex;
       if (fromIndex === toIndex) return;
@@ -246,11 +324,9 @@ export default {
       this.$store.dispatch({ type: "changeGroupPos", payload });
     },
     pickTask() {
-      // console.log('gothere');
       this.$emit("pickTask");
     },
     openModal(groupId) {
-      // console.log('hello');
       this.isAdding = true;
       this.currGroupId = groupId;
     },
@@ -261,9 +337,7 @@ export default {
       const taskTitle = this.task.title;
       this.task.title = "";
       try {
-        // await this.$store.dispatch({ type: 'addTask', task });
         await this.$store.dispatch({ type: "addTask", taskTitle, groupId });
-        // this.$emit('socketUpdateBoard')
       } catch (err) {
         console.log(err);
       }
@@ -276,12 +350,28 @@ export default {
     editTitle() {
       if (!this.newTitle) return;
     },
+   
   },
 };
 </script>
 
-<style>
+<style lang="scss">
 /* .group-list-container {
   overflow-x: auto;
 } */
+/* .outter {
+  display: flex;
+  gap: 7px;
+  height: 100%;
+} */
+.fill {
+  height: 100vh;
+  cursor: move;
+}
+// .smooth-dnd-container {
+//      .horizontal {
+//          display: flex;
+//      }
+//  }
+
 </style>

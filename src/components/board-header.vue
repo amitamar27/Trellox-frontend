@@ -4,7 +4,7 @@
       <section class="board-title-header">
         <div v-if="!titleIsEditing" class="board-title-container">
         <h1  @click="openEditing">
-          {{ boardTitle }}
+          {{ board.title }}
         </h1>
         </div>
         <input
@@ -12,15 +12,16 @@
           type="text"
           ref="title"
           placeholder="Title"
-          v-model="boardTitle"
-          @blur="saveBoardTitle"
-          @keydown.enter="saveBoardTitle"
+          v-model="board.title"
+          @blur="saveBoard"
+          @change="saveBoard"
+          
           :style="'width:' + inputWidth + 'px'"
         />
 
         <button @click="toggleFav" class="fav">
   
-          <i v-if="board.isFavorite" class="icon-star" > </i>
+          <i v-if="!board.isFavorite" class="icon-star" > </i>
           <i v-else class="icon-starred" style="color: gold"> </i>
         </button>
 
@@ -79,7 +80,7 @@ export default {
       titleIsEditing: false,
       isSideMenuOpen: false,
       isShown: false,
-      boardTitle: '',
+      // boardTitle: '',
       boardId: '',
       currTitle: 'Menu'
     }
@@ -110,7 +111,11 @@ export default {
     },
     editBgcBoard(style) {
       this.$emit('editBgcBoard', style);
-    }
+    },
+    saveBoard(){
+      console.log('saving-baord');
+      this.$emit('saveBoard')
+    },
   },
 
   computed: {

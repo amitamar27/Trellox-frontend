@@ -15,7 +15,6 @@
 </template>
 
 <script>
-// v-for="labelId in labelsId"
 export default {
   props: {
     labelIds: {
@@ -27,12 +26,10 @@ export default {
   computed: {
     labels() {
       const labels = this.$store.getters.labels;
-      // console.log("labels", labels);
       const newLabels = [];
       labels.forEach((label) => {
         if (this.labelIds.includes(label.id)) newLabels.push(label);
       });
-      // console.log("newLabels", newLabels);
       return newLabels;
     },
   },

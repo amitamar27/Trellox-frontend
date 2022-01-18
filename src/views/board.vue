@@ -1,39 +1,36 @@
 <template >
-  <div v-if="board" class="board-container">
-    <board-header :board="board" @editBgcBoard="editBgcBoard" />
-
-
-    
-    <group-list-new
-      @dragEnd="dragEnd"
-      @pickTask="pickTask"
-      @saveGroup="saveGroup"
-      :board="board"
-      v-if="board"
-    ></group-list-new>
-     <!-- <transition>
-      <aside-menu
-        v-if="isMenuShown"
+  <div style="height: 100%">
+    <div v-if="board" class="board-container" @touchend="fixActionRestriction">
+      <board-header
         :board="board"
-        :class="menuBarIsShown"
-        @openMenu="openMenu"
-        @updateBgcBoard="editBgcBoard"
-      ></aside-menu
-    ></transition> -->
-    <router-view />
+        @editBgcBoard="editBgcBoard"
+        @saveBoard="saveBoard"
+      />
+
+      <group-list
+        @dragEnd="dragEnd"
+        @saveGroup="saveGroup"
+        :board="board"
+        v-if="board"
+      ></group-list>
+
+      <router-view />
+    </div>
+    <div v-else class="loader-container">
+      <div class="loader"></div>
+    </div>
   </div>
 </template>
 
 <script>
-import asideMenu from '../components/aside-menu.vue'
+import asideMenu from "../components/aside-menu.vue";
 import groupList from "../components/group-list.vue";
-import groupListNew from "../components/group-list-new.vue";
 import taskEdit from "./task-edit.vue";
 import boardHeader from "../components/board-header.vue";
 import {
   socketService,
   SOCKET_EMIT_BOARD_WATCH,
-  SOCKET_EVENT_BOARD_UPDATED,
+  // SOCKET_EVENT_BOARD_UPDATED,
   SOCKET_ON_BOARD_UPDATE,
   SOCKET_EMIT_BOARD_UPDATE,
 } from "../services/socket.service.js";
@@ -42,7 +39,7 @@ export default {
     return {
       boardId: "",
       currBoard: null,
-      isMenuShown:false,
+      isMenuShown: false,
     };
   },
   watch: {
@@ -55,15 +52,12 @@ export default {
             boardId,
           });
           this.currBoard = currBoard;
-          this.$emit("setBg", this.currBoard.style.bgImg || this.currBoard.style.bgColor);
-          console.log("this.boardId !!!!", boardId);
+          this.$emit("setBg", this.currBoard.style);
           // socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId);
           socketService.emit(SOCKET_EMIT_BOARD_WATCH, boardId);
         } catch (err) {
           console.log("ERROR: cannot get board", err);
         }
-
-        // console.log('boardId',boardId);
       },
       immediate: true,
       deep: true,
@@ -72,12 +66,10 @@ export default {
   created() {
     this.boardId = this.$route.params.boardId;
   },
- 
+
   computed: {
     board() {
-      const b = this.$store.getters.board;
-      console.log("board.vue", b);
-      return b;
+      return this.$store.getters.board;
     },
     getStyle() {
       if (this.board.style.backgroundSrc) {
@@ -88,24 +80,25 @@ export default {
         return { backgroundColor: `${backgroundColor}` };
       }
     },
-     menuBarIsShown() {
+    menuBarIsShown() {
       return {
-        'aside-menu-open': this.isMenuShown,
-        'aside-close': !this.isMenuShown,
+        "aside-menu-open": this.isMenuShown,
+        "aside-close": !this.isMenuShown,
       };
-     },
+    },
   },
   methods: {
-    
-    pickTask() {
-      // console.log(this.board);
+    fixActionRestriction() {
+      document.body.classList.remove(
+        "smooth-dnd-no-user-select",
+        "smooth-dnd-disable-touch-action"
+      );
     },
     openMenu() {
-      console.log('here');
       this.isMenuShown = !this.isMenuShown;
     },
-    setGroups(){
-      this.$store.commit({ type: "setGroups", groups: newItems })
+    setGroups() {
+      this.$store.commit({ type: "setGroups", groups: newItems });
     },
     async setup() {
       const { boardId } = this.$route.params;
@@ -126,11 +119,6 @@ export default {
       socketService.on("user-watch-task", ({ taskId, taskTitle, userId }) => {
         this.$store.commit({ type: "setNoti", mode: true });
         if (userId !== this.$store.getters.loggedinUser?._id) return;
-        this.$store.commit({ type: "setMsgTime", time: 4500 });
-        this.$store.commit({
-          type: "setMsgTxt",
-          txt: `You have been tagged in ${taskTitle}!`,
-        });
         this.$store.dispatch({ type: "activeMsg" });
       });
     },
@@ -140,17 +128,18 @@ export default {
     saveBoard() {
       this.$store.dispatch({ type: "saveBoard" });
     },
-    saveGroup(group,idx){
-      this.$store.dispatch({ type: "saveGroup" ,group,idx});
+    saveGroup(group, idx) {
+      this.$store.dispatch({ type: "saveGroup", group, idx });
     },
     async editBgcBoard(style) {
+      console.log(style);
       try {
         await this.$store.dispatch({
           type: "updateBoardBgc",
           boardId: this.boardId,
           style: style,
         });
-        this.$emit("setBg", style.bgImg);
+        this.$emit("setBg", style);
       } catch (err) {
         console.log("Error in updateBoard (board-header):", err);
         throw err;
@@ -163,12 +152,10 @@ export default {
           type: "getBoardById",
           boardId,
         });
-        // console.log('board by id',board);
         await socketService.on(SOCKET_ON_BOARD_UPDATE, (board) => {
           console.log("socket board", board);
         });
         this.currBoard = board;
-        // console.log('this.currBoard',this.currBoard);
         this.$emit("setBg", this.currBoard.style.bgImg);
         return board;
       } catch (err) {
@@ -179,34 +166,13 @@ export default {
   },
 
   components: {
-    groupList,
     taskEdit,
     boardHeader,
-    groupListNew,
-    asideMenu
+    groupList,
+    asideMenu,
   },
 };
 </script>
 
 <style>
-/* .scroller::-webkit-scrollbar {
-  height: 15px;
-  width: 12px;
-}
-
-.scroller::-webkit-scrollbar-track {
-  
-  background: rgba(9, 30, 66, 0.08);
-  border-radius: 20px;
-}
-
-.scroller::-webkit-scrollbar-button {
-  height: 4px;
-  width: 4px;
-}
-
-.scroller::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.425);
-  border-radius: 20px;
-} */
 </style>

@@ -69,7 +69,6 @@ export default {
     };
   },
   created() {
-    //   if(board)console.log('boardddd',board);
   },
 
   methods: {
@@ -91,8 +90,7 @@ export default {
     saveLabels() {
       this.$emit("saveLabels", this.labels);
     },
-    addLabel(labelId) {
-      // console.log("labelId", labelId);
+    addLabel() {
       this.$emit("addLabel");
     },
     toggleMember() {

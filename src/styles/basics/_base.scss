@@ -7,16 +7,20 @@ html {
     line-height: 1.6;
     font-size: 16px;
     padding: 0;
-    height: 100vh;
+    // height: 100vh;
     -webkit-text-size-adjust: 100%;
     --animate-duration: 1s;
     --animate-delay: 1s;
     --animate-repeat: 1;
-
+    // height: 100vh;
+    
     ::-webkit-scrollbar {
-        height: 15px;
+        height: 14px;
         width: 12px;
         // display: none;
+        @include tablet-size-content {
+            width: 0;
+        }
     }
 
     ::-webkit-scrollbar-track {
@@ -36,35 +40,46 @@ html {
 }
 
 body {
-
+    height: 100%;
     margin: 0;
-    color: rgb(23,43,77);
+    color: rgb(23, 43, 77);
     font-family: Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
 }
-textarea{
+
+textarea {
     font-family: Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
 }
-.icon-lg, .icon-md, .icon-sm {
+
+.icon-lg,
+.icon-md,
+.icon-sm {
     color: #42526e;
 }
-.icon-lg, .icon-md {
+
+.icon-lg,
+.icon-md {
     height: 32px;
     line-height: 32px;
     width: 32px;
 }
+
 .icon-sm {
     font-size: 16px;
     height: 20px;
     line-height: 20px;
     width: 20px;
 }
+
 .icon-lg {
     font-size: 24px;
 }
-.icon-lg, .icon-md, .icon-sm{
+
+.icon-lg,
+.icon-md,
+.icon-sm {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     display: inline-block;
@@ -76,9 +91,11 @@ textarea{
     text-decoration: none;
     vertical-align: bottom;
 }
+
 .icon-close:before {
     content: "\e91c";
 }
+
 h1,
 h2,
 h3,
@@ -87,6 +104,7 @@ h5,
 h6 {
     margin: 0 0 0rem;
 }
+
 p {
     margin: 0;
 }
@@ -100,7 +118,7 @@ p {
 .fade-leave-to
 /* .fade-leave-active below version 2.1.8 */
 
-{
+    {
     opacity: 0;
 }
 
@@ -113,9 +131,7 @@ p {
 }
 
 .slide-fade-enter,
-.slide-fade-leave-to
-
-{
+.slide-fade-leave-to {
     transform: translateX(10px);
     opacity: 0;
 }
@@ -134,75 +150,126 @@ p {
     opacity: 0;
 }
 
-.flex{
+.flex {
     display: flex;
 }
+
 .app {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-overflow-scrolling: touch;
     text-align: center;
     position: absolute;
-    height: 100vh;
+    // height: 100vh;
+    height: 100%;
     flex-direction: column;
     width: 100%;
     z-index: 10;
     flex: 1;
+    overflow: hidden;
 
 }
 
-
+.smooth-dnd-container.horizontal {
+    display: flex;
+}
 .outter {
     // margin-right: 7px;
-
-    > .smooth-dnd-drop-preview-constant-class {
+    
+    >.smooth-dnd-drop-preview-constant-class {
         background-color: rgba(36, 36, 36, 0.308);
         width: 272px;
-        margin: 0 7px;
+        // margin: 0 1px;
+        // margin: 0 0 5px 5px;
         border-radius: 3px;
-
-        transition: none;
+        // transition: none;
     }
 }
-
+// .smooth-dnd-drop-preview-constant-class {
+//     background-color: rgba(36, 36, 36, 0.308);
+//     width: 272px;
+//     margin: 0 7px;
+//     border-radius: 3px;
+//     transition: none;
+// }
 .tasks-container {
-    > .smooth-dnd-drop-preview-constant-class {
+    // margin-bottom: 5px;
+    .smooth-dnd-drop-preview-constant-class {
         background-color: rgba(109, 109, 109, 0.1);
         min-height: 0px;
         max-width: calc(100% - 10px);
         // width: 252px;
         border-radius: 3px;
-        margin: 0 auto;
+        margin: 0 0 5px 5px;
     }
-    overflow-y: auto!important;
+
+    overflow-y: auto !important;
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
 .files-container {
-    > .smooth-dnd-drop-preview-constant-class {
+    >.smooth-dnd-drop-preview-constant-class {
         background-color: rgba(109, 109, 109, 0.1);
         min-height: 0px;
         max-width: 656px;
         border-radius: 3px;
     }
 }
+
 .card-ghost {
     transition: transform 0.18s ease;
     transform: rotateZ(5deg);
     cursor: grabbing;
 }
+
 .card-ghost-drop {
     transition: transform 0.18s ease-in-out;
     transform: rotateZ(0deg);
 }
-// .smooth-dnd-container {
-//     min-height: 15px;
-// }
+
+.smooth-dnd-container {
+    .horizontal {
+        display: flex;
+    }
+}
+
+.smooth-dnd-container.horizontal {
+        display: flex;
+    }
+
+    .loader-container {
+        width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .loader {
+    border:8px solid #f3f3f3; /* Light grey */
+    border-top:8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
 
 @font-face {
     font-family: Roboto;
     src: url(~@/assets/fonts/Roboto-Regular.ttf);
 }
+
 // rgb(
 // font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
 // C:\dev\Trellox\frontend\src\styles\setup\@\assets\fonts\Roboto-Regular.ttf

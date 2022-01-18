@@ -25,16 +25,7 @@ function getUsers() {
     return httpService.get(`user`)
 }
 
-function createUser(user){
-    // const user = {
-    //     fullname,
-    //     email,
-    //     password,
-    // }
-    console.log('user',user);
 
-    // signup(user)
-}
 
 async function getById(userId) {
     // const user = await storageService.get('user', userId)
@@ -58,11 +49,7 @@ async function update(user) {
 async function login(userCred) {
 
     try{
-        console.log('userCred',userCred);
-        const user = await httpService.post('auth/login', userCred)
-        
-        console.log('userrr',user);
-    // socketService.emit('login', user._id)
+    const user = await httpService.post('auth/login', userCred)
     if (user) return _saveLocalUser(user)
     return user
     } catch(err){
@@ -90,7 +77,6 @@ async function increaseScore(by = SCORE_FOR_REVIEW) {
 
 
 function _saveLocalUser(user) {
-    console.log('user-local',user);
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }

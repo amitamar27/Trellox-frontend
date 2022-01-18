@@ -124,20 +124,16 @@ export default {
 			this.editingTodo = null
 		},
 		toggleTodo(idx) {
-			// console.log('this.checklist.todos[idx].isDone',this.checklist.todos[idx].isDone);
 			this.checklist.todos[idx].isDone = !this.checklist.todos[idx].isDone
-						// console.log('this.checklist.todos[idx].isDone',this.checklist.todos[idx].isDone);
 
 			this.saveChanges()
 		},
 		updateTodo() {
-			// console.log('editing');
 			if (!this.editingTodo?.title) this.closeAddTodo()
 			const idx = this.checklist.todos.findIndex(t => t.id === this.editingTodo.id)
 			if (idx < 0) return
 
 			this.checklist.todos.splice(idx, 1, this.editingTodo)
-			// console.log('this.checklist.todos',this.checklist.todos);
 			this.editingTodo = null
 			this.closeEditTodo()
 			this.saveChanges()
@@ -146,12 +142,9 @@ export default {
 			if (!this.newTodo.title) return
 
 			this.newTodo.id = utilService.makeId()
-			// console.log('this.checklist.todos',this.checklist.todos);
 			this.checklist.todos ??= []
-			// console.log('this.checklist.todos',this.checklist.todos);
 			this.checklist.todos.push(this.newTodo)
 			this.zeroNewTodo()
-			// console.log('this.$refs',this.$refs);
 			// this.$refs.textareaAdd.focus()
 
 			this.saveChanges()
@@ -171,7 +164,6 @@ export default {
 			this.newTodo = { title: '', isDone: false }
 		},
 		saveChanges() {
-			// console.log('this.checklist',this.checklist);
 			this.$emit('saveChecklist', this.checklist)
 		},
 		isEditingStyle(idx){

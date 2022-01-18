@@ -12,87 +12,100 @@
 
 
 <script>
-import appHeader from './components/app-header.vue'
-import sideNav from './components/side-navbar.vue'
-import darkScreen from './components/dark-screen.vue'
-import { socketService } from "./services/socket.service.js"
-import login from './views/Login.vue'
+import appHeader from "./components/app-header.vue";
+import sideNav from "./components/side-navbar.vue";
+import darkScreen from "./components/dark-screen.vue";
+import { socketService } from "./services/socket.service.js";
+import {boardService} from './services/board-service'
+import login from "./views/Login.vue";
 export default {
   components: {
     appHeader,
     sideNav,
     darkScreen,
-    login
+    login,
   },
   data() {
     return {
       // bgStyle: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639076920/Trellox/5137807_o4zvys.jpg)',
-      bgStyle: '',
+      bgStyle: "",
+      bgColor: "",
+      bgImg: "",
       isSigning: false,
-    }
+    };
   },
-  async created(){
-    try{
-      console.log('app created');
-      await this.$store.dispatch({ type: "loadBoards" });
-    }catch (err){
-       console.log("ERROR cannot load users or boards");
+  async created() {
+    try {
+      const user = boardService.getLoggedinUser()
+      if (!user || user.fullname === 'Guest') await this.$store.dispatch({type:'demoBoard'})
+      else await this.$store.dispatch({ type: "loadBoards" });
+    } catch (err) {
+      console.log("ERROR cannot load users or boards");
     }
-    
   },
   computed: {
     background() {
-      console.log('this.$route.name',this.$route.name);
-      if (this.$route.name === 'Home' || this.$route.name === 'Boards') {
-        this.isSigning = false
+      if (this.$route.name === "Home" || this.$route.name === "Boards") {
+        this.isSigning = false;
         return {
-          backgroundImage: 'url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639434430/Trellox/austin-distel-rxpThOwuVgE-unsplash_mufsjc.jpg)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center'
-        }
+          backgroundImage:
+            "url(https://res.cloudinary.com/dnmyqfcjm/image/upload/v1639434430/Trellox/austin-distel-rxpThOwuVgE-unsplash_mufsjc.jpg)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        };
       }
-       if(this.$route.name === 'Login'){
-         this.isSigning = true
+      if (this.$route.name === "Login") {
+        this.isSigning = true;
         return {
           // backgroundImage: '',
-          backgroundColor: 'rgb(250, 251, 252)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center'
-        }
-        
+          backgroundColor: "rgb(250, 251, 252)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        };
       }
-      this.isSigning = false
+      this.isSigning = false;
+      // console.log("this.bgStyle", this.bgStyle);
+      if (this.bgImg) {
+        return {
+          backgroundImage: this.bgImg,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          // backgroundColor: this.bgStyle,
+        };
+      }
       return {
-        backgroundImage: this.bgStyle,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-        backgroundColor: this.bgStyle,
-      }
-
+        // backgroundImage: this.bgStyle,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundColor: this.bgColor,
+      };
     },
     appHeaderStyle() {
-			if (this.$route.name === 'Home' || this.$route.name === 'Boards') {
-				return {
-					backgroundColor: '#026AA7',
-				}
-			}
-		},
-    currUser(){
-      
+      if (this.$route.name === "Home" || this.$route.name === "Boards") {
+        return {
+          backgroundColor: "#026AA7",
+        };
+      }
     },
-
-
+    currUser() {},
   },
   methods: {
     setBg(style) {
-      this.bgStyle = style
-    }
+      // console.log("style", style);
+      if(style.bgImg){
+        this.bgImg = style.bgImg
+        this.bgColor = ''
+        return
+      }
+       this.bgImg = '';
+      this.bgColor = style.bgColor;
+    },
   },
-
-}
+};
 </script>
 
 

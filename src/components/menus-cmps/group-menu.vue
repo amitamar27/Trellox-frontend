@@ -42,11 +42,9 @@ export default {
     }
   },
   created(){
-    // console.log(this.group);
   },
   methods: {
     closeMenu() {
-      // console.log('close');
       this.isAlive = false
       this.$emit('closeMenu')
     },

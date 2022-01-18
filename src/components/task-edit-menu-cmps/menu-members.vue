@@ -48,10 +48,6 @@ export default {
       type: Object,
       required: true,
     },
-    // members:{
-    //     type:Array,
-    //     required: true,
-    // }
   },
   data() {
     return {
@@ -60,7 +56,6 @@ export default {
   },
   created() {
     this.members = this.task.members;
-    // console.log("thiss", this.members);
   },
   methods: {
     closeMenu() {

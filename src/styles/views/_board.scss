@@ -1,15 +1,10 @@
 .board-container {
-  // height: calc(100% );
   height: calc(100% - 50px);
   flex: 1;
-  // padding: 0 0 40px;
-  // margin-left: 5px;
-
   width: 100%;
-  overflow-x: auto;
+  overflow-x: auto !important;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
-  // background-size: cover;
-  // background-repeat: no-repeat;
+  overflow: hidden;
 }

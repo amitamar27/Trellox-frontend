@@ -15,18 +15,29 @@
         --animate-duration: 1s;
         --animate-delay: 1s;
         --animate-repeat: 1;
-        max-height: 100%;
-        max-height: 79vh
+        max-height: 75vh;
+
+        @media (max-width:510px){
+            max-height: 68vh;
+        }
     }
 
-    .cards-container {
+     .cards-container {
 
         overflow-y: auto !important;
         overflow-x: hidden;
         scroll-behavior: smooth;
         padding: 0px 4px;
         flex: 1;
-
+        height: fit-content;
+        &::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        &::-webkit-scrollbar-track-piece {
+            background: rgba(9, 30, 66, 0.08);
+            border-radius: 10px;
+        }
         .draggable-groups {
             // height: 100%;
             position: relative;
@@ -397,7 +408,7 @@
         box-shadow: 0 1px 0 #091e4240;
         resize: none;
         max-height: 50px;
-
+        margin: 0 8.5px 0 2.9px;
 
     }
 
@@ -464,7 +475,8 @@
     border-radius: 4px;
     margin-bottom: 8px;
     text-align: left;
-
+    margin-top: 4px;
+   
     button {
         display: flex;
         justify-content: center;
@@ -494,11 +506,12 @@
         color: #172a4d;
     }
 }
-
+  // @media (min-height: 510px){
+    //     height: 100%;
+    // }
 .group-list-container {
-    @media (min-height: 510px){
-        height: 100%;
-    }
+  
+    height: min-content;
     margin-top: 45px;
     display: flex;
    
@@ -508,10 +521,8 @@
     margin-left: 6.8px;
     > .outter {
         display: flex;
-        // gap: 7px;
         gap: 3px;
-        margin-left: 5px;
-        // height: 100%;
+        margin-left: 6px;
     }
 
 }

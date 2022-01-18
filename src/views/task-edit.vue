@@ -1,7 +1,7 @@
 <template>
   <main class="card-edit-window" ref="task" @click="closeDarkScreen">
     <div v-if="task" class="card-edit" @click.stop="">
-      <header v-if="task.cover" :style="taskBgColor" class="task-edit-bg-title">
+      <header v-if="task.cover && (task.cover.bgColor || task.cover.bgUrl)" :style="taskBgColor" class="task-edit-bg-title">
         <a class="icon-md" @click="closeDarkScreen"></a>
         <div class="task-edit-bg-btn">
           <a class="cover-btn" @click="openCoverMenu">
@@ -42,7 +42,7 @@
                 :labelIds="task.labelIds"
                 :key="1"
               ></labels>
-              <task-dates :task="task" v-if="task.dueDate"> </task-dates>
+              <task-dates @saveTask="saveTask" :task="task" v-if="task.dueDate"> </task-dates>
             </section>
 
             <section class="task-description">
@@ -125,7 +125,6 @@ export default {
     };
   },
   created() {
-    console.log("created!", this.currTask);
   },
   computed: {
     task() {
@@ -134,7 +133,6 @@ export default {
       this.$store.commit({ type: "getTaskById", taskId, groupId });
       const task = this.$store.getters.currTask;
       this.currTask = task;
-      console.log("task", task);
       return task;
     },
     taskBgColor() {
@@ -180,7 +178,7 @@ export default {
       });
       return newLabels;
     },
-    addLabel(labelId) {
+    addLabel() {
       const { groupId } = this.$route.params;
       this.$store.dispatch({
         type: "saveTask",
@@ -201,6 +199,7 @@ export default {
     },
     closeCover() {
       this.isCoverClick = false;
+      this.saveTask()
     },
     removeTask() {
       const { groupId } = this.$route.params;
@@ -236,7 +235,16 @@ export default {
   gap: 10px;
   flex-wrap: wrap;
   transition: all 0.2s;
+
+  @media (max-width: 500px){
+        display: flex;
+    margin-bottom: 15px;
+    gap: 10px;
+    transition: all .2s;
+    margin-left: 3px;
+  }
 }
+
 .task-details-h {
   color: #5e6c84;
   font-size: 12px;
@@ -249,7 +257,7 @@ export default {
   width: 100%;
   flex-grow: 1;
   justify-content: space-between;
-  gap: 12px;
+  // gap: 12px;
   min-height: 80vh;
 }
 .main-content-details-container{

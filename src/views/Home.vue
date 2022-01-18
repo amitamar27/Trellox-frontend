@@ -27,17 +27,16 @@
 
 <script>
 // @ is an alias to /src
-
+import {boardService} from '../services/board-service'
+import {userService} from '../services/user-service'
 export default {
   name: 'Home',
   created() {
-    this.$store.dispatch({ type: 'loadBoards' })
-    // var boards = this.$store.dispatch({ type: 'loadBoards' })
-    // console.log(boards);
+    const user = userService.getLoggedinUser()
+    // if(user)
+    // this.$store.dispatch({ type: 'loadBoards' })
   },
-  computed: {
-
-  },
+  
 }
 </script>
 

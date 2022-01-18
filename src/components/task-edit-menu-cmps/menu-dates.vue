@@ -41,31 +41,27 @@ export default {
       isRange: false,
     };
   },
-  created() {},
+  created() {
+    this.time = Date.now()
+  },
   components: {
     DatePicker,
   },
   methods: {
     closeMenu() {
-      // this.task.dueDate.time = this.time;
       this.$emit("closeMenu");
     },
     saveDate() {
+
+      if(!this.time) this.time = Date.now()
+      // console.log('this.task.dueDate',this.task,this.task.dueDate);
       if (!this.task.dueDate) {
         this.task.dueDate = {
           isDone: false,
           time: this.time,
         };
       } else {
-        // console.log("this.time", this.time);
-        // console.log(this.time);
-        // this.time = new Date(this.time);
-        // console.log(this.time);
-        // this.time = this.time.toGMTString();
-        // this.time = this.time.substring(0, this.time.length - 13);
-        // console.log(this.time);
         this.task.dueDate.time = Date.parse(this.time);
-        // console.log('this.task.dueDate.time',this.task.dueDate.time);
       }
       this.$emit("saveTask");
       this.$emit("closeMenu");

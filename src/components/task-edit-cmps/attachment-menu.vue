@@ -6,62 +6,15 @@
       <a class="icon-sm icon-close" @click="closeMenu"></a>
     </header>
     <main>
-      <!-- <label>
-      <h5>Computer</h5>
-      <input type="file" ref="file" multiple @change="saveToCloud" hidden />
-    </label>
-    <h5>
-				 Trellox
-				<span
-					><img
-						class="lock"
-						:src="require('@/assets/lock.svg')"
-						alt=""
-				/></span>
-			</h5>
-			<h5>
-				Google Drive
-				<span
-					><img
-						class="lock"
-						:src="require('@/assets/lock.svg')"
-						alt=""
-				/></span>
-			</h5>
-			<h5>
-				Dropbox
-				<span
-					><img
-						class="lock"
-						:src="require('@/assets/lock.svg')"
-						alt=""
-				/></span>
-			</h5>
-			<h5>
-				Box
-				<span
-					><img
-						class="lock"
-						:src="require('@/assets/lock.svg')"
-						alt=""
-				/></span>
-			</h5>
-			<h5>
-				oneDrive
-				<span
-					><img
-						class="lock"
-						:src="require('@/assets/lock.svg')"
-						alt=""
-				/></span>
-			</h5> -->
       <div>
         <ul class="pop-over-list">
           <li>
-            <a>Computer</a>
+            <!-- <a for="file">Computer</a> -->
+            <label for="file">Computer</label>
             <input
               type="file"
               ref="file"
+              id="file"
               multiple
               @change="saveToCloud"
               hidden
@@ -101,7 +54,10 @@
         <hr />
         <div>
           <label for="addLink">Attach a link</label>
-          <el-input v-model="imgLink" placeholder="Paste any link here"></el-input>
+          <el-input
+            v-model="imgLink"
+            placeholder="Paste any link here"
+          ></el-input>
           <span class="add-attach" @click="saveAttachments(imgLink)"
             >Attach</span
           >
@@ -118,8 +74,8 @@ export default {
   data() {
     return {
       cloudinary: {
-        apiKey: "417696826532455",
-        cloudName: "amitoscloud",
+        apiKey: "657612331553388",
+        cloudName: "dnmyqfcjm",
       },
       imgLink: "",
       attachments: [],
@@ -136,8 +92,7 @@ export default {
       this.loading = true;
       const formData = new FormData();
       formData.append("file", event.target.files[0]);
-      formData.append("upload_preset", "amitoscloud");
-
+      formData.append("upload_preset", "lmfle9ek");
       axios
         .post(this.clURL, formData)
         .then((res) => {
@@ -145,7 +100,6 @@ export default {
         })
         .catch(() => {
           this.loading = false;
-          console.log("sss");
         });
     },
     saveAttachments(imgLink = null) {
@@ -158,7 +112,6 @@ export default {
           fileUrl: imgLink,
         };
         this.attachments.push(attachment);
-        console.log("Attachments", this.attachments);
         this.loading = false;
       }
       const { taskId, groupId } = this.$route.params;

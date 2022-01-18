@@ -1,6 +1,5 @@
 const axios = require("axios")
 import { httpService } from './http.service'
-// const KEY = 'toysDB';
 
 export const boardService = {
     query,
@@ -8,7 +7,6 @@ export const boardService = {
     removeBoard,
     addBoard,
     updateBoard, //should be save
-    getEmptyBoard
     // getReviews,
     // removeReview,
     // addReview,

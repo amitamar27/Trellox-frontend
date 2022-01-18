@@ -12,134 +12,32 @@ export const asyncgStorageService = {
     getAndSaveBoard,
     postBoard,
     getGroupById,
-    removeGroup
+    removeGroup,
+    queryBoards
     
 }
-const gBoard = {
-    "_id": "b101",
-    "title": "Robot dev proj",
-    "createdAt": 1589983468418,
-    "createdBy": {
-        "_id": "u101",
-        "fullname": "Abi Abambi",
-        "imgUrl": "http://some-img"
-    },
-    "style": {},
-    "labels": [
-        {
-            "id": "l101",
-            "title": "Done",
-            "color": "#61bd4f"
-        }
-    ],
-    "members": [
-        {
-            "_id": "u101",
-            "fullname": "Tal Tarablus",
-            "imgUrl": "https://www.google.com"
-        }
-    ],
-    // עמודות
-    "groups": [
-        {
-            "id": "g101",
-            "title": "Group 1",
-            // כרטיסים
-            "tasks": [
-                {
-                    "id": "c101",
-                    "title": "Replace logo"
-                },
-                {
-                    "id": "c102",
-                    "title": "Add Samples"
-                }
-            ],
-            "style": {}
-        },
-        {
-            "id": "g102",
-            "title": "Group 2",
-            "tasks": [
-                {
-                    "id": "c103",
-                    "title": "Do that"
-                },
-                {
-                    "id": "c104",
-                    "title": "Help me",
-                    "description": "description",
-                    "comments": [
-                        {
-                            "id": "ZdPnm",
-                            "txt": "also @yaronb please CR this",
-                            "createdAt": 1590999817436.0,
-                            "byMember": {
-                                "_id": "u101",
-                                "fullname": "Tal Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                            }
-                        }
-                    ],
-                    "checklists": [
-                        {
-                            "id": "YEhmF",
-                            "title": "Checklist",
-                            "todos": [
-                                {
-                                    "id": "212jX",
-                                    "title": "To Do 1",
-                                    "isDone": false
-                                }
-                            ]
-                        }
-                    ],
-                    "members": [
-                        {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                        }
-                    ],
-                    "labelIds": ["l101", "l102"],
-                    "createdAt": 1590999730348,
-                    "dueDate": 16156215211,
-                    "byMember": {
-                        "_id": "u101",
-                        "username": "Tal",
-                        "fullname": "Tal Tarablus",
-                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                    },
-                    "style": {
-                        "bgColor": "#26de81"
-                    }
-                }
-            ],
-            "style": {}
-        }
-    ],
-    // פעילויות בתוך כרטיס
-    "activities": [
-        {
-            "id": "a101",
-            "txt": "Changed Color",
-            "createdAt": 154514,
-            "byMember": {
-                "_id": "u101",
-                "fullname": "Abi Abambi",
-                "imgUrl": "http://some-img"
-            },
-            "task": {
-                "id": "c101",
-                "title": "Replace Logo"
-            }
-        }
-    ],
-}
+import { storageService } from "./storage-service"
+const BOARD_KEY = 'boards';
+function postBoard(key,board){
+    return query(key)
+    .then(boards=>{
+        console.log('boards',boards);
+        boards.push(board)
+        _save(key,boards)
+        return board
 
+    })
+}
+function queryBoards(entityType, delay=0) {
+    var entities = JSON.parse(localStorage.getItem(entityType)) || []
+    console.log('entities',entities);
+    if(entities) return entities
+    return null
+   
+}
 function query(entityType, delay=0) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
+    console.log('entities',entities);
     return new Promise((resolve)=>{
         setTimeout(()=>{
             resolve(entities)
@@ -147,9 +45,11 @@ function query(entityType, delay=0) {
     })
 }
 function getAndSaveBoard(key,currBoard){
-    console.log(currBoard._id);
+    console.log(currBoard);
+    // _save(key,currBoard)
     return query(key)
     .then((boards)=>{
+        console.log('boards',boards);
         const idx =boards.findIndex((board)=> board._id === currBoard._id)
         if (idx < 0) throw new Error(`Unknown Entity ${idx}`)
         console.log('currBoard',currBoard);
@@ -264,22 +164,10 @@ function removeTaskByCardId(entityType, details) {
         
         })
 }
-function postBoard(key,board){
-    return query(key)
-    .then(boards=>{
-        boards.push(board)
-        _save(key,boards)
-        return board
 
-    })
-    
-    
-
-}
 
 
 function _save(entityType, entities) {
-    
     localStorage.setItem(entityType, JSON.stringify(entities))
 }
 

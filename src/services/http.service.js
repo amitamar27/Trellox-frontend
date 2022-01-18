@@ -3,7 +3,7 @@ import { router } from '../router/index.js'
 
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
-    : '//localhost:3000/api/'
+    : '//localhost:3035/api/'
 
 
 var axios = Axios.create({
