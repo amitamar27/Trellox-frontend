@@ -3,9 +3,9 @@ import Vuex from "vuex";
 import { boardService } from "../services/board-service";
 // import { SOCKET_ON_BOARD_UPDATE } from '../services/socket.service'
 import { socketService, SOCKET_EVENT_BOARD_UPDATED,SOCKET_ON_BOARD_UPDATE , SOCKET_EMIT_BOARD_UPDATE } from "../services/socket.service.js"
-
+// import {userService} from "../services/user-service";
 Vue.use(Vuex);
-import taskDetails from "./task-details.store";
+import userStore from "./user";
 export default new Vuex.Store({
   state: {
     board:null,
@@ -52,7 +52,7 @@ export default new Vuex.Store({
     },
     groupIdByTaskId(state) {
       return state.groupIdByTaskId
-  },
+    },
   },
 
   mutations: {
@@ -63,6 +63,7 @@ export default new Vuex.Store({
       state.isDarkScreen = false;
     },
     setBoard(state, { board }) {
+      console.log('setBoard 2');
       socketService.on(SOCKET_ON_BOARD_UPDATE, board => {
         console.log('FROM STORE FROM SOCKET', board);
         state.board = board
@@ -137,7 +138,6 @@ export default new Vuex.Store({
       if (groupIdx < 0) return
       state.board.groups.splice(groupIdx, 1)
     },
-<<<<<<< HEAD
       // --------------- Attachments ---------------
       addAttachments(state, { attachments, taskId, groupId }) {
         const group = state.board.groups.find(g => g.id === groupId)
@@ -146,8 +146,19 @@ export default new Vuex.Store({
         task.attachments = task.attachments.concat(attachments)
         state.currTask = JSON.parse(JSON.stringify(task))
     },
-=======
->>>>>>> 458d2c9df623a399245791a74996fe7d34967354
+    addBoard(state , {board}){
+      console.log('addBoard 1',board);
+      state.boards.push(board);
+    },
+    setTasks(state, { groupId, tasksToSave }) {
+      const groupIdx = state.board.groups.findIndex(g => g.id === groupId)
+      if (groupIdx < 0) return
+
+      state.board.groups[groupIdx].tasks = tasksToSave
+    },
+    setGroups(state, { groups }) {
+      state.board.groups = groups
+    },
   },
 
   actions: {
@@ -161,6 +172,9 @@ export default new Vuex.Store({
     //     console.dir("error",err);
     //   }
     // },
+    async setGroups({commit} , {groups}){
+      commit({type: 'setGroups' ,  groups})
+    },
     async loadBoard({ commit } , {boardId}) {
       try {
         var board = await boardService.getBoardById(boardId)
@@ -220,7 +234,7 @@ export default new Vuex.Store({
       try {
         // console.log('loading boards');
         const boards = await boardService.query();
-        // console.log('boards',boards);
+        console.log('boards-store',boards);
         commit({ type: "setBoards", boards });
         return boards
       } catch(err){
@@ -230,36 +244,34 @@ export default new Vuex.Store({
     },
     async getBoardById({ commit }, { boardId }) {  
       try{
-        console.log('getBoardById - store');
         var board = await boardService.getBoardById(boardId);
-        // console.log('board',board);
-        // commit({ type: "setBoard", board });
         return board
 
       }catch(err){
         console.log(err);
       }
     },
-    async createNewBoard({commit}, {boardDetails}){
+    async createNewBoard({commit, dispatch}, {boardDetails}){
       try{
-        console.log('createNewBoard - store');
-        var board = await boardService.addNewBoard(boardDetails)
+        const board = await boardService.addNewBoard(boardDetails)
+        commit({ type: "addBoard", board });
         commit({ type: "setBoard", board });
+        dispatch({type: 'addUserBoard' ,boardId: board._id})
+        return board
       }catch(err){
         console.log('faild to add new board', err);
       }
     },
     async saveTask({ commit , dispatch}, {groupId,taskToSave}) {
-      console.log('saving new task !');
       commit({ type: 'saveTask' ,groupId,taskToSave})
       dispatch({type:'socketUpdateBoard'})
       const board = this.getters.board
       await boardService.saveBoard(board)
     },
-    async updateBoard({commit,dispatch},{labels}){
+    async updateBoard({state, commit,dispatch},{labels}){
       try {
         commit({type: 'updateLabels',labels})
-        const board = this.getters.board
+        const board = state.board
         dispatch({type:'socketUpdateBoard'})
         await boardService.saveBoard(board)
       } catch(err){
@@ -277,10 +289,10 @@ export default new Vuex.Store({
         throw err;
       }
     },
-    async removeTask({commit ,dispatch}, payload){
+    async removeTask({state, commit ,dispatch}, payload){
       try{
         commit({type: 'removeTask' , payload})
-        const board = this.getters.board
+        const board = state.board
         dispatch({type:'socketUpdateBoard'})
         await boardService.saveBoard(board)
       } catch(err){
@@ -288,9 +300,8 @@ export default new Vuex.Store({
         throw err;
       }
     },
-    async saveBoard({state , dispatch}){
+    async saveBoard({state , commit , dispatch}){
       try {
-        console.log('saving');
         boardService.saveBoard(state.board)
         dispatch({type:'socketUpdateBoard'})
       } catch(err){
@@ -298,14 +309,23 @@ export default new Vuex.Store({
         throw err
       }
     },
+    async saveGroup({state , commit , dispatch}, {group,idx}){
+      try{
+        state.board.groups[idx] = group
+        boardService.saveBoard(state.board)
+        dispatch({type:'socketUpdateBoard'})
+      }catch(err){
+        console.dir('error',err)
+        throw err
+      }
+    },
     socketUpdateBoard({state}) {
-      // console.log("SOCKETUPDATEBOARDMOTHREREUFJKER SOCKETING");
-      // console.log('this.board',state.board);
       socketService.emit(SOCKET_EMIT_BOARD_UPDATE, state.board);
     },
   },
   modules: {
-    taskDetails,
+    userStore,
+
   },
 
 })

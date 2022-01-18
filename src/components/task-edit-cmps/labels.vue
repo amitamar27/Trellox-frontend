@@ -8,7 +8,7 @@
         class="task-label-list"
         :style="'background-color:' + label.color"
       >
-        {{ label.title }}
+        <span>{{ label.title }}</span>
       </section>
     </div>
   </main>
@@ -57,6 +57,10 @@ export default {
     white-space: nowrap;
     cursor: pointer;
     cursor: pointer;
+
+    span{
+          margin: 0 3px;
+    }
   }
 }
 .task-label {

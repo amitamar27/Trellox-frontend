@@ -14,6 +14,10 @@
           <router-link class="router"  to="/boards">
             <button >Lets start our project</button>
           </router-link>
+
+          <router-link class="router"  to="/login">
+            <button >Sign Up</button>
+          </router-link>
         
         </span>
       </section>

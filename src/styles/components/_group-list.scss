@@ -1,11 +1,11 @@
 .group-list {
     // width: 100%;
-    display: flex;
-    gap: 3px;
-    height: 100%;
+    // display: flex;
+    // gap: 3px;
+    // height: 100%;
     // width: 100vw;
     flex-basis: auto;
-    margin: 0px 5px;
+    // margin: 0px 5px;
     align-items: flex-start;
 
     .group-preview {
@@ -16,6 +16,7 @@
         --animate-delay: 1s;
         --animate-repeat: 1;
         max-height: 100%;
+        max-height: 79vh
     }
 
     .cards-container {
@@ -298,37 +299,35 @@
                     }
 
                     @keyframes label_text_disappear_color_blind_before {
-                        0% {
-                            width: 16px
-                        }
+                        // 0% {
+                        //     width: 16px
+                        // }
 
-                        17% {
-                            width: 16px
-                        }
+                        // 17% {
+                        //     width: 16px
+                        // }
 
-                        33% {
-                            width: 24px
-                        }
-                        53% {
-                            width: 28px
-                        }
-                        73% {
-                            width: 32px
-                        }
-                        88% {
-                            width: 36px
-                        }
+                        // 33% {
+                        //     width: 24px
+                        // }
+                        // 53% {
+                        //     width: 28px
+                        // }
+                        // 73% {
+                        //     width: 32px
+                        // }
+                        // 88% {
+                        //     width: 36px
+                        // }
 
-                        to {
-                            width: 40px
-                        }
+                        // to {
+                        //     width: 40px
+                        // }
                     }
 
                 }
 
-                // .cards-container:hover{
-                //     background-color: rgb(231, 233, 233);
-                // }
+                
 
             }
         }
@@ -497,22 +496,24 @@
 }
 
 .group-list-container {
-    // z-index: 10;
+    @media (min-height: 510px){
+        height: 100%;
+    }
     margin-top: 45px;
     display: flex;
-    height: 100%;
+   
     align-items: flex-start;
-    // width: -webkit-fit-content;
-    // width: -moz-fit-content;
-    // width: fit-content;
-    // margin: 38px 4px;
-    // max-height: 100%;
-    // height: fit-content;
     width: fit-content;
-    // -webkit-user-select: none;
-    // -moz-user-select: none;
-    // -ms-user-select: none;
     user-select: none;
+    margin-left: 6.8px;
+    > .outter {
+        display: flex;
+        // gap: 7px;
+        gap: 3px;
+        margin-left: 5px;
+        // height: 100%;
+    }
+
 }
 
 .group-add-btn {

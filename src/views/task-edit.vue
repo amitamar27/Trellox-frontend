@@ -1,11 +1,7 @@
 <template>
   <main class="card-edit-window" ref="task" @click="closeDarkScreen">
     <div v-if="task" class="card-edit" @click.stop="">
-      <header
-        v-if="task.cover && task.cover.bgColor"
-        :style="taskBgColor"
-        class="task-edit-bg-title"
-      >
+      <header v-if="task.cover" :style="taskBgColor" class="task-edit-bg-title">
         <a class="icon-md" @click="closeDarkScreen"></a>
         <div class="task-edit-bg-btn">
           <a class="cover-btn" @click="openCoverMenu">
@@ -15,11 +11,6 @@
         </div>
       </header>
       <main class="task-edit-container">
-      
-             
-
-
-         
         <transition
           enter-active-class="animate__animated animate__fadeInRight animate__faster"
           leave-active-class="animate__animated animate__fadeOutRight animate__faster"
@@ -39,6 +30,7 @@
         ></a>
         <section class="main-content">
           <div class="main-content-details">
+            <div class="main-content-details-container">
             <section class="task-details">
               <task-members
                 v-if="task.members && task.members.length"
@@ -62,7 +54,7 @@
               ></task-description>
             </section>
 
-            <section class="check-list" v-if="task.checklists">
+            <section class="check-list" v-if="task.checklists && task.checklists.length">
               <header></header>
               <check-list
                 :task="task"
@@ -71,8 +63,10 @@
               ></check-list>
             </section>
 
-            <section class="task-attachments" v-if="task.attachments">
-              <task-attachment :task="task" :key="4"></task-attachment>
+            <section class="task-attachments" v-if="task.attachments && task.attachments.length">
+              <task-attachment :task="task" :key="4"
+              @saveTask="saveTask"
+              ></task-attachment>
             </section>
 
             <section class="task-activities" v-if="task.activities">
@@ -83,7 +77,7 @@
                 @saveTask="saveTask"
               ></task-activity>
             </section>
-
+          </div>
             <section class="task-edit-actions">
               <a class="delete-task-btn" @click="removeTask">
                 <span class="icon-sm icon-remove"></span>
@@ -108,16 +102,14 @@
 </template>
 
 <script>
-// :board="board"
-// background-color: #f4f5f7;
-// animate__animated animate__backInDown
+
 import labels from "../components/task-edit-cmps/labels.vue";
 import taskMembers from "../components/task-edit-cmps/task-members.vue";
 import taskDescription from "../components/task-edit-cmps/task-description.vue";
 // import taskAttachments from '../components/task-edit-cmps/task-attachments.vue'
 import taskActivity from "../components/task-edit-cmps/task-activity.vue";
 import taskAside from "../components/task-edit-cmps/task-aside.vue";
-import taskAttachment from "../components/task-attachment.vue"
+import taskAttachment from "../components/task-attachment.vue";
 import checkList from "../components/task-edit-cmps/check-list.vue";
 import taskTitle from "../components/task-edit-cmps/task-title.vue";
 import taskCover from "../components/task-edit-cmps/task-cover.vue";
@@ -134,13 +126,11 @@ export default {
   },
   created() {
     console.log("created!", this.currTask);
-    // console.log('this.$store.getters.board',this.$store.getters.board);
   },
   computed: {
     task() {
       const { groupId } = this.$route.params;
       const { taskId } = this.$route.params;
-      // console.log(groupId, taskId);
       this.$store.commit({ type: "getTaskById", taskId, groupId });
       const task = this.$store.getters.currTask;
       this.currTask = task;
@@ -148,34 +138,33 @@ export default {
       return task;
     },
     taskBgColor() {
-      if (this.currTask.cover && this.currTask.cover.bgColor) {
+      if (this.currTask.cover.bgColor) {
         return `background-color:${this.currTask.cover.bgColor}`;
+      }
+      if (this.currTask.cover.bgUrl) {
+        return {
+          backgroundImage: `url(${this.currTask.cover.bgUrl})`,
+          backgroundSize: "cover",
+          backgroundorigin: "content-box",
+          backgroundPosition: "center center",
+        };
       }
     },
     isCheckLists() {
       return this.task().checkList;
     },
     board() {
-      // return
-      // const board =
-      // console.log("this.$store.getters.board", board);
       return this.$store.getters.board;
     },
   },
   methods: {
-    // @click.stop="closeDarkScreen"
     closeDarkScreen() {
       const { boardId } = this.$route.params;
-      // console.log("boardId", boardId);
-      // console.log("clic");
       this.$store.commit({ type: "closeDarkScreen" });
       this.$router.push("/board/" + boardId);
     },
-    saveTask(task) {
-      // alert('saving..')
-      // console.log("rass", task);
+    saveTask() {
       const { groupId } = this.$route.params;
-      // console.log("groupId", groupId);
       if (groupId)
         this.$store.dispatch({
           type: "saveTask",
@@ -185,36 +174,26 @@ export default {
     },
     labels() {
       const labels = this.$store.getters.labels;
-      // console.log("labels", labels);
       const newLabels = [];
       labels.forEach((label) => {
         if (this.currTask.labelIds.includes(label.id)) newLabels.push(label);
       });
-      // console.log("newLabels", newLabels);
       return newLabels;
     },
-    saveLabels({ labels }) {
-      // console.log("labels tp", labels);
-    },
     addLabel(labelId) {
-      // console.log(this.currTask);
-      // console.log("labelId", labelId);
       const { groupId } = this.$route.params;
-      this.$store.dispatch({type: "saveTask",groupId,taskToSave: this.currTask});
-    },
-    toggleMember() {
-      // console.log(this.currTask);
-      const { groupId } = this.$route.params;
-      // alert('calling saveTask')
       this.$store.dispatch({
         type: "saveTask",
         groupId,
         taskToSave: this.currTask,
       });
     },
+    toggleMember() {
+      const { groupId } = this.$route.params;
+      this.$store.dispatch({type: "saveTask",groupId,taskToSave: this.currTask,});
+    },
     members() {
       const memberss = this.$store.getters.members;
-      // console.log("memberss", memberss);
       return this.$store.getters.members;
     },
     openCoverMenu() {
@@ -223,17 +202,16 @@ export default {
     closeCover() {
       this.isCoverClick = false;
     },
-    removeTask(){
+    removeTask() {
       const { groupId } = this.$route.params;
       const { taskId } = this.$route.params;
-      this.$store.dispatch({type:'removeTask',groupId,taskId})
-      this.closeDarkScreen()
+      this.$store.dispatch({ type: "removeTask", groupId, taskId });
+      this.closeDarkScreen();
     },
-    updateBoard(){
-       const { boardId } = this.$route.params;
-       this.$store.dispatch({type:'updateBoard',boardId})
-    }
-    
+    updateBoard() {
+      const { boardId } = this.$route.params;
+      this.$store.dispatch({ type: "updateBoard", boardId });
+    },
   },
   components: {
     labels,
@@ -272,12 +250,18 @@ export default {
   flex-grow: 1;
   justify-content: space-between;
   gap: 12px;
+  min-height: 80vh;
+}
+.main-content-details-container{
+  display: flex;
+      flex-direction: column;
 }
 
 .main-content-details {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .task-attachments {
@@ -294,7 +278,7 @@ export default {
 }
 .task-edit-actions {
   // display: flex;
-    margin: 20px 0;
+  margin: 20px 0;
   .delete-task-btn {
     display: flex;
     border-radius: 3px;
@@ -361,8 +345,7 @@ export default {
 
 // }
 
-  // display: flex;
-
+// display: flex;
 
 /* .icon-md{
   background-color: #00000014;

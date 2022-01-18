@@ -5,6 +5,94 @@
     color: #5e6c84;
 
     main {
+        margin: 10px;
+
+        div {
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                li {
+
+                    //   clear: both;
+                    cursor: pointer;
+                    // height: 34px;
+                    // position: relative;
+                    // width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    @include hover-supported {
+                        background-color: #091e420a;
+                        box-shadow: -20px 0px 0px 0px #091e420a, 20px 0px 0px 0px #091e420a;
+
+                        span {
+                            display: block;
+                            margin-right: 5px;
+                        }
+                    }
+
+                    text-align: left;
+
+                    a {
+                        cursor: pointer;
+                        display: block;
+                        font-weight: 400;
+                        margin: 0 -12px;
+                        padding: 6px 12px;
+                        position: relative;
+                        text-decoration: none;
+                        color: #172b4d;
+                        background-color: initial;
+                    }
+
+                    span {
+                        display: none;
+                    }
+                }
+            }
+            div{
+                display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+            
+            label {
+                color: #5e6c84;
+                display: block;
+                font-size: 12px;
+                font-weight: 700;
+                line-height: 16px;
+                margin-bottom: 4px;
+                margin-top: 12px;
+                text-align: left;
+            }
+
+            input {
+                height: 35px;
+            }
+
+            .add-attach {
+                background-color: #091e420a;
+                border: none;
+                box-shadow: none;
+                cursor: pointer;
+                display: inline-block;
+                font-weight: 400;
+                line-height: 20px;
+                margin: 8px 4px 0 0;
+                padding: 6px 12px;
+                text-align: center;
+            }
+            .add-attach:hover{
+                background-color: #091e4214;
+                border: none;
+                box-shadow: none;
+            }
+        }
+        }
+
         h5 {
             display: flex;
             justify-content: space-between;
@@ -17,9 +105,11 @@
             span {
                 display: none;
             }
+
             @include hover-supported {
                 background-color: #091e420a;
                 box-shadow: -20px 0px 0px 0px #091e420a, 20px 0px 0px 0px #091e420a;
+
                 span {
                     display: block;
                 }
@@ -35,8 +125,10 @@
     .link-upload {
         padding-bottom: 8px;
         border-bottom: 1px solid #091e4221;
-        & > {
+
+        &> {
             width: 100%;
+
             h5 {
                 font-weight: 700;
                 font-size: 15px;
@@ -44,10 +136,12 @@
                 margin-top: 12px;
                 margin-bottom: 4px;
             }
+
             p.bold-font {
                 font-size: 13px;
                 margin-top: 8px;
             }
+
             input {
                 @include primaryInput;
                 box-sizing: border-box;
@@ -70,8 +164,13 @@
             }
         }
     }
+
     .tips {
         font-size: 14px;
         margin-top: 5px;
+    }
+
+    img.lock {
+        height: 14px;
     }
 }

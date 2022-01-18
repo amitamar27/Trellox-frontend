@@ -29,27 +29,74 @@
       </div>
 
       <nav class="nav-right">
-        <button>
-          <img :src="require('@/assets/add.svg')" alt="" />
+        
+        <button class="log-out" @click="logOut">
+          <span>Log out</span>
         </button>
+          <!-- <img :src="require('@/assets/add.svg')" alt="" /> -->
+          <avatar
+          class="user-avatar"
+          
+          color="black"
+          :size="30"
+          :username="setAvatar"
+        
+          ></avatar>
+        
       </nav>
     </header>
   </section>
 </template>
 <script>
 import { boardService } from '../services/board-service.js'
-
+import Avatar from 'vue-avatar'
 export default {
+
+  data(){
+    return {
+      avatarChars: 'dKL',
+    }
+  },
+  computed:{
+    setAvatar(){
+      const user =  this.$store.getters.currUser
+      console.log('user-',user);
+      if(user.fullname) return user.fullname
+      return 'Guest'
+      // backgroundColor="lightblue"
+    },
+  
+  },
 
   methods: {
     async board() {
       const id = await boardService.getBoardId()
       this.$router.push(`board/${id}`);
-    }
+    },
+    async logOut(){
+      console.log('logo llogut');
+      this.$store.dispatch({type: 'logOut'})
+      this.$router.push(`/`);
+    },
+   
   },
   components: {
     boardService,
+    Avatar
   }
 
 }
 </script>
+
+<style lang="scss">
+.avatar{
+font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+// .log-out{
+//   // font-family: Segoe UI, sans-serif;
+//     // font-size: 14px;
+//     // font-weight: 700;
+//         // color: white;
+// }
+
+</style>

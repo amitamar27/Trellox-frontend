@@ -2,13 +2,14 @@
 .app-header{
     max-height: 40px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
     background-color: #b9c1c566;
     box-sizing: border-box;
     padding: 5px;
     align-items: center;
-
+    
+   
     
     a{
         text-decoration: none;
@@ -53,7 +54,7 @@
         }
     }
     .logo{
-        width: 90%;
+        // width: 90%;
         color: white;
         display: flex;
         justify-content: center;
@@ -63,13 +64,18 @@
         width: 100px;
         display: flex;
         justify-content: flex-end;
-
+        align-items: center;
         button{
             background-color: #ffffff4a;
             border: none;
             border-radius: 4px;
-            padding: 3px 5px;
+            // padding: 3px 5px;
             cursor: pointer;
+            margin-right: 10px;
+            font-family: Segoe UI, Roboto, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
             @include hover-supported {
                 background-color: #84b8d4;
                 cursor: pointer;
@@ -80,6 +86,14 @@
             191deg) brightness(114%) contrast(100%);
             
         }
+        .user-avatar{
+            span{
+                font-family: Segoe UI, sans-serif;
+                font-size: 14px;
+                font-weight: 700;
+              }
+        }
+       
     }
     
 }

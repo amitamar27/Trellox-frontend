@@ -28,7 +28,7 @@ function createSocketService() {
             // socket = io(baseUrl, { reconnection: false })
             // console.log('socket',socket);
             // if(socket) return
-            console.log('not socket');
+            // console.log('not socket');
             socket = io(baseUrl)
             // console.log('socket',socket);
             socketIsReady = true
@@ -36,7 +36,7 @@ function createSocketService() {
         async on(eventName, cb) {
             if (!socket) await socketService.setup()
             socket.on(eventName, cb)
-            console.log('socket connected 1 ');
+            // console.log('socket connected 1 ');
         },
         async off(eventName, cb = null) {
             if (!socket) await socketService.setup()
@@ -50,7 +50,7 @@ function createSocketService() {
             if (!data) return
             if (!socket) await socketService.setup()
             socket.emit(eventName, data)
-            console.log('socket connected 2 ');
+            // console.log('socket connected 2 ');
         },
         terminate() {
             socket = null

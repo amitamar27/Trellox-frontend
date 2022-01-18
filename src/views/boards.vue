@@ -1,27 +1,29 @@
 <template>
   <div v-if="boards" class="boards-page-container">
-    <div class="boards">
-      <div class="nav-side"></div>
-      <div class="board-boards">
-        <div class="boards-list-header">
-          <h2>Boards</h2>
-        
-        </div>
-        <div class="boards-container">
-          <div v-for="board in boards" :key="board.id">
+
+    <div class="boards-list-container">
+      <div class="boards-header">
+        <h1>Boards</h1>
+      </div>
+
+      <div class="boards-container">
             <div
+            v-for="board in boards" :key="board.id"
               :style="getBackground(board)"
               class="boards-list"
               @click="setBoard(board._id)"
             >
-              <p>{{ board.title }}</p>
+              <div class="board-title-container"><p>{{ board.title }}</p></div>
             </div>
-          </div>
-          <div @click="isModalOpen = true" class="boards-list-add-board">
+
+             <div @click="isModalOpen = true" class="boards-list-add-board">
             <p>create new board</p>
           </div>
-        </div>
-        <div v-if="isModalOpen" class="modal-window">
+
+          <div 
+          v-if="isModalOpen"
+          class="modal-window"
+          >
           <div class="board-add-modal">
             <form>
               <div class="add-modal-header" :style="backgroundObject">
@@ -32,9 +34,9 @@
                     placeholder="Enter board title..."
                   />
                 </div>
-                <button @click="isModalOpen = false" class="close-modal-btn">
-                  <a class="el-icon-close"></a>
-                </button>
+                <!-- <a class="close-modal-btn"></a> -->
+                  <a @click="isModalOpen = false"  class="close-modal-btn el-icon-close"></a>
+                
               </div>
             </form>
             <div class="background-options">
@@ -56,9 +58,16 @@
               <button @click="createEmptyBoard">Create board</button>
             </div>
           </div>
-        </div>
+          </div>
+          
       </div>
+
+
     </div>
+
+
+
+
   </div>
 </template>
 
@@ -110,18 +119,14 @@ export default {
     };
   },
   created() {
-      // console.log('this.imgsBackground[0].url',this.imgsBackground[0].url);
     this.imgUrl = this.imgsBackground[0].url;
-    // console.log("this.imgUrl", this.imgUrl);
     this.$store.dispatch({ type: 'loadBoards' })
   },
   computed: {
     boards() {
-      // this.$store.dispatch({ type: 'loadBoards' })
       if(this.$store.getters.boards){
         return this.$store.getters.boards
       }
-      // return this.$store.getters.boards;
     },
     backgroundObject() {
       if (!this.imgUrl) {
@@ -133,23 +138,26 @@ export default {
   },
   methods: {
     createEmptyBoard() {
-      if (this.newBoardTitle === "") return;
+
+      if (this.newBoardTitle === '') return;
       this.isModalOpen = false;
-      var background = null;
-      if (!this.imgUrl)
-        background = { backgroundColor: `${this.colorSelected}` };
-      else {
-        background = { backgroundSrc: `${this.imgUrl}` };
-      }
-      const boardDetails = {
-        title: this.newBoardTitle,
-        background,
-      };
-      this.$store.dispatch({ type: "createNewBoard", boardDetails });
-      this.$router.push(`/board/${this.newBoardTitle}`);
+
+      let style = null;
+    
+      if (!this.imgUrl){ style = { bgColor: `${this.colorSelected}`, bgImg: '' };}
+      else { style = { bgColor: '', bgImg: `url(${this.imgUrl})` }; }
+      const boardDetails = {title: this.newBoardTitle,style};
+
+      this.$store.dispatch({ type: "createNewBoard", boardDetails })
+      .then(res => {
+        this.$router.push(`/board/${res._id}`);
+      })
+      .catch(() => {
+        console.error('Cant get board if');
+      })
+      
     },
     setBoard(boardId) {
-      // this.$store.dispatch({ type: "getBoardById", boardId });
       this.$router.push(`/board/${boardId}`);
     },
     setColorBackground(color) {
@@ -157,22 +165,16 @@ export default {
       this.colorSelected = color;
     },
     setBackground(imgUrl) {
-      // console.log('imgUrl',imgUrl);
       this.colorSelected = null;
       this.imgUrl = imgUrl;
     },
     getBackground(board) {
-      // console.log("board", board.style);
       if (board.style.bgImg) {
-        const url = board.style.bgImg;
-        // console.log('board.style.bgImg',board.style.bgImg);
-        // console.log('url',url);
-        // console.log("board.style.backgroundSrc", board.style.bgImg);
-        return { "background-image": `${url}` };
-      } else {
-        const backgroundColor = board.style.bgColor;
-        return { backgroundColor: `${backgroundColor}` };
-      }
+        // const url = board.style.bgImg;
+        return { "background-image": `${board.style.bgImg}` };
+      } 
+       // const backgroundColor = board.style.bgColor;
+        return { backgroundColor: `${board.style.bgColor}` };
     },
   },
 };

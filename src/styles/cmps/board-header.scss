@@ -12,6 +12,17 @@
     justify-content: space-between;
     padding: 16px 12px 0px 12px;
 
+    @media (max-width:510px){
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    box-sizing: border-box;
+    z-index: 1;
+    position: fixed;
+    justify-content: space-between;
+    padding: 6px 8px 0px 8px;
+    }
     .border-divider {
         height: 19px;
         border-left: 1px solid hsla(0, 0%, 100%, 0.24);
@@ -31,8 +42,25 @@
             align-items: center;
             flex-direction: row;
             gap: 5px;
+            .board-title-container{
+                background-color: rgba(255, 255, 255, 0.24);
+                font-size: 14px;
+                /* line-height: 32px; */
+                /* padding: 0 8px; */
+                font-family: "segoe-ui-bold";
+                border-radius: 3px;
+                color: #ffffff;
+                cursor: pointer;
+                display: flex;
+                width: max-content;
+                height: 32px;
+                line-height: 3;
+                align-items: center;
+                // background-color: rgba(255, 255, 255, 0.24);
+                
+            }
             h1 {
-                background-color: hsla(0, 0%, 100%, 0.24);
+                // background-color: hsla(0, 0%, 100%, 0.24);
                 font-size: 20px;
                 line-height: 32px;
                 padding: 0 8px;
@@ -43,6 +71,10 @@
                 @include hover-supported {
                     background-color: #fffff750;
                 }
+              
+                // @media (min-width:510px){
+                //     background-color:rgba(255, 255, 255, 0.24);
+                // }
             }
 
             input {
@@ -123,4 +155,7 @@
 .users{
     display: flex;
     gap: 4px;
+    @media (max-width:510px){
+display: none;
+    }
 }

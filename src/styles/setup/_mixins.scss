@@ -42,7 +42,7 @@
       content: "";
       display: block;
       width: 100%;
-      padding-top: ($height / $width) * 100%;
+      // padding-top: ($height / $width) * 100%;
     }
     > * {
       position: absolute;

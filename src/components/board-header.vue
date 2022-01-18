@@ -2,9 +2,11 @@
   <section class="board-header">
     <div class="left-board-header">
       <section class="board-title-header">
-        <h1 v-if="!titleIsEditing" @click="openEditing">
+        <div v-if="!titleIsEditing" class="board-title-container">
+        <h1  @click="openEditing">
           {{ boardTitle }}
         </h1>
+        </div>
         <input
           v-else
           type="text"
@@ -17,8 +19,9 @@
         />
 
         <button @click="toggleFav" class="fav">
-          <i class="icon-star"> </i>
-          <!-- <i class="far fa-star"></i> -->
+  
+          <i v-if="board.isFavorite" class="icon-star" > </i>
+          <i v-else class="icon-starred" style="color: gold"> </i>
         </button>
 
         <span class="border-divider"> </span>
@@ -63,7 +66,12 @@ import asideMenu from './aside-menu.vue'
 import Avatar from 'vue-avatar'
 
 export default {
-  props: ['board'],
+  props:{
+    board:{
+      type: Object,
+      required: true,
+    }
+  },
   data() {
     return {
       //    title: this.board.title,
@@ -97,6 +105,7 @@ export default {
     },
 
     openMenu() {
+      // document.querySelector('.aside-menu').style.display = 'flex'
       this.isShown = !this.isShown;
     },
     editBgcBoard(style) {
